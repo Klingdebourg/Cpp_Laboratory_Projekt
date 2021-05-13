@@ -1,0 +1,29 @@
+# Build, Release, Debug Folders etc.
+**/doc/
+**/build*/
+**/install*/
+**/release*/
+**/obj/
+**/dist/
+**/trash/
+**/tmp/
+
+# Different files from compiling and IDE settings
+*.npy
+*.npz
+*.pyc
+*.user
+*.pyproj.user
+*.egg-info/
+*.pickle
+*.mat
+**/.vs
+**/.idea
+**/__pycache__
+**/.pytest_cache
+
+# OS specific files and folders
+*~
+.DS_Store
+__MACOSX/
+*.lnk
