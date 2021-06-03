@@ -93,7 +93,6 @@ void Feder::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     switch(event->button()) {
     case Qt::LeftButton:
         setFocus();
-        grabKeyboard();
     default:
         break;
     }
