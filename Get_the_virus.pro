@@ -9,19 +9,27 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    balken.cpp \
+    ball.cpp \
     button.cpp \
+    feder.cpp \
     game.cpp \
     level1.cpp \
     level2.cpp \
     level3.cpp \
-    main.cpp
+    main.cpp \
+    virus.cpp
 
 HEADERS += \
+    balken.h \
+    ball.h \
     button.h \
+    feder.h \
     game.h \
     level1.h \
     level2.h \
-    level3.h
+    level3.h \
+    virus.h
 
 FORMS +=
 
