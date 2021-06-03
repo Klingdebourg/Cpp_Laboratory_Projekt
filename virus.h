@@ -1,9 +1,9 @@
 #ifndef VIRUS_H
 #define VIRUS_H
 
+#include "QGraphicsEllipseItem"
 
-class Virus
-{
+class Virus : public QGraphicsEllipseItem {
 public:
     Virus();
 };

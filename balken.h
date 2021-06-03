@@ -1,9 +1,9 @@
 #ifndef BALKEN_H
 #define BALKEN_H
 
+#include "QGraphicsRectItem"
 
-class Balken
-{
+class Balken : public QGraphicsRectItem {
 public:
     Balken();
 };

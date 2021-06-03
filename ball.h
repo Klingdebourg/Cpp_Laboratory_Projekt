@@ -1,9 +1,9 @@
 #ifndef BALL_H
 #define BALL_H
 
+#include "QGraphicsEllipseItem"
 
-class Ball
-{
+class Ball : public QGraphicsEllipseItem {
 public:
     Ball();
 };

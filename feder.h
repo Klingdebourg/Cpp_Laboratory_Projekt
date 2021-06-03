@@ -1,9 +1,9 @@
 #ifndef FEDER_H
 #define FEDER_H
 
+#include "QGraphicsRectItem"
 
-class Feder
-{
+class Feder : public QGraphicsRectItem {
 public:
     Feder();
 };
