@@ -3,6 +3,10 @@
 #include <QFont>
 #include <QBrush>
 #include "button.h"
+#include "level1.h"
+#include "level2.h"
+#include "level3.h"
+#include <QDebug>
 
 Game::Game(QWidget* parent){
 
@@ -82,8 +86,22 @@ void Game::levelmenu(){
     level3->setPos(l3x,l3y);
     scene->addItem(level3);
 
-    Button* back = new Button(QString("<-"));
+    Button* back = new Button(QString("<-"),0);
     connect(back, SIGNAL(clicked()),this,SLOT(displayMainMenu()));
     scene->addItem(back);
 
+}
+void Game::start(){
+    Button *clickedButton = qobject_cast<Button *>(sender());
+    clickedButton->gettext();
+    if (clickedButton->gettext() == "1"){
+        Level1 *level1 = new Level1;
+    }else{
+        if (clickedButton->gettext() == "2"){
+            Level2 *level2 = new Level2;
+        }
+        else{
+            Level3 *level3 = new Level3;
+        }
+    }
 }

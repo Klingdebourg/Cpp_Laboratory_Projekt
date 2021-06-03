@@ -12,6 +12,7 @@ public:
 
     // public methods (events)
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    QString gettext();
 signals:
     void clicked();
 private:

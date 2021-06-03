@@ -13,9 +13,11 @@ Button::Button(QString name, QGraphicsItem *parent): QGraphicsRectItem(parent){
 
     // draw the text
     text = new QGraphicsTextItem(name,this);
-
 }
 
 void Button::mousePressEvent(QGraphicsSceneMouseEvent *event){
     emit clicked();
+}
+QString Button::gettext(){
+    return text->toPlainText();
 }

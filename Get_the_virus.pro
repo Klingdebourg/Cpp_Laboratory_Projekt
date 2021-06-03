@@ -11,11 +11,17 @@ CONFIG += c++11
 SOURCES += \
     button.cpp \
     game.cpp \
+    level1.cpp \
+    level2.cpp \
+    level3.cpp \
     main.cpp
 
 HEADERS += \
     button.h \
-    game.h
+    game.h \
+    level1.h \
+    level2.h \
+    level3.h
 
 FORMS +=
 
