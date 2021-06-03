@@ -8,6 +8,10 @@
 #include "level3.h"
 #include <QDebug>
 
+
+#define WINDOW_W 1600
+#define WINDOW_H 1200
+
 Game::Game(QWidget* parent){
 
     // create the scene
@@ -20,8 +24,8 @@ Game::Game(QWidget* parent){
     show();
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFixedSize(1600,1200);
-    scene->setSceneRect(0,0,1600,1200);
+    setFixedSize(WINDOW_W,WINDOW_H);
+    scene->setSceneRect(0,0,WINDOW_W,WINDOW_H);
 }
 
 void Game::displayMainMenu(){
