@@ -4,6 +4,8 @@
 #include <QGraphicsRectItem>
 #include <QKeyEvent>
 
+#include <math.h>
+
 #define WINDOW_W 1600
 #define WINDOW_H 1200
 #define FEDER_WIDTH 20

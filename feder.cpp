@@ -30,6 +30,8 @@ Feder::Feder(int x, int y) {
     setRect(0, 0, FEDER_WIDTH, FEDER_HEIGHT);
     //position needs to be specified seperately as otherwise it is set to (0,0) allthough it is at a different position (dont know why)
     setPos(x_,y_);
+    //moves the transformation point to the lower end of the rectangle
+    setTransformOriginPoint(QPointF(FEDER_WIDTH/2, FEDER_HEIGHT));
     //makes the object focussable thus enables it to be moved
     setFlag(QGraphicsItem::ItemIsFocusable);
 
@@ -46,8 +48,6 @@ void Feder::keyPressEvent(QKeyEvent *event)
 {
     //sets the object into focus such that the scene can modify it
     setFocus();
-    //moves the transformation point to the lower end of the rectangle
-    setTransformOriginPoint(QPointF(FEDER_WIDTH/2, FEDER_HEIGHT));
     //modify the spring
     switch(event->key()) {
     case Qt::Key_Left:
@@ -62,13 +62,24 @@ void Feder::keyPressEvent(QKeyEvent *event)
         //defines a maximal tension for the spring (half of its length)
         if (spannung != 5) {
             spannung += 1;
+            setScale(1 - 0.1*spannung);
+
+            /*
+            //alternative to only scale device in height with a transformation matrix but didnt work as expected
             //shortens the appearance of the rectangle by transforming it with a matrix
             //this matrix does only affect the y coordinate of the object, the last two values are for translation purposes (dx, dy)
-            setTransform(QTransform(1, 0, 0, (1 - 0.1*spannung), 0, 0));
+            qreal xx = pow(cos(rotation()), 2) + (1 - 0.1*spannung) * pow(sin(rotation()), 2);
+            qreal yy = pow(sin(rotation()), 2) + (1 - 0.1*spannung) * pow(cos(rotation()), 2);
+            qreal xy = sin(rotation()) * cos(rotation()) * 0.1 * spannung;
+            setTransform(QTransform(xx, xy, xy, yy, 0, 0));
+            */
         }
         break;
     case Qt::Key_Up:
         spannung = 0;
-        setTransform(QTransform(1,0,0,1,0,0));
+        setScale(1 - 0.1*spannung);
+
+        //for alternative with appearance change through matrix
+        //setTransform(QTransform(1,0,0,1,0,0));
     }
 }
