@@ -26,14 +26,16 @@ Feder::Feder(int x, int y) {
     else {
         y_ = y;
     }
-    //creates rectangle with given size at given location
+    //creates rectangle with given size at origin in scene coordinates
     setRect(0, 0, FEDER_WIDTH, FEDER_HEIGHT);
-    //position needs to be specified seperately as otherwise it is set to (0,0) allthough it is at a different position (dont know why)
-    setPos(x_,y_);
+    //moves the item to the given position in scene coordinates
+    setPos(x_, y_);
     //moves the transformation point to the lower end of the rectangle
     setTransformOriginPoint(QPointF(FEDER_WIDTH/2, FEDER_HEIGHT));
     //makes the object focussable thus enables it to be moved
     setFlag(QGraphicsItem::ItemIsFocusable);
+    //makes the item selectable
+    setFlag(QGraphicsItem::ItemIsSelectable);
 
     //set initial tension to 0 (i.e. relaxed)
     spannung = 0;
