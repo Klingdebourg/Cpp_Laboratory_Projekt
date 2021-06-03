@@ -60,26 +60,27 @@ void Feder::keyPressEvent(QKeyEvent *event)
         break;
     case Qt::Key_Down:
         //defines a maximal tension for the spring (half of its length)
-        if (spannung != 5) {
+        if (spannung < 5)
             spannung += 1;
-            setScale(1 - 0.1*spannung);
-
-            /*
-            //alternative to only scale device in height with a transformation matrix but didnt work as expected
-            //shortens the appearance of the rectangle by transforming it with a matrix
-            //this matrix does only affect the y coordinate of the object, the last two values are for translation purposes (dx, dy)
-            qreal xx = pow(cos(rotation()), 2) + (1 - 0.1*spannung) * pow(sin(rotation()), 2);
-            qreal yy = pow(sin(rotation()), 2) + (1 - 0.1*spannung) * pow(cos(rotation()), 2);
-            qreal xy = sin(rotation()) * cos(rotation()) * 0.1 * spannung;
-            setTransform(QTransform(xx, xy, xy, yy, 0, 0));
-            */
-        }
         break;
     case Qt::Key_Up:
+        if (spannung > 0)
+            spannung -= 1;
+        break;
+    case Qt::Key_Space:
         spannung = 0;
-        setScale(1 - 0.1*spannung);
-
-        //for alternative with appearance change through matrix
-        //setTransform(QTransform(1,0,0,1,0,0));
     }
+    //update size of Feder, unfortunately also changes width
+    //alternative could use "update" method but this would require a redraw of the Feder which can only be done from the scene
+    setScale(1 - 0.1*spannung);
+
+    /*
+    //alternative to only scale device in height with a transformation matrix but didnt work as expected
+    //shortens the appearance of the rectangle by transforming it with a matrix
+    //this matrix does only affect the y coordinate of the object, the last two values are for translation purposes (dx, dy)
+    qreal xx = pow(cos(rotation()), 2) + (1 - 0.1*spannung) * pow(sin(rotation()), 2);
+    qreal yy = pow(sin(rotation()), 2) + (1 - 0.1*spannung) * pow(cos(rotation()), 2);
+    qreal xy = sin(rotation()) * cos(rotation()) * 0.1 * spannung;
+    setTransform(QTransform(xx, xy, xy, yy, 0, 0));
+    */
 }
