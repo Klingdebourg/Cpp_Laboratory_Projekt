@@ -16,5 +16,5 @@ Feder::Feder(int x, int y) : {
     else {
         y_ = y;
     }
-    setRect(x_, y_, FEDER_W, FEDER_H);
+    setRect(x_, y_, FEDER_WIDTH, FEDER_HEIGHT);
 }
