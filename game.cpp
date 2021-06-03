@@ -6,6 +6,8 @@
 #include "level1.h"
 #include "level2.h"
 #include "level3.h"
+#include "feder.h"
+#include "balken.h"
 #include <QDebug>
 
 #define WINDOW_W 1600
@@ -54,6 +56,7 @@ void Game::displayMainMenu(){
     int qyPos = 600;
     quitButton->setPos(qxPos,qyPos);
     scene->addItem(quitButton);
+
 }
 void Game::levelmenu(){
     scene->clear();

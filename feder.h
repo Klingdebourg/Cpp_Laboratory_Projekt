@@ -19,8 +19,6 @@ public:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
 private:
     int spannung;
-    //could be used lateron to indicate if the Feder is attached to a Balken and should move together with it
-    //bool attachedToBalken
 };
 
 #endif // FEDER_H

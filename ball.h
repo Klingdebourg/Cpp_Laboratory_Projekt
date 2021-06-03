@@ -1,7 +1,8 @@
 #ifndef BALL_H
 #define BALL_H
 
-#include "QGraphicsEllipseItem"
+#include <QGraphicsEllipseItem>
+#include "feder.h"
 
 class Ball : public QGraphicsEllipseItem {
 public:
