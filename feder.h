@@ -16,7 +16,7 @@ class Feder : public QGraphicsRectItem {
 public:
     Feder(int x, int y);
     void keyPressEvent(QKeyEvent *event);
-    void mousePressEvent(QMouseEvent *event);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
 private:
     int spannung;
     //could be used lateron to indicate if the Feder is attached to a Balken and should move together with it
