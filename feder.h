@@ -3,9 +3,9 @@
 
 #include <QGraphicsRectItem>
 #include <QKeyEvent>
-#include <QMouseEvent>
+#include <QGraphicsSceneMouseEvent>
 
-#include <math.h>
+//#include <math.h>
 
 #define WINDOW_W 1600
 #define WINDOW_H 1200

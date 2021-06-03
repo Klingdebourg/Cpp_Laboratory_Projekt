@@ -10,6 +10,10 @@
  */
 
 Feder::Feder(int x, int y) {
+    //creates rectangle with given size at origin in scene coordinates
+    setRect(0, 0, FEDER_WIDTH, FEDER_HEIGHT);
+    //moves the transformation point to the lower end of the rectangle
+    setTransformOriginPoint(QPointF(FEDER_WIDTH/2, FEDER_HEIGHT));
     //make sure that coordinates lay inside the frame
     int x_, y_;
     if (x < FEDER_WIDTH/2)
@@ -26,12 +30,8 @@ Feder::Feder(int x, int y) {
     else {
         y_ = y;
     }
-    //creates rectangle with given size at origin in scene coordinates
-    setRect(0, 0, FEDER_WIDTH, FEDER_HEIGHT);
     //moves the item to the given position in scene coordinates
     setPos(x_, y_);
-    //moves the transformation point to the lower end of the rectangle
-    setTransformOriginPoint(QPointF(FEDER_WIDTH/2, FEDER_HEIGHT));
     //makes the object focussable thus enables it to be moved
     setFlag(QGraphicsItem::ItemIsFocusable);
     //makes the item selectable
@@ -42,14 +42,12 @@ Feder::Feder(int x, int y) {
 }
 
 /**
- * @brief rotates, tensions or releaves the spring after pressing the respective keys
+ * @brief rotates, tensions or releaves the spring if it is in focus
  * @param event contains the pressed key
  */
 
 void Feder::keyPressEvent(QKeyEvent *event)
 {
-    //sets the object into focus such that the scene can modify it
-    setFocus();
     //modify the spring
     switch(event->key()) {
     case Qt::Key_Left:
@@ -91,7 +89,7 @@ void Feder::keyPressEvent(QKeyEvent *event)
  * @brief enables the object to be modified with keyboard input
  * @param event
  */
-void Feder::mousePressEvent(QMouseEvent *event) {
+void Feder::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     switch(event->button()) {
     case Qt::LeftButton:
         setFocus();
