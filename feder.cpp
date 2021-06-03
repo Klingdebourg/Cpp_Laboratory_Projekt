@@ -86,3 +86,17 @@ void Feder::keyPressEvent(QKeyEvent *event)
     setTransform(QTransform(xx, xy, xy, yy, 0, 0));
     */
 }
+
+/**
+ * @brief enables the object to be modified with keyboard input
+ * @param event
+ */
+void Feder::mousePressEvent(QMouseEvent *event) {
+    switch(event->button()) {
+    case Qt::LeftButton:
+        setFocus();
+        grabKeyboard();
+    default:
+        break;
+    }
+}
