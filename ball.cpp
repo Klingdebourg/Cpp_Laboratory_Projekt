@@ -1,6 +1,8 @@
 #include "ball.h"
 
-Ball::Ball()
+Ball::Ball(int x, int y, int radius)
 {
+    setRect(x,y,radius,radius);
+
 
 }

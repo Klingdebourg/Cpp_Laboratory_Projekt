@@ -102,6 +102,8 @@ void Game::start(){
     clickedButton->gettext();
     if (clickedButton->gettext() == "1"){
         Level1 *level1 = new Level1;
+        level1->Init();
+
     } else if (clickedButton->gettext() == "2") {
         Level2 *level2 = new Level2;
     } else {

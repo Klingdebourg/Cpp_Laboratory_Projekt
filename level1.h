@@ -2,10 +2,24 @@
 #define LEVEL1_H
 
 
-class Level1
+#include <QGraphicsView>
+#include <QGraphicsScene>
+
+#include "balken.h"
+
+#define WINDOW_W 1600
+#define WINDOW_H 1200
+
+
+class Level1: public QGraphicsView
 {
+    Q_OBJECT
 public:
     Level1();
+    QGraphicsScene* scene;
+
+
+    void Init();
 };
 
 #endif // LEVEL1_H

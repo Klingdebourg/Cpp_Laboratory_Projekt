@@ -6,7 +6,7 @@
 
 class Ball : public QGraphicsEllipseItem {
 public:
-    Ball();
+    Ball(int x, int y, int radius);
 };
 
 #endif // BALL_H
