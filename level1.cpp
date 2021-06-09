@@ -4,4 +4,5 @@
 Level1::Level1()
 {
 qDebug() << "Level 1 erstellt.";
+
 }

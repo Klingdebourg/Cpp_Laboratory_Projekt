@@ -7,7 +7,7 @@
 class Button:public QObject, public QGraphicsRectItem{
     Q_OBJECT
 public:
-    // constructors
+    // constructor
     Button(QString name, QGraphicsItem* parent=NULL);
 
     // public methods (events)
