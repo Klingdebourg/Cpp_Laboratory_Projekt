@@ -1,13 +1,5 @@
 #include "game.h"
-#include <QGraphicsTextItem>
-#include <QFont>
-#include <QBrush>
-#include "button.h"
-#include "level1.h"
-#include "level2.h"
-#include "level3.h"
-#include "feder.h"
-#include "balken.h"
+
 #include <QDebug>
 
 
@@ -23,7 +15,6 @@ Game::Game(QWidget* parent){
     // it can be used to visualize scenes)
 
     setScene(scene);
-    show();
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(WINDOW_W,WINDOW_H);
@@ -105,6 +96,8 @@ void Game::start(){
 
     } else if (clickedButton->gettext() == "2") {
         Level2 *level2 = new Level2;
+        level2->show();
+        this->hide();
     } else {
         Level3 *level3 = new Level3;
     }

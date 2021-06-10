@@ -19,12 +19,15 @@ SOURCES += \
     balken.cpp \
     ball.cpp \
     button.cpp \
+    counter.cpp \
     feder.cpp \
+    foehn.cpp \
     game.cpp \
     level1.cpp \
     level2.cpp \
     level3.cpp \
     main.cpp \
+    maske.cpp \
     src/collision/b2_broad_phase.cpp \
     src/collision/b2_chain_shape.cpp \
     src/collision/b2_circle_shape.cpp \
@@ -76,7 +79,9 @@ HEADERS += \
     balken.h \
     ball.h \
     button.h \
+    counter.h \
     feder.h \
+    foehn.h \
     game.h \
     include/box2d/b2_api.h \
     include/box2d/b2_block_allocator.h \
@@ -121,6 +126,7 @@ HEADERS += \
     level1.h \
     level2.h \
     level3.h \
+    maske.h \
     src/dynamics/b2_chain_circle_contact.h \
     src/dynamics/b2_chain_polygon_contact.h \
     src/dynamics/b2_circle_contact.h \

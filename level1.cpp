@@ -25,6 +25,7 @@ scene-> addItem(BallBsp);
 
 show();
 
+
 }
 
 

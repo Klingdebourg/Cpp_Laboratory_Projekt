@@ -1,6 +1,10 @@
 #ifndef LEVEL1_H
 #define LEVEL1_H
 
+#include "balken.h"
+#include "virus.h"
+#include "feder.h"
+#include "ball.h"
 
 #include <QGraphicsView>
 #include <QGraphicsScene>
