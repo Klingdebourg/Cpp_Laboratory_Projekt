@@ -17,8 +17,8 @@ Balken* balken2 = new Balken(300,400,0,300);
 Balken* balken3 = new Balken(1000,600,0,300);
 //Virus* virus = new Virus(1000,1000);
 Feder* feder = new Feder(balken1->x()+(balken1->boundingRect().width() - FEDER_WIDTH)/2, balken1->y()-FEDER_HEIGHT);
-//counter* counter1 = new counter;
-
+counter* counter1 = new counter;
+counter1->setPos(WINDOW_W-counter1->boundingRect().width(),y());
 //Foehn* foehn = new foehn;
 //Maske* maske1 = new Maske;
 //Maske* maske2 = new Maske;
@@ -30,8 +30,7 @@ scene->addItem(balken2);
 scene->addItem(balken3);
 //scene->addItem(virus);
 scene->addItem(feder);
-//scene->addItem(counter1);
-
+scene->addItem(counter1);
 //scene->addItem(foehn);
 //scene->addItem(maske1);
 //scene->addItem(maske2);
