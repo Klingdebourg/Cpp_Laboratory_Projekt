@@ -16,6 +16,7 @@ INCLUDEPATH += \
 
 
 SOURCES += \
+    Box2d_Playground.cpp \
     balken.cpp \
     ball.cpp \
     button.cpp \
@@ -76,6 +77,7 @@ SOURCES += \
     virus.cpp
 
 HEADERS += \
+    Box2d_Playground.h \
     balken.h \
     ball.h \
     button.h \
