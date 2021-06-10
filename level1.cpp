@@ -14,7 +14,7 @@ setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 setFixedSize(WINDOW_W,WINDOW_H);
 scene->setSceneRect(0,0,WINDOW_W,WINDOW_H);
 
-Balken *Balken1 = new Balken(750, 1100, 0, 100);
+Balken *Balken1 = new Balken(750, 100, 0, 100);
 scene-> addItem(Balken1);
 
 Ball *BallBsp= new Ball(750, 100, 50);
@@ -27,7 +27,4 @@ show();
 
 }
 
-void Level1::Init(){
 
-
-}

@@ -18,8 +18,6 @@ public:
     Level1();
     QGraphicsScene* scene;
 
-
-    void Init();
 };
 
 #endif // LEVEL1_H
