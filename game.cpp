@@ -83,21 +83,20 @@ void Game::levelmenu(){
     level3->setPos(l3x,l3y);
     scene->addItem(level3);
 
-    Button* back = new Button(QString("<-"),0);
+    Button* back = new Button(QString("<-"));
     connect(back, SIGNAL(clicked()),this,SLOT(displayMainMenu()));
     scene->addItem(back);
 
 }
 void Game::start(){
     Button *clickedButton = qobject_cast<Button *>(sender());
-    clickedButton->gettext();
     if (clickedButton->gettext() == "1"){
         Level1 *level1 = new Level1;
     } else if (clickedButton->gettext() == "2") {
-        Level2 *level2 = new Level2;
+        Level2 *level2 = new Level2(this);
         level2->show();
         this->hide();
     } else {
-        Level3 *level3 = new Level3;
+        Level3 *level3= new Level3;
     }
 }
