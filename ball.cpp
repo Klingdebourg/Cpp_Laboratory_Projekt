@@ -7,9 +7,5 @@ Ball::Ball() {
     //moves the transformation point to the middle of the circle
     setTransformOriginPoint(QPointF(BALL_DIAM/2, BALL_DIAM/2));
 
-    //makes the object focussable thus enables it to be moved
-    setFlag(QGraphicsItem::ItemIsFocusable);
-    //makes the item selectable
-    setFlag(QGraphicsItem::ItemIsSelectable);
 
 }

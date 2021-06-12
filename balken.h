@@ -12,9 +12,15 @@
 #define WINDOW_H 1200
 #define BALKEN_WIDTH 20
 
+enum balkenType {
+    statisch,
+    translatorisch,
+    rotatorisch
+};
+
 class Balken : public QGraphicsRectItem {
 public:
-    Balken(int x, int y, int rotation, int length);
+    Balken(int x, int y, int rotation, int length, balkenType typ);
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     int rot() const;
@@ -22,6 +28,7 @@ public:
 private:
     QPointF position;
     int rotation;
+    balkenType type;
 };
 
 #endif // BALKEN_H

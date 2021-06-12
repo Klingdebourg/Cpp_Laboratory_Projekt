@@ -6,8 +6,9 @@
  * @param y vertical location of Balken
  * @param rotation initial rotation of Balken
  * @param length length of the balken
+ * @param typ indicates whether the balken cannot be moved at all, can be translated or rotated with arrow keys
  */
-Balken::Balken(int x, int y, int rotation, int length) {
+Balken::Balken(int x, int y, int rotation, int length, balkenType typ) {
 
     //creates rectangle with given size at origin in scene coordinates
     setRect(0, 0, length, BALKEN_WIDTH);
@@ -31,11 +32,15 @@ Balken::Balken(int x, int y, int rotation, int length) {
     }
     setRotation(rot());
 
-    //makes the object focussable thus enables it to be moved
-    setFlag(QGraphicsItem::ItemIsFocusable);
-    //makes the item selectable
-    setFlag(QGraphicsItem::ItemIsSelectable);
+    if (typ != statisch) {
+        //makes the object focussable thus enables it to be moved
+        setFlag(QGraphicsItem::ItemIsFocusable);
+        //makes the item selectable
+        setFlag(QGraphicsItem::ItemIsSelectable);
+    }
 
+    //set the type of the balken
+    type = typ;
 }
 
 /**
@@ -46,14 +51,36 @@ void Balken::keyPressEvent(QKeyEvent *event) {
     //move the Balken
     switch(event->key()) {
     case Qt::Key_Left:
-        position.setX(position.x() - 15 * cos(rot() * M_PI/180));
-        position.setY(position.y() - 15 * sin(rot() * M_PI/180));
-        setPos(position);
+        //differentiate the movement depending on the type of the balken
+        switch(type) {
+        case translatorisch:
+            position.setX(position.x() - 15 * cos(rot() * M_PI/180));
+            position.setY(position.y() - 15 * sin(rot() * M_PI/180));
+            setPos(position);
+            break;
+        case rotatorisch:
+            rotation -= 5;
+            setRotation(rotation);
+            break;
+        default:
+            break;
+        }
         break;
     case Qt::Key_Right:
-        position.setX(position.x() + 15 * cos(rot() * M_PI/180));
-        position.setY(position.y() + 15 * sin(rot() * M_PI/180));
-        setPos(position);
+        //differentiate the movement depending on the type of the balken
+        switch(type) {
+        case translatorisch:
+            position.setX(position.x() + 15 * cos(rot() * M_PI/180));
+            position.setY(position.y() + 15 * sin(rot() * M_PI/180));
+            setPos(position);
+            break;
+        case rotatorisch:
+            rotation += 5;
+            setRotation(rotation);
+            break;
+        default:
+            break;
+        }
         break;
     }
 
