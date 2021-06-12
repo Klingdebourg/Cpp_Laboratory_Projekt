@@ -39,6 +39,53 @@ Feder::Feder(int x, int y) {
 
     //set initial tension to 0 (i.e. relaxed)
     spannung = 0;
+
+    //indicate that there is no ball attached
+    ball = nullptr;
+    isBallAttached = false;
+}
+
+/**
+ * @brief Constructor creating a spring at a requested position with a fixed size with a ball already attached to it
+ * @param x requested x position
+ * @param y requested y position
+ * @param ball ball connected to the spring
+ */
+Feder::Feder(int x, int y, Ball &ball) {
+    //creates rectangle with given size at origin in scene coordinates
+    setRect(0, 0, FEDER_WIDTH, FEDER_HEIGHT);
+    //moves the transformation point to the lower end of the rectangle
+    setTransformOriginPoint(QPointF(FEDER_WIDTH/2, FEDER_HEIGHT));
+    //make sure that coordinates lay inside the frame
+    int x_, y_;
+    if (x < FEDER_WIDTH/2)
+        x_ = FEDER_WIDTH/2;
+    else if (x > WINDOW_W - FEDER_WIDTH / 2)
+        x_ = WINDOW_W - FEDER_WIDTH/2;
+    else {
+        x_ = x;
+    }
+    if (y < FEDER_HEIGHT/2)
+        y_ = FEDER_HEIGHT/2;
+    else if (y > WINDOW_H - FEDER_HEIGHT/2)
+        y_ = WINDOW_H - FEDER_HEIGHT/2;
+    else {
+        y_ = y;
+    }
+    //moves the item to the given position in scene coordinates
+    setPos(x_, y_);
+    //makes the object focussable thus enables it to be moved
+    setFlag(QGraphicsItem::ItemIsFocusable);
+    //makes the item selectable
+    setFlag(QGraphicsItem::ItemIsSelectable);
+
+    //set initial tension to 0 (i.e. relaxed)
+    spannung = 0;
+
+    //attach the ball
+    this->ball = &ball;
+    isBallAttached = true;
+    this->ball->setPos(x_ + FEDER_WIDTH/2 - BALL_DIAM/2, y_ - FEDER_HEIGHT/2 - BALL_DIAM/2);
 }
 
 /**
@@ -96,4 +143,13 @@ void Feder::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     default:
         break;
     }
+}
+
+/**
+ * @brief if a ball is connected to the feder, its position is updated (is used after the feder changes its position/tesnion)
+ * @param ball to be changed
+ */
+void Feder::updateBall(Ball &ball)
+{
+
 }

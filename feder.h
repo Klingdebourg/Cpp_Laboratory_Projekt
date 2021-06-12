@@ -4,6 +4,7 @@
 #include <QGraphicsRectItem>
 #include <QKeyEvent>
 #include <QGraphicsSceneMouseEvent>
+#include "ball.h"
 
 //#include <math.h>
 
@@ -15,10 +16,14 @@
 class Feder : public QGraphicsRectItem {
 public:
     Feder(int x, int y);
+    Feder(int x, int y, Ball &ball);
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void updateBall(Ball &ball);
 private:
     int spannung;
+    bool isBallAttached;
+    Ball *ball;
 };
 
 #endif // FEDER_H

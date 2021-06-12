@@ -2,7 +2,10 @@
 #define BALL_H
 
 #include <QGraphicsEllipseItem>
-#include "feder.h"
+
+#define BALL_DIAM 100
+
+
 
 class Ball : public QGraphicsEllipseItem {
 public:
