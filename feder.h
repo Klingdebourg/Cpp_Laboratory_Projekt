@@ -4,9 +4,10 @@
 #include <QGraphicsRectItem>
 #include <QKeyEvent>
 #include <QGraphicsSceneMouseEvent>
+#include <QDebug>
 #include "ball.h"
 
-//#include <math.h>
+#include <math.h>
 
 #define WINDOW_W 1600
 #define WINDOW_H 1200
@@ -20,6 +21,7 @@ public:
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void updateBall(Ball &ball);
+
 private:
     int spannung;
     bool isBallAttached;

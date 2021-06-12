@@ -3,7 +3,7 @@
 
 #include <QGraphicsEllipseItem>
 
-#define BALL_DIAM 100
+#define BALL_DIAM 70
 
 
 

@@ -85,7 +85,7 @@ Feder::Feder(int x, int y, Ball &ball) {
     //attach the ball
     this->ball = &ball;
     isBallAttached = true;
-    this->ball->setPos(x_ + FEDER_WIDTH/2 - BALL_DIAM/2, y_ - FEDER_HEIGHT/2 - BALL_DIAM/2);
+    this->ball->setPos(x_ + FEDER_WIDTH/2 - BALL_DIAM/2, y_ - BALL_DIAM);
 }
 
 /**
@@ -120,6 +120,7 @@ void Feder::keyPressEvent(QKeyEvent *event)
     //update size of Feder, unfortunately also changes width
     //alternative could use "update" method but this would require a redraw of the Feder which can only be done from the scene
     setScale(1 - 0.1*spannung);
+    updateBall(* this->ball);
 
     /*
     //alternative to only scale device in height with a transformation matrix but didnt work as expected
@@ -149,7 +150,10 @@ void Feder::mousePressEvent(QGraphicsSceneMouseEvent *event) {
  * @brief if a ball is connected to the feder, its position is updated (is used after the feder changes its position/tesnion)
  * @param ball to be changed
  */
-void Feder::updateBall(Ball &ball)
-{
-
+void Feder::updateBall(Ball &ball) {
+    qDebug() << x() << y();
+    qDebug() << ball.x() << ball.y();
+    int x_ = x() + FEDER_WIDTH/2 - BALL_DIAM/2 + (FEDER_HEIGHT*(1-0.1*spannung) + BALL_DIAM/2) * sin(rotation() * M_PI/180);
+    int y_ = y() + FEDER_HEIGHT  - BALL_DIAM/2 - (FEDER_HEIGHT*(1-0.1*spannung) + BALL_DIAM/2) * cos(rotation() * M_PI/180);
+    ball.setPos(x_, y_);
 }
