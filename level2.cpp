@@ -7,7 +7,7 @@ Game* game2;
 Level2::Level2(Game* game, QWidget* parent)
 {
 //create the scene
-scene2 = new QGraphicsScene();
+scene2 = new QGraphicsScene(this);
 game2 = game;
 setScene(scene2);
 setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

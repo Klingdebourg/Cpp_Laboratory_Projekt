@@ -14,6 +14,7 @@
 #include "balken.h"
 
 class level2;
+class level1;
 
 class Game: public QGraphicsView{
     Q_OBJECT

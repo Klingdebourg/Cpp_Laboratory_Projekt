@@ -6,7 +6,7 @@
 #define WINDOW_W 1600
 #define WINDOW_H 1200
 
-Game::Game(QWidget* parent){
+Game::Game(QWidget* parent): QGraphicsView(parent){
 
     // create the scene
     scene = new QGraphicsScene();
@@ -91,7 +91,9 @@ void Game::levelmenu(){
 void Game::start(){
     Button *clickedButton = qobject_cast<Button *>(sender());
     if (clickedButton->gettext() == "1"){
-        Level1 *level1 = new Level1;
+        Level1 *level1 = new Level1(this);
+        level1->show();
+        this->hide();
     } else if (clickedButton->gettext() == "2") {
         Level2 *level2 = new Level2(this);
         level2->show();
