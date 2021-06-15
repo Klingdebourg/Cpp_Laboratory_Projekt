@@ -13,6 +13,7 @@
 #include "feder.h"
 #include "balken.h"
 
+class level3;
 class level2;
 class level1;
 

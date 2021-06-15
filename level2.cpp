@@ -31,7 +31,7 @@ scene2->addItem(titleText);
 //Create the objects for the levels
 Balken* balken1 = new Balken(600,1000,0,300);
 Balken* balken2 = new Balken(300,400,0,300);
-Balken* balken3 = new Balken(1000,600,0,300);
+Balken* balken3 = new Balken(1000,500,0,300);
 //Virus* virus = new Virus(1000,1000);
 Feder* feder = new Feder(balken1->x()+(balken1->boundingRect().width() - FEDER_WIDTH)/2, balken1->y()-FEDER_HEIGHT);
 counter* counter1 = new counter;

@@ -99,6 +99,8 @@ void Game::start(){
         level2->show();
         this->hide();
     } else {
-        Level3 *level3= new Level3;
+        Level3 *level3= new Level3(this);
+        level3->show();
+        this->hide();
     }
 }
