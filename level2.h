@@ -9,6 +9,7 @@
 #include "maske.h"
 #include "feder.h"
 #include "counter.h"
+#include "ball.h"
 
 #include <box2d/box2d.h>
 

@@ -21,6 +21,8 @@ public:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     int rot() const;
     b2BodyDef bodyDefBalken;
+    b2PolygonShape BalkenBox;
+
 
 private:
     QPointF position;

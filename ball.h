@@ -4,9 +4,14 @@
 #include <QGraphicsEllipseItem>
 #include "feder.h"
 
+#include <box2d/box2d.h>
+
 class Ball : public QGraphicsEllipseItem {
 public:
     Ball(int x, int y, int radius);
+    b2BodyDef bodyDefBall;
+    b2FixtureDef fixtureDefBall;
+
 };
 
 #endif // BALL_H

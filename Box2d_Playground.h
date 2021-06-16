@@ -1,4 +1,0 @@
-#ifndef BOX2D_PLAYGROUND_H
-#define BOX2D_PLAYGROUND_H
-
-#endif // BOX2D_PLAYGROUND_H
