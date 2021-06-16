@@ -7,6 +7,8 @@
 
 #include <math.h>
 
+#include <box2d/box2d.h>
+
 
 #define WINDOW_W 1600
 #define WINDOW_H 1200
@@ -18,6 +20,7 @@ public:
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     int rot() const;
+    b2BodyDef bodyDefBalken;
 
 private:
     QPointF position;

@@ -1,4 +1,5 @@
 #include "balken.h"
+#include "level2.h"
 
 /**
  * @brief creates a Balken at a certain position
@@ -35,6 +36,26 @@ Balken::Balken(int x, int y, int rotation, int length) {
     setFlag(QGraphicsItem::ItemIsFocusable);
     //makes the item selectable
     setFlag(QGraphicsItem::ItemIsSelectable);
+
+
+
+    //+++++++++++++++Box2D+++++++++++++++++++++++
+
+    b2BodyDef bodyDefBalken;
+    bodyDefBalken.position.Set(x, y*(-1));
+   // b2Body* body = world.CreateBody(&bodyDefBalken);
+    b2PolygonShape BalkenBox;
+    BalkenBox.SetAsBox(length/2, BALKEN_WIDTH/2);
+    b2FixtureDef fixtureDef;
+
+
+
+
+
+
+
+
+
 
 }
 

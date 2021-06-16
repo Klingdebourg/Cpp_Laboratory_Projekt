@@ -36,4 +36,28 @@ scene->addItem(counter1);
 //scene->addItem(maske2);
 //scene->addItem(maske3);
 
+
+//+++++++++++Box2D ++++++++++++++++++++++++++++++++++++++
+
+b2Vec2 gravity(0.0f, -10.0f);
+b2World world(gravity);                                   //Welt Definition
+
+b2BodyDef groundBodyDef;
+groundBodyDef.position.Set(0.0f, -600.0f);
+b2Body* groundBody = world.CreateBody(&groundBodyDef);
+b2PolygonShape groundBox;                                 //Weltbegrenzung
+groundBox.SetAsBox(800.0f, 600.0f);
+groundBody->CreateFixture(&groundBox, 0.0f);              //Welt jetzt erstellt
+
+
+timeStep = 1.0f / 60.0f;
+velocityIterations = 6;
+positionIterations = 2;
+
+b2Body* BodyBalken1 = world.CreateBody(&(balken1->bodyDefBalken));
+BodyBalken1->CreateFixture(&fixtureDef);//FixtureDef auf Richtigkeit kontrollieren, Name könnte ein anderer sein in Balken + ggf Balken:fixture... verwenden
+
+
+
+
 }
