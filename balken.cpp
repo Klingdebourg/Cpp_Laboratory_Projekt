@@ -11,6 +11,7 @@
 Balken::Balken(int x, int y, int rotation, int length, balkenType typ) {
 
     //creates rectangle with given size at origin in scene coordinates
+    this->length = length;
     setRect(0, 0, length, BALKEN_WIDTH);
     //moves the transformation point to the middle of the rectangle
     setTransformOriginPoint(QPointF(length/2, BALKEN_WIDTH/2));
@@ -30,7 +31,7 @@ Balken::Balken(int x, int y, int rotation, int length, balkenType typ) {
         else
             this->rotation = rotation - 180;
     }
-    setRotation(rot());
+    setRotation(getRotation());
 
     if (typ != statisch) {
         //makes the object focussable thus enables it to be moved
@@ -44,6 +45,14 @@ Balken::Balken(int x, int y, int rotation, int length, balkenType typ) {
 }
 
 /**
+ * @brief Balken::boundingRect
+ * @return the are to be redrawn when the item is updated
+ */
+QRectF Balken::boundingRect() const {
+    return QRectF(0, 0, getLength(), BALKEN_WIDTH);
+}
+
+/**
  * @brief to move the Balken if it is in focus
  * @param event contains the pressed key
  */
@@ -54,8 +63,8 @@ void Balken::keyPressEvent(QKeyEvent *event) {
         //differentiate the movement depending on the type of the balken
         switch(type) {
         case translatorisch:
-            position.setX(position.x() - 15 * cos(rot() * M_PI/180));
-            position.setY(position.y() - 15 * sin(rot() * M_PI/180));
+            position.setX(position.x() - 15 * cos(getRotation() * M_PI/180));
+            position.setY(position.y() - 15 * sin(getRotation() * M_PI/180));
             setPos(position);
             break;
         case rotatorisch:
@@ -70,8 +79,8 @@ void Balken::keyPressEvent(QKeyEvent *event) {
         //differentiate the movement depending on the type of the balken
         switch(type) {
         case translatorisch:
-            position.setX(position.x() + 15 * cos(rot() * M_PI/180));
-            position.setY(position.y() + 15 * sin(rot() * M_PI/180));
+            position.setX(position.x() + 15 * cos(getRotation() * M_PI/180));
+            position.setY(position.y() + 15 * sin(getRotation() * M_PI/180));
             setPos(position);
             break;
         case rotatorisch:
@@ -99,7 +108,38 @@ void Balken::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     }
 }
 
-int Balken::rot() const
-{
+void Balken::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
+    QPen pen = QPen();
+    pen.setWidth(5);
+    switch (this->type) {
+    case statisch:
+        pen.setColor(Qt::black);
+        break;
+    case translatorisch:
+        pen.setColor(Qt::blue);
+        break;
+    case rotatorisch:
+        pen.setColor(Qt::red);
+        break;
+    }
+    painter->setPen(pen);
+    painter->drawRect(0, 0, getLength(), BALKEN_WIDTH);
+}
+
+/**
+ * @brief Balken::rot
+ * @return current rotation of the Balken
+ */
+int Balken::getRotation() const{
     return rotation;
 }
+
+/**
+ * @brief Balken::getLength
+ * @return length of the Balken
+ */
+int Balken::getLength() const
+{
+    return length;
+}
+

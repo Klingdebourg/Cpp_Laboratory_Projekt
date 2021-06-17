@@ -90,18 +90,10 @@ Feder::Feder(int x, int y, Ball &ball) {
 
 /**
  * @brief Feder::boundingRect
- * @return the current size and position of the Feder
+ * @return the are to be redrawn when the item is updated
  */
 QRectF Feder::boundingRect() const {
     return QRectF(0, 0, FEDER_WIDTH, FEDER_HEIGHT);
-}
-
-/**
- * @brief Feder::boundingLostRect
- * @return the rectangle that is lost when the size is updated
- */
-QRectF Feder::boundingLostRect(){
-    return QRectF(0, 0, 0, 0.1*FEDER_HEIGHT*spannung);
 }
 
 /**

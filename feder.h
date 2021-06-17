@@ -21,7 +21,6 @@ public:
     Feder(int x, int y);
     Feder(int x, int y, Ball &ball);
     QRectF boundingRect() const;
-    QRectF boundingLostRect();
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
