@@ -1,6 +1,6 @@
 #include "virus.h"
 
-Virus::Virus()
-{
+Virus::Virus() {
+    QPixmap pic("media/virus.png");
 
 }
