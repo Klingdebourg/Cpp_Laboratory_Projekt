@@ -2,29 +2,25 @@
 #ifndef LEVEL2_H
 #define LEVEL2_H
 
-#include <QGraphicsScene>
-#include <QGraphicsView>
+
 #include "balken.h"
 #include "virus.h"
 #include "maske.h"
 #include "feder.h"
 #include "counter.h"
-#include <QGraphicsLineItem>
-#include "button.h"
+#include "level.h"
 #include "game.h"
+#include <QGraphicsView>
+#include <QGraphicsScene>
 
 class Game;
+class Level;
 
-class Level2: public QGraphicsView
+class Level2 : public Level
 {
     Q_OBJECT
 public:
-    Level2(Game* game, QWidget* parent = NULL);
-    QGraphicsScene* scene2;
-public slots:
-    void pause();
-    void Zurueck();
-    void Redo();
+    Level2(Game* game,int type = 2);
 };
 
 #endif // LEVEL2_H

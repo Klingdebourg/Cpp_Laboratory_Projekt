@@ -10,12 +10,14 @@
 #include "level1.h"
 #include "level2.h"
 #include "level3.h"
+#include "level.h"
 #include "feder.h"
 #include "balken.h"
 
-class level3;
-class level2;
 class level1;
+class level2;
+class level3;
+class Level;
 
 class Game: public QGraphicsView{
     Q_OBJECT

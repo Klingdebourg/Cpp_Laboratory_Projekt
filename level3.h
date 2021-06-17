@@ -13,6 +13,7 @@
 #include "game.h"
 
 class Game;
+class Level;
 
 class Level3: public QGraphicsView
 {
