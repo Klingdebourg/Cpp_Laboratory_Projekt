@@ -8,10 +8,10 @@
 
 class Ball : public QGraphicsEllipseItem {
 public:
-    Ball(int x, int y, int radius);
+    Ball(int x, int y, int radius, QGraphicsItem *parent = nullptr);
     b2BodyDef bodyDefBall;
     b2FixtureDef fixtureDefBall;
-
+    b2CircleShape circle;
 };
 
 #endif // BALL_H
