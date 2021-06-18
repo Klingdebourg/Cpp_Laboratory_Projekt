@@ -4,15 +4,8 @@
 #include <QGraphicsScene>
 #include "game.h"
 #include <QGraphicsLineItem>
-#include "button.h"
-#include "level1.h"
-#include "level2.h"
-#include "level3.h"
 
-class Game;
-class Level1;
-class Level2;
-class Level3;
+
 
 class Level : public QGraphicsView
 {

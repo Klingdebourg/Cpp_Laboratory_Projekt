@@ -1,9 +1,13 @@
 #include "level2.h"
+#include "balken.h"
+#include "virus.h"
+#include "maske.h"
+#include "feder.h"
+#include "counter.h"
 
 
 
-
-Level2::Level2(Game* game, int type): Level(game, type)
+Level2::Level2(Game* game): Level(game, 2)
 {
 
 //Create the objects for the levels

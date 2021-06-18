@@ -1,6 +1,9 @@
 #include "level.h"
+#include "button.h"
+#include "definitions.h"
+#include "level2.h"
 
-Level::Level(Game* game,int type, QWidget* parent)
+Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent)
 {
     levelscene = new QGraphicsScene(this);
     levelgame = game;
@@ -96,7 +99,7 @@ void Level::Redo()
     }
     if(level == 2){
         Level2* level2 = new Level2(levelgame);
-        show();
+        level2->show();
     }
     if(level == 3){
         //Level3* level3 = new Level3():Level(this);                         //TODO
