@@ -1,5 +1,6 @@
 #include "ball.h"
 #include "maske.h"
+#include "virus.h"
 
 
 
@@ -14,17 +15,25 @@ Ball::Ball() {
 
 //für move Funktion
 
-//Liste mit kollidierenden Elementen erzeugen
-QList <QGraphicsItem *> colliding_items = collidingItems();
-    //Liste durchgehen und checken, ob Item eine Maske oder Virus ist
-    for (int i = 0, n = colliding_items.size(); i< n; i++){
-        //falls Maske: Maske entfernen, Maskecounter hochsetzen
-        if (typeid(*(colliding_items[i]]] == typeid(Maske)){
-            scene -> removeItem(colliding_items[i]);
-            delete colliding_items[i];
-            masken_counter += 1;
-        }
-        else if (typeid(*(colliding_items[i]]] == typeid(Virus)){
-//Spiel beenden
+void move(){
+    ///Liste mit kollidierenden Elementen erzeugen
+    QList <QGraphicsItem *> colliding_items = collidingItems();
+    ///Liste durchgehen und checken, ob Item eine Maske oder Virus ist
+    int n = colliding_items.size();
+    for (int i = 0; i< n; i++){
+        for (int j = 0; j< n; j++){
+            ///falls Maske: Maske entfernen, Maskecounter hochsetzen
+            if ((typeid(*(colliding_items[i])) == typeid(Maske)) && (typeid(*(colliding_items[j])) == typeid(Ball))){
+                scene -> removeItem(colliding_items[i]);
+                delete colliding_items[i];
+                masken_counter += 1;
+            }
+            if ((typeid(*(colliding_items[i])) == typeid(Virus)) && (typeid(*(colliding_items[j])) == typeid(Ball))){
+            ///Spiel beenden
+                scene -> clear();
+            /// Text "du hast gewonnen" + Highscore
 
+            }
+        }
+    }
 }
