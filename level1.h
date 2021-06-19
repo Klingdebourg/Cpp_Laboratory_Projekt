@@ -1,15 +1,17 @@
 #ifndef LEVEL1_H
 #define LEVEL1_H
 
-#include "balken.h"
-#include "virus.h"
-#include "feder.h"
-#include "ball.h"
+#include "level.h"
+#include <QGraphicsView>
+#include <QGraphicsScene>
 
-class Level1
+
+
+class Level1: public Level
 {
+
 public:
-    Level1();
+    Level1(Game* game);
 };
 
 #endif // LEVEL1_H

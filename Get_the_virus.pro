@@ -23,6 +23,7 @@ SOURCES += \
     feder.cpp \
     foehn.cpp \
     game.cpp \
+    level.cpp \
     level1.cpp \
     level2.cpp \
     level3.cpp \
@@ -80,6 +81,7 @@ HEADERS += \
     ball.h \
     button.h \
     counter.h \
+    definitions.h \
     feder.h \
     foehn.h \
     game.h \
@@ -123,6 +125,7 @@ HEADERS += \
     include/box2d/b2_world.h \
     include/box2d/b2_world_callbacks.h \
     include/box2d/box2d.h \
+    level.h \
     level1.h \
     level2.h \
     level3.h \

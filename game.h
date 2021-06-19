@@ -6,14 +6,9 @@
 #include <QGraphicsTextItem>
 #include <QFont>
 #include <QBrush>
-#include "button.h"
-#include "level1.h"
-#include "level2.h"
-#include "level3.h"
-#include "feder.h"
-#include "balken.h"
 
-class level2;
+
+
 
 class Game: public QGraphicsView{
     Q_OBJECT
