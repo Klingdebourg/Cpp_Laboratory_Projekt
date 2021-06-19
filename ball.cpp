@@ -5,7 +5,7 @@ Ball::Ball(int x, int y, int radius, QGraphicsItem* parent) :
 {
     setRect(x,y,radius,radius);
 
-
+/*
 
     bodyDefBall.type = b2_dynamicBody;
     bodyDefBall.position.Set(x, y*(-1));
@@ -16,6 +16,6 @@ Ball::Ball(int x, int y, int radius, QGraphicsItem* parent) :
     fixtureDefBall.shape = &circle;
     fixtureDefBall.density = 100.0f;
     fixtureDefBall.friction = 0.3f;
-
+*/
 
 }

@@ -41,12 +41,10 @@ Balken::Balken(int x, int y, int rotation, int length) {
 
     //+++++++++++++++Box2D+++++++++++++++++++++++
 
-    b2BodyDef bodyDefBalken;
     bodyDefBalken.position.Set(x, y*(-1));
    // b2Body* body = world.CreateBody(&bodyDefBalken);
-    b2PolygonShape BalkenBox;
     BalkenBox.SetAsBox(length/2, BALKEN_WIDTH/2);
-    b2FixtureDef fixtureDef;
+
 
 
 
