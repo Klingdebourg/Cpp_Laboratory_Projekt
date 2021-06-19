@@ -24,9 +24,9 @@ SOURCES += \
     foehn.cpp \
     game.cpp \
     level.cpp \
-    #level1.cpp \
+    level1.cpp \
     level2.cpp \
-    #level3.cpp \
+    level3.cpp \
     main.cpp \
     maske.cpp \
     src/collision/b2_broad_phase.cpp \
@@ -126,9 +126,9 @@ HEADERS += \
     include/box2d/b2_world_callbacks.h \
     include/box2d/box2d.h \
     level.h \
-    #level1.h \
+    level1.h \
     level2.h \
-    #level3.h \
+    level3.h \
     maske.h \
     src/dynamics/b2_chain_circle_contact.h \
     src/dynamics/b2_chain_polygon_contact.h \

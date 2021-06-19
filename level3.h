@@ -3,28 +3,12 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsView>
-#include "balken.h"
-#include "virus.h"
-#include "maske.h"
-#include "feder.h"
-#include "counter.h"
-#include <QGraphicsLineItem>
-#include "button.h"
-#include "game.h"
+#include "level.h"
 
-class Game;
-class Level;
-
-class Level3: public QGraphicsView
+class Level3: public Level
 {
-    Q_OBJECT
 public:
-    Level3(Game* game, QWidget* parent = NULL);
-    QGraphicsScene* scene3;
-public slots:
-    void pause();
-    void Zurueck();
-    void Redo();
+    Level3(Game* game);
 };
 
 #endif // LEVEL3_H
