@@ -74,6 +74,7 @@ SOURCES += \
     src/dynamics/b2_world.cpp \
     src/dynamics/b2_world_callbacks.cpp \
     src/rope/b2_rope.cpp \
+    uhr.cpp \
     virus.cpp
 
 HEADERS += \
@@ -139,6 +140,7 @@ HEADERS += \
     src/dynamics/b2_island.h \
     src/dynamics/b2_polygon_circle_contact.h \
     src/dynamics/b2_polygon_contact.h \
+    uhr.h \
     virus.h
 
 FORMS +=
