@@ -20,11 +20,13 @@ SOURCES += \
     ball.cpp \
     button.cpp \
     feder.cpp \
+    foehn.cpp \
     game.cpp \
     level1.cpp \
     level2.cpp \
     level3.cpp \
     main.cpp \
+    maske.cpp \
     src/collision/b2_broad_phase.cpp \
     src/collision/b2_chain_shape.cpp \
     src/collision/b2_circle_shape.cpp \
@@ -70,6 +72,7 @@ SOURCES += \
     src/dynamics/b2_world.cpp \
     src/dynamics/b2_world_callbacks.cpp \
     src/rope/b2_rope.cpp \
+    uhr.cpp \
     virus.cpp
 
 HEADERS += \
@@ -77,6 +80,7 @@ HEADERS += \
     ball.h \
     button.h \
     feder.h \
+    foehn.h \
     game.h \
     include/box2d/b2_api.h \
     include/box2d/b2_block_allocator.h \
@@ -121,6 +125,7 @@ HEADERS += \
     level1.h \
     level2.h \
     level3.h \
+    maske.h \
     src/dynamics/b2_chain_circle_contact.h \
     src/dynamics/b2_chain_polygon_contact.h \
     src/dynamics/b2_circle_contact.h \
@@ -130,6 +135,7 @@ HEADERS += \
     src/dynamics/b2_island.h \
     src/dynamics/b2_polygon_circle_contact.h \
     src/dynamics/b2_polygon_contact.h \
+    uhr.h \
     virus.h
 
 FORMS +=
