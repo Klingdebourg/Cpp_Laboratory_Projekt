@@ -5,7 +5,6 @@
 #include <QKeyEvent>
 #include <QGraphicsSceneMouseEvent>
 
-#define FOEHN_BREITE 100
 
 class Foehn : public QGraphicsRectItem{
 public:

@@ -3,17 +3,17 @@
 
 #include <QGraphicsEllipseItem>
 
-#define BALL_DIAM 70
-
 #include <QGraphicsItem>
-#include <QGraphicsScene>
 #include <QList>
-#include "feder.h"
+#include "maske.h"
+#include "virus.h"
+
 
 class Ball : public QGraphicsEllipseItem {
 public:
     Ball();
-    void move();
+    //QList <QGraphicsItem *> collidingList();
+    int collidingItem(Maske* maske1, Maske* maske2, Maske* maske3, Virus* virus);
 };
 
 #endif // BALL_H

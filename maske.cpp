@@ -1,6 +1,6 @@
-
 #include "maske.h"
 #include <QRectF>
+#include "definitions.h"
 
 Maske::Maske(int x, int y, QRectF *a)
 {

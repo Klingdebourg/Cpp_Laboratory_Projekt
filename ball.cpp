@@ -1,6 +1,8 @@
 #include "ball.h"
 #include "maske.h"
 #include "virus.h"
+#include "level.h"
+#include "definitions.h"
 
 
 
@@ -15,25 +17,22 @@ Ball::Ball() {
 
 //für move Funktion
 
-void move(){
-    ///Liste mit kollidierenden Elementen erzeugen
-    QList <QGraphicsItem *> colliding_items = collidingItems();
-    ///Liste durchgehen und checken, ob Item eine Maske oder Virus ist
-    int n = colliding_items.size();
-    for (int i = 0; i< n; i++){
-        for (int j = 0; j< n; j++){
-            ///falls Maske: Maske entfernen, Maskecounter hochsetzen
-            if ((typeid(*(colliding_items[i])) == typeid(Maske)) && (typeid(*(colliding_items[j])) == typeid(Ball))){
-                scene -> removeItem(colliding_items[i]);
-                delete colliding_items[i];
-                masken_counter += 1;
-            }
-            if ((typeid(*(colliding_items[i])) == typeid(Virus)) && (typeid(*(colliding_items[j])) == typeid(Ball))){
-            ///Spiel beenden
-                scene -> clear();
-            /// Text "du hast gewonnen" + Highscore
-
-            }
-        }
+int Ball::collidingItem(Maske* maske1, Maske* maske2, Maske* maske3, Virus* virus){
+    if (collidesWithItem(maske1)==true){
+        return 1;
+    } else if (collidesWithItem(maske2)==true){
+        return 2;
+    } else if (collidesWithItem(maske3)==true){
+        return 3;
+    } else if (collidesWithItem(virus)==true){
+        return 4;
+    } else {
+        return 5;
     }
 }
+
+//QList <QGraphicsItem *> Ball::collidingList(){
+//    ///Liste mit kollidierenden Elementen erzeugen
+//    QList <QGraphicsItem *> colliding_items = collidingItems();
+//    return colliding_items;
+//}

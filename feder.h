@@ -11,10 +11,6 @@
 
 #include <math.h>
 
-#define WINDOW_W 1600
-#define WINDOW_H 1200
-#define FEDER_WIDTH 20
-#define FEDER_HEIGHT 100
 
 class Feder : public QGraphicsRectItem {
 public:

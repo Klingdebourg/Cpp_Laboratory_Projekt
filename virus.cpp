@@ -1,5 +1,6 @@
 #include "virus.h"
 #include <QRectF>
+#include "definitions.h"
 
 Virus::Virus(int x, int y, QRectF *a)
 {

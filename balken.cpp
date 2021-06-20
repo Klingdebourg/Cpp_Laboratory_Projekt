@@ -1,4 +1,5 @@
 #include "balken.h"
+#include "definitions.h"
 
 /**
  * @brief creates a Balken at a certain position

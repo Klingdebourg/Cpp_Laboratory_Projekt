@@ -4,9 +4,10 @@
 #include "level1.h"
 #include "level2.h"
 #include "level3.h"
+#include <QTimer>
+#include <QDebug>
 
-Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent)
-{
+Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     levelscene = new QGraphicsScene(this);
     levelgame = game;
     level = type;
@@ -35,6 +36,17 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent)
     titleText->setPos(txPos,tyPos);
     levelscene->addItem(titleText);
 
+    ball = new Ball();
+    maske1 = new Maske(0,0);
+    maske2 = new Maske(400,0);
+    maske3 = new Maske(600,0);
+    virus = new Virus(800,0);
+    levelscene -> addItem(ball);
+    levelscene -> addItem(maske1);
+    levelscene -> addItem(maske2);
+    levelscene -> addItem(maske3);
+    levelscene -> addItem(virus);
+
     //Pause-Button
     Button* pause = new Button(QString("||"));
     pause->setRect(0,0,100,100);
@@ -44,9 +56,15 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent)
     pausepic = new QGraphicsView;
     pausemenu = new QGraphicsScene();
 
+    QTimer *timer = new QTimer();
+    connect(timer, SIGNAL(timeout()), this, SLOT(Interaktion()));
+    timer -> start(1/60*1000);
+
+    Counter = new counter;
+    Counter->setPos(WINDOW_W-Counter->boundingRect().width(),y());
+    levelscene -> addItem(Counter);
 
 }
-
 
 
 void Level::pause(){
@@ -107,5 +125,64 @@ void Level::Redo()
         Level3* level3 = new Level3(levelgame);
         level3->show();
     }
+}
+
+///Prüft, ob die Items, welche in der Scene sind kollidieren und handelt je nach Art des Items; Interaktion mit Box2D
+void Level::Interaktion(){
+    //@Lukas: hier Interaktion mit Box2d
+
+
+
+
+
+
+
+
+  ///Kollisionsabfrage
+    ///In Ball abfragen, was mit Ball kollidiert
+    int colliding_item = ball -> collidingItem(maske1, maske2, maske3, virus);
+    if (colliding_item == 1){
+        qDebug("Maske1 wird berührt");
+        levelscene -> removeItem(maske1);
+        Counter -> increase();
+        return;
+    } else if (colliding_item == 2){
+        levelscene -> removeItem(maske2);
+        Counter -> increase();
+        return;
+    } else if (colliding_item == 3){
+        levelscene -> removeItem(maske3);
+        Counter -> increase();
+        return;
+    }  else if (colliding_item == 4){
+        ///Spiel beenden
+        levelscene -> clear();
+        /// Text "du hast gewonnen" + Highscore
+    } else if (colliding_item == 5){
+        qDebug("Nichts wird berührt");
+        return;
+    }
+
+//    ///Liste durchgehen und checken, ob Item eine Maske oder Virus ist
+//    int n = colliding_items_level.size();
+//    for (int i = 0; i< n; i++){
+//        for (int j = 0; j< n; j++){
+//            ///falls Maske: Maske entfernen, Maskecounter hochsetzen
+//            if ((typeid(*(colliding_items_level[i])) == typeid(Maske)) && (typeid(*(colliding_items_level[j])) == typeid(Ball))){
+//                levelscene -> removeItem(colliding_items_level[i]);
+//                delete colliding_items_level[i];
+//                Counter -> increase();
+//                return;
+//            }
+//            else if ((typeid(*(colliding_items_level[i])) == typeid(Virus)) && (typeid(*(colliding_items_level[j])) == typeid(Ball))){
+//            ///Spiel beenden
+//                levelscene -> clear();
+//                return;
+//            /// Text "du hast gewonnen" + Highscore
+
+//            }
+//            else return;
+//        }
+//    }
 }
 

@@ -1,5 +1,6 @@
 #include "foehn.h"
 #include <QDebug>
+#include "definitions.h"
 
 Foehn::Foehn(int x, int y){
     setRect(x, y, FOEHN_BREITE, FOEHN_BREITE);
