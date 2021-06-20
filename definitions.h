@@ -8,7 +8,7 @@
 #define FEDER_WIDTH 20
 #define FEDER_HEIGHT 100
 #define FOEHN_BREITE 100
-#define MASKE_BREITE 80
+#define MASKE_BREITE 60
 #define VIRUS_RADIUS 80
 
 #endif // DEFINITIONS_H

@@ -38,9 +38,9 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
 
     ball = new Ball();
     maske1 = new Maske(0,0);
-    maske2 = new Maske(400,0);
-    maske3 = new Maske(600,0);
-    virus = new Virus(800,0);
+    maske2 = new Maske(0,0);
+    maske3 = new Maske(0,0);
+    virus = new Virus(0,0);
     levelscene -> addItem(ball);
     levelscene -> addItem(maske1);
     levelscene -> addItem(maske2);
@@ -56,7 +56,7 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     pausepic = new QGraphicsView;
     pausemenu = new QGraphicsScene();
 
-    QTimer *timer = new QTimer();
+    QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(Interaktion()));
     timer -> start(1/60*1000);
 
@@ -96,6 +96,12 @@ void Level::pause(){
     redo->setRect(0,0,300,50);
     redo->setPos(pausetext->x()+pausetext->boundingRect().width()/4, pausetext->y()+200);
     pausemenu->addItem(redo);
+
+    Button* haupt = new Button(QString("Zum Hauptmenü"));
+    connect(haupt, SIGNAL(clicked()),this,SLOT(Hauptmenu()));
+    haupt->setRect(0,0,300,50);
+    haupt->setPos(pausetext->x()+pausetext->boundingRect().width()/4, pausetext->y()+300);
+    pausemenu->addItem(haupt);
 }
 
 void Level::Zurueck()
@@ -125,6 +131,15 @@ void Level::Redo()
         Level3* level3 = new Level3(levelgame);
         level3->show();
     }
+}
+
+void Level::Hauptmenu()
+{
+    levelgame->show();
+    levelgame->displayMainMenu();
+    pausemenu->deleteLater();
+    pausepic->deleteLater();
+    this->deleteLater();
 }
 
 ///Prüft, ob die Items, welche in der Scene sind kollidieren und handelt je nach Art des Items; Interaktion mit Box2D

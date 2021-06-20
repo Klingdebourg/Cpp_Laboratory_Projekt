@@ -2,11 +2,10 @@
 #define MASKE_H
 
 #include <QGraphicsRectItem>
-#include <QRectF>
 
 class Maske : public QGraphicsRectItem {
 public:
-    Maske(int x, int y, QRectF *a=0);
+    Maske(int x, int y);
 };
 
 #endif // MASKE_H

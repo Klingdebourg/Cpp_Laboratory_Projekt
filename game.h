@@ -21,6 +21,7 @@ public slots:
     void levelmenu();
     void displayMainMenu();
     void start();
+    void Info();
 
 };
 

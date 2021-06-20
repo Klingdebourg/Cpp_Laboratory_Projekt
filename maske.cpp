@@ -1,8 +1,7 @@
 #include "maske.h"
-#include <QRectF>
 #include "definitions.h"
 
-Maske::Maske(int x, int y, QRectF *a)
+Maske::Maske(int x, int y)
 
 {
     setRect(x, y, MASKE_BREITE, MASKE_BREITE);

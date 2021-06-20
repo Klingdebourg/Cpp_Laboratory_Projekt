@@ -50,6 +50,14 @@ void Game::displayMainMenu(){
     int qyPos = 600;
     quitButton->setPos(qxPos,qyPos);
     scene->addItem(quitButton);
+
+
+    Button* info = new Button(QString("Spielinformationen"));
+    connect(info,SIGNAL(clicked()),this,SLOT(Info()));
+    int ixPos = txPos;
+    int iyPos = 800;
+    info->setPos(ixPos,iyPos);
+    scene->addItem(info);
 }
 void Game::levelmenu(){
     scene->clear();
@@ -106,4 +114,15 @@ void Game::start(){
         level3->show();
         this->hide();
     }
+}
+
+void Game::Info()
+{
+    scene->clear();
+
+    //Informationen wie man das Spiel spielt werden hier hereingeschrieben
+
+    Button* back = new Button(QString("<-"));
+    connect(back, SIGNAL(clicked()),this,SLOT(displayMainMenu()));
+    scene->addItem(back);
 }

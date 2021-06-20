@@ -34,6 +34,7 @@ public slots:
     void pause();
     void Zurueck();
     void Redo();
+    void Hauptmenu();
     void Interaktion();
 //    Maske* maske1, Maske* maske2, Maske* maske3, Virus* virus
 };
