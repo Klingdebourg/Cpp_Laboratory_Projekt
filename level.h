@@ -7,6 +7,7 @@
 #include "maske.h"
 #include "ball.h"
 #include "virus.h"
+#include "feder.h"
 #include <QGraphicsLineItem>
 #include <QGraphicsItem>
 #include <QList>
@@ -30,6 +31,11 @@ public:
     Maske* maske2;
     Maske* maske3;
     Virus* virus;
+    Feder* feder;
+    int failbedingung;
+    int x_last;
+    int y_last;
+
 public slots:
     void pause();
     void Zurueck();

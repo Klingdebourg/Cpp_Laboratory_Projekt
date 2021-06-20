@@ -6,7 +6,6 @@
 #include "level.h"
 #include "balken.h"
 #include "foehn.h"
-#include "feder.h"
 
 class Level3: public Level{
 public:
@@ -16,7 +15,6 @@ public:
     Balken* balken3;
     Foehn* foehn1;
     Foehn* foehn2;
-    Feder* feder;
 };
 
 #endif // LEVEL3_H

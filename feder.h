@@ -21,6 +21,7 @@ public:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void updateBall(Ball &ball);
+    bool ballattached();
 
 private:
     int spannung;

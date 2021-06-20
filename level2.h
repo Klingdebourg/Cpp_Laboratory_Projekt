@@ -5,7 +5,6 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include "balken.h"
-#include "feder.h"
 #include "foehn.h"
 
 class Level2: public Level{
@@ -14,7 +13,6 @@ public:
     Balken* balken1;
     Balken* balken2;
     Balken* balken3;
-    Feder* feder;
     Foehn* foehn;
 
 };

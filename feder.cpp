@@ -125,6 +125,9 @@ void Feder::keyPressEvent(QKeyEvent *event)
         break;
     case Qt::Key_Space:
         spannung = 0;
+        if(isBallAttached)
+            isBallAttached = false;
+        //Geschwindigkeit Ball setzen
     }
     //update size of Feder, unfortunately also changes width
     //alternative could use "update" method but this would require a redraw of the Feder which can only be done from the scene
@@ -177,4 +180,9 @@ void Feder::updateBall(Ball &ball) {
     int x_ = x() + FEDER_WIDTH/2 - BALL_DIAM/2 + (FEDER_HEIGHT*(1-0.1*spannung) + BALL_DIAM/2) * sin(rotation() * M_PI/180);
     int y_ = y() + FEDER_HEIGHT  - BALL_DIAM/2 - (FEDER_HEIGHT*(1-0.1*spannung) + BALL_DIAM/2) * cos(rotation() * M_PI/180);
     ball.setPos(x_, y_);
+}
+
+bool Feder::ballattached()
+{
+    return isBallAttached;
 }

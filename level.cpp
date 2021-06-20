@@ -41,7 +41,6 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     maske2 = new Maske(0,0);
     maske3 = new Maske(0,0);
     virus = new Virus(0,0);
-    levelscene -> addItem(ball);
     levelscene -> addItem(maske1);
     levelscene -> addItem(maske2);
     levelscene -> addItem(maske3);
@@ -63,6 +62,14 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     Counter = new counter;
     Counter->setPos(WINDOW_W-Counter->boundingRect().width(),y());
     levelscene -> addItem(Counter);
+
+    feder = new Feder(0,0,*ball);
+    levelscene -> addItem(ball);
+    levelscene->addItem(feder);
+
+
+    failbedingung=0;
+
 
 }
 
@@ -151,7 +158,26 @@ void Level::Interaktion(){
 
 
 
-
+  //Abfrage nach Position des Balls->Ende des Spiels
+if(!feder->ballattached()){
+   int x_current = ball->x();
+   int y_current = ball->y();
+   if(x_current == x_last && y_current == y_last) {
+      if(failbedingung <= 250000){
+          failbedingung++;
+      }
+      else{
+          //Spiel verloren
+          qDebug()<< "Spiel verloren";
+          //hier einfügen was jetzt passiert
+      }
+   }else{
+       failbedingung = 0;
+   }
+   x_last = x_current;
+   y_last = y_current;}else{
+    failbedingung =0;
+}
 
   ///Kollisionsabfrage
     ///In Ball abfragen, was mit Ball kollidiert
@@ -174,7 +200,7 @@ void Level::Interaktion(){
         levelscene -> clear();
         /// Text "du hast gewonnen" + Highscore
     } else if (colliding_item == 5){
-        qDebug("Nichts wird berührt");
+//        qDebug("Nichts wird berührt");
         return;
     }
 
