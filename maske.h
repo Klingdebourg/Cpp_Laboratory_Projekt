@@ -7,6 +7,6 @@
 class Maske : public QGraphicsRectItem {
 public:
     Maske(int x, int y, QRectF *a=0);
-};
+}
 
 #endif // MASKE_H

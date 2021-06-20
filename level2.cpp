@@ -1,6 +1,7 @@
 #include "level2.h"
 #include "balken.h"
 #include "feder.h"
+#include <QDebug>
 #include "foehn.h"
 
 
@@ -36,5 +37,11 @@ levelscene->addItem(foehn);
 //levelscene->addItem(maske2);
 //levelscene->addItem(maske3);
 
+    qDebug() << "Level 2 erstellt.";
+    game -> scene -> clear();
+    Virus *virus1 = new Virus(100, 100);
+    game -> scene -> addItem(virus1);
+    Foehn * foehn1 = new Foehn (100,100);
+    game -> scene -> addItem(foehn1);
 }
 

@@ -8,7 +8,6 @@
 #include "maske.h"
 #include "virus.h"
 
-
 class Ball : public QGraphicsEllipseItem {
 public:
     Ball();

@@ -1,0 +1,12 @@
+cp    ball.cpp \
+   ball.h \
+   foehn.cpp \
+   foehn.h \
+   level2.cpp \
+   level2.h \
+   maske.cpp \
+   maske.h \
+   uhr.h \
+   virus.cpp \
+   virus.h \
+   ~/tmp_copy/
