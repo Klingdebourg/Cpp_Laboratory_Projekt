@@ -5,8 +5,7 @@
 #include <QGraphicsView>
 #include "level.h"
 
-class Level3: public Level
-{
+class Level3: public Level{
 public:
     Level3(Game* game);
 };

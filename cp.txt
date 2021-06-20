@@ -1,0 +1,11 @@
+tkdiff   ball.cpp   ~/tmp_copy/ball.cpp 
+tkdiff   ball.h     ~/tmp_copy/ball.h 
+tkdiff   foehn.cpp  ~/tmp_copy/foehn.cpp 
+tkdiff   foehn.h    ~/tmp_copy/foehn.h 
+tkdiff   level2.cpp ~/tmp_copy/level2.cpp 
+tkdiff   level2.h   ~/tmp_copy/level2.h 
+tkdiff   maske.cpp  ~/tmp_copy/maske.cpp 
+tkdiff   maske.h    ~/tmp_copy/maske.h 
+tkdiff   uhr.h      ~/tmp_copy/uhr.h 
+tkdiff   virus.cpp  ~/tmp_copy/virus.cpp 
+tkdiff   virus.h    ~/tmp_copy/virus.h 

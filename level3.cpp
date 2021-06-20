@@ -1,8 +1,6 @@
 #include "level3.h"
-#include "counter.h"
 #include "balken.h"
 #include "feder.h"
-
 
 
 Game* game3;
@@ -19,8 +17,8 @@ Balken* balken3 = new Balken(950,650,-45,300, statisch);                //transl
 //Foehn* foehn2 = new Foehn();
 //Virus* virus = new Virus(1000,1000);
 Feder* feder = new Feder(balken1->x()+(balken1->boundingRect().width() - FEDER_WIDTH)/2, balken1->y()-FEDER_HEIGHT);
-counter* counter1 = new counter;
-counter1->setPos(WINDOW_W-counter1->boundingRect().width(),y());
+//counter* counter1 = new counter;
+//counter1->setPos(WINDOW_W-counter1->boundingRect().width(),y());
 //Maske* maske1 = new Maske;
 //Maske* maske2 = new Maske;
 //Maske* maske3 = new Maske;
@@ -31,7 +29,7 @@ levelscene->addItem(balken2);
 levelscene->addItem(balken3);
 //scene->addItem(virus);
 levelscene->addItem(feder);
-levelscene->addItem(counter1);
+//levelscene->addItem(counter1);
 //scene->addItem(maske1);
 //scene->addItem(maske2);
 //scene->addItem(maske3);

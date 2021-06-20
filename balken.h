@@ -10,10 +10,6 @@
 #include <math.h>
 
 
-#define WINDOW_W 1600
-#define WINDOW_H 1200
-#define BALKEN_WIDTH 40
-
 enum balkenType {
     statisch,
     translatorisch,
