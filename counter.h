@@ -10,6 +10,7 @@
      counter();
      void increase();
      int getscore();
+    private:
      int m_score;
     };
 
