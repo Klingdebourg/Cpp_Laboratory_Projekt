@@ -5,8 +5,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 
-class Level2
-{
+class Level2: public Level{
 public:
     Level2(Game* game);
 };

@@ -1,0 +1,11 @@
+diff   ball.cpp   ~/tmp_copy/ball.cpp 
+diff   ball.h     ~/tmp_copy/ball.h 
+diff   foehn.cpp  ~/tmp_copy/foehn.cpp 
+diff   foehn.h    ~/tmp_copy/foehn.h 
+diff   level2.cpp ~/tmp_copy/level2.cpp 
+diff   level2.h   ~/tmp_copy/level2.h 
+diff   maske.cpp  ~/tmp_copy/maske.cpp 
+diff   maske.h    ~/tmp_copy/maske.h 
+diff   uhr.h      ~/tmp_copy/uhr.h 
+diff   virus.cpp  ~/tmp_copy/virus.cpp 
+diff   virus.h    ~/tmp_copy/virus.h 

@@ -5,7 +5,7 @@
 #include "foehn.h"
 
 
-Level2::Level2(Game* game): Level(game, 2)
+Level2::Level2(Game* game):Level(game, 2)
 {
 
 //Create the objects for the levels
@@ -37,11 +37,5 @@ levelscene->addItem(foehn);
 //levelscene->addItem(maske2);
 //levelscene->addItem(maske3);
 
-    qDebug() << "Level 2 erstellt.";
-    game -> scene -> clear();
-    Virus *virus1 = new Virus(100, 100);
-    game -> scene -> addItem(virus1);
-    Foehn * foehn1 = new Foehn (100,100);
-    game -> scene -> addItem(foehn1);
 }
 
