@@ -18,6 +18,15 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     levelscene->setSceneRect(0,0,WINDOW_W,WINDOW_H);
     levelscene->addLine(0,100,WINDOW_W,100);
 
+    //create box2d world
+    b2Vec2 gravity(0.0f, -10.0f);
+    world= new b2World(gravity);
+    timeStep = 1.0f /10.0f;
+    velocityIterations = 10;
+    positionIterations = 8;
+
+
+    //create level title
     if (level == 1 ){
         text= "Level 1";
     }
@@ -36,7 +45,18 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     titleText->setPos(txPos,tyPos);
     levelscene->addItem(titleText);
 
+    //initialize ballfor Qt and box2d
     ball = new Ball();
+    bodyDefBall = new b2BodyDef();
+    bodyDefBall->type = b2_dynamicBody;
+    bodyBall = world->CreateBody(bodyDefBall);
+    circle->m_radius = BALL_DIAM/2;
+    fixtureBall->density = 100.0f;
+    fixtureBall->friction = 0.3f;
+    fixtureBall->restitution = 5.0f;
+    fixtureBall->shape = circle;
+    bodyBall->CreateFixture(fixtureBall);
+
     maske1 = new Maske(0,0);
     maske2 = new Maske(0,0);
     maske3 = new Maske(0,0);
@@ -145,7 +165,9 @@ void Level::Hauptmenu()
 ///Prüft, ob die Items, welche in der Scene sind kollidieren und handelt je nach Art des Items; Interaktion mit Box2D
 void Level::Interaktion(){
     //@Lukas: hier Interaktion mit Box2d
-
+    world->Step(timeStep, velocityIterations, positionIterations);
+    b2Vec2 positionBall = bodyBall->GetPosition();
+    ball->setPos(QPointF(positionBall.x, -1*positionBall.y));
 
 
 
