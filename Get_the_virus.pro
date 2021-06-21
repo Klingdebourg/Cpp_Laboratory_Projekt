@@ -83,6 +83,7 @@ HEADERS += \
     button.h \
     counter.h \
     definitions.h \
+    element.h \
     feder.h \
     foehn.h \
     game.h \

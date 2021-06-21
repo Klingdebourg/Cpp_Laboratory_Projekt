@@ -36,16 +36,16 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     titleText->setPos(txPos,tyPos);
     levelscene->addItem(titleText);
 
-    ball = new Ball();
-    maske1 = new Maske(0,0);
-    maske2 = new Maske(0,0);
-    maske3 = new Maske(0,0);
-    virus = new Virus(0,0);
-    levelscene -> addItem(ball);
-    levelscene -> addItem(maske1);
-    levelscene -> addItem(maske2);
-    levelscene -> addItem(maske3);
-    levelscene -> addItem(virus);
+    ball->item = new Ball();
+    maske1->item = new Maske(0,0);
+    maske2->item = new Maske(0,0);
+    maske3->item = new Maske(0,0);
+    virus->item = new Virus(0,0);
+    levelscene -> addItem(ball->item);
+    levelscene -> addItem(maske1->item);
+    levelscene -> addItem(maske2->item);
+    levelscene -> addItem(maske3->item);
+    levelscene -> addItem(virus->item);
 
     //Pause-Button
     Button* pause = new Button(QString("||"));
@@ -155,18 +155,18 @@ void Level::Interaktion(){
 
   ///Kollisionsabfrage
     ///In Ball abfragen, was mit Ball kollidiert
-    int colliding_item = ball -> collidingItem(maske1, maske2, maske3, virus);
+    int colliding_item = dynamic_cast<Ball*>(ball->item)->collidingItem(dynamic_cast<Maske*>(maske1->item), dynamic_cast<Maske*>(maske2->item), dynamic_cast<Maske*>(maske3->item), dynamic_cast<Virus*>(virus->item));
     if (colliding_item == 1){
         qDebug("Maske1 wird berührt");
-        levelscene -> removeItem(maske1);
+        levelscene -> removeItem(maske1->item);
         Counter -> increase();
         return;
     } else if (colliding_item == 2){
-        levelscene -> removeItem(maske2);
+        levelscene -> removeItem(maske2->item);
         Counter -> increase();
         return;
     } else if (colliding_item == 3){
-        levelscene -> removeItem(maske3);
+        levelscene -> removeItem(maske3->item);
         Counter -> increase();
         return;
     }  else if (colliding_item == 4){

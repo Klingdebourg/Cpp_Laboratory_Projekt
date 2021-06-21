@@ -11,12 +11,12 @@
 class Level3: public Level{
 public:
     Level3(Game* game);
-    Balken* balken1;
-    Balken* balken2;
-    Balken* balken3;
-    Foehn* foehn1;
-    Foehn* foehn2;
-    Feder* feder;
+    Element* balken1;
+    Element* balken2;
+    Element* balken3;
+    Element* foehn1;
+    Element* foehn2;
+    Element* feder;
 };
 
 #endif // LEVEL3_H

@@ -6,18 +6,18 @@ Level1::Level1(Game* game):Level(game,1)
 {
 
 //Create the objects for the levels
-Balken* balken1 = new Balken(800,900,0,300,rotatorisch);
-Feder* feder = new Feder(balken1->x()+(balken1->boundingRect().width() - FEDER_WIDTH)/2, balken1->y()-FEDER_HEIGHT, *ball);
+balken1->item = new Balken(800,900,0,300,rotatorisch);
+feder->item = new Feder(balken1->item->x()+(balken1->item->boundingRect().width() - FEDER_WIDTH)/2, balken1->item->y()-FEDER_HEIGHT, dynamic_cast<Ball*>(ball->item));
 
 
 //Add the objects/items to the scene to be visualized
-levelscene->addItem(balken1);
-levelscene->addItem(feder);
+levelscene->addItem(balken1->item);
+levelscene->addItem(feder->item);
 
 //Position der Masken und des Virus festlegen
-virus->setPos(balken1->x()-600,balken1->y()-725);
-maske1->setPos(balken1->x(),balken1->y()-275);
-maske2->setPos(balken1->x()-175,balken1->y()-450);
-maske3->setPos(balken1->x()-350,balken1->y()-575);
+virus->item->setPos(balken1->item->x()-600,balken1->item->y()-725);
+maske1->item->setPos(balken1->item->x(),balken1->item->y()-275);
+maske2->item->setPos(balken1->item->x()-175,balken1->item->y()-450);
+maske3->item->setPos(balken1->item->x()-350,balken1->item->y()-575);
 
 }

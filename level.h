@@ -8,9 +8,9 @@
 #include "ball.h"
 #include "virus.h"
 #include <QGraphicsLineItem>
-#include <QGraphicsItem>
 #include <QList>
 #include "definitions.h"
+#include "element.h"
 
 
 class Level : public QGraphicsView
@@ -25,11 +25,11 @@ public:
     QGraphicsScene* pausemenu;
     QGraphicsView* pausepic;
     counter* Counter;
-    Ball* ball;
-    Maske* maske1;
-    Maske* maske2;
-    Maske* maske3;
-    Virus* virus;
+    Element* ball;
+    Element* maske1;
+    Element* maske2;
+    Element* maske3;
+    Element* virus;
 public slots:
     void pause();
     void Zurueck();

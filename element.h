@@ -1,19 +1,13 @@
 #ifndef ELEMENT_H
 #define ELEMENT_H
-
-#include <box2d.h>
 #include <QGraphicsItem>
-enum shape {
-    ELLIPSE,
-    RECT
-};
+#include <box2d.h>
 
 struct Element {
-    QGraphicsItem *item;
-    shape type;
-    b2BodyDef *bodyDef;
-    b2Body *body;
-    b2FixtureDef *fixtureDef;
+    QGraphicsItem *item = nullptr;
+    b2Body *body = nullptr;
+    b2BodyDef *bodyDef = nullptr;
+    b2FixtureDef *fixture = nullptr;
 };
 
 #endif // ELEMENT_H
