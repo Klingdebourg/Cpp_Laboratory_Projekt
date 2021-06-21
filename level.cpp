@@ -18,6 +18,7 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     levelscene->setSceneRect(0,0,WINDOW_W,WINDOW_H);
     levelscene->addLine(0,100,WINDOW_W,100);
 
+
     if (level == 1 ){
         text= "Level 1";
     }
@@ -36,6 +37,7 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     titleText->setPos(txPos,tyPos);
     levelscene->addItem(titleText);
 
+    ball->bodyDef = new b2BodyDef();
     ball->item = new Ball();
     maske1->item = new Maske(0,0);
     maske2->item = new Maske(0,0);

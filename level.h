@@ -25,7 +25,7 @@ public:
     QGraphicsScene* pausemenu;
     QGraphicsView* pausepic;
     counter* Counter;
-    Element* ball;
+    Element* ball/* = new Element()*/;
     Element* maske1;
     Element* maske2;
     Element* maske3;
