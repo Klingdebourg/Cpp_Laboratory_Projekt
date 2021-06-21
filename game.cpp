@@ -1,12 +1,15 @@
 #include "game.h"
 
 #include <QDebug>
+#include "button.h"
+#include "level1.h"
+#include "level2.h"
+#include "level3.h"
+#include "definitions.h"
 
 
-#define WINDOW_W 1600
-#define WINDOW_H 1200
 
-Game::Game(QWidget* parent){
+Game::Game(QWidget* parent): QGraphicsView(parent){
 
     // create the scene
     scene = new QGraphicsScene();
@@ -47,6 +50,14 @@ void Game::displayMainMenu(){
     int qyPos = 600;
     quitButton->setPos(qxPos,qyPos);
     scene->addItem(quitButton);
+
+
+    Button* info = new Button(QString("Spielinformationen"));
+    connect(info,SIGNAL(clicked()),this,SLOT(Info()));
+    int ixPos = txPos;
+    int iyPos = 800;
+    info->setPos(ixPos,iyPos);
+    scene->addItem(info);
 }
 void Game::levelmenu(){
     scene->clear();
@@ -91,12 +102,27 @@ void Game::levelmenu(){
 void Game::start(){
     Button *clickedButton = qobject_cast<Button *>(sender());
     if (clickedButton->gettext() == "1"){
-        Level1 *level1 = new Level1;
+        Level1 *level1 = new Level1(this);
+        level1->show();
+        this->hide();
     } else if (clickedButton->gettext() == "2") {
         Level2 *level2 = new Level2(this);
         level2->show();
         this->hide();
     } else {
-        Level3 *level3= new Level3;
+        Level3 *level3= new Level3(this);
+        level3->show();
+        this->hide();
     }
+}
+
+void Game::Info()
+{
+    scene->clear();
+
+    //Informationen wie man das Spiel spielt werden hier hereingeschrieben
+
+    Button* back = new Button(QString("<-"));
+    connect(back, SIGNAL(clicked()),this,SLOT(displayMainMenu()));
+    scene->addItem(back);
 }

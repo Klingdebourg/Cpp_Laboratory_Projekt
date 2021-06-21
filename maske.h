@@ -1,12 +1,11 @@
 #ifndef MASKE_H
 #define MASKE_H
 
+#include <QGraphicsRectItem>
 
-class Maske
-{
+class Maske : public QGraphicsRectItem {
 public:
-    Maske();
-
+    Maske(int x, int y);
 };
 
 #endif // MASKE_H

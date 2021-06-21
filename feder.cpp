@@ -1,4 +1,5 @@
 #include "feder.h"
+#include "definitions.h"
 
 #include <QDebug>
 

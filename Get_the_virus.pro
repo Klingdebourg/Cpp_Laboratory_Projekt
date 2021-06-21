@@ -23,6 +23,7 @@ SOURCES += \
     feder.cpp \
     foehn.cpp \
     game.cpp \
+    level.cpp \
     level1.cpp \
     level2.cpp \
     level3.cpp \
@@ -73,6 +74,7 @@ SOURCES += \
     src/dynamics/b2_world.cpp \
     src/dynamics/b2_world_callbacks.cpp \
     src/rope/b2_rope.cpp \
+    uhr.cpp \
     virus.cpp
 
 HEADERS += \
@@ -81,7 +83,6 @@ HEADERS += \
     button.h \
     counter.h \
     definitions.h \
-    element.h \
     feder.h \
     foehn.h \
     game.h \
@@ -125,6 +126,7 @@ HEADERS += \
     include/box2d/b2_world.h \
     include/box2d/b2_world_callbacks.h \
     include/box2d/box2d.h \
+    level.h \
     level1.h \
     level2.h \
     level3.h \
@@ -138,6 +140,7 @@ HEADERS += \
     src/dynamics/b2_island.h \
     src/dynamics/b2_polygon_circle_contact.h \
     src/dynamics/b2_polygon_contact.h \
+    uhr.h \
     virus.h
 
 FORMS +=

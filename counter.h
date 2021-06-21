@@ -11,7 +11,7 @@
      void increase();
      int getscore();
     private:
-       int m_score;
+     int m_score;
     };
 
     #endif // COUNTER_H
