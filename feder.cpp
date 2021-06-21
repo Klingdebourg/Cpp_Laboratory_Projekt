@@ -51,7 +51,7 @@ Feder::Feder(int x, int y) {
  * @param y requested y position
  * @param ball ball connected to the spring
  */
-Feder::Feder(int x, int y, Ball &ball) {
+Feder::Feder(int x, int y, Ball *ball) {
     //creates rectangle with given size at origin in scene coordinates
     setRect(0, 0, FEDER_WIDTH, FEDER_HEIGHT);
     //moves the transformation point to the lower end of the rectangle
@@ -83,7 +83,7 @@ Feder::Feder(int x, int y, Ball &ball) {
     spannung = 0;
 
     //attach the ball
-    this->ball = &ball;
+    this->ball = ball;
     isBallAttached = true;
     this->ball->setPos(x_ + FEDER_WIDTH/2 - BALL_DIAM/2, y_ - BALL_DIAM);
 }

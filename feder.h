@@ -19,7 +19,7 @@
 class Feder : public QGraphicsRectItem {
 public:
     Feder(int x, int y);
-    Feder(int x, int y, Ball &ball);
+    Feder(int x, int y, Ball *ball);
     QRectF boundingRect() const;
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
