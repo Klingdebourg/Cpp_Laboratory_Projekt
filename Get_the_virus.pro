@@ -80,11 +80,8 @@ HEADERS += \
     ball.h \
     button.h \
     counter.h \
-<<<<<<< Updated upstream
-=======
     definitions.h \
     element.h \
->>>>>>> Stashed changes
     feder.h \
     foehn.h \
     game.h \
