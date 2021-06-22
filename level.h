@@ -32,6 +32,7 @@ public:
     Maske* maske3;
     Virus* virus;
     Feder* feder;
+    QTimer* timer;
     int failbedingung;
     int x_last;
     int y_last;
