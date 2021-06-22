@@ -21,7 +21,7 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     //create box2d world
     b2Vec2 gravity(0.0f, -10.0f);
     world= new b2World(gravity);
-    timeStep = 1.0f /10.0f;
+    timeStep = 1.0f /60.0f;
     velocityIterations = 10;
     positionIterations = 8;
 
@@ -50,7 +50,10 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     bodyDefBall = new b2BodyDef();
     bodyDefBall->type = b2_dynamicBody;
     bodyBall = world->CreateBody(bodyDefBall);
+    circle = new b2CircleShape();
+    circle->m_p.Set(0, 0);
     circle->m_radius = BALL_DIAM/2;
+    fixtureBall = new b2FixtureDef();
     fixtureBall->density = 100.0f;
     fixtureBall->friction = 0.3f;
     fixtureBall->restitution = 5.0f;
@@ -78,7 +81,7 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
 
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(Interaktion()));
-    timer -> start(1/60*1000);
+    timer -> start(STEP_TIME*1000);
 
     Counter = new counter;
     Counter->setPos(WINDOW_W-Counter->boundingRect().width(),y());
@@ -165,9 +168,12 @@ void Level::Hauptmenu()
 ///Prüft, ob die Items, welche in der Scene sind kollidieren und handelt je nach Art des Items; Interaktion mit Box2D
 void Level::Interaktion(){
     //@Lukas: hier Interaktion mit Box2d
-    world->Step(timeStep, velocityIterations, positionIterations);
+    world->Step(STEP_TIME, velocityIterations, positionIterations);
     b2Vec2 positionBall = bodyBall->GetPosition();
-    ball->setPos(QPointF(positionBall.x, -1*positionBall.y));
+    ball->setPos(QPointF(positionBall.x, -positionBall.y));
+
+    qDebug() << positionBall.x<<" "<< positionBall.y;
+
 
 
 

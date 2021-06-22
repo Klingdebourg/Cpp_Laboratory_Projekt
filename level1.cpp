@@ -8,8 +8,8 @@ Level1::Level1(Game* game):Level(game,1)
 //Create the objects for the levels
 Balken* balken1 = new Balken(800,900,0,300,rotatorisch);
 Feder* feder = new Feder(balken1->x()+(balken1->boundingRect().width() - FEDER_WIDTH)/2, balken1->y()-FEDER_HEIGHT, *ball);
-bodyDefBall->position.Set(ball->x() + BALL_DIAM/2, ball->y() + BALL_DIAM/2);
-circle->m_p.Set(ball->x() + BALL_DIAM/2, ball->y() + BALL_DIAM/2);
+bodyBall->SetTransform(b2Vec2(ball->x(), ball->y()), ball->rotation());
+
 
 //Add the objects/items to the scene to be visualized
 levelscene->addItem(balken1);
