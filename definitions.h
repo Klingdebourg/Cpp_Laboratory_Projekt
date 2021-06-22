@@ -12,16 +12,16 @@
 #define VIRUS_RADIUS 80
 
 //scaling between box2d world and qt scene
-#define SCALING 1000
+#define SCALING 1000.0f
 
 //Box2D Prarameters for the ball
 #define BALL_DENSITY 100
-#define BALL_FRICTION 0.3
-#define BALL_RESTITUTION 5.0
+#define BALL_FRICTION 0.3f
+#define BALL_RESTITUTION 0.9f
 
 //Paramters required for steps of the box2d world
-#define TIME_STEP 1/60
-#define VEL_ITER 8
-#define POS_ITER 10
+#define TIME_STEP 1.0f/60
+#define VEL_ITER 10
+#define POS_ITER 8
 
 #endif // DEFINITIONS_H

@@ -42,7 +42,7 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     ball->item = new Ball();
     ball->bodyDef = new b2BodyDef();
     ball->bodyDef->type = b2_dynamicBody;
-    ball->bodyDef->position.Set(0, 0);
+    //ball->bodyDef->position.Set(0, 0);
     ball->body = world->CreateBody(ball->bodyDef);
     ball->shape = new b2CircleShape();
     dynamic_cast<b2CircleShape*>(ball->shape)->m_p.Set(0, 0);
@@ -197,7 +197,7 @@ void Level::Interaktion(){
     if (!dynamic_cast<Feder*>(feder->item)->getBallAttached()) {
         world->Step(TIME_STEP, VEL_ITER, POS_ITER);
         ballStep = ball->body->GetPosition();
-        ball->item->setPos(QPointF(ballStep.x*SCALING, WINDOW_H-ballStep.y*SCALING));
+        ball->item->setPos(QPointF(ballStep.x, WINDOW_H-ballStep.y));
         qDebug() << ballStep.x << " " << ballStep.y;
 
     }
