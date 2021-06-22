@@ -56,7 +56,7 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     fixtureBall = new b2FixtureDef();
     fixtureBall->density = 100.0f;
     fixtureBall->friction = 0.3f;
-    fixtureBall->restitution = 5.0f;
+    fixtureBall->restitution = 0.9f;
     fixtureBall->shape = circle;
     bodyBall->CreateFixture(fixtureBall);
 
@@ -170,7 +170,7 @@ void Level::Interaktion(){
     //@Lukas: hier Interaktion mit Box2d
     world->Step(STEP_TIME, velocityIterations, positionIterations);
     b2Vec2 positionBall = bodyBall->GetPosition();
-    ball->setPos(QPointF(positionBall.x, -positionBall.y));
+    ball->setPos(QPointF(positionBall.x, WINDOW_H-positionBall.y));
 
     qDebug() << positionBall.x<<" "<< positionBall.y;
 

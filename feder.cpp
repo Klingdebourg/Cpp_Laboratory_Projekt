@@ -86,7 +86,7 @@ Feder::Feder(int x, int y, Ball &ball) {
     //attach the ball
     this->ball = &ball;
     isBallAttached = true;
-    this->ball->setPos(x_ + FEDER_WIDTH/2, y_ - BALL_DIAM/2);
+    this->ball->setPos(x_ + FEDER_WIDTH/2 - BALL_DIAM/2, y_ - BALL_DIAM/2 - BALL_DIAM/2);
 }
 
 /**
@@ -174,7 +174,7 @@ void Feder::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
  * @param ball to be changed
  */
 void Feder::updateBall(Ball &ball) {
-    int x_ = x() + FEDER_WIDTH/2 + (FEDER_HEIGHT*(1-0.1*spannung) + BALL_DIAM/2) * sin(rotation() * M_PI/180);
-    int y_ = y() + FEDER_HEIGHT - (FEDER_HEIGHT*(1-0.1*spannung) + BALL_DIAM/2) * cos(rotation() * M_PI/180);
+    int x_ = x() + FEDER_WIDTH/2 + (FEDER_HEIGHT*(1-0.1*spannung)) * sin(rotation() * M_PI/180);
+    int y_ = y() + FEDER_HEIGHT - (FEDER_HEIGHT*(1-0.1*spannung)) * cos(rotation() * M_PI/180);
     ball.setPos(x_, y_);
 }

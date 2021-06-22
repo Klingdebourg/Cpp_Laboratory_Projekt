@@ -10,6 +10,6 @@
 #define FOEHN_BREITE 100
 #define MASKE_BREITE 60
 #define VIRUS_RADIUS 80
-#define STEP_TIME 1
+#define STEP_TIME 1.0f/60
 
 #endif // DEFINITIONS_H

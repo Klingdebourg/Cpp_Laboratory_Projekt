@@ -13,7 +13,7 @@ Balken::Balken(int x, int y, int rotation, int length, balkenType typ) {
 
     //creates rectangle with given size at origin in scene coordinates
     this->length = length;
-    setRect(0, 0, length, BALKEN_WIDTH);
+    setRect(-length/2, -BALKEN_WIDTH/2, length, BALKEN_WIDTH);
     //moves the transformation point to the middle of the rectangle
     setTransformOriginPoint(QPointF(length/2, BALKEN_WIDTH/2));
 
