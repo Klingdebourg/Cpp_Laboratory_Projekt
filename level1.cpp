@@ -2,22 +2,23 @@
 
 
 
-Level1::Level1(Game* game):Level(game,1)
-{
+Level1::Level1(Game* game):Level(game,1) {
 
 //Create the objects for the levels
     balken1 = new Element();
     balken1->item = new Balken(800,900,0,300,rotatorisch);
     balken1->bodyDef = new b2BodyDef();
+    balken1->bodyDef->type = b2_staticBody;
     balken1->body = world->CreateBody(balken1->bodyDef);
+    balken1->shape = new b2PolygonShape();
+    dynamic_cast<b2PolygonShape*>(balken1->shape)->SetAsBox(dynamic_cast<Balken*>(balken1->item)->getLength(), BALKEN_WIDTH);
     balken1->fixture = new b2FixtureDef();
+    balken1->fixture->shape= balken1->shape;
+    balken1->fixture->density=0.0f;
+    balken1->body->CreateFixture(balken1->fixture);
 
-    feder = new Element();
-    feder->item = new Feder(balken1->item->x()+(balken1->item->boundingRect().width() - FEDER_WIDTH)/2, balken1->item->y()-FEDER_HEIGHT, dynamic_cast<Ball*>(ball->item));
-    feder->bodyDef = new b2BodyDef();
-    feder->body = world->CreateBody(balken1->bodyDef);
-    feder->fixture = new b2FixtureDef();
-
+    feder->item->setPos(balken1->item->x()+(balken1->item->boundingRect().width() - FEDER_WIDTH)/2, balken1->item->y()-FEDER_HEIGHT);
+    dynamic_cast<Feder*>(feder->item)->attachBall(*ball);
 
     //Add the objects/items to the scene to be visualized
     levelscene->addItem(balken1->item);

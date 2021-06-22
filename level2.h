@@ -14,7 +14,6 @@ public:
     Element* balken1;
     Element* balken2;
     Element* balken3;
-    Element* feder;
     Element* foehn;
 
 };

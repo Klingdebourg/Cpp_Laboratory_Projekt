@@ -11,7 +11,7 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     levelscene = new QGraphicsScene(this);
     levelgame = game;
     level = type;
-    world = new b2World((b2Vec2(0.0f, -10.0f)));
+    world = new b2World(b2Vec2(0.0f, -10.0f));
     setScene(levelscene);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -41,14 +41,26 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     ball = new Element();
     ball->item = new Ball();
     ball->bodyDef = new b2BodyDef();
+    ball->bodyDef->type = b2_dynamicBody;
+    ball->bodyDef->position.Set(0, 0);
     ball->body = world->CreateBody(ball->bodyDef);
+    ball->shape = new b2CircleShape();
+    dynamic_cast<b2CircleShape*>(ball->shape)->m_p.Set(0, 0);
+    ball->shape->m_radius = BALL_DIAM/2;
     ball->fixture = new b2FixtureDef();
+    ball->fixture->density = BALL_DENSITY;
+    ball->fixture->friction = BALL_FRICTION;
+    ball->fixture->restitution = BALL_RESTITUTION;
+    ball->fixture->shape = ball->shape;
+    ball->body->CreateFixture(ball->fixture);
     levelscene -> addItem(ball->item);
+
 
     maske1 = new Element();
     maske1->item = new Maske(0, 0);
     maske1->bodyDef = new b2BodyDef();
     maske1->body = world->CreateBody(ball->bodyDef);
+    maske1->shape = new b2PolygonShape();
     maske1->fixture = new b2FixtureDef();
     levelscene -> addItem(maske1->item);
 
@@ -56,6 +68,7 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     maske2->item = new Maske(0, 0);
     maske2->bodyDef = new b2BodyDef();
     maske2->body = world->CreateBody(ball->bodyDef);
+    maske2->shape = new b2PolygonShape();
     maske2->fixture = new b2FixtureDef();
     levelscene -> addItem(maske2->item);
 
@@ -63,6 +76,7 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     maske3->item = new Maske(0, 0);
     maske3->bodyDef = new b2BodyDef();
     maske3->body = world->CreateBody(ball->bodyDef);
+    maske3->shape = new b2PolygonShape();
     maske3->fixture = new b2FixtureDef();
     levelscene -> addItem(maske3->item);
 
@@ -70,8 +84,17 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     virus->item = new Virus(0,0);
     virus->bodyDef = new b2BodyDef();
     virus->body = world->CreateBody(ball->bodyDef);
+    virus->shape = new b2CircleShape();
     virus->fixture = new b2FixtureDef();
     levelscene -> addItem(virus->item);
+
+    feder = new Element();
+    feder->item = new Feder(0, 0);
+    feder->bodyDef = new b2BodyDef();
+    feder->body = world->CreateBody(feder->bodyDef);
+    feder->shape = new b2PolygonShape();
+    feder->fixture = new b2FixtureDef();
+    levelscene->addItem(feder->item);
 
     //Pause-Button
     Button* pause = new Button(QString("||"));
@@ -84,7 +107,7 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
 
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(Interaktion()));
-    timer -> start(1/60*1000);
+    timer -> start(TIME_STEP*1000);
 
     Counter = new counter;
     Counter->setPos(WINDOW_W-Counter->boundingRect().width(),y());
@@ -171,7 +194,13 @@ void Level::Hauptmenu()
 ///Prüft, ob die Items, welche in der Scene sind kollidieren und handelt je nach Art des Items; Interaktion mit Box2D
 void Level::Interaktion(){
     //@Lukas: hier Interaktion mit Box2d
+    if (!dynamic_cast<Feder*>(feder->item)->getBallAttached()) {
+        world->Step(TIME_STEP, VEL_ITER, POS_ITER);
+        ballStep = ball->body->GetPosition();
+        ball->item->setPos(QPointF(ballStep.x*SCALING, WINDOW_H-ballStep.y*SCALING));
+        qDebug() << ballStep.x << " " << ballStep.y;
 
+    }
 
 
 
@@ -181,7 +210,10 @@ void Level::Interaktion(){
 
   ///Kollisionsabfrage
     ///In Ball abfragen, was mit Ball kollidiert
-    int colliding_item = dynamic_cast<Ball*>(ball->item)->collidingItem(dynamic_cast<Maske*>(maske1->item), dynamic_cast<Maske*>(maske2->item), dynamic_cast<Maske*>(maske3->item), dynamic_cast<Virus*>(virus->item));
+    int colliding_item = dynamic_cast<Ball*>(ball->item)->collidingItem(dynamic_cast<Maske*>(maske1->item),
+                                                                        dynamic_cast<Maske*>(maske2->item),
+                                                                        dynamic_cast<Maske*>(maske3->item),
+                                                                        dynamic_cast<Virus*>(virus->item));
     if (colliding_item == 1){
         qDebug("Maske1 wird berührt");
         levelscene -> removeItem(maske1->item);

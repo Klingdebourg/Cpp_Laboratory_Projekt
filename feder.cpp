@@ -52,7 +52,7 @@ Feder::Feder(int x, int y) {
  * @param y requested y position
  * @param ball ball connected to the spring
  */
-Feder::Feder(int x, int y, Ball *ball) {
+Feder::Feder(int x, int y, Element *ball) {
     //creates rectangle with given size at origin in scene coordinates
     setRect(0, 0, FEDER_WIDTH, FEDER_HEIGHT);
     //moves the transformation point to the lower end of the rectangle
@@ -86,7 +86,8 @@ Feder::Feder(int x, int y, Ball *ball) {
     //attach the ball
     this->ball = ball;
     isBallAttached = true;
-    this->ball->setPos(x_ + FEDER_WIDTH/2 - BALL_DIAM/2, y_ - BALL_DIAM);
+    this->ball->item->setPos(x_ + FEDER_WIDTH/2 - BALL_DIAM/2, y_ - BALL_DIAM);
+    this->ball->body->SetTransform(b2Vec2(this->ball->item->x(), this->ball->item->y()), this->ball->item->rotation());
 }
 
 /**
@@ -125,12 +126,13 @@ void Feder::keyPressEvent(QKeyEvent *event)
         break;
     case Qt::Key_Space:
         spannung = 0;
+        isBallAttached = false;
     }
     //update size of Feder, unfortunately also changes width
     //alternative could use "update" method but this would require a redraw of the Feder which can only be done from the scene
     //setScale(1 - 0.1*spannung);
     if (this->ball != nullptr)
-        updateBall(* dynamic_cast<Ball*>(this->ball->item));
+        updateBall(* this->ball);
 
     update();
 
@@ -177,5 +179,16 @@ void Feder::updateBall(Element &ball) {
     int x_ = x() + FEDER_WIDTH/2 - BALL_DIAM/2 + (FEDER_HEIGHT*(1-0.1*spannung) + BALL_DIAM/2) * sin(rotation() * M_PI/180);
     int y_ = y() + FEDER_HEIGHT  - BALL_DIAM/2 - (FEDER_HEIGHT*(1-0.1*spannung) + BALL_DIAM/2) * cos(rotation() * M_PI/180);
     dynamic_cast<Ball&>(* ball.item).setPos(x_, y_);
-    ball.body->SetTransform(b2Vec2(x_, y_), dynamic_cast<Ball&>(* ball.item).rotation());
+    ball.body->SetTransform(b2Vec2(x_/SCALING, y_/SCALING), dynamic_cast<Ball&>(* ball.item).rotation());
+}
+
+void Feder::attachBall(Element &ball) {
+    this->isBallAttached = true;
+    this->ball = &ball;
+    updateBall(ball);
+}
+
+bool Feder::getBallAttached() const
+{
+    return isBallAttached;
 }

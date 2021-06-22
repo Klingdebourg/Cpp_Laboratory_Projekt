@@ -7,6 +7,7 @@
 #include "maske.h"
 #include "ball.h"
 #include "virus.h"
+#include "feder.h"
 #include <QGraphicsLineItem>
 #include <QList>
 #include "definitions.h"
@@ -27,10 +28,12 @@ public:
     QGraphicsView* pausepic;
     counter* Counter;
     Element* ball;
+    b2Vec2 ballStep;
     Element* maske1;
     Element* maske2;
     Element* maske3;
     Element* virus;
+    Element* feder;
 public slots:
     void pause();
     void Zurueck();

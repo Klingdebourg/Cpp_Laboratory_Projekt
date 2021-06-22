@@ -7,6 +7,7 @@ struct Element {
     QGraphicsItem *item = nullptr;
     b2Body *body = nullptr;
     b2BodyDef *bodyDef = nullptr;
+    b2Shape *shape = nullptr;
     b2FixtureDef *fixture = nullptr;
 
 

@@ -16,7 +16,6 @@ public:
     Element* balken3;
     Element* foehn1;
     Element* foehn2;
-    Element* feder;
 };
 
 #endif // LEVEL3_H
