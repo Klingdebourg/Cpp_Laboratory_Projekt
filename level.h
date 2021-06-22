@@ -20,12 +20,13 @@ public:
     Level(Game* game, int type, QWidget* parent = NULL);
     Game* levelgame;
     int level;
+    b2World *world;
     QString text;
     QGraphicsScene* levelscene;
     QGraphicsScene* pausemenu;
     QGraphicsView* pausepic;
     counter* Counter;
-    Element* ball/* = new Element()*/;
+    Element* ball;
     Element* maske1;
     Element* maske2;
     Element* maske3;

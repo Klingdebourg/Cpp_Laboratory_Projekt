@@ -11,6 +11,7 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     levelscene = new QGraphicsScene(this);
     levelgame = game;
     level = type;
+    world = new b2World((b2Vec2(0.0f, -10.0f)));
     setScene(levelscene);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -37,16 +38,39 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     titleText->setPos(txPos,tyPos);
     levelscene->addItem(titleText);
 
-    ball->bodyDef = new b2BodyDef();
+    ball = new Element();
     ball->item = new Ball();
-    maske1->item = new Maske(0,0);
-    maske2->item = new Maske(0,0);
-    maske3->item = new Maske(0,0);
-    virus->item = new Virus(0,0);
+    ball->bodyDef = new b2BodyDef();
+    ball->body = world->CreateBody(ball->bodyDef);
+    ball->fixture = new b2FixtureDef();
     levelscene -> addItem(ball->item);
+
+    maske1 = new Element();
+    maske1->item = new Maske(0, 0);
+    maske1->bodyDef = new b2BodyDef();
+    maske1->body = world->CreateBody(ball->bodyDef);
+    maske1->fixture = new b2FixtureDef();
     levelscene -> addItem(maske1->item);
+
+    maske2 = new Element();
+    maske2->item = new Maske(0, 0);
+    maske2->bodyDef = new b2BodyDef();
+    maske2->body = world->CreateBody(ball->bodyDef);
+    maske2->fixture = new b2FixtureDef();
     levelscene -> addItem(maske2->item);
+
+    maske3 = new Element();
+    maske3->item = new Maske(0, 0);
+    maske3->bodyDef = new b2BodyDef();
+    maske3->body = world->CreateBody(ball->bodyDef);
+    maske3->fixture = new b2FixtureDef();
     levelscene -> addItem(maske3->item);
+
+    virus = new Element();
+    virus->item = new Virus(0,0);
+    virus->bodyDef = new b2BodyDef();
+    virus->body = world->CreateBody(ball->bodyDef);
+    virus->fixture = new b2FixtureDef();
     levelscene -> addItem(virus->item);
 
     //Pause-Button

@@ -130,7 +130,7 @@ void Feder::keyPressEvent(QKeyEvent *event)
     //alternative could use "update" method but this would require a redraw of the Feder which can only be done from the scene
     //setScale(1 - 0.1*spannung);
     if (this->ball != nullptr)
-        updateBall(* this->ball);
+        updateBall(* dynamic_cast<Ball*>(this->ball->item));
 
     update();
 
@@ -173,8 +173,9 @@ void Feder::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
  * @brief if a ball is connected to the feder, its position is updated (is used after the feder changes its position/tesnion)
  * @param ball to be changed
  */
-void Feder::updateBall(Ball &ball) {
+void Feder::updateBall(Element &ball) {
     int x_ = x() + FEDER_WIDTH/2 - BALL_DIAM/2 + (FEDER_HEIGHT*(1-0.1*spannung) + BALL_DIAM/2) * sin(rotation() * M_PI/180);
     int y_ = y() + FEDER_HEIGHT  - BALL_DIAM/2 - (FEDER_HEIGHT*(1-0.1*spannung) + BALL_DIAM/2) * cos(rotation() * M_PI/180);
-    ball.setPos(x_, y_);
+    dynamic_cast<Ball&>(* ball.item).setPos(x_, y_);
+    ball.body->SetTransform(b2Vec2(x_, y_), dynamic_cast<Ball&>(* ball.item).rotation());
 }

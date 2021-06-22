@@ -8,6 +8,18 @@ struct Element {
     b2Body *body = nullptr;
     b2BodyDef *bodyDef = nullptr;
     b2FixtureDef *fixture = nullptr;
+
+
+    ~Element() {
+        if (bodyDef != nullptr) {
+            delete bodyDef;
+            bodyDef = nullptr;
+        }
+        if (fixture != nullptr) {
+            delete fixture;
+            fixture = nullptr;
+        }
+    }
 };
 
 #endif // ELEMENT_H
