@@ -1,5 +1,6 @@
 #include "level2.h"
 
+
 Level2::Level2(Game* game):Level(game, 2) {
 
     //Create the objects for the levels
@@ -45,7 +46,13 @@ Level2::Level2(Game* game):Level(game, 2) {
     feder->item->setPos(balken1->item->x()+(balken1->item->boundingRect().width() - FEDER_WIDTH)/2, balken1->item->y()-FEDER_HEIGHT);
     dynamic_cast<Feder*>(feder->item)->attachBall(* ball);
 
+    x_last=ball->item->x();
+    y_last=ball->item->y();
+
+
     //levelscene->addItem(foehn->item);
+    //foehn = new Foehn(balken2->x()-100, balken2->y()-100);
+
 
     //Maskenposition und Virus position setzen
     virus->item->setPos(balken3->item->x()+dynamic_cast<Balken*>(balken3->item)->getLength(),balken3->item->y()-150);

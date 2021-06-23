@@ -34,6 +34,12 @@ public:
     Element* maske3;
     Element* virus;
     Element* feder;
+    QTimer* timer;
+    int failbedingung;
+    int x_last;
+    int y_last;
+    int x_current;
+    int y_current;
 public slots:
     void pause();
     void Zurueck();

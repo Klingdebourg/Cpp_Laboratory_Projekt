@@ -13,6 +13,7 @@ class Level1: public Level
 
 public:
     Level1(Game* game);
+
     Element* balken1;
 };
 

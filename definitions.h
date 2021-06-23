@@ -13,6 +13,8 @@
 #define MASKE_WIDTH 60
 #define VIRUS_DIAM 80
 
+#define Abbruchzeit 1000
+
 //scaling between box2d world and qt scene
 #define SCALING 1000.0f
 

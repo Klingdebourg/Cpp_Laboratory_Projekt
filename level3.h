@@ -6,11 +6,11 @@
 #include "level.h"
 #include "balken.h"
 #include "foehn.h"
-#include "feder.h"
 
 class Level3: public Level{
 public:
     Level3(Game* game);
+
     Element* balken1;
     Element* balken2;
     Element* balken3;

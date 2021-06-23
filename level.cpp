@@ -144,13 +144,16 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     pausepic = new QGraphicsView;
     pausemenu = new QGraphicsScene();
 
-    QTimer *timer = new QTimer(this);
+    timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(Interaktion()));
     timer -> start(TIME_STEP*1000);
 
     Counter = new counter;
     Counter->setPos(WINDOW_W-Counter->boundingRect().width(),y());
     levelscene -> addItem(Counter);
+
+    failbedingung=0;
+
 
 }
 
@@ -261,6 +264,52 @@ void Level::Interaktion(){
     }
 
 
+    //Abfrage nach Position des Balls->Ende des Spiels / Abbruchbedingung
+  if(! dynamic_cast<Feder*>(feder->item)->getBallAttached()){
+     int x_current = ball->item->x();
+     int y_current = ball->item->y();
+     if(x_current == x_last && y_current == y_last) {
+        if(failbedingung <= Abbruchzeit){
+            failbedingung++;
+        }
+        else{
+           levelscene->clear();
+           QGraphicsTextItem* losttext = new QGraphicsTextItem(QString("Sie haben leider verloren"));
+           QFont titleFont("comic sans",50);
+           losttext->setFont(titleFont);
+           int txPos = this->width()/2 - losttext->boundingRect().width()/2;
+           int tyPos = 150;
+           losttext->setPos(txPos,tyPos);
+           levelscene->addItem(losttext);
+
+           Button* zurueck = new Button(QString("Zurück zur Levelübersicht"));
+           connect(zurueck, SIGNAL(clicked()),this,SLOT(Zurueck()));
+           zurueck->setRect(0,0,300,50);
+           zurueck->setPos(losttext->x()+losttext->boundingRect().width()/3,losttext ->y()+400);
+           levelscene->addItem(zurueck);
+
+           Button* redo = new Button(QString("Den Level erneut starten"));
+           connect(redo, SIGNAL(clicked()),this,SLOT(Redo()));
+           redo->setRect(0,0,300,50);
+           redo->setPos(losttext->x()+losttext->boundingRect().width()/3, losttext->y()+600);
+           levelscene->addItem(redo);
+
+           Button* haupt = new Button(QString("Zum Hauptmenü"));
+           connect(haupt, SIGNAL(clicked()),this,SLOT(Hauptmenu()));
+           haupt->setRect(0,0,300,50);
+           haupt->setPos(losttext->x()+losttext->boundingRect().width()/3, losttext->y()+800);
+           levelscene->addItem(haupt);
+           timer->stop();
+           return;
+
+        }
+     }else{
+         failbedingung = 0;
+     }
+     x_last = x_current;
+     y_last = y_current;}else{
+      failbedingung =0;
+  }
 
 
 

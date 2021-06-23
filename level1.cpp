@@ -36,6 +36,9 @@ Level1::Level1(Game* game):Level(game,1) {
     ballStep = ball->body->GetPosition();
     qDebug() << ballStep.x << " " << ballStep.y;
 
+    x_last=ball->item->x();
+    y_last=ball->item->y();
+
 
     //Position der Masken und des Virus festlegen
     virus->item->setPos(balken1->item->x()-600,balken1->item->y()-725);

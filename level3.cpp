@@ -3,6 +3,7 @@
 
 Level3::Level3(Game* game):Level(game,3) {
 
+
     //Create the objects for the levels
     balken1->item = new Balken(550,1000,0,300, rotatorisch);
     balken2->item = new Balken(550,400,0,300, statisch);
@@ -12,6 +13,11 @@ Level3::Level3(Game* game):Level(game,3) {
     feder->item->setPos(balken1->item->x()+(balken1->item->boundingRect().width() - FEDER_WIDTH)/2, balken1->item->y()-FEDER_HEIGHT);
     dynamic_cast<Feder*>(feder->item)->attachBall(*ball);
 
+    x_last=ball->item->x();
+    y_last=ball->item->y();
+
+    //foehn1 = new Foehn(balken3->x()-75,balken3->y()+125);
+   // foehn2 = new Foehn(balken2->x()+650,balken3->y()-balken3->getLength());
 
     //Add the objects/items to the scene to be visualized
     levelscene->addItem(balken1->item);

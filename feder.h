@@ -23,7 +23,6 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void updateBall(Element &ball);
     void attachBall(Element &ball);
-
     bool getBallAttached() const;
 
 private:
