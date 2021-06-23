@@ -203,11 +203,11 @@ void Level::pause(){
  */
 void Level::Zurueck()
 {
-levelgame->show();
-levelgame->levelmenu();
-pausemenu->deleteLater();
-pausepic->deleteLater();
-this->deleteLater();
+    levelgame->show();
+    levelgame->levelmenu();
+    pausemenu->deleteLater();
+    pausepic->deleteLater();
+    this->deleteLater();
 }
 
 /**
@@ -266,57 +266,57 @@ void Level::Interaktion(){
 
 
     //Abfrage nach Position des Balls->Ende des Spiels / Abbruchbedingung
-  if(! dynamic_cast<Feder*>(feder->item)->getBallAttached()){
-     int x_current = ball->item->x();
-     int y_current = ball->item->y();
-     if(x_current == x_last && y_current == y_last) {
-        if(failbedingung <= Abbruchzeit){
-            failbedingung++;
+    if (! dynamic_cast<Feder*>(feder->item)->getBallAttached()) {
+        int x_current = ball->item->x();
+        int y_current = ball->item->y();
+        if(x_current == x_last && y_current == y_last) {
+            if (failbedingung <= ABBRUCHZEIT) {
+                failbedingung++;
+            } else {
+                levelscene->clear();
+                QGraphicsTextItem* losttext = new QGraphicsTextItem(QString("Sie haben leider verloren"));
+                QFont titleFont("comic sans",50);
+                losttext->setFont(titleFont);
+                int txPos = this->width()/2 - losttext->boundingRect().width()/2;
+                int tyPos = 150;
+                losttext->setPos(txPos,tyPos);
+                levelscene->addItem(losttext);
+
+                Button* zurueck = new Button(QString("Zurück zur Levelübersicht"));
+                connect(zurueck, SIGNAL(clicked()),this,SLOT(Zurueck()));
+                zurueck->setRect(0,0,300,50);
+                zurueck->setPos(losttext->x()+losttext->boundingRect().width()/3,losttext ->y()+400);
+                levelscene->addItem(zurueck);
+
+                Button* redo = new Button(QString("Den Level erneut starten"));
+                connect(redo, SIGNAL(clicked()),this,SLOT(Redo()));
+                redo->setRect(0,0,300,50);
+                redo->setPos(losttext->x()+losttext->boundingRect().width()/3, losttext->y()+600);
+                levelscene->addItem(redo);
+
+                Button* haupt = new Button(QString("Zum Hauptmenü"));
+                connect(haupt, SIGNAL(clicked()),this,SLOT(Hauptmenu()));
+                haupt->setRect(0,0,300,50);
+                haupt->setPos(losttext->x()+losttext->boundingRect().width()/3, losttext->y()+800);
+                levelscene->addItem(haupt);
+                timer->stop();
+                return;
+
+            }
+        } else {
+            failbedingung = 0;
         }
-        else{
-           levelscene->clear();
-           QGraphicsTextItem* losttext = new QGraphicsTextItem(QString("Sie haben leider verloren"));
-           QFont titleFont("comic sans",50);
-           losttext->setFont(titleFont);
-           int txPos = this->width()/2 - losttext->boundingRect().width()/2;
-           int tyPos = 150;
-           losttext->setPos(txPos,tyPos);
-           levelscene->addItem(losttext);
-
-           Button* zurueck = new Button(QString("Zurück zur Levelübersicht"));
-           connect(zurueck, SIGNAL(clicked()),this,SLOT(Zurueck()));
-           zurueck->setRect(0,0,300,50);
-           zurueck->setPos(losttext->x()+losttext->boundingRect().width()/3,losttext ->y()+400);
-           levelscene->addItem(zurueck);
-
-           Button* redo = new Button(QString("Den Level erneut starten"));
-           connect(redo, SIGNAL(clicked()),this,SLOT(Redo()));
-           redo->setRect(0,0,300,50);
-           redo->setPos(losttext->x()+losttext->boundingRect().width()/3, losttext->y()+600);
-           levelscene->addItem(redo);
-
-           Button* haupt = new Button(QString("Zum Hauptmenü"));
-           connect(haupt, SIGNAL(clicked()),this,SLOT(Hauptmenu()));
-           haupt->setRect(0,0,300,50);
-           haupt->setPos(losttext->x()+losttext->boundingRect().width()/3, losttext->y()+800);
-           levelscene->addItem(haupt);
-           timer->stop();
-           return;
-
-        }
-     }else{
-         failbedingung = 0;
-     }
-     x_last = x_current;
-     y_last = y_current;}else{
-      failbedingung =0;
-  }
+        x_last = x_current;
+        y_last = y_current;
+    } else {
+        failbedingung = 0;
+    }
 
 
 
 
 
-  ///Kollisionsabfrage
+    ///Kollisionsabfrage
     ///In Ball abfragen, was mit Ball kollidiert
     int colliding_item = dynamic_cast<Ball*>(ball->item)->collidingItem(dynamic_cast<Maske*>(maske1->item),
                                                                         dynamic_cast<Maske*>(maske2->item),
@@ -344,25 +344,25 @@ void Level::Interaktion(){
         return;
     }
 
-//    ///Liste durchgehen und checken, ob Item eine Maske oder Virus ist
-//    int n = colliding_items_level.size();
-//    for (int i = 0; i< n; i++){
-//        for (int j = 0; j< n; j++){
-//            ///falls Maske: Maske entfernen, Maskecounter hochsetzen
-//            if ((typeid(*(colliding_items_level[i])) == typeid(Maske)) && (typeid(*(colliding_items_level[j])) == typeid(Ball))){
-//                levelscene -> removeItem(colliding_items_level[i]);
-//                delete colliding_items_level[i];
-//                Counter -> increase();
-//                return;
-//            }
-//            else if ((typeid(*(colliding_items_level[i])) == typeid(Virus)) && (typeid(*(colliding_items_level[j])) == typeid(Ball))){
-//            ///Spiel beenden
-//                levelscene -> clear();
-//                return;
-//            /// Text "du hast gewonnen" + Highscore
+    //    ///Liste durchgehen und checken, ob Item eine Maske oder Virus ist
+    //    int n = colliding_items_level.size();
+    //    for (int i = 0; i< n; i++){
+    //        for (int j = 0; j< n; j++){
+    //            ///falls Maske: Maske entfernen, Maskecounter hochsetzen
+    //            if ((typeid(*(colliding_items_level[i])) == typeid(Maske)) && (typeid(*(colliding_items_level[j])) == typeid(Ball))){
+    //                levelscene -> removeItem(colliding_items_level[i]);
+    //                delete colliding_items_level[i];
+    //                Counter -> increase();
+    //                return;
+    //            }
+    //            else if ((typeid(*(colliding_items_level[i])) == typeid(Virus)) && (typeid(*(colliding_items_level[j])) == typeid(Ball))){
+    //            ///Spiel beenden
+    //                levelscene -> clear();
+    //                return;
+    //            /// Text "du hast gewonnen" + Highscore
 
-//            }
-//            else return;
-//        }
-//    }
+    //            }
+    //            else return;
+    //        }
+    //    }
 }
