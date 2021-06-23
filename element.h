@@ -11,7 +11,9 @@
 #include <box2d.h>
 
 enum elementType {
-    BALKEN,
+    BALKEN_S,
+    BALKEN_R,
+    BALKEN_T,
     BALL,
     FEDER,
     FOEHN,
@@ -41,8 +43,14 @@ struct Element {
     Element(elementType typ) {
         ///define item
         switch(typ) {
-        case BALKEN:
+        case BALKEN_S:
             this->item = new Balken(0, 0, 0, BALKEN_LENGTH_DEFAULT, statisch);
+            break;
+        case BALKEN_R:
+            this->item = new Balken(0, 0, 0, BALKEN_LENGTH_DEFAULT, rotatorisch);
+            break;
+        case BALKEN_T:
+            this->item = new Balken(0, 0, 0, BALKEN_LENGTH_DEFAULT, translatorisch);
             break;
         case BALL:
             this->item = new Ball();
@@ -74,12 +82,14 @@ struct Element {
         }
         ///define shape
         switch(typ) {
-        case BALKEN:
+        case BALKEN_S:
+        case BALKEN_R:
+        case BALKEN_T:
         case FEDER:
         case FOEHN:
         case MASKE:
             this->shape = new b2PolygonShape();
-            if (typ == BALKEN)
+            if (typ == BALKEN_S || typ == BALKEN_R || typ == BALKEN_T)
                 dynamic_cast<b2PolygonShape*>(this->shape)->SetAsBox(BALKEN_LENGTH_DEFAULT, BALKEN_WIDTH);
             else if (typ == FEDER)
                 dynamic_cast<b2PolygonShape*>(this->shape)->SetAsBox(FEDER_WIDTH, FEDER_HEIGHT);

@@ -125,14 +125,12 @@ void Feder::keyPressEvent(QKeyEvent *event)
             spannung -= 1;
         break;
     case Qt::Key_Space:
-        ball->body->ApplyLinearImpulseToCenter(b2Vec2(spannung*10000 * -sin(this->rotation() * M_PI/180), spannung*10000 * cos(this->rotation() * M_PI/180)), true);
-        spannung = 0;
-        b2Vec2 ballStep = ball->body->GetPosition();
-        qDebug() << ballStep.x << " " << ballStep.y;
-        ballStep = ball->body->GetPosition();
-        qDebug() << ballStep.x << " " << ballStep.y;
-        isBallAttached = false;
-        this->ball = nullptr;
+        if (isBallAttached) {
+            ball->body->ApplyLinearImpulseToCenter(b2Vec2(spannung*10000 * -sin(this->rotation() * M_PI/180), spannung*10000 * cos(this->rotation() * M_PI/180)), true);
+            spannung = 0;
+            isBallAttached = false;
+            this->ball = nullptr;
+        }
     }
 
     //update shape of feder (change rotation and length)
