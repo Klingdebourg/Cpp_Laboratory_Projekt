@@ -121,6 +121,7 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     */
 
     feder = new Element(FEDER);
+    //the feder item cannot be genereated in the element-constructor due to the circular include
     feder->item = new Feder(0, 0);
     feder->body = world->CreateBody(feder->bodyDef);
     feder->body->CreateFixture(feder->fixture);

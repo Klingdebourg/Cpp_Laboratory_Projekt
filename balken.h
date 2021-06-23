@@ -9,6 +9,8 @@
 
 #include <math.h>
 
+#include "definitions.h"
+
 
 enum balkenType {
     statisch,
@@ -24,7 +26,7 @@ public:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    void setType(balkenType typ);
+    void setPosition(QPointF point);
 
     int getRotation() const;
     int getLength() const;

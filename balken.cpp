@@ -1,5 +1,4 @@
 #include "balken.h"
-#include "definitions.h"
 
 /**
  * @brief creates a Balken at a certain position
@@ -18,9 +17,7 @@ Balken::Balken(int x, int y, int rotation, int length, balkenType typ) {
     setTransformOriginPoint(QPointF(length/2, BALKEN_WIDTH/2));
 
     //moves the item to the given position in scene coordinates
-    position.setX(x);
-    position.setY(y);
-    setPos(position);
+    setPosition(QPointF(x, y));
 
     //rotates the item as requested
     if (rotation >= -90 && rotation < 90) {
@@ -32,7 +29,7 @@ Balken::Balken(int x, int y, int rotation, int length, balkenType typ) {
         else
             this->rotation = rotation - 180;
     }
-    setRotation(getRotation());
+    setRotation(rotation);
 
     if (typ != statisch) {
         //makes the object focussable thus enables it to be moved
@@ -50,7 +47,7 @@ Balken::Balken(int x, int y, int rotation, int length, balkenType typ) {
  * @return the are to be redrawn when the item is updated
  */
 QRectF Balken::boundingRect() const {
-    return QRectF(0, 0, getLength(), BALKEN_WIDTH);
+    return QRectF(0, 0, getLength()+6, BALKEN_WIDTH+6);
 }
 
 /**
@@ -127,8 +124,16 @@ void Balken::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     painter->drawRect(0, 0, getLength(), BALKEN_WIDTH);
 }
 
-void Balken::setType(balkenType typ) {
-    this->type = typ;
+
+/**
+ * @brief Balken::setPosition sets the position of the Balken and changes the internally stored position
+ * @param point
+ */
+void Balken::setPosition(QPointF point) {
+    position.setX(point.x());
+    position.setY(point.y());
+    setPos(position);
+
 }
 
 /**

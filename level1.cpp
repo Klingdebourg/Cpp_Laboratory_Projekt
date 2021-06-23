@@ -4,10 +4,9 @@
 
 Level1::Level1(Game* game):Level(game,1) {
 
-//Create the objects for the levels
-    balken1 = new Element(BALKEN);
-    balken1->item->setPos(800, 900);
-    dynamic_cast<Balken*>(balken1->item)->setType(rotatorisch);
+    //Create the objects specific for the level
+    balken1 = new Element(BALKEN_S);
+    dynamic_cast<Balken*>(balken1->item)->setPosition(QPointF(WINDOW_W/2.0f, WINDOW_H*3.0f/4));
     balken1->body = world->CreateBody(balken1->bodyDef);
     balken1->body->CreateFixture(balken1->fixture);
     balken1->body->SetTransform(b2Vec2(balken1->item->x(), WINDOW_H - balken1->item->y()), 0);
