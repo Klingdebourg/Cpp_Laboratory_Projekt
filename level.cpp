@@ -256,7 +256,7 @@ void Level::Hauptmenu()
 void Level::Interaktion(){
     ///only update the world if the ball is not attached to the spring
     /// as the ball is the only dynamic itme in the world
-    if (!dynamic_cast<Feder*>(feder->item)->getBallAttached()) {
+    if (!dynamic_cast<Feder*>(feder->item)->getBallAttached() && !isPaused) {
         world->Step(TIME_STEP, VEL_ITER, POS_ITER);
         ballStep = ball->body->GetPosition();
         qDebug() << ballStep.x << " " << ballStep.y;
