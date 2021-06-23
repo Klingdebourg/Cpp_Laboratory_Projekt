@@ -20,8 +20,8 @@ Balken* balken2 = new Balken(300,400,0,300);
 Balken* balken3 = new Balken(1000,600,0,300);
 
 //+++++Ball erstellen+++++++++++++
-int xBall= 800; int yBall=-500; int radius=50;
-Ball *Ball1 = new Ball(800, 500, 50);
+int xBall= 800; int yBall=-1000; int radius=50;
+Ball *Ball1 = new Ball(800, 1000, 50);
 //+++++++++++++++++
 
 
@@ -55,9 +55,9 @@ scene-> addItem(Ball1);
 //+++++++++++Box2D ++++++++++++++++++++++++++++++++++++++
 
 b2Vec2 gravity(0.0f, -10.0f);
-b2World *world= new b2World(gravity);                                   //Welt Definition
+b2World *world= new b2World(gravity);                        //Welt Definition
 
-b2BodyDef groundBodyDefTop;
+b2BodyDef groundBodyDefTop;                                  //BodyDefinitions
 b2BodyDef groundBodyDefBotton;
 b2BodyDef groundBodyDefLeft;
 b2BodyDef groundBodyDefRight;
@@ -70,7 +70,7 @@ b2PolygonShape groundBoxTop;
 groundBoxTop.SetAsBox(800.0f, 5.0f);
 b2FixtureDef GroundBoxFixDefTop;
 GroundBoxFixDefTop.shape= &groundBoxTop;
-groundBodyTop->CreateFixture(&GroundBoxFixDefTop);              //Rechte Wand
+groundBodyTop->CreateFixture(&GroundBoxFixDefTop);
 
 groundBodyDefBotton.type= b2_staticBody;
 groundBodyDefBotton.position.Set(800,-1205);
@@ -109,6 +109,10 @@ fixtureDefBall.density = 100.0f;
 fixtureDefBall.friction = 0.3f;
 fixtureDefBall.shape = &circle;
 BodyBall1->CreateFixture(&(fixtureDefBall));
+
+
+
+
 /* float w=0.1;
 BodyBall1->SetAngularVelocity(w);
 */
@@ -169,6 +173,8 @@ for (int32 i = 0; i < 600; ++i)
     float angleBalken = groundBodyBotton->GetAngle();
 
     std::cout<< positionBalken.x<<" "<< positionBalken.y<<" "<< angleBalken<< std::endl;
+
+   //std::cout<<BodyBall1->beginContact<<
 
     Ball1->setPos(positionBall.x, -1*positionBall.y );
 }
