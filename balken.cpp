@@ -1,5 +1,4 @@
 #include "balken.h"
-#include "definitions.h"
 
 /**
  * @brief creates a Balken at a certain position
@@ -30,7 +29,7 @@ Balken::Balken(int x, int y, int rotation, int length, balkenType typ) {
         else
             this->rotation = rotation - 180;
     }
-    setRotation(getRotation());
+    setRotation(rotation);
 
     if (typ != statisch) {
         //makes the object focussable thus enables it to be moved
@@ -125,9 +124,6 @@ void Balken::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     painter->drawRect(0, 0, getLength(), BALKEN_WIDTH);
 }
 
-void Balken::setType(balkenType typ) {
-    this->type = typ;
-}
 
 /**
  * @brief Balken::setPosition sets the position of the Balken and changes the internally stored position

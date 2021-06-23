@@ -136,7 +136,7 @@ void Feder::keyPressEvent(QKeyEvent *event)
     //update shape of feder (change rotation and length)
     update();
     //update position of ball if it is attached
-    if (this->isBallAttached)
+    if (isBallAttached)
         updateBall(* this->ball);
 
 }

@@ -61,7 +61,7 @@ struct Element {
             //werden um "zirkulaere" includes zu vermeiden
             break;
         case FOEHN:
-            this->item = new Foehn(0, 0);
+            this->item = new Foehn(0, 0, 0);
             break;
         case MASKE:
             this->item = new Maske(0, 0);
@@ -110,15 +110,14 @@ struct Element {
         ///define fixture
         this->fixture = new b2FixtureDef();
         this->fixture->shape = this->shape;
+        this->fixture->friction = BALL_FRICTION;
         switch(typ) {
         case BALL:
             this->fixture->density = BALL_DENSITY;
-            this->fixture->friction = BALL_FRICTION;
             this->fixture->restitution = BALL_RESTITUTION;
             break;
         default:
             this->fixture->density = 0.0f;
-            this->fixture->friction = 0.0f;
             this->fixture->restitution = 0.0f;
             break;
         }
