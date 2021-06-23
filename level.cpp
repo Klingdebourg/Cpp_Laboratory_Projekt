@@ -38,7 +38,11 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     titleText->setPos(txPos,tyPos);
     levelscene->addItem(titleText);
 
-    ball = new Element();
+    ball = new Element(BALL);
+    ball->body = world->CreateBody(ball->bodyDef);
+    ball->body->CreateFixture(ball->fixture);
+    levelscene -> addItem(ball->item);
+    /*
     ball->item = new Ball();
     ball->bodyDef = new b2BodyDef();
     ball->bodyDef->type = b2_dynamicBody;
@@ -54,47 +58,79 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     ball->fixture->shape = ball->shape;
     ball->body->CreateFixture(ball->fixture);
     levelscene -> addItem(ball->item);
+    */
 
 
-    maske1 = new Element();
+    maske1 = new Element(MASKE);
+    maske1->body = world->CreateBody(maske1->bodyDef);
+    maske1->body->CreateFixture(maske1->fixture);
+    levelscene -> addItem(maske1->item);
+    /*
     maske1->item = new Maske(0, 0);
     maske1->bodyDef = new b2BodyDef();
-    maske1->body = world->CreateBody(ball->bodyDef);
+    maske1->body = world->CreateBody(maske1->bodyDef);
     maske1->shape = new b2PolygonShape();
     maske1->fixture = new b2FixtureDef();
+    maske1->body->CreateFixture(maske1->fixture);
     levelscene -> addItem(maske1->item);
+    */
 
-    maske2 = new Element();
+    maske2 = new Element(MASKE);
+    maske2->body = world->CreateBody(maske2->bodyDef);
+    maske2->body->CreateFixture(maske2->fixture);
+    levelscene -> addItem(maske2->item);
+    /*
     maske2->item = new Maske(0, 0);
     maske2->bodyDef = new b2BodyDef();
-    maske2->body = world->CreateBody(ball->bodyDef);
+    maske2->body = world->CreateBody(maske2->bodyDef);
     maske2->shape = new b2PolygonShape();
     maske2->fixture = new b2FixtureDef();
+    maske2->body->CreateFixture(maske2->fixture);
     levelscene -> addItem(maske2->item);
+    */
 
-    maske3 = new Element();
+    maske3 = new Element(MASKE);
+    maske3->body = world->CreateBody(maske3->bodyDef);
+    maske3->body->CreateFixture(maske3->fixture);
+    levelscene -> addItem(maske3->item);
+    /*
     maske3->item = new Maske(0, 0);
     maske3->bodyDef = new b2BodyDef();
-    maske3->body = world->CreateBody(ball->bodyDef);
+    maske3->body = world->CreateBody(maske3->bodyDef);
     maske3->shape = new b2PolygonShape();
     maske3->fixture = new b2FixtureDef();
+    maske3->body->CreateFixture(maske3->fixture);
     levelscene -> addItem(maske3->item);
+    */
 
-    virus = new Element();
+    virus = new Element(VIRUS);
+    virus->body = world->CreateBody(virus->bodyDef);
+    virus->body->CreateFixture(virus->fixture);
+    levelscene -> addItem(virus->item);
+    /*
     virus->item = new Virus(0,0);
     virus->bodyDef = new b2BodyDef();
-    virus->body = world->CreateBody(ball->bodyDef);
+    virus->body = world->CreateBody(virus->bodyDef);
     virus->shape = new b2CircleShape();
     virus->fixture = new b2FixtureDef();
+    virus->body->CreateFixture(virus->fixture);
     levelscene -> addItem(virus->item);
+    */
 
-    feder = new Element();
+    feder = new Element(FEDER);
+    feder->item = new Feder(0, 0);
+    feder->body = world->CreateBody(feder->bodyDef);
+    feder->body->CreateFixture(feder->fixture);
+    levelscene->addItem(feder->item);
+    /*
     feder->item = new Feder(0, 0);
     feder->bodyDef = new b2BodyDef();
     feder->body = world->CreateBody(feder->bodyDef);
     feder->shape = new b2PolygonShape();
     feder->fixture = new b2FixtureDef();
+    feder->body->CreateFixture(feder->fixture);
     levelscene->addItem(feder->item);
+    */
 
     //Pause-Button
     Button* pause = new Button(QString("||"));
@@ -197,8 +233,8 @@ void Level::Interaktion(){
     if (!dynamic_cast<Feder*>(feder->item)->getBallAttached()) {
         world->Step(TIME_STEP, VEL_ITER, POS_ITER);
         ballStep = ball->body->GetPosition();
-        ball->item->setPos(QPointF(ballStep.x, WINDOW_H-ballStep.y));
         qDebug() << ballStep.x << " " << ballStep.y;
+        ball->item->setPos(QPointF(ballStep.x, WINDOW_H-ballStep.y));
 
     }
 

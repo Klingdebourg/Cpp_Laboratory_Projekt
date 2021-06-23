@@ -5,11 +5,12 @@
 #define WINDOW_H 1000
 #define BALL_DIAM 70
 #define BALKEN_WIDTH 40
+#define BALKEN_LENGTH_DEFAULT 300
 #define FEDER_WIDTH 20
 #define FEDER_HEIGHT 100
-#define FOEHN_BREITE 100
-#define MASKE_BREITE 60
-#define VIRUS_RADIUS 80
+#define FOEHN_WIDTH 100
+#define MASKE_WIDTH 60
+#define VIRUS_DIAM 80
 
 //scaling between box2d world and qt scene
 #define SCALING 1000.0f

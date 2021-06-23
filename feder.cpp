@@ -87,7 +87,7 @@ Feder::Feder(int x, int y, Element *ball) {
     this->ball = ball;
     isBallAttached = true;
     this->ball->item->setPos(x_ + FEDER_WIDTH/2 - BALL_DIAM/2, y_ - BALL_DIAM);
-    this->ball->body->SetTransform(b2Vec2(this->ball->item->x(), (WINDOW_H - this->ball->item->y()), this->ball->item->rotation());
+    this->ball->body->SetTransform(b2Vec2(this->ball->item->x(), (WINDOW_H - this->ball->item->y())), this->ball->item->rotation());
 }
 
 /**
@@ -126,28 +126,21 @@ void Feder::keyPressEvent(QKeyEvent *event)
         break;
     case Qt::Key_Space:
         spannung = 0;
+        b2Vec2 ballStep = ball->body->GetPosition();
+        qDebug() << ballStep.x << " " << ballStep.y;
+        ball->body->ApplyLinearImpulseToCenter(b2Vec2(spannung*10000 * -sin(this->rotation() * M_PI/180), spannung*10000 * cos(this->rotation() * M_PI/180)), true);
+        ballStep = ball->body->GetPosition();
+        qDebug() << ballStep.x << " " << ballStep.y;
         isBallAttached = false;
+        this->ball = nullptr;
     }
-    //update size of Feder, unfortunately also changes width
-    //alternative could use "update" method but this would require a redraw of the Feder which can only be done from the scene
-    //setScale(1 - 0.1*spannung);
+
+    //update shape of feder (change rotation and length)
+    update();
+    //update position of ball if it is attached
     if (this->isBallAttached)
         updateBall(* this->ball);
 
-    update();
-
-    /*
-    //alternative to only scale device in height with a transformation matrix but didnt work as expected
-    //shortens the appearance of the rectangle by transforming it with a matrix
-    //this matrix does only affect the y coordinate of the object, the last two values are for translation purposes (dx, dy)
-    qreal xx = pow(cos(rotation()), 2) + (1 - 0.1*spannung) * pow(sin(rotation()), 2);
-    qreal yy = pow(sin(rotation()), 2) + (1 - 0.1*spannung) * pow(cos(rotation()), 2);
-    qreal xy = sin(rotation()) * cos(rotation()) * 0.1 * spannung;
-
-    setTransform(QTransform(0, 0, 0, 0,-FEDER_WIDTH/2, -FEDER_HEIGHT));
-    setTransform(QTransform(1, 0, 0, (1-0.1*spannung), 0, 0), true);
-    setTransform(QTransform(0, 0, 0, 0, FEDER_WIDTH/2, FEDER_HEIGHT), true);
-    */
 }
 
 /**
@@ -179,7 +172,7 @@ void Feder::updateBall(Element &ball) {
     int x_ = x() + FEDER_WIDTH/2 - BALL_DIAM/2 + (FEDER_HEIGHT*(1-0.1*spannung) + BALL_DIAM/2) * sin(rotation() * M_PI/180);
     int y_ = y() + FEDER_HEIGHT  - BALL_DIAM/2 - (FEDER_HEIGHT*(1-0.1*spannung) + BALL_DIAM/2) * cos(rotation() * M_PI/180);
     dynamic_cast<Ball&>(* ball.item).setPos(x_, y_);
-    ball.body->SetTransform(b2Vec2(x_/SCALING, (WINDOW_H - y_)/SCALING), dynamic_cast<Ball&>(* ball.item).rotation());
+    ball.body->SetTransform(b2Vec2(x_, (WINDOW_H - y_)), dynamic_cast<Ball&>(* ball.item).rotation());
 }
 
 void Feder::attachBall(Element &ball) {

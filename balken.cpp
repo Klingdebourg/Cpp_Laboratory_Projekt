@@ -127,6 +127,10 @@ void Balken::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     painter->drawRect(0, 0, getLength(), BALKEN_WIDTH);
 }
 
+void Balken::setType(balkenType typ) {
+    this->type = typ;
+}
+
 /**
  * @brief Balken::rot
  * @return current rotation of the Balken

@@ -6,7 +6,7 @@
 
 class Virus : public QGraphicsEllipseItem {
 public:
-    Virus(int x, int y, QRectF *a=0);
+    Virus(int x, int y, QRectF *a = nullptr);
 };
 
 #endif // VIRUS_H

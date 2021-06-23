@@ -24,6 +24,8 @@ public:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
+    void setType(balkenType typ);
+
     int getRotation() const;
     int getLength() const;
 
