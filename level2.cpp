@@ -3,6 +3,8 @@
 
 Level2::Level2(Game* game):Level(game, 2) {
 
+    ballStep = b2Vec2(0,0);
+
     //wofür ist dies? (@johanna)
     x_last=ball->item->x();
     y_last=ball->item->y();
@@ -30,7 +32,7 @@ Level2::Level2(Game* game):Level(game, 2) {
     levelscene->addItem(balken3->item);
 
     foehn = new Element(FOEHN);
-    foehn->item->setPos(balken2->item->x()-100, balken2->item->y()-100);
+    foehn->item->setPos(balken2->item->x()-FOEHN_WIDTH, balken2->item->y()-FOEHN_WIDTH);
     foehn->body = world->CreateBody(foehn->bodyDef);
     foehn->body->CreateFixture(foehn->fixture);
     foehn->body->SetTransform(b2Vec2(foehn->item->x(), foehn->item->y()), foehn->item->rotation());
@@ -38,9 +40,13 @@ Level2::Level2(Game* game):Level(game, 2) {
 
     //Feder positionieren und Ball verbinden
     feder->item->setPos(balken1->item->x()+(balken1->item->boundingRect().width() - FEDER_WIDTH)/2, balken1->item->y()-FEDER_HEIGHT);
-    dynamic_cast<Feder*>(feder->item)->attachBall(* ball);
-
-
+    //dynamic_cast<Feder*>(feder->item)->attachBall(* ball);
+    ball->item->setPos(balken2->item->x(), balken2->item->y()-FOEHN_WIDTH);
+    ball->body->SetTransform(b2Vec2(ball->item->x(), (WINDOW_H - ball->item->y())), 0);
+    ballStep.Set(ball->item->x(), ball->item->y());
+    qDebug() << ballStep.x << " " << ballStep.y;
+    ballStep = ball->body->GetPosition();
+    qDebug() << ballStep.x << " " << ballStep.y;
 
     //Maskenposition und Virus position setzen
     virus->item->setPos(balken3->item->x()+dynamic_cast<Balken*>(balken3->item)->getLength(),balken3->item->y()-150);

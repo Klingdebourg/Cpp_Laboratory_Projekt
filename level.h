@@ -8,6 +8,7 @@
 #include "ball.h"
 #include "virus.h"
 #include "feder.h"
+#include "foehn.h"
 #include <QGraphicsLineItem>
 #include <QList>
 #include "definitions.h"
@@ -29,11 +30,13 @@ public:
     counter* Counter;
     Element* ball;
     b2Vec2 ballStep;
+    Element* feder;
     Element* maske1;
     Element* maske2;
     Element* maske3;
     Element* virus;
-    Element* feder;
+    QVector<Foehn*> foehne;
+    int anzahlFoehne;
     QTimer* timer;
     int failbedingung;
     int x_last;

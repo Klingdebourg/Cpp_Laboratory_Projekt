@@ -20,9 +20,10 @@
 
 //parameters for the world
 #define GRAVITY -10.0f
+#define FOEHN_FORCE 1000000
 
 //Box2D Prarameters for the ball
-#define BALL_DENSITY 100
+#define BALL_DENSITY 0.01f
 #define BALL_FRICTION 0.3f
 #define BALL_RESTITUTION 0.9f
 

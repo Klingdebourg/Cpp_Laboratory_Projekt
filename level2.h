@@ -5,7 +5,6 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include "balken.h"
-#include "foehn.h"
 
 class Level2: public Level{
 public:

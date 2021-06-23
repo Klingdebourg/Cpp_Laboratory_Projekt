@@ -63,6 +63,21 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     levelscene -> addItem(ball->item);
     */
 
+    feder = new Element(FEDER);
+    //the feder item cannot be genereated in the element-constructor due to the circular include
+    feder->item = new Feder(0, 0);
+    feder->body = world->CreateBody(feder->bodyDef);
+    feder->body->CreateFixture(feder->fixture);
+    levelscene->addItem(feder->item);
+    /*
+    feder->item = new Feder(0, 0);
+    feder->bodyDef = new b2BodyDef();
+    feder->body = world->CreateBody(feder->bodyDef);
+    feder->shape = new b2PolygonShape();
+    feder->fixture = new b2FixtureDef();
+    feder->body->CreateFixture(feder->fixture);
+    levelscene->addItem(feder->item);
+    */
 
     maske1 = new Element(MASKE);
     maske1->body = world->CreateBody(maske1->bodyDef);
@@ -120,27 +135,15 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     levelscene -> addItem(virus->item);
     */
 
-    feder = new Element(FEDER);
-    //the feder item cannot be genereated in the element-constructor due to the circular include
-    feder->item = new Feder(0, 0);
-    feder->body = world->CreateBody(feder->bodyDef);
-    feder->body->CreateFixture(feder->fixture);
-    levelscene->addItem(feder->item);
-    /*
-    feder->item = new Feder(0, 0);
-    feder->bodyDef = new b2BodyDef();
-    feder->body = world->CreateBody(feder->bodyDef);
-    feder->shape = new b2PolygonShape();
-    feder->fixture = new b2FixtureDef();
-    feder->body->CreateFixture(feder->fixture);
-    levelscene->addItem(feder->item);
-    */
+    //foehne = new QVector<Foehn*>(5, nullptr);
+    anzahlFoehne = 0;
 
     //Pause-Button
     Button* pause = new Button(QString("||"));
     pause->setRect(0,0,100,100);
     connect(pause, SIGNAL(clicked()),this,SLOT(pause()));
     levelscene->addItem(pause);
+    isPaused = false;
 
     pausepic = new QGraphicsView;
     pausemenu = new QGraphicsScene();
@@ -258,9 +261,16 @@ void Level::Interaktion(){
     /// as the ball is the only dynamic itme in the world
     if (!dynamic_cast<Feder*>(feder->item)->getBallAttached() && !isPaused) {
         world->Step(TIME_STEP, VEL_ITER, POS_ITER);
+        ball->item->setPos(QPointF(ballStep.x, WINDOW_H-ballStep.y));
+        ball->body->ApplyForceToCenter(b2Vec2(FOEHN_FORCE, 0), false);
         ballStep = ball->body->GetPosition();
         qDebug() << ballStep.x << " " << ballStep.y;
-        ball->item->setPos(QPointF(ballStep.x, WINDOW_H-ballStep.y));
+
+        //iterate over all foehne
+        for (int i = 0; i < foehne.size(); i++) {
+            //check whether the ball is currently in the range of a foehn
+
+        }
 
     }
 
