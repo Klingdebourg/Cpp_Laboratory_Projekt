@@ -48,3 +48,7 @@ void Foehn::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     painter->drawRect(0, 0, FOEHN_WIDTH, FOEHN_WIDTH);
 
 }
+
+bool Foehn::isOn() const {
+    return foehn_on;
+}

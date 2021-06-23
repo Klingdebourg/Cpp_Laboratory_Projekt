@@ -16,6 +16,9 @@ public:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+    bool isOn() const;
+
 private:
     bool foehn_on = false;
 };

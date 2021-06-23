@@ -268,8 +268,10 @@ void Level::Interaktion(){
 
         //iterate over all foehne
         for (int i = 0; i < foehne.size(); i++) {
-            //check whether the ball is currently in the range of a foehn
-
+            //check whether the currently investigated foehn is currently turned on
+            if(foehne.at(i)->isOn()) {
+                //check
+            }
         }
 
     }
