@@ -1,6 +1,7 @@
 #ifndef DEFINITIONS_H
 #define DEFINITIONS_H
 
+//parameters for the different objects
 #define WINDOW_W 1600
 #define WINDOW_H 1000
 #define BALL_DIAM 70
@@ -14,6 +15,9 @@
 
 //scaling between box2d world and qt scene
 #define SCALING 1000.0f
+
+//parameters for the world
+#define GRAVITY -10.0f
 
 //Box2D Prarameters for the ball
 #define BALL_DENSITY 100

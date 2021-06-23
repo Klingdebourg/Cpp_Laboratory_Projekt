@@ -8,16 +8,19 @@
 #include <QDebug>
 
 Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
+    //create scene for the level and adapt parameters
     levelscene = new QGraphicsScene(this);
     levelgame = game;
     level = type;
-    world = new b2World(b2Vec2(0.0f, -10.0f));
     setScene(levelscene);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(WINDOW_W,WINDOW_H);
     levelscene->setSceneRect(0,0,WINDOW_W,WINDOW_H);
     levelscene->addLine(0,100,WINDOW_W,100);
+
+    //create box2d world with negative gravity of
+    world = new b2World(b2Vec2(0.0f, GRAVITY));
 
 
     if (level == 1 ){
@@ -151,10 +154,12 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
 
 }
 
-
+/**
+ * @brief Level::pause to pause the game
+ */
 void Level::pause(){
     //Szene einfrieren -> box2d??
-
+    isPaused = true;
     //new scene
 
     pausepic->setScene(pausemenu);
@@ -189,6 +194,9 @@ void Level::pause(){
     pausemenu->addItem(haupt);
 }
 
+/**
+ * @brief Level::Zurueck to return to the level menu from pause menu
+ */
 void Level::Zurueck()
 {
 levelgame->show();
@@ -198,6 +206,9 @@ pausepic->deleteLater();
 this->deleteLater();
 }
 
+/**
+ * @brief Level::Redo rebuilds the level
+ */
 void Level::Redo()
 {
     pausemenu->deleteLater();
@@ -218,6 +229,9 @@ void Level::Redo()
     }
 }
 
+/**
+ * @brief Level::Hauptmenu to return to the main menu from pause menu
+ */
 void Level::Hauptmenu()
 {
     levelgame->show();
@@ -227,9 +241,17 @@ void Level::Hauptmenu()
     this->deleteLater();
 }
 
+
 ///Prüft, ob die Items, welche in der Scene sind kollidieren und handelt je nach Art des Items; Interaktion mit Box2D
+
+/**
+ * @brief Level::Interaktion is called TIME_STEP times per second via a timer
+ * first functionality: step the box2d world
+ * second fuinctionality: check if the ball collided with any itmes and act accordingly
+ */
 void Level::Interaktion(){
-    //@Lukas: hier Interaktion mit Box2d
+    ///only update the world if the ball is not attached to the spring
+    /// as the ball is the only dynamic itme in the world
     if (!dynamic_cast<Feder*>(feder->item)->getBallAttached()) {
         world->Step(TIME_STEP, VEL_ITER, POS_ITER);
         ballStep = ball->body->GetPosition();
