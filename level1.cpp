@@ -2,24 +2,41 @@
 
 
 
-Level1::Level1(Game* game):Level(game,1)
-{
+Level1::Level1(Game* game):Level(game,1) {
 
 //Create the objects for the levels
-Balken* balken1 = new Balken(800,900,0,300,statisch);
-feder->setPos(balken1->x()+(balken1->boundingRect().width() - FEDER_WIDTH)/2, balken1->y()-FEDER_HEIGHT);
-feder->updateBall(*ball);
-x_last=ball->x();
-y_last=ball->y();
 
-//Add the objects/items to the scene to be visualized
-levelscene->addItem(balken1);
+    balken1 = new Element();
+    balken1->item = new Balken(800,900,0,300,rotatorisch);
+    balken1->bodyDef = new b2BodyDef();
+    balken1->bodyDef->type = b2_staticBody;
+    balken1->body = world->CreateBody(balken1->bodyDef);
+    balken1->shape = new b2PolygonShape();
+    dynamic_cast<b2PolygonShape*>(balken1->shape)->m_centroid.Set(0, 0);
+    dynamic_cast<b2PolygonShape*>(balken1->shape)->SetAsBox(dynamic_cast<Balken*>(balken1->item)->getLength(), BALKEN_WIDTH);
+    balken1->fixture = new b2FixtureDef();
+    balken1->fixture->density = 0.0f;
+    balken1->fixture->friction = 0.0f;
+    balken1->fixture->restitution = 0.0f;
+    balken1->fixture->shape = balken1->shape;
+    balken1->body->CreateFixture(balken1->fixture);
+    balken1->body->SetTransform(b2Vec2(balken1->item->x(), WINDOW_H - balken1->item->y()), 0);
+    levelscene->addItem(balken1->item);
+
+    feder->item->setPos(balken1->item->x()+(balken1->item->boundingRect().width() - FEDER_WIDTH)/2, balken1->item->y()-FEDER_HEIGHT);
+    dynamic_cast<Feder*>(feder->item)->attachBall(*ball);
+    ball->body->SetTransform(b2Vec2(ball->item->x(), (WINDOW_H - ball->item->y())), ball->item->rotation());
+    ballStep = ball->body->GetPosition();
+    qDebug() << ballStep.x << " " << ballStep.y;
+
+    x_last=ball->item->x();
+    y_last=ball->item->y();
 
 
-//Position der Masken und des Virus festlegen
-virus->setPos(balken1->x()-600,balken1->y()-725);
-maske1->setPos(balken1->x(),balken1->y()-275);
-maske2->setPos(balken1->x()-175,balken1->y()-450);
-maske3->setPos(balken1->x()-350,balken1->y()-575);
+    //Position der Masken und des Virus festlegen
+    virus->item->setPos(balken1->item->x()-600,balken1->item->y()-725);
+    maske1->item->setPos(balken1->item->x(),balken1->item->y()-275);
+    maske2->item->setPos(balken1->item->x()-175,balken1->item->y()-450);
+    maske3->item->setPos(balken1->item->x()-350,balken1->item->y()-575);
 
 }

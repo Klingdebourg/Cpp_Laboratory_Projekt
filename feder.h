@@ -8,6 +8,7 @@
 #include <QWidget>
 #include <QDebug>
 #include "ball.h"
+#include "element.h"
 
 #include <math.h>
 
@@ -15,18 +16,19 @@
 class Feder : public QGraphicsRectItem {
 public:
     Feder(int x, int y);
-    Feder(int x, int y, Ball &ball);
+    Feder(int x, int y, Element *ball);
     QRectF boundingRect() const;
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    void updateBall(Ball &ball);
-    bool ballattached();
+    void updateBall(Element &ball);
+    void attachBall(Element &ball);
+    bool getBallAttached() const;
 
 private:
     int spannung;
     bool isBallAttached;
-    Ball *ball;
+    Element *ball;
 };
 
 #endif // FEDER_H

@@ -10,10 +10,11 @@
 class Level2: public Level{
 public:
     Level2(Game* game);
-    Balken* balken1;
-    Balken* balken2;
-    Balken* balken3;
-    Foehn* foehn;
+
+    Element* balken1;
+    Element* balken2;
+    Element* balken3;
+    Element* foehn;
 
 };
 

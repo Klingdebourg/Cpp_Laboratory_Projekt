@@ -13,7 +13,8 @@ class Level1: public Level
 
 public:
     Level1(Game* game);
-    Balken* balken1;
+
+    Element* balken1;
 };
 
 #endif // LEVEL1_H

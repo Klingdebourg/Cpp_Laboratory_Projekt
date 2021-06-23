@@ -11,12 +11,14 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     levelscene = new QGraphicsScene(this);
     levelgame = game;
     level = type;
+    world = new b2World(b2Vec2(0.0f, -10.0f));
     setScene(levelscene);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(WINDOW_W,WINDOW_H);
     levelscene->setSceneRect(0,0,WINDOW_W,WINDOW_H);
     levelscene->addLine(0,100,WINDOW_W,100);
+
 
     if (level == 1 ){
         text= "Level 1";
@@ -36,15 +38,63 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     titleText->setPos(txPos,tyPos);
     levelscene->addItem(titleText);
 
-    ball = new Ball();
-    maske1 = new Maske(0,0);
-    maske2 = new Maske(0,0);
-    maske3 = new Maske(0,0);
-    virus = new Virus(0,0);
-    levelscene -> addItem(maske1);
-    levelscene -> addItem(maske2);
-    levelscene -> addItem(maske3);
-    levelscene -> addItem(virus);
+    ball = new Element();
+    ball->item = new Ball();
+    ball->bodyDef = new b2BodyDef();
+    ball->bodyDef->type = b2_dynamicBody;
+    //ball->bodyDef->position.Set(0, 0);
+    ball->body = world->CreateBody(ball->bodyDef);
+    ball->shape = new b2CircleShape();
+    dynamic_cast<b2CircleShape*>(ball->shape)->m_p.Set(0, 0);
+    ball->shape->m_radius = BALL_DIAM/2;
+    ball->fixture = new b2FixtureDef();
+    ball->fixture->density = BALL_DENSITY;
+    ball->fixture->friction = BALL_FRICTION;
+    ball->fixture->restitution = BALL_RESTITUTION;
+    ball->fixture->shape = ball->shape;
+    ball->body->CreateFixture(ball->fixture);
+    levelscene -> addItem(ball->item);
+
+
+    maske1 = new Element();
+    maske1->item = new Maske(0, 0);
+    maske1->bodyDef = new b2BodyDef();
+    maske1->body = world->CreateBody(ball->bodyDef);
+    maske1->shape = new b2PolygonShape();
+    maske1->fixture = new b2FixtureDef();
+    levelscene -> addItem(maske1->item);
+
+    maske2 = new Element();
+    maske2->item = new Maske(0, 0);
+    maske2->bodyDef = new b2BodyDef();
+    maske2->body = world->CreateBody(ball->bodyDef);
+    maske2->shape = new b2PolygonShape();
+    maske2->fixture = new b2FixtureDef();
+    levelscene -> addItem(maske2->item);
+
+    maske3 = new Element();
+    maske3->item = new Maske(0, 0);
+    maske3->bodyDef = new b2BodyDef();
+    maske3->body = world->CreateBody(ball->bodyDef);
+    maske3->shape = new b2PolygonShape();
+    maske3->fixture = new b2FixtureDef();
+    levelscene -> addItem(maske3->item);
+
+    virus = new Element();
+    virus->item = new Virus(0,0);
+    virus->bodyDef = new b2BodyDef();
+    virus->body = world->CreateBody(ball->bodyDef);
+    virus->shape = new b2CircleShape();
+    virus->fixture = new b2FixtureDef();
+    levelscene -> addItem(virus->item);
+
+    feder = new Element();
+    feder->item = new Feder(0, 0);
+    feder->bodyDef = new b2BodyDef();
+    feder->body = world->CreateBody(feder->bodyDef);
+    feder->shape = new b2PolygonShape();
+    feder->fixture = new b2FixtureDef();
+    levelscene->addItem(feder->item);
 
     //Pause-Button
     Button* pause = new Button(QString("||"));
@@ -57,16 +107,11 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
 
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(Interaktion()));
-    timer -> start(1/60*1000);
+    timer -> start(TIME_STEP*1000);
 
     Counter = new counter;
     Counter->setPos(WINDOW_W-Counter->boundingRect().width(),y());
     levelscene -> addItem(Counter);
-
-    feder = new Feder(0,0,*ball);
-    levelscene -> addItem(ball);
-    levelscene->addItem(feder);
-
 
     failbedingung=0;
 
@@ -152,73 +197,83 @@ void Level::Hauptmenu()
 ///Prüft, ob die Items, welche in der Scene sind kollidieren und handelt je nach Art des Items; Interaktion mit Box2D
 void Level::Interaktion(){
     //@Lukas: hier Interaktion mit Box2d
+    if (!dynamic_cast<Feder*>(feder->item)->getBallAttached()) {
+        world->Step(TIME_STEP, VEL_ITER, POS_ITER);
+        ballStep = ball->body->GetPosition();
+        ball->item->setPos(QPointF(ballStep.x, WINDOW_H-ballStep.y));
+        qDebug() << ballStep.x << " " << ballStep.y;
+
+    }
+
+
+    //Abfrage nach Position des Balls->Ende des Spiels / Abbruchbedingung
+  if(! dynamic_cast<Feder*>(feder->item)->getBallAttached()){
+     int x_current = ball->item->x();
+     int y_current = ball->item->y();
+     if(x_current == x_last && y_current == y_last) {
+        if(failbedingung <= Abbruchzeit){
+            failbedingung++;
+        }
+        else{
+           levelscene->clear();
+           QGraphicsTextItem* losttext = new QGraphicsTextItem(QString("Sie haben leider verloren"));
+           QFont titleFont("comic sans",50);
+           losttext->setFont(titleFont);
+           int txPos = this->width()/2 - losttext->boundingRect().width()/2;
+           int tyPos = 150;
+           losttext->setPos(txPos,tyPos);
+           levelscene->addItem(losttext);
+
+           Button* zurueck = new Button(QString("Zurück zur Levelübersicht"));
+           connect(zurueck, SIGNAL(clicked()),this,SLOT(Zurueck()));
+           zurueck->setRect(0,0,300,50);
+           zurueck->setPos(losttext->x()+losttext->boundingRect().width()/3,losttext ->y()+400);
+           levelscene->addItem(zurueck);
+
+           Button* redo = new Button(QString("Den Level erneut starten"));
+           connect(redo, SIGNAL(clicked()),this,SLOT(Redo()));
+           redo->setRect(0,0,300,50);
+           redo->setPos(losttext->x()+losttext->boundingRect().width()/3, losttext->y()+600);
+           levelscene->addItem(redo);
+
+           Button* haupt = new Button(QString("Zum Hauptmenü"));
+           connect(haupt, SIGNAL(clicked()),this,SLOT(Hauptmenu()));
+           haupt->setRect(0,0,300,50);
+           haupt->setPos(losttext->x()+losttext->boundingRect().width()/3, losttext->y()+800);
+           levelscene->addItem(haupt);
+           timer->stop();
+           return;
+
+        }
+     }else{
+         failbedingung = 0;
+     }
+     x_last = x_current;
+     y_last = y_current;}else{
+      failbedingung =0;
+  }
 
 
 
 
-
-
-  //Abfrage nach Position des Balls->Ende des Spiels / Abbruchbedingung
-if(!feder->ballattached()){
-   int x_current = ball->x();
-   int y_current = ball->y();
-   if(x_current == x_last && y_current == y_last) {
-      if(failbedingung <= 250000){
-          failbedingung++;
-      }
-      else{
-         levelscene->clear();
-         QGraphicsTextItem* losttext = new QGraphicsTextItem(QString("Sie haben leider verloren"));
-         QFont titleFont("comic sans",50);
-         losttext->setFont(titleFont);
-         int txPos = this->width()/2 - losttext->boundingRect().width()/2;
-         int tyPos = 150;
-         losttext->setPos(txPos,tyPos);
-         levelscene->addItem(losttext);
-
-         Button* zurueck = new Button(QString("Zurück zur Levelübersicht"));
-         connect(zurueck, SIGNAL(clicked()),this,SLOT(Zurueck()));
-         zurueck->setRect(0,0,300,50);
-         zurueck->setPos(losttext->x()+losttext->boundingRect().width()/3,losttext ->y()+400);
-         levelscene->addItem(zurueck);
-
-         Button* redo = new Button(QString("Den Level erneut starten"));
-         connect(redo, SIGNAL(clicked()),this,SLOT(Redo()));
-         redo->setRect(0,0,300,50);
-         redo->setPos(losttext->x()+losttext->boundingRect().width()/3, losttext->y()+600);
-         levelscene->addItem(redo);
-
-         Button* haupt = new Button(QString("Zum Hauptmenü"));
-         connect(haupt, SIGNAL(clicked()),this,SLOT(Hauptmenu()));
-         haupt->setRect(0,0,300,50);
-         haupt->setPos(losttext->x()+losttext->boundingRect().width()/3, losttext->y()+800);
-         levelscene->addItem(haupt);
-         timer->stop();
-         return;
-
-      }
-   }else{
-       failbedingung = 0;
-   }
-   x_last = x_current;
-   y_last = y_current;}else{
-    failbedingung =0;
-}
 
   ///Kollisionsabfrage
     ///In Ball abfragen, was mit Ball kollidiert
-    int colliding_item = ball -> collidingItem(maske1, maske2, maske3, virus);
+    int colliding_item = dynamic_cast<Ball*>(ball->item)->collidingItem(dynamic_cast<Maske*>(maske1->item),
+                                                                        dynamic_cast<Maske*>(maske2->item),
+                                                                        dynamic_cast<Maske*>(maske3->item),
+                                                                        dynamic_cast<Virus*>(virus->item));
     if (colliding_item == 1){
         qDebug("Maske1 wird berührt");
-        levelscene -> removeItem(maske1);
+        levelscene -> removeItem(maske1->item);
         Counter -> increase();
         return;
     } else if (colliding_item == 2){
-        levelscene -> removeItem(maske2);
+        levelscene -> removeItem(maske2->item);
         Counter -> increase();
         return;
     } else if (colliding_item == 3){
-        levelscene -> removeItem(maske3);
+        levelscene -> removeItem(maske3->item);
         Counter -> increase();
         return;
     }  else if (colliding_item == 4){
@@ -226,7 +281,7 @@ if(!feder->ballattached()){
         levelscene -> clear();
         /// Text "du hast gewonnen" + Highscore
     } else if (colliding_item == 5){
-//        qDebug("Nichts wird berührt");
+        qDebug("Nichts wird berührt");
         return;
     }
 
@@ -252,4 +307,3 @@ if(!feder->ballattached()){
 //        }
 //    }
 }
-

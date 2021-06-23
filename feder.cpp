@@ -52,7 +52,7 @@ Feder::Feder(int x, int y) {
  * @param y requested y position
  * @param ball ball connected to the spring
  */
-Feder::Feder(int x, int y, Ball &ball) {
+Feder::Feder(int x, int y, Element *ball) {
     //creates rectangle with given size at origin in scene coordinates
     setRect(0, 0, FEDER_WIDTH, FEDER_HEIGHT);
     //moves the transformation point to the lower end of the rectangle
@@ -84,9 +84,10 @@ Feder::Feder(int x, int y, Ball &ball) {
     spannung = 0;
 
     //attach the ball
-    this->ball = &ball;
+    this->ball = ball;
     isBallAttached = true;
-    this->ball->setPos(x_ + FEDER_WIDTH/2 - BALL_DIAM/2, y_ - BALL_DIAM);
+    this->ball->item->setPos(x_ + FEDER_WIDTH/2 - BALL_DIAM/2, y_ - BALL_DIAM);
+    this->ball->body->SetTransform(b2Vec2(this->ball->item->x(), (WINDOW_H - this->ball->item->y())), this->ball->item->rotation());
 }
 
 /**
@@ -128,11 +129,12 @@ void Feder::keyPressEvent(QKeyEvent *event)
         if(isBallAttached)
             isBallAttached = false;
         //Geschwindigkeit Ball setzen
+
     }
     //update size of Feder, unfortunately also changes width
     //alternative could use "update" method but this would require a redraw of the Feder which can only be done from the scene
     //setScale(1 - 0.1*spannung);
-    if (this->ball != nullptr)
+    if (this->isBallAttached)
         updateBall(* this->ball);
 
     update();
@@ -176,13 +178,20 @@ void Feder::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
  * @brief if a ball is connected to the feder, its position is updated (is used after the feder changes its position/tesnion)
  * @param ball to be changed
  */
-void Feder::updateBall(Ball &ball) {
+void Feder::updateBall(Element &ball) {
     int x_ = x() + FEDER_WIDTH/2 - BALL_DIAM/2 + (FEDER_HEIGHT*(1-0.1*spannung) + BALL_DIAM/2) * sin(rotation() * M_PI/180);
     int y_ = y() + FEDER_HEIGHT  - BALL_DIAM/2 - (FEDER_HEIGHT*(1-0.1*spannung) + BALL_DIAM/2) * cos(rotation() * M_PI/180);
-    ball.setPos(x_, y_);
+    dynamic_cast<Ball&>(* ball.item).setPos(x_, y_);
+    ball.body->SetTransform(b2Vec2(x_/SCALING, (WINDOW_H - y_)/SCALING), dynamic_cast<Ball&>(* ball.item).rotation());
 }
 
-bool Feder::ballattached()
+void Feder::attachBall(Element &ball) {
+    this->isBallAttached = true;
+    this->ball = &ball;
+    updateBall(ball);
+}
+
+bool Feder::getBallAttached() const
 {
     return isBallAttached;
 }
