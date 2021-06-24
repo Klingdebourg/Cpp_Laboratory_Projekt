@@ -4,7 +4,7 @@
 //parameters for the different objects
 #define WINDOW_W 1600
 #define WINDOW_H 1000
-#define BALL_DIAM 70
+#define BALL_DIAM 50
 #define BALKEN_WIDTH 40
 #define BALKEN_LENGTH_DEFAULT 300
 #define FEDER_WIDTH 20
@@ -22,7 +22,7 @@
 #define GRAVITY -10.0f
 
 //Box2D Prarameters for the ball
-#define BALL_DENSITY 100
+#define BALL_DENSITY 0.00000000001f
 #define BALL_FRICTION 0.3f
 #define BALL_RESTITUTION 0.9f
 
