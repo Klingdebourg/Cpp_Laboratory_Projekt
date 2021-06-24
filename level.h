@@ -35,7 +35,9 @@ public:
     Element* maske2;
     Element* maske3;
     Element* virus;
-    QVector<Foehn*> foehne;
+    QVector<Element*> balken;
+    Element* currentBalken;
+    QVector<Element*> foehne;
     int anzahlFoehne;
     QTimer* timer;
     int failbedingung;

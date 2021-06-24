@@ -257,6 +257,15 @@ void Level::Hauptmenu()
  * second fuinctionality: check if the ball collided with any itmes and act accordingly
  */
 void Level::Interaktion(){
+    ///update position of all balken if their Qt appearance has been changed
+    for (int i = 0; i < balken.size(); i++) {
+        currentBalken = balken.at(i);
+        //nur nicht-statische Balken updaten
+        if(currentBalken->item->type() != statisch)
+            currentBalken->body->SetTransform(b2Vec2(currentBalken->item->x(), WINDOW_H - currentBalken->item->y()), -currentBalken->item->rotation()*M_PI/180);
+    }
+
+
     ///only update the world if the ball is not attached to the spring
     /// as the ball is the only dynamic itme in the world
     if (!dynamic_cast<Feder*>(feder->item)->getBallAttached() && !isPaused) {
@@ -268,7 +277,7 @@ void Level::Interaktion(){
         //iterate over all foehne
         for (int i = 0; i < foehne.size(); i++) {
             //check whether the currently investigated foehn is currently turned on
-            if(foehne.at(i)->isOn()) {
+            if(dynamic_cast<Foehn*>(foehne.at(i)->item)->isOn()) {
                 ball->body->ApplyForceToCenter(b2Vec2(FOEHN_FORCE, 0), false);
                 //check
             }
