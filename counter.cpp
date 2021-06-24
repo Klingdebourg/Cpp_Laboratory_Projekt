@@ -11,6 +11,7 @@ counter::counter(){
 
 void counter::increase(){
     m_score += 1;
+    setPlainText((QString("Score: ")+QString::number(m_score)));
 }
 
 int counter::getscore(){
