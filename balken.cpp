@@ -40,6 +40,7 @@ Balken::Balken(int x, int y, int rotation, int length, balkenType typ) {
 
     //set the type of the balken
     type = typ;
+    modified = NONE;
 }
 
 /**
@@ -72,6 +73,7 @@ void Balken::keyPressEvent(QKeyEvent *event) {
         default:
             break;
         }
+        modified = LEFT;
         break;
     case Qt::Key_Right:
         //differentiate the movement depending on the type of the balken
@@ -88,8 +90,10 @@ void Balken::keyPressEvent(QKeyEvent *event) {
         default:
             break;
         }
+        modified = RIGHT;
         break;
     }
+
 
 }
 
@@ -109,17 +113,19 @@ void Balken::mousePressEvent(QGraphicsSceneMouseEvent *event) {
 void Balken::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     QPen pen = QPen();
     pen.setWidth(5);
+    QColor *color;
     switch (this->type) {
     case statisch:
-        pen.setColor(Qt::black);
+        color = new QColor(0, 0, 0, 250);
         break;
     case translatorisch:
-        pen.setColor(Qt::blue);
+        color = new QColor(0, 255, 0, 50);
         break;
     case rotatorisch:
-        pen.setColor(Qt::red);
+        color = new QColor(0, 255, 255, 50);
         break;
     }
+    pen.setColor(*color);
     painter->setPen(pen);
     painter->drawRect(0, 0, getLength(), BALKEN_WIDTH);
 }
@@ -137,6 +143,13 @@ void Balken::setPosition(QPointF point) {
 }
 
 /**
+ * @brief Balken::unmodified setd the modified status to NONE
+ */
+void Balken::unmodified() {
+    modified = NONE;
+}
+
+/**
  * @brief Balken::rot
  * @return current rotation of the Balken
  */
@@ -151,5 +164,13 @@ int Balken::getRotation() const{
 int Balken::getLength() const
 {
     return length;
+}
+
+Balken::balkenType Balken::getType() const {
+    return type;
+}
+
+Balken::modification Balken::wasModified() const{
+    return modified;
 }
 

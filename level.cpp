@@ -234,6 +234,7 @@ void Level::Redo()
         Level3* level3 = new Level3(levelgame);
         level3->show();
     }
+    isPaused = false;
 }
 
 /**
@@ -260,25 +261,56 @@ void Level::Interaktion(){
     ///update position of all balken if their Qt appearance has been changed
     for (int i = 0; i < balken.size(); i++) {
         currentBalken = balken.at(i);
+        currentBalkenItem = dynamic_cast<Balken*>(currentBalken->item);
         //nur nicht-statische Balken updaten
-        if(currentBalken->item->type() != statisch)
-            currentBalken->body->SetTransform(b2Vec2(currentBalken->item->x(), WINDOW_H - currentBalken->item->y()), -currentBalken->item->rotation()*M_PI/180);
-    }
+        if(currentBalkenItem->getType() != Balken::statisch && currentBalkenItem->wasModified() != Balken::NONE) {
+            if(currentBalkenItem->getType() == Balken::translatorisch) {
+                //modify the position according to the angle for translational Balken
+                if(currentBalkenItem->wasModified() == Balken::LEFT) {
+                    currentBalken->body->SetTransform( b2Vec2(currentBalken->body->GetPosition().x - 15*cos(currentBalkenItem->getRotation() * M_PI/180),
+                                                             currentBalken->body->GetPosition().y + 15*sin(currentBalkenItem->getRotation() * M_PI/180) ),
+                                                       currentBalkenItem->getRotation());
+                } else {
+                    currentBalken->body->SetTransform( b2Vec2(currentBalken->body->GetPosition().x + 15*cos(currentBalkenItem->getRotation() * M_PI/180),
+                                                             currentBalken->body->GetPosition().y - 15*sin(currentBalkenItem->getRotation() * M_PI/180) ),
+                                                       currentBalkenItem->getRotation());
+                }//left-right differentiation
+            } else if (currentBalkenItem->getType() == Balken::rotatorisch) {
+                //modify the rotation for rotational Balken (Attention box2d: ccw, Qt: cw)
+                if(currentBalkenItem->wasModified() == Balken::LEFT) {
+                    currentBalken->body->SetTransform( b2Vec2(currentBalken->body->GetPosition().x,
+                                                             currentBalken->body->GetPosition().y ),
+                                                       - currentBalkenItem->getRotation());
+                } else {
+                    currentBalken->body->SetTransform( b2Vec2(currentBalken->body->GetPosition().x,
+                                                             currentBalken->body->GetPosition().y),
+                                                       - currentBalkenItem->getRotation());
+                }//left-right differentiation
+            }//translation-rotation differentiation
+            currentBalkenItem->unmodified();
+        }//only move non-stationary modified Balken
+    }//iterate over all Balken in the level
 
 
     ///only update the world if the ball is not attached to the spring
     /// as the ball is the only dynamic itme in the world
     if (!dynamic_cast<Feder*>(feder->item)->getBallAttached() && !isPaused) {
         world->Step(TIME_STEP, VEL_ITER, POS_ITER);
-        ball->item->setPos(QPointF(ballStep.x, WINDOW_H-ballStep.y));
         ballStep = ball->body->GetPosition();
-        qDebug() << ballStep.x << " " << ballStep.y;
+         ball->item->setPos(QPointF(ballStep.x, WINDOW_H-ballStep.y));
+        qDebug() << "Position Ball: " << ballStep.x << " " << ballStep.y;
+        ballStep = balken.at(0)->body->GetPosition();
+        qDebug() << "Position Balken1: " << ballStep.x << " " << ballStep.y << balken.at(0)->body->GetAngle();
+        ballStep = balken.at(1)->body->GetPosition();
+        qDebug() << "Position Balken2: " << ballStep.x << " " << ballStep.y << balken.at(1)->body->GetAngle();
+        ballStep = balken.at(2)->body->GetPosition();
+        qDebug() << "Position Balken3: " << ballStep.x << " " << ballStep.y << balken.at(2)->body->GetAngle();
 
         //iterate over all foehne
         for (int i = 0; i < foehne.size(); i++) {
             //check whether the currently investigated foehn is currently turned on
             if(dynamic_cast<Foehn*>(foehne.at(i)->item)->isOn()) {
-                ball->body->ApplyForceToCenter(b2Vec2(FOEHN_FORCE, 0), false);
+                //ball->body->ApplyForceToCenter(b2Vec2(FOEHN_FORCE, 0), false);
                 //check
             }
         }

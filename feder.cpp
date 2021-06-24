@@ -126,7 +126,7 @@ void Feder::keyPressEvent(QKeyEvent *event)
         break;
     case Qt::Key_Space:
         if (isBallAttached) {
-            ball->body->ApplyLinearImpulseToCenter(b2Vec2(spannung*10000 * -sin(this->rotation() * M_PI/180), spannung*10000 * cos(this->rotation() * M_PI/180)), true);
+            ball->body->ApplyLinearImpulseToCenter(b2Vec2(spannung*10000 * sin(this->rotation() * M_PI/180), spannung*10000 * cos(this->rotation() * M_PI/180)), true);
             spannung = 0;
             isBallAttached = false;
             this->ball = nullptr;

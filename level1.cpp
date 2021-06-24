@@ -29,7 +29,7 @@ Level1::Level1(Game* game):Level(game,1) {
     levelscene->addItem(balken1->item);
     */
 
-    feder->item->setPos(balken.at(0)->item->x()+(balken.at(0)->item->boundingRect().width() - FEDER_WIDTH)/2, balken.at(0)->item->y()-FEDER_HEIGHT);
+    feder->item->setPos(balken.at(0)->item->x()+(BALKEN_LENGTH_DEFAULT - FEDER_WIDTH)/2, balken.at(0)->item->y()-FEDER_HEIGHT);
     dynamic_cast<Feder*>(feder->item)->attachBall(*ball);
     ball->body->SetTransform(b2Vec2(ball->item->x(), (WINDOW_H - ball->item->y())), ball->item->rotation());
     ballStep = ball->body->GetPosition();

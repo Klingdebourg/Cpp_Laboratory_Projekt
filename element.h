@@ -44,13 +44,13 @@ struct Element {
         ///define item
         switch(typ) {
         case BALKEN_S:
-            this->item = new Balken(0, 0, 0, BALKEN_LENGTH_DEFAULT, statisch);
+            this->item = new Balken(0, 0, 0, BALKEN_LENGTH_DEFAULT, Balken::statisch);
             break;
         case BALKEN_R:
-            this->item = new Balken(0, 0, 0, BALKEN_LENGTH_DEFAULT, rotatorisch);
+            this->item = new Balken(0, 0, 0, BALKEN_LENGTH_DEFAULT, Balken::rotatorisch);
             break;
         case BALKEN_T:
-            this->item = new Balken(0, 0, 0, BALKEN_LENGTH_DEFAULT, translatorisch);
+            this->item = new Balken(0, 0, 0, BALKEN_LENGTH_DEFAULT, Balken::translatorisch);
             break;
         case BALL:
             this->item = new Ball();

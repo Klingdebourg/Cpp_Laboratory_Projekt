@@ -8,6 +8,7 @@
 #include "ball.h"
 #include "virus.h"
 #include "feder.h"
+//#include "balken.h"
 #include "foehn.h"
 #include <QGraphicsLineItem>
 #include <QList>
@@ -37,6 +38,7 @@ public:
     Element* virus;
     QVector<Element*> balken;
     Element* currentBalken;
+    Balken* currentBalkenItem;
     QVector<Element*> foehne;
     int anzahlFoehne;
     QTimer* timer;
