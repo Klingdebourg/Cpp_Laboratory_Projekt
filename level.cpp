@@ -262,7 +262,6 @@ void Level::Interaktion(){
     if (!dynamic_cast<Feder*>(feder->item)->getBallAttached() && !isPaused) {
         world->Step(TIME_STEP, VEL_ITER, POS_ITER);
         ball->item->setPos(QPointF(ballStep.x, WINDOW_H-ballStep.y));
-        ball->body->ApplyForceToCenter(b2Vec2(FOEHN_FORCE, 0), false);
         ballStep = ball->body->GetPosition();
         qDebug() << ballStep.x << " " << ballStep.y;
 
@@ -270,6 +269,7 @@ void Level::Interaktion(){
         for (int i = 0; i < foehne.size(); i++) {
             //check whether the currently investigated foehn is currently turned on
             if(foehne.at(i)->isOn()) {
+                ball->body->ApplyForceToCenter(b2Vec2(FOEHN_FORCE, 0), false);
                 //check
             }
         }
