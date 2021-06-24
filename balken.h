@@ -36,6 +36,7 @@ public:
 
     void setPosition(QPointF point);
     void unmodified();
+    void setRotation(qreal angle);
 
     int getRotation() const;
     int getLength() const;

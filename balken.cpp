@@ -149,6 +149,11 @@ void Balken::unmodified() {
     modified = NONE;
 }
 
+void Balken::setRotation(qreal angle) {
+    rotation = angle;
+    QGraphicsItem::setRotation(angle);
+}
+
 /**
  * @brief Balken::rot
  * @return current rotation of the Balken
