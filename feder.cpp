@@ -40,6 +40,7 @@ Feder::Feder(int x, int y) {
 
     //set initial tension to 0 (i.e. relaxed)
     spannung = 0;
+    spannungBall=1000;
 
     //indicate that there is no ball attached
     ball = nullptr;
@@ -82,6 +83,7 @@ Feder::Feder(int x, int y, Element *ball) {
 
     //set initial tension to 0 (i.e. relaxed)
     spannung = 0;
+    spannungBall=1000;
 
     //attach the ball
     this->ball = ball;
@@ -117,17 +119,27 @@ void Feder::keyPressEvent(QKeyEvent *event)
         break;
     case Qt::Key_Down:
         //defines a maximal tension for the spring (half of its length)
-        if (spannung < 5)
+        if (spannung < 5){
             spannung += 1;
+            spannungBall= spannungBall*40;
+            qDebug()<<"Spannung:" << spannung;
+            qDebug()<<"SpannungBall:" <<  spannungBall;}
         break;
     case Qt::Key_Up:
-        if (spannung > 0)
+        if (spannung > 0){
             spannung -= 1;
+            spannungBall= spannungBall/40;
+            qDebug()<<"Spannung:" << spannung;
+            qDebug()<<"SpannungBall:" << spannungBall;}
         break;
     case Qt::Key_Space:
         if (isBallAttached) {
-            ball->body->ApplyLinearImpulseToCenter(b2Vec2(spannung*pow(10, 22) * sin(this->rotation() * M_PI/180), spannung*pow(10, 22) * cos(this->rotation() * M_PI/180)), true);
+            qDebug()<< spannung;
+            ball->body->ApplyLinearImpulseToCenter(b2Vec2(spannungBall * sin(this->rotation() * M_PI/180), spannungBall * cos(this->rotation() * M_PI/180)), true);
+            b2Vec2 VelocityBall= ball->body->GetLinearVelocity();
+            qDebug() << VelocityBall.x << " " << VelocityBall.y;
             spannung = 0;
+            spannungBall=1000;
             isBallAttached = false;
             this->ball = nullptr;
         }

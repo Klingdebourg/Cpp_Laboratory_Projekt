@@ -24,7 +24,7 @@
 //Box2D Prarameters for the ball
 #define BALL_DENSITY 0.1f
 #define BALL_FRICTION 0.3f
-#define BALL_RESTITUTION 0.9f
+#define BALL_RESTITUTION 0.7f
 
 //Paramters required for steps of the box2d world
 #define TIME_STEP 1.0f/300

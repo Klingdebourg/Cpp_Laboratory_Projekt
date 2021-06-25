@@ -27,6 +27,7 @@ public:
 
 private:
     int spannung;
+    long long spannungBall; // Eingefuert um einen Impulsunterschied beim Abschiessen des Balls zu spuehren
     bool isBallAttached;
     Element *ball;
 };

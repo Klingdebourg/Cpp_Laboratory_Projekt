@@ -259,7 +259,7 @@ void Level::Interaktion(){
     if (!dynamic_cast<Feder*>(feder->item)->getBallAttached() && !isPaused) {
         world->Step(TIME_STEP, VEL_ITER, POS_ITER);
         ballStep = ball->body->GetPosition();
-        qDebug() << ballStep.x << " " << ballStep.y;
+       //qDebug() << ballStep.x << " " << ballStep.y;  +++++++++++++++++++++++++++++++++++++++++
         ball->item->setPos(QPointF(ballStep.x, WINDOW_H-ballStep.y));
 
     }
@@ -323,7 +323,7 @@ void Level::Interaktion(){
                                                                         dynamic_cast<Maske*>(maske3->item),
                                                                         dynamic_cast<Virus*>(virus->item));
     if (colliding_item == 1){
-        qDebug("Maske1 wird berührt");
+       // qDebug("Maske1 wird berührt"); +++++++++++++++++++++++++++++++++++++
         levelscene -> removeItem(maske1->item);
         Counter -> increase();
         return;
@@ -340,7 +340,7 @@ void Level::Interaktion(){
         levelscene -> clear();
         /// Text "du hast gewonnen" + Highscore
     } else if (colliding_item == 5){
-        qDebug("Nichts wird berührt");
+       // qDebug("Nichts wird berührt");+++++++++++++++++++++++++++++
         return;
     }
 
