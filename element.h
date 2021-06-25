@@ -90,13 +90,13 @@ struct Element {
         case MASKE:
             this->shape = new b2PolygonShape();
             if (typ == BALKEN_S || typ == BALKEN_R || typ == BALKEN_T)
-                dynamic_cast<b2PolygonShape*>(this->shape)->SetAsBox(BALKEN_LENGTH_DEFAULT, BALKEN_WIDTH);
+                dynamic_cast<b2PolygonShape*>(this->shape)->SetAsBox(BALKEN_LENGTH_DEFAULT/2, BALKEN_WIDTH/2);
             else if (typ == FEDER)
-                dynamic_cast<b2PolygonShape*>(this->shape)->SetAsBox(FEDER_WIDTH, FEDER_HEIGHT);
+                dynamic_cast<b2PolygonShape*>(this->shape)->SetAsBox(FEDER_WIDTH/2, FEDER_HEIGHT/2);
             else if (typ == FOEHN)
-                dynamic_cast<b2PolygonShape*>(this->shape)->SetAsBox(FOEHN_WIDTH, FOEHN_WIDTH);
+                dynamic_cast<b2PolygonShape*>(this->shape)->SetAsBox(FOEHN_WIDTH/2, FOEHN_WIDTH/2);
             else
-                dynamic_cast<b2PolygonShape*>(this->shape)->SetAsBox(MASKE_WIDTH, MASKE_WIDTH);
+                dynamic_cast<b2PolygonShape*>(this->shape)->SetAsBox(MASKE_WIDTH/2, MASKE_WIDTH/2);
             break;
         case BALL:
         case VIRUS:

@@ -35,13 +35,13 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     groundBoxBotton.SetAsBox(900.0f, 5.0f);
     groundBodyBotton->CreateFixture(&groundBoxBotton, 0.0f);
 
-    groundBodyDefLeft.position.Set(-35,600);
+    groundBodyDefLeft.position.Set(-30,600);
     b2Body* groundBodyLeft = world->CreateBody(&groundBodyDefLeft);
     b2PolygonShape groundBoxLeft;
     groundBoxLeft.SetAsBox(5.0f, 600.0f);
     groundBodyLeft->CreateFixture(&groundBoxLeft, 0.0f);
 
-    groundBodyDefRight.position.Set(1590,600);
+    groundBodyDefRight.position.Set(1580,600);
     b2Body* groundBodyRight = world->CreateBody(&groundBodyDefRight);
     b2PolygonShape groundBoxRight;
     groundBoxRight.SetAsBox(5.0f, 600.0f);
@@ -148,8 +148,8 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     feder = new Element(FEDER);
     //the feder item cannot be genereated in the element-constructor due to the circular include
     feder->item = new Feder(0, 0);
-    feder->body = world->CreateBody(feder->bodyDef);
-    feder->body->CreateFixture(feder->fixture);
+    //feder->body = world->CreateBody(feder->bodyDef);
+    //feder->body->CreateFixture(feder->fixture);
     levelscene->addItem(feder->item);
     /*
     feder->item = new Feder(0, 0);

@@ -9,7 +9,7 @@ Level1::Level1(Game* game):Level(game,1) {
     dynamic_cast<Balken*>(balken1->item)->setPosition(QPointF(WINDOW_W/2.0f, WINDOW_H*3.0f/4));
     balken1->body = world->CreateBody(balken1->bodyDef);
     balken1->body->CreateFixture(balken1->fixture);
-    balken1->body->SetTransform(b2Vec2(balken1->item->x(), WINDOW_H - balken1->item->y()), 0);
+    balken1->body->SetTransform(b2Vec2((balken1->item->x())-25 + BALKEN_LENGTH_DEFAULT/2.0f  , (WINDOW_H - balken1->item->y())+5), 0);
     levelscene->addItem(balken1->item);
     /*
     balken1->item = new Balken(800,900,0,300,rotatorisch);
