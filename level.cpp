@@ -22,6 +22,45 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     //create box2d world with negative gravity of
     world = new b2World(b2Vec2(0.0f, GRAVITY));
 
+    b2BodyDef groundBodyDefTop;                                  //BodyDefinitions
+    b2BodyDef groundBodyDefBotton;
+    b2BodyDef groundBodyDefLeft;
+    b2BodyDef groundBodyDefRight;
+
+
+    groundBodyDefTop.type= b2_staticBody;
+    groundBodyDefTop.position.Set(800,20);
+    b2Body* groundBodyTop = world->CreateBody(&groundBodyDefTop);
+    b2PolygonShape groundBoxTop;
+    groundBoxTop.SetAsBox(900.0f, 5.0f);
+    b2FixtureDef GroundBoxFixDefTop;
+    GroundBoxFixDefTop.shape= &groundBoxTop;
+    groundBodyTop->CreateFixture(&GroundBoxFixDefTop);
+
+    groundBodyDefBotton.type= b2_staticBody;
+    groundBodyDefBotton.position.Set(800,1030);
+    b2Body* groundBodyBotton = world->CreateBody(&groundBodyDefBotton);
+    b2PolygonShape groundBoxBotton;
+    groundBoxBotton.SetAsBox(900.0f, 5.0f);
+    b2FixtureDef GroundBoxFixDefBotton;
+    GroundBoxFixDefBotton.shape= &groundBoxBotton;
+    GroundBoxFixDefBotton.density=0.0f;
+    groundBodyBotton->CreateFixture(&GroundBoxFixDefBotton);
+
+    groundBodyDefLeft.type= b2_staticBody;
+    groundBodyDefLeft.position.Set(-35,600);
+    b2Body* groundBodyLeft = world->CreateBody(&groundBodyDefLeft);
+    b2PolygonShape groundBoxLeft;
+    groundBoxLeft.SetAsBox(5.0f, 600.0f);
+    groundBodyLeft->CreateFixture(&groundBoxLeft, 0.0f);
+
+    groundBodyDefRight.type= b2_staticBody;
+    groundBodyDefRight.position.Set(1590,600);
+    b2Body* groundBodyRight = world->CreateBody(&groundBodyDefRight);
+    b2PolygonShape groundBoxRight;
+    groundBoxRight.SetAsBox(5.0f, 600.0f);
+    groundBodyRight->CreateFixture(&groundBoxRight, 0.0f);
+
 
     if (level == 1 ){
         text= "Level 1";
