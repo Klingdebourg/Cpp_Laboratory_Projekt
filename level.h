@@ -57,7 +57,6 @@ protected:
 private:
     Element* currentBalken;
     Balken* currentBalkenItem;
-    int anzahlFoehne;
     b2Vec2 foehnBall;
     int distanceFoehnBall;
     float angleFoehnBall;

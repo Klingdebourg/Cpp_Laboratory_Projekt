@@ -3,9 +3,9 @@
 
 Level3::Level3(Game* game):Level(game,3) {
 
-    //wofür ist dies? (@johanna)
     x_last=ball->item->x();
     y_last=ball->item->y();
+
 
 
     //Create the objects specific for the level
@@ -33,6 +33,7 @@ Level3::Level3(Game* game):Level(game,3) {
 
     foehne.append(new Element(FOEHN));
     foehne.at(0)->item->setPos(balken.at(2)->item->x()-75,balken.at(2)->item->y()+125);
+    //foehne.at(0)->item->setPos(WINDOW_W/2, WINDOW_H/2);
     foehne.at(0)->body = world->CreateBody(foehne.at(0)->bodyDef);
     foehne.at(0)->body->CreateFixture(foehne.at(0)->fixture);
     foehne.at(0)->body->SetTransform(b2Vec2(foehne.at(0)->item->x(), WINDOW_H - foehne.at(0)->item->y()), foehne.at(0)->item->rotation());
@@ -49,6 +50,8 @@ Level3::Level3(Game* game):Level(game,3) {
     //Feder positionieren und Ball verbinden
     feder->item->setPos(balken.at(0)->item->x()+(balken.at(0)->item->boundingRect().width() - FEDER_WIDTH)/2, balken.at(0)->item->y()-FEDER_HEIGHT);
     dynamic_cast<Feder*>(feder->item)->attachBall(* ball);
+    ball->item->setPos(foehne.at(0)->item->x(), foehne.at(0)->item->y()-150);
+    ball->body->SetTransform(b2Vec2(ball->item->x(), WINDOW_H - ball->item->y()), 0);
 
 
 

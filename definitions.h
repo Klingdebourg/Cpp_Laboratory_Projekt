@@ -19,10 +19,10 @@
 #define SCALING 1000.0f
 
 //parameters for forces in box2d
-#define GRAVITY -10.0f
-#define FOEHN_FORCE 1000000
+#define GRAVITY -500.0f
+#define FOEHN_FORCE 30000
 #define FOEHN_REACH 250
-#define FOEHN_REACH_ANGLE M_PI/12 //15 degrees in both directions
+#define FOEHN_REACH_ANGLE M_PI/4 //45 degrees in both directions
 
 //Box2D Prarameters for the ball
 #define BALL_DENSITY 0.01f

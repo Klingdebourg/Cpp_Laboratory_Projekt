@@ -45,23 +45,6 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     ball->body = world->CreateBody(ball->bodyDef);
     ball->body->CreateFixture(ball->fixture);
     levelscene -> addItem(ball->item);
-    /*
-    ball->item = new Ball();
-    ball->bodyDef = new b2BodyDef();
-    ball->bodyDef->type = b2_dynamicBody;
-    //ball->bodyDef->position.Set(0, 0);
-    ball->body = world->CreateBody(ball->bodyDef);
-    ball->shape = new b2CircleShape();
-    dynamic_cast<b2CircleShape*>(ball->shape)->m_p.Set(0, 0);
-    ball->shape->m_radius = BALL_DIAM/2;
-    ball->fixture = new b2FixtureDef();
-    ball->fixture->density = BALL_DENSITY;
-    ball->fixture->friction = BALL_FRICTION;
-    ball->fixture->restitution = BALL_RESTITUTION;
-    ball->fixture->shape = ball->shape;
-    ball->body->CreateFixture(ball->fixture);
-    levelscene -> addItem(ball->item);
-    */
 
     feder = new Element(FEDER);
     //the feder item cannot be genereated in the element-constructor due to the circular include
@@ -69,74 +52,26 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     feder->body = world->CreateBody(feder->bodyDef);
     feder->body->CreateFixture(feder->fixture);
     levelscene->addItem(feder->item);
-    /*
-    feder->item = new Feder(0, 0);
-    feder->bodyDef = new b2BodyDef();
-    feder->body = world->CreateBody(feder->bodyDef);
-    feder->shape = new b2PolygonShape();
-    feder->fixture = new b2FixtureDef();
-    feder->body->CreateFixture(feder->fixture);
-    levelscene->addItem(feder->item);
-    */
 
     maske1 = new Element(MASKE);
     maske1->body = world->CreateBody(maske1->bodyDef);
     maske1->body->CreateFixture(maske1->fixture);
     levelscene -> addItem(maske1->item);
-    /*
-    maske1->item = new Maske(0, 0);
-    maske1->bodyDef = new b2BodyDef();
-    maske1->body = world->CreateBody(maske1->bodyDef);
-    maske1->shape = new b2PolygonShape();
-    maske1->fixture = new b2FixtureDef();
-    maske1->body->CreateFixture(maske1->fixture);
-    levelscene -> addItem(maske1->item);
-    */
 
     maske2 = new Element(MASKE);
     maske2->body = world->CreateBody(maske2->bodyDef);
     maske2->body->CreateFixture(maske2->fixture);
     levelscene -> addItem(maske2->item);
-    /*
-    maske2->item = new Maske(0, 0);
-    maske2->bodyDef = new b2BodyDef();
-    maske2->body = world->CreateBody(maske2->bodyDef);
-    maske2->shape = new b2PolygonShape();
-    maske2->fixture = new b2FixtureDef();
-    maske2->body->CreateFixture(maske2->fixture);
-    levelscene -> addItem(maske2->item);
-    */
 
     maske3 = new Element(MASKE);
     maske3->body = world->CreateBody(maske3->bodyDef);
     maske3->body->CreateFixture(maske3->fixture);
     levelscene -> addItem(maske3->item);
-    /*
-    maske3->item = new Maske(0, 0);
-    maske3->bodyDef = new b2BodyDef();
-    maske3->body = world->CreateBody(maske3->bodyDef);
-    maske3->shape = new b2PolygonShape();
-    maske3->fixture = new b2FixtureDef();
-    maske3->body->CreateFixture(maske3->fixture);
-    levelscene -> addItem(maske3->item);
-    */
 
     virus = new Element(VIRUS);
     virus->body = world->CreateBody(virus->bodyDef);
     virus->body->CreateFixture(virus->fixture);
     levelscene -> addItem(virus->item);
-    /*
-    virus->item = new Virus(0,0);
-    virus->bodyDef = new b2BodyDef();
-    virus->body = world->CreateBody(virus->bodyDef);
-    virus->shape = new b2CircleShape();
-    virus->fixture = new b2FixtureDef();
-    virus->body->CreateFixture(virus->fixture);
-    levelscene -> addItem(virus->item);
-    */
-
-    //foehne = new QVector<Foehn*>(5, nullptr);
-    anzahlFoehne = 0;
 
     //Pause-Button
     Button* pause = new Button(QString("||"));
@@ -274,14 +209,16 @@ void Level::Interaktion(){
         ballStep = ball->body->GetPosition();
         ball->item->setPos(QPointF(ballStep.x, WINDOW_H-ballStep.y));
 
-        //Debugging for balken bug (b2-body does not move according to Qt-item)
-        qDebug() << "Position Ball: " << ballStep.x << " " << ballStep.y;
-        ballStep = balken.at(0)->body->GetPosition();
-        qDebug() << "Position Balken1: " << ballStep.x << " " << ballStep.y << balken.at(0)->body->GetAngle();
-        ballStep = balken.at(1)->body->GetPosition();
-        qDebug() << "Position Balken2: " << ballStep.x << " " << ballStep.y << balken.at(1)->body->GetAngle();
-        ballStep = balken.at(2)->body->GetPosition();
-        qDebug() << "Position Balken3: " << ballStep.x << " " << ballStep.y << balken.at(2)->body->GetAngle();
+
+//        //Debugging for balken bug (b2-body does not move according to Qt-item)
+//        qDebug() << "Position Ball: " << ballStep.x << " " << ballStep.y;
+//        ballStep = balken.at(0)->body->GetPosition();
+//        qDebug() << "Position Balken1: " << ballStep.x << " " << ballStep.y << balken.at(0)->body->GetAngle();
+//        ballStep = balken.at(1)->body->GetPosition();
+//        qDebug() << "Position Balken2: " << ballStep.x << " " << ballStep.y << balken.at(1)->body->GetAngle();
+//        ballStep = balken.at(2)->body->GetPosition();
+//        qDebug() << "Position Balken3: " << ballStep.x << " " << ballStep.y << balken.at(2)->body->GetAngle();
+
     }
 
 
@@ -396,8 +333,9 @@ void Level::applyFoehnForces() {
         if(dynamic_cast<Foehn*>(foehne.at(i)->item)->isOn()) {
             //vector pointing from the tip of the foehn to the center of the ball
             //remember, that points of ball and foehn are located at top-left corner of object
-            foehnBall = b2Vec2(ball->item->x()+BALL_DIAM/2 - foehne.at(i)->item->x()+FOEHN_WIDTH*(1.0f/2-sin(foehne.at(i)->item->rotation() * M_PI/180)),
-                               ball->item->y()+BALL_DIAM/2 - foehne.at(i)->item->x()+FOEHN_WIDTH*(1.0f/2+cos(foehne.at(i)->item->rotation() * M_PI/180)) );
+            qDebug() << foehne.at(0)->item->rotation();
+            foehnBall = b2Vec2(foehne.at(i)->item->x()+FOEHN_WIDTH/2*(1+sin(foehne.at(i)->item->rotation() * M_PI/180)) - (ball->item->x()+BALL_DIAM/2),
+                               foehne.at(i)->item->y()+FOEHN_WIDTH/2*(1-cos(foehne.at(i)->item->rotation() * M_PI/180)) - (ball->item->y()+BALL_DIAM/2));
             //vector product of direction of foehn and vector from tip of foehn to ball
             //i.e. projection of one vector onto the other thus offset in direction of foehn
             distanceFoehnBall = foehnBall.x*sin(foehne.at(i)->item->rotation() * M_PI/180) +
@@ -414,7 +352,9 @@ void Level::applyFoehnForces() {
                     //1. the angle between the direction of the foehn and the vector from foehn to ball (cos function zero at FOEHN_REACH_ANGLE)
                     //2. the distance of the ball to the foehn in direction of the foehn (inverse)
                 intensityFoehn = FOEHN_FORCE * cos(angleFoehnBall * M_PI/(2*FOEHN_REACH_ANGLE)) * FOEHN_REACH/distanceFoehnBall;
-                ball->body->ApplyForceToCenter(b2Vec2(intensityFoehn*sin(foehne.at(i)->item->rotation() * M_PI/180), -intensityFoehn*cos(foehne.at(i)->item->rotation() * M_PI/180)), false);
+                ball->body->ApplyForceToCenter(b2Vec2(intensityFoehn*sin(foehne.at(i)->item->rotation() * M_PI/180),
+                                                      intensityFoehn*cos(foehne.at(i)->item->rotation() * M_PI/180)),
+                                               true);
             }
         }
     }
