@@ -22,6 +22,10 @@ public:
     Game* levelgame;
     int level;
     b2World *world;
+    b2BodyDef groundBodyDefTop;
+    b2BodyDef groundBodyDefBotton;
+    b2BodyDef groundBodyDefLeft;
+    b2BodyDef groundBodyDefRight;
     QString text;
     QGraphicsScene* levelscene;
     QGraphicsScene* pausemenu;
