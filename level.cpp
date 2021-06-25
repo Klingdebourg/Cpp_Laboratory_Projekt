@@ -310,6 +310,7 @@ void Level::Interaktion(){
         for (int i = 0; i < foehne.size(); i++) {
             //check whether the currently investigated foehn is currently turned on
             if(dynamic_cast<Foehn*>(foehne.at(i)->item)->isOn()) {
+
                 //ball->body->ApplyForceToCenter(b2Vec2(FOEHN_FORCE, 0), false);
                 //check
             }

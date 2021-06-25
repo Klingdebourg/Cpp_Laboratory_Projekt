@@ -23,24 +23,11 @@ public:
     Level(Game* game, int type, QWidget* parent = NULL);
     Game* levelgame;
     int level;
-    b2World *world;
     QString text;
     QGraphicsScene* levelscene;
     QGraphicsScene* pausemenu;
     QGraphicsView* pausepic;
     counter* Counter;
-    Element* ball;
-    b2Vec2 ballStep;
-    Element* feder;
-    Element* maske1;
-    Element* maske2;
-    Element* maske3;
-    Element* virus;
-    QVector<Element*> balken;
-    Element* currentBalken;
-    Balken* currentBalkenItem;
-    QVector<Element*> foehne;
-    int anzahlFoehne;
     QTimer* timer;
     int failbedingung;
     int x_last;
@@ -56,6 +43,21 @@ public slots:
     //Maske* maske1, Maske* maske2, Maske* maske3, Virus* virus
 
 private:
+    b2World *world;
+    Element* ball;
+    b2Vec2 ballStep;
+    Element* feder;
+    Element* maske1;
+    Element* maske2;
+    Element* maske3;
+    Element* virus;
+    QVector<Element*> balken;
+    Element* currentBalken;
+    Balken* currentBalkenItem;
+    QVector<Element*> foehne;
+    int anzahlFoehne;
+    b2Vec2 foehnBall;
+    int distanceFoehnBall;
     bool isPaused;
 };
 
