@@ -35,14 +35,14 @@ Level3::Level3(Game* game):Level(game,3) {
     foehne.at(0)->item->setPos(balken.at(2)->item->x()-75,balken.at(2)->item->y()+125);
     foehne.at(0)->body = world->CreateBody(foehne.at(0)->bodyDef);
     foehne.at(0)->body->CreateFixture(foehne.at(0)->fixture);
-    foehne.at(0)->body->SetTransform(b2Vec2(foehne.at(0)->item->x(), foehne.at(0)->item->y()), foehne.at(0)->item->rotation());
+    foehne.at(0)->body->SetTransform(b2Vec2(foehne.at(0)->item->x(), WINDOW_H - foehne.at(0)->item->y()), foehne.at(0)->item->rotation());
     levelscene->addItem(foehne.at(0)->item);
 
     foehne.append(new Element(FOEHN));
     foehne.at(1)->item->setPos(balken.at(1)->item->x()+650, balken.at(2)->item->y()-BALKEN_LENGTH_DEFAULT);
     foehne.at(1)->body = world->CreateBody(foehne.at(1)->bodyDef);
     foehne.at(1)->body->CreateFixture(foehne.at(1)->fixture);
-    foehne.at(1)->body->SetTransform(b2Vec2(foehne.at(1)->item->x(), foehne.at(1)->item->y()), foehne.at(1)->item->rotation());
+    foehne.at(1)->body->SetTransform(b2Vec2(foehne.at(1)->item->x(), WINDOW_H - foehne.at(1)->item->y()), foehne.at(1)->item->rotation());
     levelscene->addItem(foehne.at(1)->item);
 
 

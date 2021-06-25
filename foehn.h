@@ -1,7 +1,7 @@
 #ifndef FOEHN_H
 #define FOEHN_H
 
-#include <QGraphicsRectItem>
+#include <QGraphicsPolygonItem>
 #include <QKeyEvent>
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
@@ -10,7 +10,7 @@
 #include "definitions.h"
 
 
-class Foehn : public QGraphicsRectItem{
+class Foehn : public QGraphicsPolygonItem{
 public:
     Foehn(int x, int y, int alpha);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
@@ -20,6 +20,7 @@ public:
     bool isOn() const;
 
 private:
+    QPolygon *triangle;
     bool foehn_on = false;
 };
 
