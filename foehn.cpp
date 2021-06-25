@@ -11,6 +11,8 @@ Foehn::Foehn(int x, int y, int alpha){
     //rotates the item for the given angle
     setRotation(alpha);
 
+    foehn_on = false;
+
 }
 
 void Foehn::mousePressEvent(QGraphicsSceneMouseEvent *event) {
@@ -37,14 +39,16 @@ QRectF Foehn::boundingRect() const {
 
 void Foehn::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     QPen pen = QPen();
+    QBrush brush = QBrush();
     if (foehn_on) {
-        pen.setWidth(6);
-        pen.setColor(Qt::gray);
+        pen.setWidth(3);
+        brush.setColor(Qt::gray);
     } else {
         pen.setWidth(1);
-        pen.setColor(Qt::black);
+        brush.setColor(Qt::white);
     }
     painter->setPen(pen);
+    painter->setBrush(brush);
     painter->drawRect(0, 0, FOEHN_WIDTH, FOEHN_WIDTH);
 
 }

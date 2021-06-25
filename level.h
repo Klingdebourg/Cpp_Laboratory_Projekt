@@ -42,7 +42,7 @@ public slots:
     void Interaktion();
     //Maske* maske1, Maske* maske2, Maske* maske3, Virus* virus
 
-private:
+protected:
     b2World *world;
     Element* ball;
     b2Vec2 ballStep;
@@ -52,13 +52,20 @@ private:
     Element* maske3;
     Element* virus;
     QVector<Element*> balken;
+    QVector<Element*> foehne;
+
+private:
     Element* currentBalken;
     Balken* currentBalkenItem;
-    QVector<Element*> foehne;
     int anzahlFoehne;
     b2Vec2 foehnBall;
     int distanceFoehnBall;
+    float angleFoehnBall;
+    float intensityFoehn;
     bool isPaused;
+
+    void applyFoehnForces();
+    void updateB2Balken();
 };
 
 #endif // LEVEL_H
