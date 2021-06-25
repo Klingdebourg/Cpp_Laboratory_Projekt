@@ -19,15 +19,15 @@
 #define SCALING 1000.0f
 
 //parameters for the world
-#define GRAVITY -10.0f
+#define GRAVITY -200.0f
 
 //Box2D Prarameters for the ball
-#define BALL_DENSITY 0.00000000001f
+#define BALL_DENSITY 0.1f
 #define BALL_FRICTION 0.3f
 #define BALL_RESTITUTION 0.9f
 
 //Paramters required for steps of the box2d world
-#define TIME_STEP 1.0f/60
+#define TIME_STEP 1.0f/300
 #define VEL_ITER 10
 #define POS_ITER 8
 
