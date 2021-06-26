@@ -6,6 +6,7 @@
 #include "level3.h"
 #include <QTimer>
 #include <QDebug>
+#include <QGraphicsRectItem>
 
 Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     //create scene for the level and adapt parameters
@@ -22,16 +23,34 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     //create box2d world with negative gravity of
     world = new b2World(b2Vec2(0.0f, GRAVITY));
 
+     Button* closeinfo = new Button(QString("OK & schließen"));
+     connect(closeinfo, SIGNAL(clicked()),this,SLOT(InfoToBeClosed()));
+     closeinfo->setRect(0,0,150,50);
+
+    bounds=new QGraphicsRectItem;
 
     if (level == 1 ){
         text= "Level 1";
+        Info = new info(1,closeinfo, bounds);
+        levelscene->addItem(Info);
     }
     if(level == 2){
         text = "Level 2";
+        closeinfo->setPos(0,0);
+        Info = new info(2,closeinfo, bounds);
+        levelscene->addItem(Info);
+
     }
     if(level == 3){
         text = "Level 3";
+        closeinfo->setPos(0,0);
+        Info = new info(3,closeinfo, bounds);
+        levelscene->addItem(Info);
+
     }
+    levelscene->addItem(bounds);
+
+
     QGraphicsTextItem* titleText = new QGraphicsTextItem(text);
     QFont titleFont("comic sans",30);
     titleText->setDefaultTextColor(Qt::cyan);
@@ -92,6 +111,9 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     levelscene -> addItem(Counter);
 
     failbedingung=0;
+
+    levelscene->addItem(closeinfo);
+
 
 
 }
@@ -285,7 +307,7 @@ void Level::Interaktion(){
         levelscene -> clear();
         /// Text "du hast gewonnen" + Highscore
     } else if (colliding_item == 5){
-        qDebug("Nichts wird berührt");
+//        qDebug("Nichts wird berührt");
         return;
     }
 
@@ -312,6 +334,11 @@ void Level::Interaktion(){
     //    }
 }
 
+void Level::InfoToBeClosed()
+{
+    Info->OKpressed();
+    delete(bounds);
+}
 /**
  * @brief Level::applyFoehnForces iterates over all foehne, checks whether the ball is in reach of them
  * and applies a force in direction of the foehn if necessary depending on the positions wrt each others
