@@ -93,8 +93,12 @@ struct Element {
                 dynamic_cast<b2PolygonShape*>(this->shape)->SetAsBox(BALKEN_LENGTH_DEFAULT/2, BALKEN_WIDTH/2);
             else if (typ == FEDER)
                 dynamic_cast<b2PolygonShape*>(this->shape)->SetAsBox(FEDER_WIDTH/2, FEDER_HEIGHT/2);
-            else if (typ == FOEHN)
-                dynamic_cast<b2PolygonShape*>(this->shape)->SetAsBox(FOEHN_WIDTH/2, FOEHN_WIDTH/2);
+            else if (typ == FOEHN){
+                b2Vec2 VecShapeFoehn[3];
+                VecShapeFoehn[0].Set(0.0f, 0.0f);
+                VecShapeFoehn[1].Set(FOEHN_WIDTH*3.0f/4.0f, 0.0f);
+                VecShapeFoehn[2].Set(FOEHN_WIDTH*3.0f/8.0f, FOEHN_WIDTH*3.0f/4.0f);
+                dynamic_cast<b2PolygonShape*>(this->shape)->Set(VecShapeFoehn, 3);}
             else
                 dynamic_cast<b2PolygonShape*>(this->shape)->SetAsBox(MASKE_WIDTH/2, MASKE_WIDTH/2);
             break;

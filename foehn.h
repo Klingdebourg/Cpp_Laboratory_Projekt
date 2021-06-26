@@ -15,10 +15,8 @@ public:
     Foehn(int x, int y, int alpha);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); 
     bool isOn() const;
-
 private:
     QPolygon *triangle;
     bool foehn_on = false;
