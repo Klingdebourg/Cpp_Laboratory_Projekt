@@ -11,8 +11,6 @@
 class Ball : public QGraphicsEllipseItem {
 public:
     Ball();
-    //QList <QGraphicsItem *> collidingList();
-    int collidingItem(Maske* maske1, Maske* maske2, Maske* maske3, Virus* virus);
 };
 
 #endif // BALL_H

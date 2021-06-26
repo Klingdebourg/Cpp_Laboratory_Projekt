@@ -5,7 +5,6 @@
 #include "level2.h"
 #include "level3.h"
 #include <QTimer>
-#include <QDebug>
 
 Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     levelscene = new QGraphicsScene(this);
@@ -139,50 +138,33 @@ void Level::Interaktion(){
 
 
   ///Kollisionsabfrage
-    ///In Ball abfragen, was mit Ball kollidiert
-    int colliding_item = ball -> collidingItem(maske1, maske2, maske3, virus);
-    if (colliding_item == 1){
-        qDebug("Maske1 wird berührt");
+    if (ball -> collidesWithItem(maske1)==true){
         levelscene -> removeItem(maske1);
+        maske1 -> setPos(1000,-100);
         Counter -> increase();
         return;
-    } else if (colliding_item == 2){
+    } else if (ball -> collidesWithItem(maske2)==true){
         levelscene -> removeItem(maske2);
+        maske2 -> setPos(1000,-100);
         Counter -> increase();
         return;
-    } else if (colliding_item == 3){
+    } else if (ball -> collidesWithItem(maske3)==true){
         levelscene -> removeItem(maske3);
+        maske3 -> setPos(1000,-100);
         Counter -> increase();
         return;
-    }  else if (colliding_item == 4){
+    }  else if (ball -> collidesWithItem(virus)==true){
         ///Spiel beenden
         levelscene -> clear();
         /// Text "du hast gewonnen" + Highscore
-    } else if (colliding_item == 5){
-        qDebug("Nichts wird berührt");
+// Hier noch etwas einfügen
+
+
+
+        return;
+    } else {
         return;
     }
 
-//    ///Liste durchgehen und checken, ob Item eine Maske oder Virus ist
-//    int n = colliding_items_level.size();
-//    for (int i = 0; i< n; i++){
-//        for (int j = 0; j< n; j++){
-//            ///falls Maske: Maske entfernen, Maskecounter hochsetzen
-//            if ((typeid(*(colliding_items_level[i])) == typeid(Maske)) && (typeid(*(colliding_items_level[j])) == typeid(Ball))){
-//                levelscene -> removeItem(colliding_items_level[i]);
-//                delete colliding_items_level[i];
-//                Counter -> increase();
-//                return;
-//            }
-//            else if ((typeid(*(colliding_items_level[i])) == typeid(Virus)) && (typeid(*(colliding_items_level[j])) == typeid(Ball))){
-//            ///Spiel beenden
-//                levelscene -> clear();
-//                return;
-//            /// Text "du hast gewonnen" + Highscore
-
-//            }
-//            else return;
-//        }
-//    }
 }
 
