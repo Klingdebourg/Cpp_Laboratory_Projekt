@@ -35,14 +35,14 @@ Level3::Level3(Game* game):Level(game,3) {
     foehn1->item->setPos(balken3->item->x()-75,balken3->item->y()+125);
     foehn1->body = world->CreateBody(foehn1->bodyDef);
     foehn1->body->CreateFixture(foehn1->fixture);
-    foehn1->body->SetTransform(b2Vec2(foehn1->item->x()-25 + FOEHN_WIDTH/2.0f, WINDOW_H - foehn1->item->y()), foehn1->item->rotation());
+    foehn1->body->SetTransform(b2Vec2(foehn1->item->x()-25 + FOEHN_WIDTH/2.0f, WINDOW_H - foehn1->item->y()-FOEHN_WIDTH/4.0f), foehn1->item->rotation());
     levelscene->addItem(foehn1->item);
 
     foehn2 = new Element(FOEHN);
     foehn2->item->setPos(balken2->item->x()+650, balken3->item->y()-BALKEN_LENGTH_DEFAULT);
     foehn2->body = world->CreateBody(foehn2->bodyDef);
     foehn2->body->CreateFixture(foehn2->fixture);
-    foehn2->body->SetTransform(b2Vec2(foehn2->item->x()-25 + FOEHN_WIDTH/2.0f, WINDOW_H - foehn2->item->y()), foehn2->item->rotation());
+    foehn2->body->SetTransform(b2Vec2(foehn2->item->x()-25 + FOEHN_WIDTH/2.0f, WINDOW_H - foehn2->item->y()-FOEHN_WIDTH/4.0f), foehn2->item->rotation());
     levelscene->addItem(foehn2->item);
 
 
