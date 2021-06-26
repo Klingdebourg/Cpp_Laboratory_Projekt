@@ -265,7 +265,7 @@ void Level::Interaktion(){
     if (! dynamic_cast<Feder*>(feder->item)->getBallAttached()) {
         int x_current = ball->item->x();
         int y_current = ball->item->y();
-        if(x_current == x_last && y_current == y_last) {
+        if(x_current == x_last && y_current == y_last && isPaused == false) {
             if (failbedingung <= ABBRUCHZEIT) {
                 failbedingung++;
             } else {
@@ -318,21 +318,26 @@ void Level::Interaktion(){
                                                                         dynamic_cast<Virus*>(virus->item));
     if (colliding_item == 1){
        // qDebug("Maske1 wird berührt"); +++++++++++++++++++++++++++++++++++++
-        levelscene -> removeItem(maske1->item);
+//        levelscene -> removeItem(maske1->item);
+        dynamic_cast<Maske*>(maske1->item)->setPos(0,-100);
         Counter -> increase();
         return;
     } else if (colliding_item == 2){
-        levelscene -> removeItem(maske2->item);
+//        levelscene -> removeItem(maske2->item);
+        dynamic_cast<Maske*>(maske2->item)->setPos(0,-100);
         Counter -> increase();
         return;
     } else if (colliding_item == 3){
-        levelscene -> removeItem(maske3->item);
+//        levelscene -> removeItem(maske3->item);
+        dynamic_cast<Maske*>(maske3->item)->setPos(0,-100);
         Counter -> increase();
         return;
     }  else if (colliding_item == 4){
         ///Spiel beenden
         timer->stop();
+        levelscene->clear();
         Gewonnen();
+        return;
         /// Text "du hast gewonnen" + Highscore
     } else if (colliding_item == 5){       
 //        qDebug("Nichts wird berührt");
@@ -370,47 +375,48 @@ void Level::InfoToBeClosed()
 
 void Level::Gewonnen()
 {
-    levelscene -> clear();
+//    levelscene -> clear();
 
-    QGraphicsTextItem* winText = new QGraphicsTextItem(QString("Wow. Du hast es geschafft den Virus zu besiegen. Glückwunsch! Du hast es geschafft dabei "+QString::number(Counter->getscore())+ " Masken zu sammeln und das in einer Zeit von(Hier einfügen Uhr!)! Was möchtest du jetzt tun?"));
-    QFont titleFont("comic sans",30);
+    QGraphicsTextItem* winText = new QGraphicsTextItem(QString("Wow. Du hast es geschafft den Virus zu besiegen. Glückwunsch! Du hast es geschafft dabei "+QString::number(Counter->getscore())+ " Maske/n zu sammeln und das in einer Zeit von(Hier einfügen Uhr!)! Was möchtest du jetzt tun?"));
+
+    QFont titleFont("comic sans",10);
+    winText->setTextWidth(1000);
     winText->setDefaultTextColor(Qt::darkGreen);
     winText->setFont(titleFont);
-    int txPos = this->width()/2 - winText->boundingRect().width()/2;
-    int tyPos = 5;
+    int txPos = levelscene->width()/2 - winText->boundingRect().width()/2;
+    int tyPos = WINDOW_H*1/8;
     winText->setPos(txPos,tyPos);
-    winText->adjustSize();
     levelscene->addItem(winText);
 
     Button* zurueck = new Button(QString("Zurück zur Levelübersicht"));
     connect(zurueck, SIGNAL(clicked()),this,SLOT(Zurueck()));
     zurueck->setRect(0,0,300,50);
-    zurueck->setPos(winText->x()+winText->boundingRect().width(), winText->y()+100);
+    zurueck->setPos(WINDOW_W/8,WINDOW_H/2);
     levelscene->addItem(zurueck);
 
     if (level == 1 || level == 2){
     Button* next = new Button(QString("Nächster Level"));
-    connect(zurueck, SIGNAL(clicked()),this,SLOT(Next()));
+    connect(next, SIGNAL(clicked()),this,SLOT(Next()));
     next->setRect(0,0,300,50);
-    next->setPos(winText->x()+winText->boundingRect().width()+winText->boundingRect().width()/2, winText->y()+100);
+    next->setPos(WINDOW_W*5/8,WINDOW_H/2);
     levelscene->addItem(next);}
 
     Button* redo = new Button(QString("Den Level erneut starten"));
     connect(redo, SIGNAL(clicked()),this,SLOT(Redo()));
     redo->setRect(0,0,300,50);
-    redo->setPos(winText->x()+winText->boundingRect().width(), winText->y()+400);
+    redo->setPos(WINDOW_W/8, WINDOW_H*3/4);
     levelscene->addItem(redo);
 
     Button* haupt = new Button(QString("Zum Hauptmenü"));
     connect(haupt, SIGNAL(clicked()),this,SLOT(Hauptmenu()));
     haupt->setRect(0,0,300,50);
-    haupt->setPos(winText->x()+winText->boundingRect().width()+winText->boundingRect().width()/2, winText->y()+400);
+    haupt->setPos(WINDOW_W*5/8, WINDOW_H*3/4);
     levelscene->addItem(haupt);
 
     Button* highscore = new Button(QString("Meinen Score speichern"));
     connect(highscore, SIGNAL(clicked()),this,SLOT(AddScore()));
     highscore->setRect(0,0,300,50);
-    highscore->setPos(winText->x()+winText->boundingRect().width(), winText->y()+700);
+    highscore->setPos(WINDOW_W*3/8, WINDOW_H*5/8);
     levelscene->addItem(highscore);
 
 
