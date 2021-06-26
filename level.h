@@ -44,6 +44,9 @@ public slots:
     void Hauptmenu();
     void Interaktion();
     void InfoToBeClosed();
+    void Gewonnen();
+    void Next();
+    void AddScore();
     //Maske* maske1, Maske* maske2, Maske* maske3, Virus* virus
 
 protected:

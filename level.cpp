@@ -314,7 +314,8 @@ void Level::Interaktion(){
         return;
     }  else if (colliding_item == 4){
         ///Spiel beenden
-        levelscene -> clear();
+        timer->stop();
+        Gewonnen();
         /// Text "du hast gewonnen" + Highscore
     } else if (colliding_item == 5){
 //        qDebug("Nichts wird berührt");
@@ -349,6 +350,82 @@ void Level::InfoToBeClosed()
     Info->OKpressed();
     delete(bounds);
 }
+
+void Level::Gewonnen()
+{
+    levelscene -> clear();
+
+    QGraphicsTextItem* winText = new QGraphicsTextItem(QString("Wow. Du hast es geschafft den Virus zu besiegen. Glückwunsch! Du hast es geschafft dabei "+QString::number(Counter->getscore())+ " Masken zu sammeln und das in einer Zeit von(Hier einfügen Uhr!)! Was möchtest du jetzt tun?"));
+    QFont titleFont("comic sans",30);
+    winText->setDefaultTextColor(Qt::darkGreen);
+    winText->setFont(titleFont);
+    int txPos = this->width()/2 - winText->boundingRect().width()/2;
+    int tyPos = 5;
+    winText->setPos(txPos,tyPos);
+    winText->adjustSize();
+    levelscene->addItem(winText);
+
+    Button* zurueck = new Button(QString("Zurück zur Levelübersicht"));
+    connect(zurueck, SIGNAL(clicked()),this,SLOT(Zurueck()));
+    zurueck->setRect(0,0,300,50);
+    zurueck->setPos(winText->x()+winText->boundingRect().width(), winText->y()+100);
+    levelscene->addItem(zurueck);
+
+    if (level == 1 || level == 2){
+    Button* next = new Button(QString("Nächster Level"));
+    connect(zurueck, SIGNAL(clicked()),this,SLOT(Next()));
+    next->setRect(0,0,300,50);
+    next->setPos(winText->x()+winText->boundingRect().width()+winText->boundingRect().width()/2, winText->y()+100);
+    levelscene->addItem(next);}
+
+    Button* redo = new Button(QString("Den Level erneut starten"));
+    connect(redo, SIGNAL(clicked()),this,SLOT(Redo()));
+    redo->setRect(0,0,300,50);
+    redo->setPos(winText->x()+winText->boundingRect().width(), winText->y()+400);
+    levelscene->addItem(redo);
+
+    Button* haupt = new Button(QString("Zum Hauptmenü"));
+    connect(haupt, SIGNAL(clicked()),this,SLOT(Hauptmenu()));
+    haupt->setRect(0,0,300,50);
+    haupt->setPos(winText->x()+winText->boundingRect().width()+winText->boundingRect().width()/2, winText->y()+400);
+    levelscene->addItem(haupt);
+
+    Button* highscore = new Button(QString("Meinen Score speichern"));
+    connect(highscore, SIGNAL(clicked()),this,SLOT(AddScore()));
+    highscore->setRect(0,0,300,50);
+    highscore->setPos(winText->x()+winText->boundingRect().width(), winText->y()+700);
+    levelscene->addItem(highscore);
+
+
+}
+
+
+
+
+void Level::Next()
+{
+    if(level==1){
+        this->deleteLater();
+        Level2* level2 = new Level2(levelgame);
+        level2->show();
+    }
+    if(level ==2){
+        this->deleteLater();
+        Level3* level3 = new Level3(levelgame);
+        level3->show();
+    }
+
+}
+
+
+void Level::AddScore()
+{
+    levelscene->clear();
+    //Hier einfügen QLINE Edit und Textdatei
+
+}
+
+
 /**
  * @brief Level::applyFoehnForces iterates over all foehne, checks whether the ball is in reach of them
  * and applies a force in direction of the foehn if necessary depending on the positions wrt each others
