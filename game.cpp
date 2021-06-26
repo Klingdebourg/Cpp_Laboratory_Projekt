@@ -22,6 +22,9 @@ Game::Game(QWidget* parent): QGraphicsView(parent){
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(WINDOW_W,WINDOW_H);
     scene->setSceneRect(0,0,WINDOW_W,WINDOW_H);
+
+    informationtitle = new QGraphicsTextItem;
+    information = new QGraphicsTextItem;
 }
 
 void Game::displayMainMenu(){
@@ -125,4 +128,20 @@ void Game::Info()
     Button* back = new Button(QString("<-"));
     connect(back, SIGNAL(clicked()),this,SLOT(displayMainMenu()));
     scene->addItem(back);
+
+    informationtitle->setPlainText(QString("Spielinformationen"));
+    QFont titleFont("comic sans",50);
+    informationtitle->setFont(titleFont);
+    int txPos = this->width()/2 - informationtitle->boundingRect().width()/2;
+    int tyPos = 150;
+    informationtitle->setPos(txPos,tyPos);
+    scene->addItem(informationtitle);
+
+    information->setPlainText(QString("Das Ziel des Spieles ist es den Virus (roter Ball) mit dem Antikörper-Ball (grüner Ball) zu treffen. Der Ball ist bewegbar nur in dem man ihn mit einer Feder abschießt. Die Feder ist schwarz und man kann sie spannen indem man zuerst mit der Maus auf sie drückt und dann mit den Pfeiltasten auf und ab die Spannhöhe angibt. Mit den Pfeiltasten rechts und links lässt sich die Feder ausrichten. ZUm Abschießen drückt man die Leertaste. Während des Spieles kann man Masken einsammeln (Gelbe Quadrate), hierbei erhöht sich der Score. Es gibt drei verschiedene Arten von Balken an dem der Antikörper-Ball abprallt. Die schwarzen Balken sind starr, die hellgrünen Balken sind rotatorisch. Mit den Pfeiltasten rechts und links lässt sich die Rotation einstellen. Die hellblauen Balken sind translatorisch, sie lassen sich ebenfalls mit den Pfeiltasten nach links und rechts bewegen."));
+    information->setPos(informationtitle->x()+informationtitle->boundingRect().width()*3/16,informationtitle->y()+200);
+    QFont textFont("times",10);
+    information->setFont(textFont);
+    information->adjustSize();
+    scene->addItem(information);
+
 }

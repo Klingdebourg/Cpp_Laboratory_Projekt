@@ -17,6 +17,9 @@ public:
 
     QGraphicsScene* scene;
 
+    QGraphicsTextItem* informationtitle;
+    QGraphicsTextItem* information;
+
 public slots:
     void levelmenu();
     void displayMainMenu();
