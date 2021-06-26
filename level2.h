@@ -5,16 +5,10 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include "balken.h"
-#include "foehn.h"
 
 class Level2: public Level{
 public:
     Level2(Game* game);
-
-    Element* balken1;
-    Element* balken2;
-    Element* balken3;
-    Element* foehn;
 
 };
 

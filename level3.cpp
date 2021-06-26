@@ -3,59 +3,62 @@
 
 Level3::Level3(Game* game):Level(game,3) {
 
-    //wofür ist dies? (@johanna)
     x_last=ball->item->x();
     y_last=ball->item->y();
 
 
+
     //Create the objects specific for the level
-    balken1 = new Element(BALKEN_S);
-    dynamic_cast<Balken*>(balken1->item)->setPosition(QPointF(WINDOW_W*11/32, WINDOW_H*5/6));
-    balken1->body = world->CreateBody(balken1->bodyDef);
-    balken1->body->CreateFixture(balken1->fixture);
-    balken1->body->SetTransform(b2Vec2(balken1->item->x(), WINDOW_H - balken1->item->y()), 0);
-    levelscene->addItem(balken1->item);
+    balken.append(new Element(BALKEN_S));
+    dynamic_cast<Balken*>(balken.at(0)->item)->setPosition(QPointF(WINDOW_W*11/32, WINDOW_H*5/6));
+    balken.at(0)->body = world->CreateBody(balken.at(0)->bodyDef);
+    balken.at(0)->body->CreateFixture(balken.at(0)->fixture);
+    balken.at(0)->body->SetTransform(b2Vec2(balken.at(0)->item->x(), WINDOW_H - balken.at(0)->item->y()), 0);
+    levelscene->addItem(balken.at(0)->item);
 
-    balken2 = new Element(BALKEN_S);
-    dynamic_cast<Balken*>(balken2->item)->setPosition(QPointF(WINDOW_W*11/32, WINDOW_H*1/3));
-    balken2->body = world->CreateBody(balken2->bodyDef);
-    balken2->body->CreateFixture(balken2->fixture);
-    balken2->body->SetTransform(b2Vec2(balken2->item->x(), WINDOW_H - balken2->item->y()), 0);
-    levelscene->addItem(balken2->item);
+    balken.append(new Element(BALKEN_S));
+    dynamic_cast<Balken*>(balken.at(1)->item)->setPosition(QPointF(WINDOW_W*11/32, WINDOW_H*1/3));
+    balken.at(1)->body = world->CreateBody(balken.at(1)->bodyDef);
+    balken.at(1)->body->CreateFixture(balken.at(1)->fixture);
+    balken.at(1)->body->SetTransform(b2Vec2(balken.at(1)->item->x(), WINDOW_H - balken.at(1)->item->y()), 0);
+    levelscene->addItem(balken.at(1)->item);
 
-    balken3 = new Element(BALKEN_T);
-    dynamic_cast<Balken*>(balken3->item)->setPosition(QPointF(WINDOW_W*19/32, WINDOW_H*13/24));
-    dynamic_cast<Balken*>(balken3->item)->setRotation(-45);
-    balken3->body = world->CreateBody(balken3->bodyDef);
-    balken3->body->CreateFixture(balken3->fixture);
-    balken3->body->SetTransform(b2Vec2(balken3->item->x(), WINDOW_H - balken3->item->y()), 0);
-    levelscene->addItem(balken3->item);
+    balken.append(new Element(BALKEN_T));
+    dynamic_cast<Balken*>(balken.at(2)->item)->setPosition(QPointF(WINDOW_W*19/32, WINDOW_H*13/24));
+    dynamic_cast<Balken*>(balken.at(2)->item)->setRotation(-45);
+    balken.at(2)->body = world->CreateBody(balken.at(2)->bodyDef);
+    balken.at(2)->body->CreateFixture(balken.at(2)->fixture);
+    balken.at(2)->body->SetTransform(b2Vec2(balken.at(2)->item->x(), WINDOW_H - balken.at(2)->item->y()), 0);
+    levelscene->addItem(balken.at(2)->item);
 
-    foehn1 = new Element(FOEHN);
-    foehn1->item->setPos(balken3->item->x()-75,balken3->item->y()+125);
-    foehn1->body = world->CreateBody(foehn1->bodyDef);
-    foehn1->body->CreateFixture(foehn1->fixture);
-    foehn1->body->SetTransform(b2Vec2(foehn1->item->x(), foehn1->item->y()), foehn1->item->rotation());
-    levelscene->addItem(foehn1->item);
+    foehne.append(new Element(FOEHN));
+    foehne.at(0)->item->setPos(balken.at(2)->item->x()-75,balken.at(2)->item->y()+125);
+    //foehne.at(0)->item->setPos(WINDOW_W/2, WINDOW_H/2);
+    foehne.at(0)->body = world->CreateBody(foehne.at(0)->bodyDef);
+    foehne.at(0)->body->CreateFixture(foehne.at(0)->fixture);
+    foehne.at(0)->body->SetTransform(b2Vec2(foehne.at(0)->item->x(), WINDOW_H - foehne.at(0)->item->y()), foehne.at(0)->item->rotation());
+    levelscene->addItem(foehne.at(0)->item);
 
-    foehn2 = new Element(FOEHN);
-    foehn2->item->setPos(balken2->item->x()+650, balken3->item->y()-BALKEN_LENGTH_DEFAULT);
-    foehn2->body = world->CreateBody(foehn2->bodyDef);
-    foehn2->body->CreateFixture(foehn2->fixture);
-    foehn2->body->SetTransform(b2Vec2(foehn2->item->x(), foehn2->item->y()), foehn2->item->rotation());
-    levelscene->addItem(foehn2->item);
+    foehne.append(new Element(FOEHN));
+    foehne.at(1)->item->setPos(balken.at(1)->item->x()+650, balken.at(2)->item->y()-BALKEN_LENGTH_DEFAULT);
+    foehne.at(1)->body = world->CreateBody(foehne.at(1)->bodyDef);
+    foehne.at(1)->body->CreateFixture(foehne.at(1)->fixture);
+    foehne.at(1)->body->SetTransform(b2Vec2(foehne.at(1)->item->x(), WINDOW_H - foehne.at(1)->item->y()), foehne.at(1)->item->rotation());
+    levelscene->addItem(foehne.at(1)->item);
 
 
     //Feder positionieren und Ball verbinden
-    feder->item->setPos(balken1->item->x()+(balken1->item->boundingRect().width() - FEDER_WIDTH)/2, balken1->item->y()-FEDER_HEIGHT);
+    feder->item->setPos(balken.at(0)->item->x()+(balken.at(0)->item->boundingRect().width() - FEDER_WIDTH)/2, balken.at(0)->item->y()-FEDER_HEIGHT);
     dynamic_cast<Feder*>(feder->item)->attachBall(* ball);
+    ball->item->setPos(foehne.at(0)->item->x(), foehne.at(0)->item->y()-150);
+    ball->body->SetTransform(b2Vec2(ball->item->x(), WINDOW_H - ball->item->y()), 0);
 
 
 
     //Maskenpositionen und Virus
-    virus->item->setPos(balken2->item->x()+BALKEN_LENGTH_DEFAULT/2-50,balken2->item->y()-100);
-    maske1->item->setPos(balken1->item->x()+BALKEN_LENGTH_DEFAULT-50,virus->item->y()+250);
-    maske2->item->setPos(balken3->item->x()+BALKEN_LENGTH_DEFAULT/2,balken3->item->y()-150);
-    maske3->item->setPos(balken3->item->x(), virus->item->y()-100);
+    virus->item->setPos(balken.at(1)->item->x()+BALKEN_LENGTH_DEFAULT/2-50,balken.at(1)->item->y()-100);
+    maske1->item->setPos(balken.at(0)->item->x()+BALKEN_LENGTH_DEFAULT-50,virus->item->y()+250);
+    maske2->item->setPos(balken.at(2)->item->x()+BALKEN_LENGTH_DEFAULT/2,balken.at(2)->item->y()-150);
+    maske3->item->setPos(balken.at(2)->item->x(), virus->item->y()-100);
 
 }

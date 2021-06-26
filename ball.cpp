@@ -31,6 +31,19 @@ int Ball::collidingItem(Maske* maske1, Maske* maske2, Maske* maske3, Virus* viru
     }
 }
 
+QRectF Ball::boundingRect() const {
+    return QRectF(0, 0, BALL_DIAM, BALL_DIAM);
+}
+
+void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
+    QPen pen(Qt::black, 1);
+    QBrush brush(Qt::green, Qt::SolidPattern);
+    painter->setPen(pen);
+    painter->setBrush(brush);
+    painter->drawEllipse(QRectF(0, 0, BALL_DIAM, BALL_DIAM));
+
+}
+
 //QList <QGraphicsItem *> Ball::collidingList(){
 //    ///Liste mit kollidierenden Elementen erzeugen
 //    QList <QGraphicsItem *> colliding_items = collidingItems();

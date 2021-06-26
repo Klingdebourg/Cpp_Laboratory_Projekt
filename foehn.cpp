@@ -1,8 +1,13 @@
 #include "foehn.h"
 
 Foehn::Foehn(int x, int y, int alpha){
-    //creates rectangle with given size at origin in scene coordinates
-    setRect(0, 0, FOEHN_WIDTH, FOEHN_WIDTH);
+    triangle = new QPolygon();
+    triangle->append(QPoint(FOEHN_WIDTH/2, 0));
+    triangle->append(QPoint(FOEHN_WIDTH, FOEHN_WIDTH));
+    triangle->append(QPoint(0, FOEHN_WIDTH));
+    triangle->append(QPoint(FOEHN_WIDTH/2, 0));
+    //creates triangle with given size pointing upwards
+    setPolygon(*triangle);
     //moves the transformation point to the lower end of the rectangle
     setTransformOriginPoint(QPointF(FOEHN_WIDTH/2, FOEHN_WIDTH));
 
@@ -10,6 +15,8 @@ Foehn::Foehn(int x, int y, int alpha){
     setPos(x, y);
     //rotates the item for the given angle
     setRotation(alpha);
+
+    foehn_on = false;
 
 }
 
@@ -37,14 +44,21 @@ QRectF Foehn::boundingRect() const {
 
 void Foehn::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     QPen pen = QPen();
+    QBrush brush = QBrush(Qt::white, Qt::SolidPattern);
+    pen.setColor(Qt::black);
     if (foehn_on) {
-        pen.setWidth(6);
-        pen.setColor(Qt::gray);
+        pen.setWidth(3);
+        brush.setColor(Qt::gray);
     } else {
         pen.setWidth(1);
-        pen.setColor(Qt::black);
+        brush.setColor(Qt::white);
     }
     painter->setPen(pen);
-    painter->drawRect(0, 0, FOEHN_WIDTH, FOEHN_WIDTH);
+    painter->setBrush(brush);
+    painter->drawPolygon(*triangle);
 
+}
+
+bool Foehn::isOn() const {
+    return foehn_on;
 }

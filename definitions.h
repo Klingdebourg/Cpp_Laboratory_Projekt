@@ -18,11 +18,14 @@
 //scaling between box2d world and qt scene
 #define SCALING 1000.0f
 
-//parameters for the world
-#define GRAVITY -10.0f
+//parameters for forces in box2d
+#define GRAVITY -500.0f
+#define FOEHN_FORCE 30000
+#define FOEHN_REACH 250
+#define FOEHN_REACH_ANGLE M_PI/4 //45 degrees in both directions
 
 //Box2D Prarameters for the ball
-#define BALL_DENSITY 100
+#define BALL_DENSITY 0.01f
 #define BALL_FRICTION 0.3f
 #define BALL_RESTITUTION 0.9f
 

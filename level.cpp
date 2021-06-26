@@ -64,80 +64,6 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     ball->body = world->CreateBody(ball->bodyDef);
     ball->body->CreateFixture(ball->fixture);
     levelscene -> addItem(ball->item);
-    /*
-    ball->item = new Ball();
-    ball->bodyDef = new b2BodyDef();
-    ball->bodyDef->type = b2_dynamicBody;
-    //ball->bodyDef->position.Set(0, 0);
-    ball->body = world->CreateBody(ball->bodyDef);
-    ball->shape = new b2CircleShape();
-    dynamic_cast<b2CircleShape*>(ball->shape)->m_p.Set(0, 0);
-    ball->shape->m_radius = BALL_DIAM/2;
-    ball->fixture = new b2FixtureDef();
-    ball->fixture->density = BALL_DENSITY;
-    ball->fixture->friction = BALL_FRICTION;
-    ball->fixture->restitution = BALL_RESTITUTION;
-    ball->fixture->shape = ball->shape;
-    ball->body->CreateFixture(ball->fixture);
-    levelscene -> addItem(ball->item);
-    */
-
-
-    maske1 = new Element(MASKE);
-    maske1->body = world->CreateBody(maske1->bodyDef);
-    maske1->body->CreateFixture(maske1->fixture);
-    levelscene -> addItem(maske1->item);
-    /*
-    maske1->item = new Maske(0, 0);
-    maske1->bodyDef = new b2BodyDef();
-    maske1->body = world->CreateBody(maske1->bodyDef);
-    maske1->shape = new b2PolygonShape();
-    maske1->fixture = new b2FixtureDef();
-    maske1->body->CreateFixture(maske1->fixture);
-    levelscene -> addItem(maske1->item);
-    */
-
-    maske2 = new Element(MASKE);
-    maske2->body = world->CreateBody(maske2->bodyDef);
-    maske2->body->CreateFixture(maske2->fixture);
-    levelscene -> addItem(maske2->item);
-    /*
-    maske2->item = new Maske(0, 0);
-    maske2->bodyDef = new b2BodyDef();
-    maske2->body = world->CreateBody(maske2->bodyDef);
-    maske2->shape = new b2PolygonShape();
-    maske2->fixture = new b2FixtureDef();
-    maske2->body->CreateFixture(maske2->fixture);
-    levelscene -> addItem(maske2->item);
-    */
-
-    maske3 = new Element(MASKE);
-    maske3->body = world->CreateBody(maske3->bodyDef);
-    maske3->body->CreateFixture(maske3->fixture);
-    levelscene -> addItem(maske3->item);
-    /*
-    maske3->item = new Maske(0, 0);
-    maske3->bodyDef = new b2BodyDef();
-    maske3->body = world->CreateBody(maske3->bodyDef);
-    maske3->shape = new b2PolygonShape();
-    maske3->fixture = new b2FixtureDef();
-    maske3->body->CreateFixture(maske3->fixture);
-    levelscene -> addItem(maske3->item);
-    */
-
-    virus = new Element(VIRUS);
-    virus->body = world->CreateBody(virus->bodyDef);
-    virus->body->CreateFixture(virus->fixture);
-    levelscene -> addItem(virus->item);
-    /*
-    virus->item = new Virus(0,0);
-    virus->bodyDef = new b2BodyDef();
-    virus->body = world->CreateBody(virus->bodyDef);
-    virus->shape = new b2CircleShape();
-    virus->fixture = new b2FixtureDef();
-    virus->body->CreateFixture(virus->fixture);
-    levelscene -> addItem(virus->item);
-    */
 
     feder = new Element(FEDER);
     //the feder item cannot be genereated in the element-constructor due to the circular include
@@ -145,21 +71,33 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     feder->body = world->CreateBody(feder->bodyDef);
     feder->body->CreateFixture(feder->fixture);
     levelscene->addItem(feder->item);
-    /*
-    feder->item = new Feder(0, 0);
-    feder->bodyDef = new b2BodyDef();
-    feder->body = world->CreateBody(feder->bodyDef);
-    feder->shape = new b2PolygonShape();
-    feder->fixture = new b2FixtureDef();
-    feder->body->CreateFixture(feder->fixture);
-    levelscene->addItem(feder->item);
-    */
+
+    maske1 = new Element(MASKE);
+    maske1->body = world->CreateBody(maske1->bodyDef);
+    maske1->body->CreateFixture(maske1->fixture);
+    levelscene -> addItem(maske1->item);
+
+    maske2 = new Element(MASKE);
+    maske2->body = world->CreateBody(maske2->bodyDef);
+    maske2->body->CreateFixture(maske2->fixture);
+    levelscene -> addItem(maske2->item);
+
+    maske3 = new Element(MASKE);
+    maske3->body = world->CreateBody(maske3->bodyDef);
+    maske3->body->CreateFixture(maske3->fixture);
+    levelscene -> addItem(maske3->item);
+
+    virus = new Element(VIRUS);
+    virus->body = world->CreateBody(virus->bodyDef);
+    virus->body->CreateFixture(virus->fixture);
+    levelscene -> addItem(virus->item);
 
     //Pause-Button
     Button* pause = new Button(QString("||"));
     pause->setRect(0,0,100,100);
     connect(pause, SIGNAL(clicked()),this,SLOT(pause()));
     levelscene->addItem(pause);
+    isPaused = false;
 
     pausepic = new QGraphicsView;
     pausemenu = new QGraphicsScene();
@@ -253,6 +191,7 @@ void Level::Redo()
         Level3* level3 = new Level3(levelgame);
         level3->show();
     }
+    isPaused = false;
 }
 
 /**
@@ -276,13 +215,31 @@ void Level::Hauptmenu()
  * second fuinctionality: check if the ball collided with any itmes and act accordingly
  */
 void Level::Interaktion(){
+    ///update the positions of all balken if their Qt appearance has been changed
+    updateB2Balken();
+
+    ///account for influence of the foehne
+    applyFoehnForces();
+
     ///only update the world if the ball is not attached to the spring
-    /// as the ball is the only dynamic itme in the world
+    ///as the ball is the only dynamic item in the world
     if (!dynamic_cast<Feder*>(feder->item)->getBallAttached() && !isPaused) {
+        ///calculate the positions of all items after one step in the box2d world
         world->Step(TIME_STEP, VEL_ITER, POS_ITER);
+
+        ///calculate the new position of the ball and apply it
         ballStep = ball->body->GetPosition();
-        qDebug() << ballStep.x << " " << ballStep.y;
         ball->item->setPos(QPointF(ballStep.x, WINDOW_H-ballStep.y));
+
+
+//        //Debugging for balken bug (b2-body does not move according to Qt-item)
+//        qDebug() << "Position Ball: " << ballStep.x << " " << ballStep.y;
+//        ballStep = balken.at(0)->body->GetPosition();
+//        qDebug() << "Position Balken1: " << ballStep.x << " " << ballStep.y << balken.at(0)->body->GetAngle();
+//        ballStep = balken.at(1)->body->GetPosition();
+//        qDebug() << "Position Balken2: " << ballStep.x << " " << ballStep.y << balken.at(1)->body->GetAngle();
+//        ballStep = balken.at(2)->body->GetPosition();
+//        qDebug() << "Position Balken3: " << ballStep.x << " " << ballStep.y << balken.at(2)->body->GetAngle();
 
     }
 
@@ -333,8 +290,6 @@ void Level::Interaktion(){
     } else {
         failbedingung = 0;
     }
-
-
 
 
 
@@ -393,4 +348,82 @@ void Level::InfoToBeClosed()
 {
     Info->OKpressed();
     delete(bounds);
+}
+/**
+ * @brief Level::applyFoehnForces iterates over all foehne, checks whether the ball is in reach of them
+ * and applies a force in direction of the foehn if necessary depending on the positions wrt each others
+ */
+void Level::applyFoehnForces() {
+    //iterate over all foehne
+    for (int i = 0; i < foehne.size(); i++) {
+        //check whether the currently investigated foehn is currently turned on
+        if(dynamic_cast<Foehn*>(foehne.at(i)->item)->isOn()) {
+            //vector pointing from the tip of the foehn to the center of the ball
+            //remember, that points of ball and foehn are located at top-left corner of object
+            qDebug() << foehne.at(0)->item->rotation();
+            foehnBall = b2Vec2(foehne.at(i)->item->x()+FOEHN_WIDTH/2*(1+sin(foehne.at(i)->item->rotation() * M_PI/180)) - (ball->item->x()+BALL_DIAM/2),
+                               foehne.at(i)->item->y()+FOEHN_WIDTH/2*(1-cos(foehne.at(i)->item->rotation() * M_PI/180)) - (ball->item->y()+BALL_DIAM/2));
+            //vector product of direction of foehn and vector from tip of foehn to ball
+            //i.e. projection of one vector onto the other thus offset in direction of foehn
+            distanceFoehnBall = foehnBall.x*sin(foehne.at(i)->item->rotation() * M_PI/180) +
+                                    foehnBall.y*cos(foehne.at(i)->item->rotation() * M_PI/180);
+            //computing angle (rads) between both vectors via vector product theorem vec_a*vec_b = |a|*|b|*cos(alpha)
+            //as direction vector of foehn is normalized, it has length 1 thus does not need to be considered
+            angleFoehnBall = acos(distanceFoehnBall/foehnBall.Length());
+            //only applying force if the ball is distance-wise and angle-wise in the reach of the foehn
+            //lower bound of angle does not need to be checked as acos only returns poisitive values in between 0 and 90 degrees
+                //and for higher angles the distance would be negative
+            if (distanceFoehnBall > 0 && distanceFoehnBall < FOEHN_REACH &&
+                    angleFoehnBall < FOEHN_REACH_ANGLE) {
+                //the intensity of the foehn depends on
+                    //1. the angle between the direction of the foehn and the vector from foehn to ball (cos function zero at FOEHN_REACH_ANGLE)
+                    //2. the distance of the ball to the foehn in direction of the foehn (inverse)
+                intensityFoehn = FOEHN_FORCE * cos(angleFoehnBall * M_PI/(2*FOEHN_REACH_ANGLE)) * FOEHN_REACH/distanceFoehnBall;
+                ball->body->ApplyForceToCenter(b2Vec2(intensityFoehn*sin(foehne.at(i)->item->rotation() * M_PI/180),
+                                                      intensityFoehn*cos(foehne.at(i)->item->rotation() * M_PI/180)),
+                                               true);
+            }
+        }
+    }
+}
+
+/**
+ * @brief Level::updateB2Balken as the balken class only handles their Qt appearance/position,
+ * their box2d position needs to be updated as well. Therefore this method iterates over all balken
+ * stored in the QVector of the level and updates their position if the internal modified flag
+ * has been set in the respective Qt-item.
+ */
+void Level::updateB2Balken() {
+    //iterate over all balken
+    for (int i = 0; i < balken.size(); i++) {
+        currentBalken = balken.at(i);
+        currentBalkenItem = dynamic_cast<Balken*>(currentBalken->item);
+        //nur nicht-statische Balken updaten
+        if(currentBalkenItem->getType() != Balken::statisch && currentBalkenItem->wasModified() != Balken::NONE) {
+            if(currentBalkenItem->getType() == Balken::translatorisch) {
+                //modify the position according to the angle for translational Balken
+                if(currentBalkenItem->wasModified() == Balken::LEFT) {
+                    currentBalken->body->SetTransform( b2Vec2(currentBalken->body->GetPosition().x - 15*cos(currentBalkenItem->getRotation() * M_PI/180),
+                                                             currentBalken->body->GetPosition().y + 15*sin(currentBalkenItem->getRotation() * M_PI/180) ),
+                                                       currentBalkenItem->getRotation());
+                } else {
+                    currentBalken->body->SetTransform( b2Vec2(currentBalken->body->GetPosition().x + 15*cos(currentBalkenItem->getRotation() * M_PI/180),
+                                                             currentBalken->body->GetPosition().y - 15*sin(currentBalkenItem->getRotation() * M_PI/180) ),
+                                                       currentBalkenItem->getRotation());
+                }//left-right differentiation
+            } else if (currentBalkenItem->getType() == Balken::rotatorisch) {
+                //modify the rotation for rotational Balken (Attention box2d: ccw, Qt: cw)
+                if(currentBalkenItem->wasModified() == Balken::LEFT) {
+                    currentBalken->body->SetTransform( b2Vec2(currentBalken->body->GetPosition().x,
+                                                             currentBalken->body->GetPosition().y ),
+                                                       - currentBalkenItem->getRotation());
+                } else {
+                    currentBalken->body->SetTransform( b2Vec2(currentBalken->body->GetPosition().x,
+                                                             currentBalken->body->GetPosition().y),
+                                                       - currentBalkenItem->getRotation());
+                }//left-right differentiation
+            }//translation-rotation differentiation
+            currentBalkenItem->unmodified();
+        }//only move non-stationary modified Balken
+    }//iterate over all Balken in the level
 }
