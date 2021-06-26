@@ -12,6 +12,7 @@
 #include <QList>
 #include "definitions.h"
 #include "element.h"
+#include "info.h"
 
 
 class Level : public QGraphicsView
@@ -40,12 +41,15 @@ public:
     int y_last;
     int x_current;
     int y_current;
+    info* Info;
+    QGraphicsRectItem* bounds;
 public slots:
     void pause();
     void Zurueck();
     void Redo();
     void Hauptmenu();
     void Interaktion();
+    void InfoToBeClosed();
     //Maske* maske1, Maske* maske2, Maske* maske3, Virus* virus
 
 private:
