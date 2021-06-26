@@ -23,11 +23,38 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     //create box2d world with negative gravity of
     world = new b2World(b2Vec2(0.0f, GRAVITY));
 
-     Button* closeinfo = new Button(QString("OK & schließen"));
-     connect(closeinfo, SIGNAL(clicked()),this,SLOT(InfoToBeClosed()));
-     closeinfo->setRect(0,0,150,50);
+    //create a wall for each side of the window
+    groundBodyDefTop.position.Set(800,20);
+    b2Body* groundBodyTop = world->CreateBody(&groundBodyDefTop);
+    b2PolygonShape groundBoxTop;
+    groundBoxTop.SetAsBox(900.0f, 5.0f);
+    groundBodyTop->CreateFixture(&groundBoxTop, 0.0f);
+
+    groundBodyDefBotton.position.Set(800,1030);
+    b2Body* groundBodyBotton = world->CreateBody(&groundBodyDefBotton);
+    b2PolygonShape groundBoxBotton;
+    groundBoxBotton.SetAsBox(900.0f, 5.0f);
+    groundBodyBotton->CreateFixture(&groundBoxBotton, 0.0f);
+
+    groundBodyDefLeft.position.Set(-30,600);
+    b2Body* groundBodyLeft = world->CreateBody(&groundBodyDefLeft);
+    b2PolygonShape groundBoxLeft;
+    groundBoxLeft.SetAsBox(5.0f, 600.0f);
+    groundBodyLeft->CreateFixture(&groundBoxLeft, 0.0f);
+
+    groundBodyDefRight.position.Set(1580,600);
+    b2Body* groundBodyRight = world->CreateBody(&groundBodyDefRight);
+    b2PolygonShape groundBoxRight;
+    groundBoxRight.SetAsBox(5.0f, 600.0f);
+    groundBodyRight->CreateFixture(&groundBoxRight, 0.0f);
+
+
+    Button* closeinfo = new Button(QString("OK & schließen"));
+    connect(closeinfo, SIGNAL(clicked()),this,SLOT(InfoToBeClosed()));
+    closeinfo->setRect(0,0,150,50);
 
     bounds=new QGraphicsRectItem;
+
 
     if (level == 1 ){
         text= "Level 1";
@@ -68,8 +95,8 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     feder = new Element(FEDER);
     //the feder item cannot be genereated in the element-constructor due to the circular include
     feder->item = new Feder(0, 0);
-    feder->body = world->CreateBody(feder->bodyDef);
-    feder->body->CreateFixture(feder->fixture);
+    //feder->body = world->CreateBody(feder->bodyDef);
+    //feder->body->CreateFixture(feder->fixture);
     levelscene->addItem(feder->item);
 
     maske1 = new Element(MASKE);
@@ -221,7 +248,8 @@ void Level::Interaktion(){
     ///account for influence of the foehne
     applyFoehnForces();
 
-    ///only update the world if the ball is not attached to the spring
+    ///update world in box2d (ask new position of ball and apply)
+    ///only update if the ball is not attached to the spring
     ///as the ball is the only dynamic item in the world
     if (!dynamic_cast<Feder*>(feder->item)->getBallAttached() && !isPaused) {
         ///calculate the positions of all items after one step in the box2d world
@@ -230,17 +258,6 @@ void Level::Interaktion(){
         ///calculate the new position of the ball and apply it
         ballStep = ball->body->GetPosition();
         ball->item->setPos(QPointF(ballStep.x, WINDOW_H-ballStep.y));
-
-
-//        //Debugging for balken bug (b2-body does not move according to Qt-item)
-//        qDebug() << "Position Ball: " << ballStep.x << " " << ballStep.y;
-//        ballStep = balken.at(0)->body->GetPosition();
-//        qDebug() << "Position Balken1: " << ballStep.x << " " << ballStep.y << balken.at(0)->body->GetAngle();
-//        ballStep = balken.at(1)->body->GetPosition();
-//        qDebug() << "Position Balken2: " << ballStep.x << " " << ballStep.y << balken.at(1)->body->GetAngle();
-//        ballStep = balken.at(2)->body->GetPosition();
-//        qDebug() << "Position Balken3: " << ballStep.x << " " << ballStep.y << balken.at(2)->body->GetAngle();
-
     }
 
 
@@ -300,7 +317,7 @@ void Level::Interaktion(){
                                                                         dynamic_cast<Maske*>(maske3->item),
                                                                         dynamic_cast<Virus*>(virus->item));
     if (colliding_item == 1){
-        qDebug("Maske1 wird berührt");
+       // qDebug("Maske1 wird berührt"); +++++++++++++++++++++++++++++++++++++
         levelscene -> removeItem(maske1->item);
         Counter -> increase();
         return;
@@ -317,7 +334,7 @@ void Level::Interaktion(){
         timer->stop();
         Gewonnen();
         /// Text "du hast gewonnen" + Highscore
-    } else if (colliding_item == 5){
+    } else if (colliding_item == 5){       
 //        qDebug("Nichts wird berührt");
         return;
     }
@@ -482,22 +499,22 @@ void Level::updateB2Balken() {
                 if(currentBalkenItem->wasModified() == Balken::LEFT) {
                     currentBalken->body->SetTransform( b2Vec2(currentBalken->body->GetPosition().x - 15*cos(currentBalkenItem->getRotation() * M_PI/180),
                                                              currentBalken->body->GetPosition().y + 15*sin(currentBalkenItem->getRotation() * M_PI/180) ),
-                                                       currentBalkenItem->getRotation());
+                                                       - currentBalkenItem->getRotation() * M_PI/180);
                 } else {
                     currentBalken->body->SetTransform( b2Vec2(currentBalken->body->GetPosition().x + 15*cos(currentBalkenItem->getRotation() * M_PI/180),
                                                              currentBalken->body->GetPosition().y - 15*sin(currentBalkenItem->getRotation() * M_PI/180) ),
-                                                       currentBalkenItem->getRotation());
+                                                       - currentBalkenItem->getRotation() * M_PI/180);
                 }//left-right differentiation
             } else if (currentBalkenItem->getType() == Balken::rotatorisch) {
                 //modify the rotation for rotational Balken (Attention box2d: ccw, Qt: cw)
                 if(currentBalkenItem->wasModified() == Balken::LEFT) {
                     currentBalken->body->SetTransform( b2Vec2(currentBalken->body->GetPosition().x,
                                                              currentBalken->body->GetPosition().y ),
-                                                       - currentBalkenItem->getRotation());
+                                                       - currentBalkenItem->getRotation() * M_PI/180);
                 } else {
                     currentBalken->body->SetTransform( b2Vec2(currentBalken->body->GetPosition().x,
                                                              currentBalken->body->GetPosition().y),
-                                                       - currentBalkenItem->getRotation());
+                                                       - currentBalkenItem->getRotation() * M_PI/180);
                 }//left-right differentiation
             }//translation-rotation differentiation
             currentBalkenItem->unmodified();
