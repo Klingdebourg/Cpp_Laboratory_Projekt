@@ -23,11 +23,38 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     //create box2d world with negative gravity of
     world = new b2World(b2Vec2(0.0f, GRAVITY));
 
-     Button* closeinfo = new Button(QString("OK & schließen"));
-     connect(closeinfo, SIGNAL(clicked()),this,SLOT(InfoToBeClosed()));
-     closeinfo->setRect(0,0,150,50);
+    //create a wall for each side of the window
+    groundBodyDefTop.position.Set(800,20);
+    b2Body* groundBodyTop = world->CreateBody(&groundBodyDefTop);
+    b2PolygonShape groundBoxTop;
+    groundBoxTop.SetAsBox(900.0f, 5.0f);
+    groundBodyTop->CreateFixture(&groundBoxTop, 0.0f);
+
+    groundBodyDefBotton.position.Set(800,1030);
+    b2Body* groundBodyBotton = world->CreateBody(&groundBodyDefBotton);
+    b2PolygonShape groundBoxBotton;
+    groundBoxBotton.SetAsBox(900.0f, 5.0f);
+    groundBodyBotton->CreateFixture(&groundBoxBotton, 0.0f);
+
+    groundBodyDefLeft.position.Set(-30,600);
+    b2Body* groundBodyLeft = world->CreateBody(&groundBodyDefLeft);
+    b2PolygonShape groundBoxLeft;
+    groundBoxLeft.SetAsBox(5.0f, 600.0f);
+    groundBodyLeft->CreateFixture(&groundBoxLeft, 0.0f);
+
+    groundBodyDefRight.position.Set(1580,600);
+    b2Body* groundBodyRight = world->CreateBody(&groundBodyDefRight);
+    b2PolygonShape groundBoxRight;
+    groundBoxRight.SetAsBox(5.0f, 600.0f);
+    groundBodyRight->CreateFixture(&groundBoxRight, 0.0f);
+
+
+    Button* closeinfo = new Button(QString("OK & schließen"));
+    connect(closeinfo, SIGNAL(clicked()),this,SLOT(InfoToBeClosed()));
+    closeinfo->setRect(0,0,150,50);
 
     bounds=new QGraphicsRectItem;
+
 
     if (level == 1 ){
         text= "Level 1";
@@ -68,8 +95,8 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     feder = new Element(FEDER);
     //the feder item cannot be genereated in the element-constructor due to the circular include
     feder->item = new Feder(0, 0);
-    feder->body = world->CreateBody(feder->bodyDef);
-    feder->body->CreateFixture(feder->fixture);
+    //feder->body = world->CreateBody(feder->bodyDef);
+    //feder->body->CreateFixture(feder->fixture);
     levelscene->addItem(feder->item);
 
     maske1 = new Element(MASKE);
@@ -290,7 +317,7 @@ void Level::Interaktion(){
                                                                         dynamic_cast<Maske*>(maske3->item),
                                                                         dynamic_cast<Virus*>(virus->item));
     if (colliding_item == 1){
-        qDebug("Maske1 wird berührt");
+       // qDebug("Maske1 wird berührt"); +++++++++++++++++++++++++++++++++++++
         levelscene -> removeItem(maske1->item);
         Counter -> increase();
         return;
@@ -306,7 +333,7 @@ void Level::Interaktion(){
         ///Spiel beenden
         levelscene -> clear();
         /// Text "du hast gewonnen" + Highscore
-    } else if (colliding_item == 5){
+    } else if (colliding_item == 5){       
 //        qDebug("Nichts wird berührt");
         return;
     }
