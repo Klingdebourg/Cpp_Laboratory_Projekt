@@ -40,9 +40,9 @@ Level1::Level1(Game* game):Level(game,1) {
 
 
     //Position der Masken und des Virus festlegen
-    virus->item->setPos(balken1->item->x()-600,balken1->item->y()-725);
-    maske1->item->setPos(balken1->item->x(),balken1->item->y()-275);
-    maske2->item->setPos(balken1->item->x()-175,balken1->item->y()-450);
-    maske3->item->setPos(balken1->item->x()-350,balken1->item->y()-575);
+    virus->item->setPos(WINDOW_W*1/8,WINDOW_H*3/16);
+    maske1->item->setPos(balken1->item->x(),balken1->item->y()-dynamic_cast<Balken*>(balken1->item)->getLength());
+    maske2->item->setPos(balken1->item->x()-dynamic_cast<Balken*>(balken1->item)->getLength()*3/4,balken1->item->y()-dynamic_cast<Balken*>(balken1->item)->getLength()*3/2);
+    maske3->item->setPos(virus->item->x()+dynamic_cast<Feder*>(feder->item)->boundingRect().height()*2,virus->item->y()+dynamic_cast<Virus*>(virus->item)->boundingRect().width()/2);
 
 }

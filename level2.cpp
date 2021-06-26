@@ -16,25 +16,25 @@ Level2::Level2(Game* game):Level(game, 2) {
     levelscene->addItem(balken1->item);
 
     balken2 = new Element(BALKEN_R);
-    dynamic_cast<Balken*>(balken2->item)->setPosition(QPointF(WINDOW_W*3.0f/16, WINDOW_H*1.0f/3));
+    dynamic_cast<Balken*>(balken2->item)->setPosition(QPointF(WINDOW_W*3.0f/8, WINDOW_H*1.0f/5));
     balken2->body = world->CreateBody(balken2->bodyDef);
     balken2->body->CreateFixture(balken2->fixture);
     balken2->body->SetTransform(b2Vec2(balken2->item->x(), WINDOW_H - balken2->item->y()), 0);
     levelscene->addItem(balken2->item);
 
     balken3 = new Element(BALKEN_T);
-    dynamic_cast<Balken*>(balken3->item)->setPosition(QPointF(WINDOW_W*5.0f/8, WINDOW_H/2.0f));
+    dynamic_cast<Balken*>(balken3->item)->setPosition(QPointF(WINDOW_W*3.0f/8, WINDOW_H*1.0f/2));
     balken3->body = world->CreateBody(balken3->bodyDef);
     balken3->body->CreateFixture(balken3->fixture);
     balken3->body->SetTransform(b2Vec2(balken3->item->x(), WINDOW_H - balken3->item->y()), 0);
     levelscene->addItem(balken3->item);
 
-    foehn = new Element(FOEHN);
-    foehn->item->setPos(balken2->item->x()-100, balken2->item->y()-100);
-    foehn->body = world->CreateBody(foehn->bodyDef);
-    foehn->body->CreateFixture(foehn->fixture);
-    foehn->body->SetTransform(b2Vec2(foehn->item->x(), foehn->item->y()), foehn->item->rotation());
-    levelscene->addItem(foehn->item);
+//    foehn = new Element(FOEHN);
+//    foehn->item->setPos(balken2->item->x()-100, balken2->item->y()-100);
+//    foehn->body = world->CreateBody(foehn->bodyDef);
+//    foehn->body->CreateFixture(foehn->fixture);
+//    foehn->body->SetTransform(b2Vec2(foehn->item->x(), foehn->item->y()), foehn->item->rotation());
+//    levelscene->addItem(foehn->item);
 
     //Feder positionieren und Ball verbinden
     feder->item->setPos(balken1->item->x()+(balken1->item->boundingRect().width() - FEDER_WIDTH)/2, balken1->item->y()-FEDER_HEIGHT);
@@ -43,10 +43,9 @@ Level2::Level2(Game* game):Level(game, 2) {
 
 
     //Maskenposition und Virus position setzen
-    virus->item->setPos(balken3->item->x()+dynamic_cast<Balken*>(balken3->item)->getLength(),balken3->item->y()-150);
-    maske1->item->setPos(balken3->item->x()-250,balken3->item->y()-50);
-    maske2->item->setPos(virus->item->x()-250,virus->item->y());
-    maske3->item->setPos(balken2->item->x()+dynamic_cast<Balken*>(balken2->item)->getLength()/2-25,balken2->item->y()-100);
+    virus->item->setPos(balken2->item->x()+dynamic_cast<Balken*>(balken2->item)->getLength()*2,balken2->item->y()+dynamic_cast<Virus*>(virus->item)->boundingRect().height());
+    maske1->item->setPos(ball->item->x(),ball->item->y()-dynamic_cast<Feder*>(feder->item)->boundingRect().height());
+    maske2->item->setPos(virus->item->x()-dynamic_cast<Feder*>(feder->item)->boundingRect().height(),virus->item->y()+dynamic_cast<Virus*>(virus->item)->boundingRect().height()/4);
+    maske3->item->setPos(ball->item->x(),balken3->item->y()-dynamic_cast<Feder*>(feder->item)->boundingRect().height()*3/2);
 
 }
-
