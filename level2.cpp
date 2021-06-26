@@ -17,7 +17,7 @@ Level2::Level2(Game* game):Level(game, 2) {
     balken.at(0)->body->SetTransform(b2Vec2(balken.at(0)->item->x(), WINDOW_H - balken.at(0)->item->y()), 0);
     levelscene->addItem(balken.at(0)->item);
 
-    balken.append(new Element(BALKEN_R));
+    balken.append(new Element(BALKEN_T));
     dynamic_cast<Balken*>(balken.at(1)->item)->setPosition(QPointF(WINDOW_W*4.0f/10, WINDOW_H*5.0f/12));
     balken.at(1)->body = world->CreateBody(balken.at(1)->bodyDef);
     balken.at(1)->body->CreateFixture(balken.at(1)->fixture);

@@ -368,22 +368,22 @@ void Level::updateB2Balken() {
                 if(currentBalkenItem->wasModified() == Balken::LEFT) {
                     currentBalken->body->SetTransform( b2Vec2(currentBalken->body->GetPosition().x - 15*cos(currentBalkenItem->getRotation() * M_PI/180),
                                                              currentBalken->body->GetPosition().y + 15*sin(currentBalkenItem->getRotation() * M_PI/180) ),
-                                                       currentBalkenItem->getRotation());
+                                                       - currentBalkenItem->getRotation() * M_PI/180);
                 } else {
                     currentBalken->body->SetTransform( b2Vec2(currentBalken->body->GetPosition().x + 15*cos(currentBalkenItem->getRotation() * M_PI/180),
                                                              currentBalken->body->GetPosition().y - 15*sin(currentBalkenItem->getRotation() * M_PI/180) ),
-                                                       currentBalkenItem->getRotation());
+                                                       - currentBalkenItem->getRotation() * M_PI/180);
                 }//left-right differentiation
             } else if (currentBalkenItem->getType() == Balken::rotatorisch) {
                 //modify the rotation for rotational Balken (Attention box2d: ccw, Qt: cw)
                 if(currentBalkenItem->wasModified() == Balken::LEFT) {
                     currentBalken->body->SetTransform( b2Vec2(currentBalken->body->GetPosition().x,
                                                              currentBalken->body->GetPosition().y ),
-                                                       - currentBalkenItem->getRotation());
+                                                       - currentBalkenItem->getRotation() * M_PI/180);
                 } else {
                     currentBalken->body->SetTransform( b2Vec2(currentBalken->body->GetPosition().x,
                                                              currentBalken->body->GetPosition().y),
-                                                       - currentBalkenItem->getRotation());
+                                                       - currentBalkenItem->getRotation() * M_PI/180);
                 }//left-right differentiation
             }//translation-rotation differentiation
             currentBalkenItem->unmodified();
