@@ -199,7 +199,8 @@ void Level::Interaktion(){
     ///account for influence of the foehne
     applyFoehnForces();
 
-    ///only update the world if the ball is not attached to the spring
+    ///update world in box2d (ask new position of ball and apply)
+    ///only update if the ball is not attached to the spring
     ///as the ball is the only dynamic item in the world
     if (!dynamic_cast<Feder*>(feder->item)->getBallAttached() && !isPaused) {
         ///calculate the positions of all items after one step in the box2d world
@@ -208,17 +209,6 @@ void Level::Interaktion(){
         ///calculate the new position of the ball and apply it
         ballStep = ball->body->GetPosition();
         ball->item->setPos(QPointF(ballStep.x, WINDOW_H-ballStep.y));
-
-
-//        //Debugging for balken bug (b2-body does not move according to Qt-item)
-//        qDebug() << "Position Ball: " << ballStep.x << " " << ballStep.y;
-//        ballStep = balken.at(0)->body->GetPosition();
-//        qDebug() << "Position Balken1: " << ballStep.x << " " << ballStep.y << balken.at(0)->body->GetAngle();
-//        ballStep = balken.at(1)->body->GetPosition();
-//        qDebug() << "Position Balken2: " << ballStep.x << " " << ballStep.y << balken.at(1)->body->GetAngle();
-//        ballStep = balken.at(2)->body->GetPosition();
-//        qDebug() << "Position Balken3: " << ballStep.x << " " << ballStep.y << balken.at(2)->body->GetAngle();
-
     }
 
 

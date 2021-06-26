@@ -15,9 +15,6 @@
 
 #define ABBRUCHZEIT 1000
 
-//scaling between box2d world and qt scene
-#define SCALING 1000.0f
-
 //parameters for forces in box2d
 #define GRAVITY -500.0f
 #define FOEHN_FORCE 30000
