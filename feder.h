@@ -23,6 +23,10 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void updateBall(Element &ball);
     void attachBall(Element &ball);
+    ///
+    /// \brief getBallAttached gibt zurück ob der Ball an der Feder angebracht ist oder nicht. Dies ist wichtig für zum Beispiel die Abbruchbedingung
+    /// \return
+    ///
     bool getBallAttached() const;
 
 private:

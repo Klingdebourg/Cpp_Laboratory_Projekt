@@ -12,6 +12,10 @@ class Level1: public Level
 {
 
 public:
+    ///
+    /// \brief Level1
+    /// \param game
+    ///
     Level1(Game* game);
 
 };

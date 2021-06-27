@@ -8,7 +8,6 @@
 #include "ball.h"
 #include "virus.h"
 #include "feder.h"
-//#include "balken.h"
 #include "foehn.h"
 #include <QGraphicsLineItem>
 #include <QList>

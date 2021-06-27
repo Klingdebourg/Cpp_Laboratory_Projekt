@@ -7,12 +7,29 @@ class info:public QGraphicsTextItem
 {
     Q_OBJECT
 public:
+    ///
+    /// \brief info
+    /// \param type
+    /// \param closeinfo
+    /// \param bounds
+    ///
     info(int type, Button* closeinfo, QGraphicsRectItem* bounds);
-    Button* closeinfolocal;
-    QGraphicsRectItem* boundslocal;
+
 
 public slots:
+    ///
+    /// \brief OKpressed
+    ///
     void OKpressed();
+private:
+    ///
+    /// \brief closeinfolocal
+    ///
+    Button* closeinfolocal;
+    ///
+    /// \brief boundslocal
+    ///
+    QGraphicsRectItem* boundslocal;
 };
 
 #endif // INFO_H
