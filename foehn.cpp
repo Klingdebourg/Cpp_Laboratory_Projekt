@@ -16,7 +16,7 @@ Foehn::Foehn(int x, int y, int alpha){
     //rotates the item for the given angle
     setRotation(alpha);
 
-    foehn_on = false;
+    foehn_on = false;    
 
 }
 
