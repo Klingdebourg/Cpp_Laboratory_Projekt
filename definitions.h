@@ -12,6 +12,7 @@
 #define FOEHN_WIDTH 100
 #define MASKE_WIDTH 60
 #define VIRUS_DIAM 80
+#define spannungBallInit 6000
 
 #define ABBRUCHZEIT 1000
 
