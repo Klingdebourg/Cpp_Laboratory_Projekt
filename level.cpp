@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <QDebug>
 #include <QGraphicsRectItem>
+#include <QLineEdit>
 
 Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     //create scene for the level and adapt parameters
@@ -335,6 +336,7 @@ void Level::Interaktion(){
     }  else if (colliding_item == 4){
         ///Spiel beenden
         timer->stop();
+        finalscore = Counter->getscore();
         levelscene->clear();
         Gewonnen();
         return;
@@ -375,9 +377,9 @@ void Level::InfoToBeClosed()
 
 void Level::Gewonnen()
 {
-//    levelscene -> clear();
 
-    QGraphicsTextItem* winText = new QGraphicsTextItem(QString("Wow. Du hast es geschafft den Virus zu besiegen. Glückwunsch! Du hast es geschafft dabei "+QString::number(Counter->getscore())+ " Maske/n zu sammeln und das in einer Zeit von(Hier einfügen Uhr!)! Was möchtest du jetzt tun?"));
+
+    QGraphicsTextItem* winText = new QGraphicsTextItem(QString("Wow. Du hast es geschafft den Virus zu besiegen. Glückwunsch! Du hast es geschafft dabei "+QString::number(finalscore)+ " Maske/n zu sammeln und das in einer Zeit von(Hier einfügen Uhr!)! Was möchtest du jetzt tun?"));
 
     QFont titleFont("comic sans",10);
     winText->setTextWidth(1000);
@@ -444,7 +446,35 @@ void Level::Next()
 void Level::AddScore()
 {
     levelscene->clear();
-    //Hier einfügen QLINE Edit und Textdatei
+    QGraphicsTextItem* enternametitle = new QGraphicsTextItem(QString("Bitte gebe deinen Namen ein und bestätige mit dem Button"));
+       QFont titleFont("comic sans",20);
+       enternametitle->setFont(titleFont);
+       enternametitle->setPos(WINDOW_W/16,WINDOW_H/8);
+       levelscene->addItem(enternametitle);
+
+       QLineEdit* input = new QLineEdit();
+       QFont textFont("time",15);
+       input->setReadOnly(false);
+       input->setFixedHeight(100);
+       input->setFixedWidth(500);
+       input->setFont(textFont);
+       input->move(WINDOW_W/3,WINDOW_H/2);
+       levelscene->addWidget(input);
+
+       QGraphicsTextItem*sc = new QGraphicsTextItem(QString("Dein Score: " + QString::number(finalscore)));
+       sc->setPos(WINDOW_W/8,WINDOW_H*3/8);
+       sc->setFont(titleFont);
+       levelscene->addItem(sc);
+
+       QGraphicsTextItem* time = new QGraphicsTextItem(QString("Deine Zeit: "));
+       time->setPos(WINDOW_W*4/8,WINDOW_H*3/8);
+       time->setFont(titleFont);
+       levelscene->addItem(time);
+
+       Button* add = new Button(QString("Hinzufügen"));
+       connect(add,SIGNAL(clicked()),this,SLOT(CopyInDatei()));
+       add->setPos(input->x()+input->width(),input->y());
+       levelscene->addItem(add);
 
 }
 

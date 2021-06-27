@@ -145,3 +145,52 @@ void Game::Info()
     scene->addItem(information);
 
 }
+
+
+void Game::scores()
+{
+    scene->clear();
+
+    QGraphicsTextItem* scoreText = new QGraphicsTextItem(QString("Die Bestenliste der Level:"));
+    QFont levelFont("times",50);
+    scoreText->setFont(levelFont);
+    int lvposx = this->width()/2-scoreText->boundingRect().width()/2;
+    int lvposy = 200;
+    scoreText->setPos(lvposx,lvposy);
+    scene->addItem(scoreText);
+
+    // create the button for Level 1
+    Button* level1 = new Button(QString("1"));
+    connect(level1,SIGNAL(clicked()),this,SLOT(best()));
+    int l1x = this->width()/2-scoreText->boundingRect().width();
+    int l1y = 500;
+    level1->setPos(l1x,l1y);
+    scene->addItem(level1);
+
+    // create the button for Level 2
+    Button* level2 = new Button(QString("2"));
+    connect(level2,SIGNAL(clicked()),this,SLOT(best()));
+    int l2x = this->width()/2 - level2->boundingRect().width()/2;
+    int l2y = 500;
+    level2->setPos(l2x,l2y);
+    scene->addItem(level2);
+
+    // create the button for Level 3
+    Button* level3 = new Button(QString("3"));
+    connect(level3,SIGNAL(clicked()),this,SLOT(best()));
+    int l3x = this->width()/2+scoreText->boundingRect().width()/2;
+    int l3y = 500;
+    level3->setPos(l3x,l3y);
+    scene->addItem(level3);
+
+    Button* back = new Button(QString("<-"));
+    connect(back, SIGNAL(clicked()),this,SLOT(displayMainMenu()));
+    scene->addItem(back);
+
+}
+
+void Game::best()
+{
+    scene->clear();
+
+}

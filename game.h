@@ -25,6 +25,8 @@ public slots:
     void displayMainMenu();
     void start();
     void Info();
+    void scores();
+    void best();
 
 };
 

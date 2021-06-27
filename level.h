@@ -41,6 +41,7 @@ public:
     int y_current;
     info* Info;
     QGraphicsRectItem* bounds;
+    int finalscore;
 public slots:
     void pause();
     void Zurueck();
