@@ -491,11 +491,11 @@ void Level::applyFoehnForces() {
             //vector pointing from the tip of the foehn to the center of the ball
             //remember, that points of ball and foehn are located at top-left corner of object
             qDebug() << foehne.at(0)->item->rotation();
-            foehnBall = b2Vec2(foehne.at(i)->item->x()+FOEHN_WIDTH/2*(1+sin(foehne.at(i)->item->rotation() * M_PI/180)) - (ball->item->x()+BALL_DIAM/2),
-                               foehne.at(i)->item->y()+FOEHN_WIDTH/2*(1-cos(foehne.at(i)->item->rotation() * M_PI/180)) - (ball->item->y()+BALL_DIAM/2));
+            foehnBall = b2Vec2((ball->item->x()+BALL_DIAM/2) - (foehne.at(i)->item->x()+FOEHN_WIDTH/2*(1+sin(foehne.at(i)->item->rotation() * M_PI/180))),
+                               (ball->item->y()+BALL_DIAM/2) - (foehne.at(i)->item->y()+FOEHN_WIDTH/2*(1-cos(foehne.at(i)->item->rotation() * M_PI/180))));
             //vector product of direction of foehn and vector from tip of foehn to ball
             //i.e. projection of one vector onto the other thus offset in direction of foehn
-            distanceFoehnBall = foehnBall.x*sin(foehne.at(i)->item->rotation() * M_PI/180) +
+            distanceFoehnBall = foehnBall.x*sin(foehne.at(i)->item->rotation() * M_PI/180) -
                                     foehnBall.y*cos(foehne.at(i)->item->rotation() * M_PI/180);
             //computing angle (rads) between both vectors via vector product theorem vec_a*vec_b = |a|*|b|*cos(alpha)
             //as direction vector of foehn is normalized, it has length 1 thus does not need to be considered
