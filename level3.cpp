@@ -43,7 +43,7 @@ Level3::Level3(Game* game):Level(game,3) {
     foehne.at(1)->item->setRotation(-90);
     foehne.at(1)->body = world->CreateBody(foehne.at(1)->bodyDef);
     foehne.at(1)->body->CreateFixture(foehne.at(1)->fixture);
-    foehne.at(1)->body->SetTransform(b2Vec2(foehne.at(1)->item->x()+10-FOEHN_WIDTH/4, WINDOW_H - foehne.at(1)->item->y()+5-FOEHN_WIDTH/2), -foehne.at(1)->item->rotation() * M_PI/180);
+    foehne.at(1)->body->SetTransform(b2Vec2(foehne.at(1)->item->x()+20-FOEHN_WIDTH/4, WINDOW_H - foehne.at(1)->item->y()-10-FOEHN_WIDTH), -foehne.at(1)->item->rotation() * M_PI/180);
     levelscene->addItem(foehne.at(1)->item);
 
 

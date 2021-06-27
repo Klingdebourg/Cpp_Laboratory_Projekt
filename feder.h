@@ -25,7 +25,6 @@ public:
     void attachBall(Element &ball);
     bool getBallAttached() const;
 
-
 private:
     int spannung;
     long long spannungBall; // Eingefuert um einen Impulsunterschied beim Abschiessen des Balls zu spuehren
