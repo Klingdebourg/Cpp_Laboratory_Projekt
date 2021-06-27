@@ -61,6 +61,14 @@ void Game::displayMainMenu(){
     int iyPos = 800;
     info->setPos(ixPos,iyPos);
     scene->addItem(info);
+
+
+    Button* scores = new Button(QString("Die Bestenliste"));
+      connect(scores,SIGNAL(clicked()),this,SLOT(scores()));
+      int sxPos=txPos + (titleText->boundingRect().width()/4)*3;
+      int syPos=800;
+      scores->setPos(sxPos,syPos);
+      scene->addItem(scores);
 }
 void Game::levelmenu(){
     scene->clear();
