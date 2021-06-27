@@ -1,0 +1,138 @@
+\hypertarget{class_feder}{}\doxysection{Feder Class Reference}
+\label{class_feder}\index{Feder@{Feder}}
+Inheritance diagram for Feder\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feder}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_feder_a8e3c6699a2720fee907e3211b6f9e162}{Feder}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Constructor creating a spring at a requested position with a fixed size. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_feder_a6b04a11142b59572fddd7143f16156f9}{Feder}} (int x, int y, \mbox{\hyperlink{struct_element}{Element}} $\ast$ball)
+\begin{DoxyCompactList}\small\item\em Constructor creating a spring at a requested position with a fixed size with a ball already attached to it. \end{DoxyCompactList}\item 
+QRectF \mbox{\hyperlink{class_feder_a491800a5309c659f53286bab16aaf619}{bounding\+Rect}} () const
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_feder_a491800a5309c659f53286bab16aaf619}{Feder\+::bounding\+Rect}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_feder_a4814b9e59c6509f030e72477c02220cf}{key\+Press\+Event}} (QKey\+Event $\ast$event)
+\begin{DoxyCompactList}\small\item\em rotates, tensions or releaves the spring if it is in focus \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_feder_af1c96b67dbc3a5e7a0b84d6e95ae73f1}{mouse\+Press\+Event}} (QGraphics\+Scene\+Mouse\+Event $\ast$event)
+\begin{DoxyCompactList}\small\item\em enables the object to be modified with keyboard input \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_feder_a7b2cee0df7edb85c66393de0434d2268}\label{class_feder_a7b2cee0df7edb85c66393de0434d2268}} 
+void {\bfseries paint} (QPainter $\ast$painter, const QStyle\+Option\+Graphics\+Item $\ast$option, QWidget $\ast$widget)
+\item 
+void \mbox{\hyperlink{class_feder_a4392cb6ed9828b94d287bd1a52af87d8}{update\+Ball}} (\mbox{\hyperlink{struct_element}{Element}} \&ball)
+\begin{DoxyCompactList}\small\item\em if a ball is connected to the feder, its position is updated (is used after the feder changes its position/tesnion) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_feder_a2bc7ed2fcae785149d97f8a95bdc3efa}\label{class_feder_a2bc7ed2fcae785149d97f8a95bdc3efa}} 
+void {\bfseries attach\+Ball} (\mbox{\hyperlink{struct_element}{Element}} \&ball)
+\item 
+\mbox{\Hypertarget{class_feder_afe784870cbf4769638933aa2a190fc44}\label{class_feder_afe784870cbf4769638933aa2a190fc44}} 
+bool {\bfseries get\+Ball\+Attached} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_feder_a8e3c6699a2720fee907e3211b6f9e162}\label{class_feder_a8e3c6699a2720fee907e3211b6f9e162}} 
+\index{Feder@{Feder}!Feder@{Feder}}
+\index{Feder@{Feder}!Feder@{Feder}}
+\doxysubsubsection{\texorpdfstring{Feder()}{Feder()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Feder\+::\+Feder (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Constructor creating a spring at a requested position with a fixed size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & requested x position \\
+\hline
+{\em y} & requested y position \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_feder_a6b04a11142b59572fddd7143f16156f9}\label{class_feder_a6b04a11142b59572fddd7143f16156f9}} 
+\index{Feder@{Feder}!Feder@{Feder}}
+\index{Feder@{Feder}!Feder@{Feder}}
+\doxysubsubsection{\texorpdfstring{Feder()}{Feder()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Feder\+::\+Feder (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{\mbox{\hyperlink{struct_element}{Element}} $\ast$}]{ball }\end{DoxyParamCaption})}
+
+
+
+Constructor creating a spring at a requested position with a fixed size with a ball already attached to it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & requested x position \\
+\hline
+{\em y} & requested y position \\
+\hline
+{\em ball} & ball connected to the spring \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_feder_a491800a5309c659f53286bab16aaf619}\label{class_feder_a491800a5309c659f53286bab16aaf619}} 
+\index{Feder@{Feder}!boundingRect@{boundingRect}}
+\index{boundingRect@{boundingRect}!Feder@{Feder}}
+\doxysubsubsection{\texorpdfstring{boundingRect()}{boundingRect()}}
+{\footnotesize\ttfamily QRectF Feder\+::bounding\+Rect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+\mbox{\hyperlink{class_feder_a491800a5309c659f53286bab16aaf619}{Feder\+::bounding\+Rect}}. 
+
+\begin{DoxyReturn}{Returns}
+the are to be redrawn when the item is updated 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_feder_a4814b9e59c6509f030e72477c02220cf}\label{class_feder_a4814b9e59c6509f030e72477c02220cf}} 
+\index{Feder@{Feder}!keyPressEvent@{keyPressEvent}}
+\index{keyPressEvent@{keyPressEvent}!Feder@{Feder}}
+\doxysubsubsection{\texorpdfstring{keyPressEvent()}{keyPressEvent()}}
+{\footnotesize\ttfamily void Feder\+::key\+Press\+Event (\begin{DoxyParamCaption}\item[{QKey\+Event $\ast$}]{event }\end{DoxyParamCaption})}
+
+
+
+rotates, tensions or releaves the spring if it is in focus 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & contains the pressed key \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_feder_af1c96b67dbc3a5e7a0b84d6e95ae73f1}\label{class_feder_af1c96b67dbc3a5e7a0b84d6e95ae73f1}} 
+\index{Feder@{Feder}!mousePressEvent@{mousePressEvent}}
+\index{mousePressEvent@{mousePressEvent}!Feder@{Feder}}
+\doxysubsubsection{\texorpdfstring{mousePressEvent()}{mousePressEvent()}}
+{\footnotesize\ttfamily void Feder\+::mouse\+Press\+Event (\begin{DoxyParamCaption}\item[{QGraphics\+Scene\+Mouse\+Event $\ast$}]{event }\end{DoxyParamCaption})}
+
+
+
+enables the object to be modified with keyboard input 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_feder_a4392cb6ed9828b94d287bd1a52af87d8}\label{class_feder_a4392cb6ed9828b94d287bd1a52af87d8}} 
+\index{Feder@{Feder}!updateBall@{updateBall}}
+\index{updateBall@{updateBall}!Feder@{Feder}}
+\doxysubsubsection{\texorpdfstring{updateBall()}{updateBall()}}
+{\footnotesize\ttfamily void Feder\+::update\+Ball (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_element}{Element}} \&}]{ball }\end{DoxyParamCaption})}
+
+
+
+if a ball is connected to the feder, its position is updated (is used after the feder changes its position/tesnion) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ball} & to be changed \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+feder.\+h\item 
+feder.\+cpp\end{DoxyCompactItemize}
