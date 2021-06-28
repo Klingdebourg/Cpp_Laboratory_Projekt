@@ -1,0 +1,172 @@
+\hypertarget{class_level}{}\doxysection{Level Class Reference}
+\label{class_level}\index{Level@{Level}}
+Inheritance diagram for Level\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_level}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_level_aaff1f8419f7557199adfdc5fb55608f6}\label{class_level_aaff1f8419f7557199adfdc5fb55608f6}} 
+void \mbox{\hyperlink{class_level_aaff1f8419f7557199adfdc5fb55608f6}{pause}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_level_aaff1f8419f7557199adfdc5fb55608f6}{Level\+::pause}} to pause the game. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_level_a92c94cda2b692906602ee1fbd4c59bb5}\label{class_level_a92c94cda2b692906602ee1fbd4c59bb5}} 
+void \mbox{\hyperlink{class_level_a92c94cda2b692906602ee1fbd4c59bb5}{Zurueck}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_level_a92c94cda2b692906602ee1fbd4c59bb5}{Level\+::\+Zurueck}} to return to the level menu from pause menu. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_level_a7791f3d6222ed5202255a8d8d6a7eead}\label{class_level_a7791f3d6222ed5202255a8d8d6a7eead}} 
+void \mbox{\hyperlink{class_level_a7791f3d6222ed5202255a8d8d6a7eead}{Redo}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_level_a7791f3d6222ed5202255a8d8d6a7eead}{Level\+::\+Redo}} rebuilds the level. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_level_a077b3a9b68c88749ac9520a2f3e7d748}\label{class_level_a077b3a9b68c88749ac9520a2f3e7d748}} 
+void \mbox{\hyperlink{class_level_a077b3a9b68c88749ac9520a2f3e7d748}{Hauptmenu}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_level_a077b3a9b68c88749ac9520a2f3e7d748}{Level\+::\+Hauptmenu}} to return to the main menu from pause menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_level_ad5c286be1fbbecf0442bd3ca9b3ed46e}{Interaktion}} ()
+\begin{DoxyCompactList}\small\item\em Prüft, ob die Items, welche in der Scene sind kollidieren und handelt je nach Art des Items; Interaktion mit Box2D. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_level_a461fe4470c21f27d4981bcdb71dd39bb}\label{class_level_a461fe4470c21f27d4981bcdb71dd39bb}} 
+void {\bfseries Info\+To\+Be\+Closed} ()
+\item 
+\mbox{\Hypertarget{class_level_ae6dd6593cf79b8abf8b767d3b5c690b1}\label{class_level_ae6dd6593cf79b8abf8b767d3b5c690b1}} 
+void {\bfseries Gewonnen} ()
+\item 
+\mbox{\Hypertarget{class_level_a19756476a42b94db60e69052e8f228c6}\label{class_level_a19756476a42b94db60e69052e8f228c6}} 
+void {\bfseries Next} ()
+\item 
+\mbox{\Hypertarget{class_level_a498a5ae8d4f11d2e29f336b49e16f802}\label{class_level_a498a5ae8d4f11d2e29f336b49e16f802}} 
+void {\bfseries Add\+Score} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_level_a21c0f15abc827ec9ffc03e16e49edd1f}\label{class_level_a21c0f15abc827ec9ffc03e16e49edd1f}} 
+{\bfseries Level} (\mbox{\hyperlink{class_game}{Game}} $\ast$game, int type, QWidget $\ast$parent=NULL)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_level_a5a3e801a7d94140f72c24f79e2cc0289}\label{class_level_a5a3e801a7d94140f72c24f79e2cc0289}} 
+\mbox{\hyperlink{class_game}{Game}} $\ast$ {\bfseries levelgame}
+\item 
+\mbox{\Hypertarget{class_level_a75f4fbd93b48b437bf58e9c40e78cb12}\label{class_level_a75f4fbd93b48b437bf58e9c40e78cb12}} 
+int {\bfseries level}
+\item 
+\mbox{\Hypertarget{class_level_a6b7c3c5e1c0dc55a2446098dac6ae2ab}\label{class_level_a6b7c3c5e1c0dc55a2446098dac6ae2ab}} 
+b2\+Body\+Def {\bfseries ground\+Body\+Def\+Top}
+\item 
+\mbox{\Hypertarget{class_level_af0aecc09a384c6499b534824557c0154}\label{class_level_af0aecc09a384c6499b534824557c0154}} 
+b2\+Body\+Def {\bfseries ground\+Body\+Def\+Botton}
+\item 
+\mbox{\Hypertarget{class_level_ab3eea44b0ab1e896b08bc8770514ed52}\label{class_level_ab3eea44b0ab1e896b08bc8770514ed52}} 
+b2\+Body\+Def {\bfseries ground\+Body\+Def\+Left}
+\item 
+\mbox{\Hypertarget{class_level_a4fd07b715948d7b739df8ffa739e46fa}\label{class_level_a4fd07b715948d7b739df8ffa739e46fa}} 
+b2\+Body\+Def {\bfseries ground\+Body\+Def\+Right}
+\item 
+\mbox{\Hypertarget{class_level_ad44ee56e73b9c006832c4446afaccc0b}\label{class_level_ad44ee56e73b9c006832c4446afaccc0b}} 
+QString {\bfseries text}
+\item 
+\mbox{\Hypertarget{class_level_a448d9df202a969bf15a5616b5c09928c}\label{class_level_a448d9df202a969bf15a5616b5c09928c}} 
+QGraphics\+Scene $\ast$ {\bfseries levelscene}
+\item 
+\mbox{\Hypertarget{class_level_aeecfa6d3f07ab521fc09d00b7c36fba7}\label{class_level_aeecfa6d3f07ab521fc09d00b7c36fba7}} 
+QGraphics\+Scene $\ast$ {\bfseries pausemenu}
+\item 
+\mbox{\Hypertarget{class_level_af3a21e0398bf5fb712ad5613b157e8da}\label{class_level_af3a21e0398bf5fb712ad5613b157e8da}} 
+QGraphics\+View $\ast$ {\bfseries pausepic}
+\item 
+\mbox{\Hypertarget{class_level_a26b1a04a45d65982dae50dbf7d1924aa}\label{class_level_a26b1a04a45d65982dae50dbf7d1924aa}} 
+\mbox{\hyperlink{classcounter}{counter}} $\ast$ {\bfseries Counter}
+\item 
+\mbox{\Hypertarget{class_level_a59f1561c0f028e52eba23ad9669ebb0e}\label{class_level_a59f1561c0f028e52eba23ad9669ebb0e}} 
+QTimer $\ast$ {\bfseries timer}
+\item 
+\mbox{\Hypertarget{class_level_a107ee0267ab99fdaaca3de6d4b6c4f23}\label{class_level_a107ee0267ab99fdaaca3de6d4b6c4f23}} 
+int {\bfseries failbedingung}
+\item 
+\mbox{\Hypertarget{class_level_a14a014f78ba25e54fd01962434aeafee}\label{class_level_a14a014f78ba25e54fd01962434aeafee}} 
+int {\bfseries x\+\_\+last}
+\item 
+\mbox{\Hypertarget{class_level_ac92ca6dc46252c3ed98a0bd89b00943d}\label{class_level_ac92ca6dc46252c3ed98a0bd89b00943d}} 
+int {\bfseries y\+\_\+last}
+\item 
+\mbox{\Hypertarget{class_level_a898f527f2e72cda907a069bc0650a65e}\label{class_level_a898f527f2e72cda907a069bc0650a65e}} 
+int {\bfseries x\+\_\+current}
+\item 
+\mbox{\Hypertarget{class_level_adae5160f49b0beb59835e170616cb879}\label{class_level_adae5160f49b0beb59835e170616cb879}} 
+int {\bfseries y\+\_\+current}
+\item 
+\mbox{\Hypertarget{class_level_a621a37002a22961fb653972bc4e43d24}\label{class_level_a621a37002a22961fb653972bc4e43d24}} 
+\mbox{\hyperlink{classinfo}{info}} $\ast$ {\bfseries Info}
+\item 
+\mbox{\Hypertarget{class_level_ab8d77b9efc25d542dba5837fdd91c43c}\label{class_level_ab8d77b9efc25d542dba5837fdd91c43c}} 
+QGraphics\+Rect\+Item $\ast$ {\bfseries bounds}
+\item 
+\mbox{\Hypertarget{class_level_a194de4df44caa7e5052f7b5ee3647470}\label{class_level_a194de4df44caa7e5052f7b5ee3647470}} 
+int {\bfseries finalscore}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_level_a8eebf5b15172a3dd1b1d7b202013a11a}\label{class_level_a8eebf5b15172a3dd1b1d7b202013a11a}} 
+b2\+World $\ast$ {\bfseries world}
+\item 
+\mbox{\Hypertarget{class_level_a6d525ea6d7b0b2a899d762bfd1d4ff19}\label{class_level_a6d525ea6d7b0b2a899d762bfd1d4ff19}} 
+\mbox{\hyperlink{struct_element}{Element}} $\ast$ {\bfseries ball}
+\item 
+\mbox{\Hypertarget{class_level_a140f858c32437683b80441560546f9be}\label{class_level_a140f858c32437683b80441560546f9be}} 
+b2\+Vec2 {\bfseries ball\+Step}
+\item 
+\mbox{\Hypertarget{class_level_aed71b37a68a39e1765a01b8f41f14309}\label{class_level_aed71b37a68a39e1765a01b8f41f14309}} 
+\mbox{\hyperlink{struct_element}{Element}} $\ast$ {\bfseries feder}
+\item 
+\mbox{\Hypertarget{class_level_a42aacd4073de48d0520dc1caa216b3f4}\label{class_level_a42aacd4073de48d0520dc1caa216b3f4}} 
+\mbox{\hyperlink{struct_element}{Element}} $\ast$ {\bfseries maske1}
+\item 
+\mbox{\Hypertarget{class_level_a4dc59685e695b93dac223e89632db723}\label{class_level_a4dc59685e695b93dac223e89632db723}} 
+\mbox{\hyperlink{struct_element}{Element}} $\ast$ {\bfseries maske2}
+\item 
+\mbox{\Hypertarget{class_level_a23ae8368f63ed6578054e0dc97f283c5}\label{class_level_a23ae8368f63ed6578054e0dc97f283c5}} 
+\mbox{\hyperlink{struct_element}{Element}} $\ast$ {\bfseries maske3}
+\item 
+\mbox{\Hypertarget{class_level_a864dee69b300de84a61e0adeb5e395ff}\label{class_level_a864dee69b300de84a61e0adeb5e395ff}} 
+\mbox{\hyperlink{struct_element}{Element}} $\ast$ {\bfseries virus}
+\item 
+\mbox{\Hypertarget{class_level_abcaf0db7177b3edb4c3e8f058b17a6e2}\label{class_level_abcaf0db7177b3edb4c3e8f058b17a6e2}} 
+QVector$<$ \mbox{\hyperlink{struct_element}{Element}} $\ast$ $>$ {\bfseries balken}
+\item 
+\mbox{\Hypertarget{class_level_a41d4b611c9e36aee290b374b89359ca2}\label{class_level_a41d4b611c9e36aee290b374b89359ca2}} 
+QVector$<$ \mbox{\hyperlink{struct_element}{Element}} $\ast$ $>$ {\bfseries foehne}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_level_ad5c286be1fbbecf0442bd3ca9b3ed46e}\label{class_level_ad5c286be1fbbecf0442bd3ca9b3ed46e}} 
+\index{Level@{Level}!Interaktion@{Interaktion}}
+\index{Interaktion@{Interaktion}!Level@{Level}}
+\doxysubsubsection{\texorpdfstring{Interaktion}{Interaktion}}
+{\footnotesize\ttfamily void Level\+::\+Interaktion (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Prüft, ob die Items, welche in der Scene sind kollidieren und handelt je nach Art des Items; Interaktion mit Box2D. 
+
+\mbox{\hyperlink{class_level_ad5c286be1fbbecf0442bd3ca9b3ed46e}{Level\+::\+Interaktion}} is called TIME\+\_\+\+STEP times per second via a timer first functionality\+: step the box2d world second fuinctionality\+: check if the ball collided with any itmes and act accordingly update the positions of all balken if their Qt appearance has been changed
+
+account for influence of the foehne
+
+update world in box2d (ask new position of ball and apply) only update if the ball is not attached to the spring as the ball is the only dynamic item in the world
+
+calculate the positions of all items after one step in the box2d world
+
+calculate the new position of the ball and apply it
+
+Kollisionsabfrage In \mbox{\hyperlink{class_ball}{Ball}} abfragen, was mit \mbox{\hyperlink{class_ball}{Ball}} kollidiert
+
+Spiel beenden
+
+Text \char`\"{}du hast gewonnen\char`\"{} + Highscore
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+level.\+h\item 
+level.\+cpp\end{DoxyCompactItemize}
