@@ -17,10 +17,16 @@ public:
 
     QGraphicsScene* scene;
 
+    QGraphicsTextItem* informationtitle;
+    QGraphicsTextItem* information;
+
 public slots:
     void levelmenu();
     void displayMainMenu();
     void start();
+    void Info();
+    void scores();
+    void best();
 
 };
 

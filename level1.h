@@ -4,6 +4,7 @@
 #include "level.h"
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include "balken.h"
 
 
 
@@ -12,6 +13,7 @@ class Level1: public Level
 
 public:
     Level1(Game* game);
+
 };
 
 #endif // LEVEL1_H

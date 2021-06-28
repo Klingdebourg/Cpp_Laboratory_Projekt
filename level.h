@@ -7,10 +7,14 @@
 #include "maske.h"
 #include "ball.h"
 #include "virus.h"
+#include "feder.h"
+//#include "balken.h"
+#include "foehn.h"
 #include <QGraphicsLineItem>
-#include <QGraphicsItem>
 #include <QList>
 #include "definitions.h"
+#include "element.h"
+#include "info.h"
 
 
 class Level : public QGraphicsView
@@ -20,22 +24,59 @@ public:
     Level(Game* game, int type, QWidget* parent = NULL);
     Game* levelgame;
     int level;
+    b2BodyDef groundBodyDefTop;
+    b2BodyDef groundBodyDefBotton;
+    b2BodyDef groundBodyDefLeft;
+    b2BodyDef groundBodyDefRight;
     QString text;
     QGraphicsScene* levelscene;
     QGraphicsScene* pausemenu;
     QGraphicsView* pausepic;
     counter* Counter;
-    Ball* ball;
-    Maske* maske1;
-    Maske* maske2;
-    Maske* maske3;
-    Virus* virus;
+    QTimer* timer;
+    int failbedingung;
+    int x_last;
+    int y_last;
+    int x_current;
+    int y_current;
+    info* Info;
+    QGraphicsRectItem* bounds;
+    int finalscore;
 public slots:
     void pause();
     void Zurueck();
     void Redo();
+    void Hauptmenu();
     void Interaktion();
-//    Maske* maske1, Maske* maske2, Maske* maske3, Virus* virus
+    void InfoToBeClosed();
+    void Gewonnen();
+    void Next();
+    void AddScore();
+    //Maske* maske1, Maske* maske2, Maske* maske3, Virus* virus
+
+protected:
+    b2World *world;
+    Element* ball;
+    b2Vec2 ballStep;
+    Element* feder;
+    Element* maske1;
+    Element* maske2;
+    Element* maske3;
+    Element* virus;
+    QVector<Element*> balken;
+    QVector<Element*> foehne;
+
+private:
+    Element* currentBalken;
+    Balken* currentBalkenItem;
+    b2Vec2 foehnBall;
+    int distanceFoehnBall;
+    float angleFoehnBall;
+    float intensityFoehn;
+    bool isPaused;
+
+    void applyFoehnForces();
+    void updateB2Balken();
 };
 
 #endif // LEVEL_H

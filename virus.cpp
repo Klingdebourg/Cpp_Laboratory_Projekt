@@ -5,5 +5,17 @@
 Virus::Virus(int x, int y, QRectF *a)
 {
     QPixmap pic("media/virus.png");
-    setRect(x, y, VIRUS_RADIUS, VIRUS_RADIUS);
+    setRect(x, y, VIRUS_DIAM, VIRUS_DIAM);
+}
+
+QRectF Virus::boundingRect() const {
+    return QRectF(0, 0, VIRUS_DIAM, VIRUS_DIAM);
+}
+
+void Virus::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
+    QPen pen(Qt::gray, 1);
+    QBrush brush(Qt::red, Qt::SolidPattern);
+    painter->setPen(pen);
+    painter->setBrush(brush);
+    painter->drawEllipse(QRectF(0, 0, VIRUS_DIAM, VIRUS_DIAM));
 }

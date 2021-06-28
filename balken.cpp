@@ -1,5 +1,4 @@
 #include "balken.h"
-#include "definitions.h"
 
 /**
  * @brief creates a Balken at a certain position
@@ -18,9 +17,7 @@ Balken::Balken(int x, int y, int rotation, int length, balkenType typ) {
     setTransformOriginPoint(QPointF(length/2, BALKEN_WIDTH/2));
 
     //moves the item to the given position in scene coordinates
-    position.setX(x);
-    position.setY(y);
-    setPos(position);
+    setPosition(QPointF(x, y));
 
     //rotates the item as requested
     if (rotation >= -90 && rotation < 90) {
@@ -32,7 +29,7 @@ Balken::Balken(int x, int y, int rotation, int length, balkenType typ) {
         else
             this->rotation = rotation - 180;
     }
-    setRotation(getRotation());
+    setRotation(rotation);
 
     if (typ != statisch) {
         //makes the object focussable thus enables it to be moved
@@ -43,6 +40,7 @@ Balken::Balken(int x, int y, int rotation, int length, balkenType typ) {
 
     //set the type of the balken
     type = typ;
+    modified = NONE;
 }
 
 /**
@@ -50,7 +48,7 @@ Balken::Balken(int x, int y, int rotation, int length, balkenType typ) {
  * @return the are to be redrawn when the item is updated
  */
 QRectF Balken::boundingRect() const {
-    return QRectF(0, 0, getLength(), BALKEN_WIDTH);
+    return QRectF(0, 0, getLength()+6, BALKEN_WIDTH+6);
 }
 
 /**
@@ -75,6 +73,7 @@ void Balken::keyPressEvent(QKeyEvent *event) {
         default:
             break;
         }
+        modified = LEFT;
         break;
     case Qt::Key_Right:
         //differentiate the movement depending on the type of the balken
@@ -91,8 +90,10 @@ void Balken::keyPressEvent(QKeyEvent *event) {
         default:
             break;
         }
+        modified = RIGHT;
         break;
     }
+
 
 }
 
@@ -112,19 +113,45 @@ void Balken::mousePressEvent(QGraphicsSceneMouseEvent *event) {
 void Balken::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     QPen pen = QPen();
     pen.setWidth(5);
+    QColor *color;
     switch (this->type) {
     case statisch:
-        pen.setColor(Qt::black);
+        color = new QColor(0, 0, 0, 250);
         break;
     case translatorisch:
-        pen.setColor(Qt::blue);
+        color = new QColor(0, 255, 0, 50);
         break;
     case rotatorisch:
-        pen.setColor(Qt::red);
+        color = new QColor(0, 255, 255, 50);
         break;
     }
+    pen.setColor(*color);
     painter->setPen(pen);
     painter->drawRect(0, 0, getLength(), BALKEN_WIDTH);
+}
+
+
+/**
+ * @brief Balken::setPosition sets the position of the Balken and changes the internally stored position
+ * @param point
+ */
+void Balken::setPosition(QPointF point) {
+    position.setX(point.x());
+    position.setY(point.y());
+    setPos(position);
+
+}
+
+/**
+ * @brief Balken::unmodified setd the modified status to NONE
+ */
+void Balken::unmodified() {
+    modified = NONE;
+}
+
+void Balken::setRotation(qreal angle) {
+    rotation = angle;
+    QGraphicsItem::setRotation(angle);
 }
 
 /**
@@ -142,5 +169,13 @@ int Balken::getRotation() const{
 int Balken::getLength() const
 {
     return length;
+}
+
+Balken::balkenType Balken::getType() const {
+    return type;
+}
+
+Balken::modification Balken::wasModified() const{
+    return modified;
 }
 

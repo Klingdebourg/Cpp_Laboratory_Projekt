@@ -1,0 +1,143 @@
+#ifndef ELEMENT_H
+#define ELEMENT_H
+#include "definitions.h"
+#include <QGraphicsItem>
+#include "balken.h"
+#include "ball.h"
+#include "feder.h"
+#include "foehn.h"
+#include "maske.h"
+#include "virus.h"
+#include <box2d.h>
+
+enum elementType {
+    BALKEN_S,
+    BALKEN_R,
+    BALKEN_T,
+    BALL,
+    FEDER,
+    FOEHN,
+    MASKE,
+    VIRUS
+};
+
+
+struct Element {
+    QGraphicsItem *item = nullptr;
+    b2Body *body = nullptr;
+    b2BodyDef *bodyDef = nullptr;
+    b2Shape *shape = nullptr;
+    b2FixtureDef *fixture = nullptr;
+    elementType typ;
+
+    /**
+     * @brief Element standard construktor
+     */
+    Element(){
+    }
+    /**
+     * @brief Element specific constructor
+     * still requires the definition of the body, linking of body and fixture and adding to the Qt-world
+     * @param typ defines type of element
+     */
+    Element(elementType typ) {
+        ///define item
+        switch(typ) {
+        case BALKEN_S:
+            this->item = new Balken(0, 0, 0, BALKEN_LENGTH_DEFAULT, Balken::statisch);
+            break;
+        case BALKEN_R:
+            this->item = new Balken(0, 0, 0, BALKEN_LENGTH_DEFAULT, Balken::rotatorisch);
+            break;
+        case BALKEN_T:
+            this->item = new Balken(0, 0, 0, BALKEN_LENGTH_DEFAULT, Balken::translatorisch);
+            break;
+        case BALL:
+            this->item = new Ball();
+            break;
+        case FEDER:
+            //this->item = new Feder(0, 0);
+            //momentan muss eine Feder noch von hand nach dem konstruktor erstellt
+            //werden um "zirkulaere" includes zu vermeiden
+            break;
+        case FOEHN:
+            this->item = new Foehn(0, 0, 0);
+            break;
+        case MASKE:
+            this->item = new Maske(0, 0);
+            break;
+        case VIRUS:
+            this->item = new Virus(0, 0);
+            break;
+        }
+        ///define bodyDef
+        this->bodyDef = new b2BodyDef();
+        switch(typ) {
+        case BALL:
+            this->bodyDef->type = b2_dynamicBody;
+            break;
+        default:
+            this->bodyDef->type = b2_staticBody;
+            break;
+        }
+        ///define shape
+        switch(typ) {
+        case BALKEN_S:
+        case BALKEN_R:
+        case BALKEN_T:
+        case FEDER:
+        case FOEHN:
+        case MASKE:
+            this->shape = new b2PolygonShape();
+            if (typ == BALKEN_S || typ == BALKEN_R || typ == BALKEN_T)
+                dynamic_cast<b2PolygonShape*>(this->shape)->SetAsBox(BALKEN_LENGTH_DEFAULT/2, BALKEN_WIDTH/2);
+            else if (typ == FEDER)
+                dynamic_cast<b2PolygonShape*>(this->shape)->SetAsBox(FEDER_WIDTH/2, FEDER_HEIGHT/2);
+            else if (typ == FOEHN){
+                b2Vec2 VecShapeFoehn[3];
+                VecShapeFoehn[0].Set(0.0f, 0.0f);
+                VecShapeFoehn[1].Set(FOEHN_WIDTH*3.0f/4.0f, 0.0f);
+                VecShapeFoehn[2].Set(FOEHN_WIDTH*3.0f/8.0f, FOEHN_WIDTH*3.0f/4.0f);
+                dynamic_cast<b2PolygonShape*>(this->shape)->Set(VecShapeFoehn, 3);}
+            else
+                dynamic_cast<b2PolygonShape*>(this->shape)->SetAsBox(MASKE_WIDTH/2, MASKE_WIDTH/2);
+            break;
+        case BALL:
+        case VIRUS:
+            this->shape = new b2CircleShape();
+            if (typ == BALL)
+                this->shape->m_radius = BALL_DIAM/2;
+            else
+                this->shape->m_radius = VIRUS_DIAM/2;
+            break;
+        }
+        ///define fixture
+        this->fixture = new b2FixtureDef();
+        this->fixture->shape = this->shape;
+        this->fixture->friction = BALL_FRICTION;
+        switch(typ) {
+        case BALL:
+            this->fixture->density = BALL_DENSITY;
+            this->fixture->restitution = BALL_RESTITUTION;
+            break;
+        default:
+            this->fixture->density = 0.0f;
+            this->fixture->restitution = 0.0f;
+            break;
+        }
+    }
+
+
+    ~Element() {
+        if (bodyDef != nullptr) {
+            delete bodyDef;
+            bodyDef = nullptr;
+        }
+        if (fixture != nullptr) {
+            delete fixture;
+            fixture = nullptr;
+        }
+    }
+};
+
+#endif // ELEMENT_H
