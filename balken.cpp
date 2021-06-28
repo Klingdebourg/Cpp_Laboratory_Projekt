@@ -1,13 +1,5 @@
 #include "balken.h"
 
-/**
- * @brief creates a Balken at a certain position
- * @param x horizontal location of Balken
- * @param y vertical location of Balken
- * @param rotation initial rotation of Balken
- * @param length length of the balken
- * @param typ indicates whether the balken cannot be moved at all, can be translated or rotated with arrow keys
- */
 Balken::Balken(int x, int y, int rotation, int length, balkenType typ) {
 
     //creates rectangle with given size at origin in scene coordinates
@@ -139,10 +131,6 @@ int Balken::getRotation() const{
     return rotation;
 }
 
-/**
- * @brief Balken::getLength
- * @return length of the Balken
- */
 int Balken::getLength() const
 {
     return length;
