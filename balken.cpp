@@ -43,18 +43,10 @@ Balken::Balken(int x, int y, int rotation, int length, balkenType typ) {
     modified = NONE;
 }
 
-/**
- * @brief Balken::boundingRect
- * @return the are to be redrawn when the item is updated
- */
 QRectF Balken::boundingRect() const {
     return QRectF(0, 0, getLength()+6, BALKEN_WIDTH+6);
 }
 
-/**
- * @brief to move the Balken if it is in focus
- * @param event contains the pressed key
- */
 void Balken::keyPressEvent(QKeyEvent *event) {
     //move the Balken
     switch(event->key()) {
@@ -97,10 +89,6 @@ void Balken::keyPressEvent(QKeyEvent *event) {
 
 }
 
-/**
- * @brief enables the object to be modified with keyboard input
- * @param event
- */
 void Balken::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     switch(event->button()) {
     case Qt::LeftButton:
@@ -131,10 +119,6 @@ void Balken::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 }
 
 
-/**
- * @brief Balken::setPosition sets the position of the Balken and changes the internally stored position
- * @param point
- */
 void Balken::setPosition(QPointF point) {
     position.setX(point.x());
     position.setY(point.y());
@@ -142,9 +126,6 @@ void Balken::setPosition(QPointF point) {
 
 }
 
-/**
- * @brief Balken::unmodified setd the modified status to NONE
- */
 void Balken::unmodified() {
     modified = NONE;
 }
@@ -154,10 +135,6 @@ void Balken::setRotation(qreal angle) {
     QGraphicsItem::setRotation(angle);
 }
 
-/**
- * @brief Balken::rot
- * @return current rotation of the Balken
- */
 int Balken::getRotation() const{
     return rotation;
 }

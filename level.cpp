@@ -479,10 +479,6 @@ void Level::AddScore()
 }
 
 
-/**
- * @brief Level::applyFoehnForces iterates over all foehne, checks whether the ball is in reach of them
- * and applies a force in direction of the foehn if necessary depending on the positions wrt each others
- */
 void Level::applyFoehnForces() {
     //iterate over all foehne
     for (int i = 0; i < foehne.size(); i++) {
@@ -517,12 +513,7 @@ void Level::applyFoehnForces() {
     }
 }
 
-/**
- * @brief Level::updateB2Balken as the balken class only handles their Qt appearance/position,
- * their box2d position needs to be updated as well. Therefore this method iterates over all balken
- * stored in the QVector of the level and updates their position if the internal modified flag
- * has been set in the respective Qt-item.
- */
+
 void Level::updateB2Balken() {
     //iterate over all balken
     for (int i = 0; i < balken.size(); i++) {
