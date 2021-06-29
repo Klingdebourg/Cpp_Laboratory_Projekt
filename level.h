@@ -25,7 +25,7 @@ public:
     Game* levelgame;
     int level;
     b2BodyDef groundBodyDefTop;
-    b2BodyDef groundBodyDefBotton;
+    b2BodyDef groundBodyDefBottom;
     b2BodyDef groundBodyDefLeft;
     b2BodyDef groundBodyDefRight;
     QString text;

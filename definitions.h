@@ -29,7 +29,7 @@
 
 ///physical ball specific box2d parameters
 #define BALL_DENSITY 0.1f
-#define BALL_FRICTION 0.25f
+#define BALL_FRICTION 10000.25f
 #define BALL_RESTITUTION 0.7f
 
 #endif // DEFINITIONS_H

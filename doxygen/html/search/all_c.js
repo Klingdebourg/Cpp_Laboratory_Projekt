@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['setposition_24',['setPosition',['../class_balken.html#aadcefe258bea6caa7aef9070f82f80b4',1,'Balken']]]
+  ['redo_42',['Redo',['../class_level.html#a7791f3d6222ed5202255a8d8d6a7eead',1,'Level']]]
 ];

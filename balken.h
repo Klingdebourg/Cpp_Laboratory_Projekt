@@ -17,7 +17,8 @@
 class Balken : public QGraphicsRectItem {
 public:
     /**
-     * @brief The balkenType enum defines whether and if yes how the balken can be
+     * @brief The balkenType enum
+     * defines whether and if yes how the balken can be
      * modified by the player
      */
     enum balkenType {
@@ -27,7 +28,8 @@ public:
     };
 
     /**
-     * @brief The modification enum this parameter is necessary to tell the level class
+     * @brief The modification enum
+     * this parameter is necessary to tell the level class
      * if a balken has been modifiedand if yes how. Then the level class will also modify
      * the position of the box2d instance of the balken
      */

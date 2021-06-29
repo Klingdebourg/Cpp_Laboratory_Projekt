@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['keypressevent_54',['keyPressEvent',['../class_balken.html#ae767d213c3c80b00085afd5ceec78e51',1,'Balken::keyPressEvent()'],['../class_feder.html#a4814b9e59c6509f030e72477c02220cf',1,'Feder::keyPressEvent()']]]
+  ['interaktion_84',['Interaktion',['../class_level.html#ad5c286be1fbbecf0442bd3ca9b3ed46e',1,'Level']]],
+  ['ison_85',['isOn',['../class_foehn.html#a64f662d6889c02add20800d9204f6b80',1,'Foehn']]]
 ];

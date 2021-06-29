@@ -31,11 +31,14 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     groundBoxTop.SetAsBox(900.0f, 5.0f);
     groundBodyTop->CreateFixture(&groundBoxTop, 0.0f);
 
-    groundBodyDefBotton.position.Set(800,1030);
-    b2Body* groundBodyBotton = world->CreateBody(&groundBodyDefBotton);
-    b2PolygonShape groundBoxBotton;
-    groundBoxBotton.SetAsBox(900.0f, 5.0f);
-    groundBodyBotton->CreateFixture(&groundBoxBotton, 0.0f);
+    groundBodyDefBottom.position.Set(800,1030);
+    b2Body* groundBodyBottom = world->CreateBody(&groundBodyDefBottom);
+    b2PolygonShape groundBoxBottom;
+    groundBoxBottom.SetAsBox(900.0f, 5.0f);
+    b2FixtureDef groundFixtureBottom;
+    groundFixtureBottom.friction = 2000.5f;
+    groundFixtureBottom.shape = &groundBoxBottom;
+    groundBodyBottom->CreateFixture(&groundFixtureBottom);
 
     groundBodyDefLeft.position.Set(-30,600);
     b2Body* groundBodyLeft = world->CreateBody(&groundBodyDefLeft);
