@@ -7,32 +7,32 @@
 class Button:public QObject, public QGraphicsRectItem{
     Q_OBJECT
 public:
-    ///
-    /// \brief Button Der Konstruktor für Button
-    /// \param name Dies ist ein Übergabeparameter mit dem Titel für den Button
-    /// \param parent Zu übergeben an das Elternteil QGraphicsItem
-    ///
+    /**
+     * @brief button constructor
+     * @param name parameter given to the constructor containing the name of the button
+     * @param parent to be given to the parent class
+     */
     Button(QString name, QGraphicsItem* parent=NULL);
 
-    ///
-    /// \brief mousePressEvent
-    /// \param event
-    ///
+    /**
+     * @brief mousePressEvent
+     * @param event
+     */
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    ///
-    /// \brief gettext: Gibt den Text/Titel des Buttons als QString zurück
-    /// \return
-    ///
+    /**
+     * @brief gettext gives back the private variable text
+     * @return the name of the button as a QString
+     */
     QString gettext();
 signals:
-    ///
-    /// \brief clicked: Signal das der Button aussendet umd zu bestimmten Slot zu weisen
-    ///
+    /**
+     * @brief clicked signal that is emitted when a button is clicked to show to the slot
+     */
     void clicked();
 private:
-    ///
-    /// \brief text: Private Variable in das der Name des Buttons gespeichert wird
-    ///
+    /**
+     * @brief text private variable that contains the name of the variable
+     */
     QGraphicsTextItem* text;
 };
 

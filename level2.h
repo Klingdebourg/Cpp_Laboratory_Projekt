@@ -8,10 +8,12 @@
 
 class Level2: public Level{
 public:
-    ///
-    /// \brief Level2
-    /// \param game
-    ///
+    /**
+     * @brief Level2 constructor
+     * @param game given to Level 2 to be handed to level (parent)
+     *
+     * Graphics for Level 2 are drawn
+     */
     Level2(Game* game);
 
 };

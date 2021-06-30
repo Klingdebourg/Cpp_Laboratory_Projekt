@@ -21,6 +21,7 @@ class Level : public QGraphicsView
     Q_OBJECT
 public:
     Level(Game* game, int type, QWidget* parent = NULL);
+    QGraphicsScene* levelscene;
     Game* levelgame;
     int level;
     b2BodyDef groundBodyDefTop;
@@ -28,7 +29,6 @@ public:
     b2BodyDef groundBodyDefLeft;
     b2BodyDef groundBodyDefRight;
     QString text;
-    QGraphicsScene* levelscene;
     QGraphicsScene* pausemenu;
     QGraphicsView* pausepic;
     counter* Counter;
@@ -36,8 +36,6 @@ public:
     int failbedingung;
     int x_last;
     int y_last;
-    int x_current;
-    int y_current;
     info* Info;
     QGraphicsRectItem* bounds;
     int finalscore;
@@ -51,6 +49,7 @@ public slots:
     void Gewonnen();
     void Next();
     void AddScore();
+    bool StopCheck();
     //Maske* maske1, Maske* maske2, Maske* maske3, Virus* virus
 
 protected:

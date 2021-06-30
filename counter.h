@@ -7,25 +7,25 @@
     class counter: public QGraphicsTextItem
     {
     public:
-     ///
-     /// \brief counter Konstruktor für einen Counter
-     ///
-     /// Der Counter ist pro Level aktiv und trackt die gesammelten Masken. Der Score wird dabei am Bildschirm ausgegeben
-     ///
+        /**
+      * @brief counter constructor
+      *
+      * Counter is a class that is active in every level counting up the collected masks
+      */
      counter();
-     ///
-     /// \brief increase Setzt die private Variable m_score bei Aufruf nach oben und aktualisiert die Ausgabe auf den Bildschirm
-     ///
+     /**
+      * @brief increase increases the private variable m_score and actualizes the GUI, when called (mask is collected)
+      */
      void increase();
-     ///
-     /// \brief getscore Gibt den Score, beziehungsweise die private Variable m_score zurück
-     /// \return
-     ///
+     /**
+      * @brief getscore gives back the private variable m_score
+      * @return returns the score of the collected masks
+      */
      int getscore();
     private:
-     ///
-     /// \brief m_score Die private Variable die die Anzahl der gesammelten Masken in sich speichert
-     ///
+     /**
+      * @brief m_score private variable that saves the number of collected masks
+      */
      int m_score;
     };
 

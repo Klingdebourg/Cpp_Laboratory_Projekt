@@ -14,7 +14,7 @@
 #define VIRUS_DIAM 80
 #define spannungBallInit 6000
 
-#define ABBRUCHZEIT 100
+#define ABBRUCHZEIT 1500
 
 ///scaling between box2d world and qt scene
 #define SCALING 1000.0f
