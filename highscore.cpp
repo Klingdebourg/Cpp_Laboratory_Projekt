@@ -3,58 +3,58 @@
 Highscore::Highscore(){
 }
 
-void Highscore::write(){
-    QFile file1("highscore1.txt");
-    if (!file1.open(QFile::WriteOnly | QFile::Text)) {
-        return;
-    }
-    QTextStream out1(&file1);
-    QString line1 = "Hello";
-    out1 << line1;
-    file1.flush();
-    file1.close();
-}
-
-QString Highscore::read(int level){
+QString Highscore::read(int level){    
+    ///defines String to insert the filename for the level
     QString filename;
+    ///choses name of the file according the which level was played
     if(level == 1){
-        filename = "C:/Users/paula/Documents/TUM/Bachelor/6.Semester/Cpp/Hauptprojekt/Spiel/gruppe-3-hauptprojekt/highscores/highscore1.txt";
+        filename = "highscore1.txt";
     } else if(level == 2){
-        filename = "C:/Users/paula/Documents/TUM/Bachelor/6.Semester/Cpp/Hauptprojekt/Spiel/gruppe-3-hauptprojekt/highscores/highscore2.txt";
+        filename = "highscore2.txt";
     } else if(level == 3){
-        filename = "C:/Users/paula/Documents/TUM/Bachelor/6.Semester/Cpp/Hauptprojekt/Spiel/gruppe-3-hauptprojekt/highscores/highscore3.txt";
+        filename = "highscore3.txt";
     }
-    QFile file(filename);    if (!file.open(QFile::ReadOnly | QFile::Text)) {
+    QFile file(filename);
+    if (!file.open(QFile::ReadOnly | QFile::Text)) {
         return "";
     }
+    ///create a new QTextStream and insert file and inserts the text that is in the textfile
     QTextStream in(&file);
     QString line = in.readAll();
+    /// returns text of highscorefile so it can be showed in a Highscoreoutput
     return line;
     file.close();
 }
 
 void Highscore::insertScore(QString Name, QString Zeit, int Masken, int level){
+    ///defines String to insert the filename for the level
     QString filename;
+    ///choses name of the file according the which level was played
     if(level == 1){
-        filename = "C:/Users/paula/Documents/TUM/Bachelor/6.Semester/Cpp/Hauptprojekt/Spiel/gruppe-3-hauptprojekt/highscores/highscore1.txt";
+        filename = "highscore1.txt";
     } else if(level == 2){
-        filename = "C:/Users/paula/Documents/TUM/Bachelor/6.Semester/Cpp/Hauptprojekt/Spiel/gruppe-3-hauptprojekt/highscores/highscore2.txt";
+        filename = "highscore2.txt";
     } else if(level == 3){
-        filename = "C:/Users/paula/Documents/TUM/Bachelor/6.Semester/Cpp/Hauptprojekt/Spiel/gruppe-3-hauptprojekt/highscores/highscore3.txt";
+        filename = "highscore3.txt";
     }
     QFile file(filename);
-    if(!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
+    QFileDevice::Permissions p = file.permissions();
+    if (!file.open(QFile::ReadWrite | QFile::Text)) {
         return;
     }
+    ///line [15] to save the lines that were already in the file
     QString line[15];
     int row = 0;
+    ///create a new QTextStream and insert file
     QTextStream out(&file);
+    ///create new Highscore Output and add all outputs to the Text stream
     line[row] = Name + ": Zeit: " + Zeit + ", gesammelte Masken: " + QString::number(Masken);
-    line[row + 1]=out.readAll();
+    line[row+1] = out.readAll();
     while(!out.atEnd()){
         out << line[row] << endl;
         row++;
     }
     out << line[row] << endl;
+    file.flush();
     file.close();
 }

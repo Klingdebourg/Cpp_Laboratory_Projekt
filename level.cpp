@@ -151,6 +151,7 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     uhr->setPos(WINDOW_W-uhr->boundingRect().width(),40);
     levelscene -> addItem(uhr);
 
+    ///add a highscore to use it's functions
     newHighscore = new Highscore;
 
     ///set the counter needed for the fail condition
@@ -272,9 +273,9 @@ void Level::Interaktion(){
     ///account for influence of the foehne
     applyFoehnForces();
 
-    ///update the passed time as soon as ball is moving
-    if (!dynamic_cast<Feder*>(feder->item)->getBallAttached()){
-        uhr -> time_elapsed();
+    ///restarts the timer as long as the ball isn't moving
+    if (dynamic_cast<Feder*>(feder->item)->getBallAttached()){
+        uhr -> start();
     }
 
     ///update world in box2d (ask new position of ball and apply)
@@ -289,45 +290,40 @@ void Level::Interaktion(){
         ball->item->setPos(QPointF(ballStep.x, WINDOW_H-ballStep.y));
     }
 
+    ///updates the passed time since the timer was started
+    uhr -> time_elapsed();
+
 
     ///Check for position of the ball, if it hasn't changed in 1500 times of calling the method then the game is lost
     if (StopCheck()==true){
         return;}
 
-
-
-
-    ///Kollisionsabfrage
-    ///In Ball abfragen, was mit Ball kollidiert
+    ///see wha't colliding with the ball
     int colliding_item = dynamic_cast<Ball*>(ball->item)->collidingItem(dynamic_cast<Maske*>(maske1->item),
                                                                         dynamic_cast<Maske*>(maske2->item),
                                                                         dynamic_cast<Maske*>(maske3->item),
                                                                         dynamic_cast<Virus*>(virus->item));
+    ///touched masks are being "removed" (moved out of levelscene)
     if (colliding_item == 1){
-       // qDebug("Maske1 wird berührt"); +++++++++++++++++++++++++++++++++++++
-//        levelscene -> removeItem(maske1->item);
         dynamic_cast<Maske*>(maske1->item)->setPos(0,-100);
         Counter -> increase();
         return;
     } else if (colliding_item == 2){
-//        levelscene -> removeItem(maske2->item);
         dynamic_cast<Maske*>(maske2->item)->setPos(0,-100);
         Counter -> increase();
         return;
     } else if (colliding_item == 3){
-//        levelscene -> removeItem(maske3->item);
         dynamic_cast<Maske*>(maske3->item)->setPos(0,-100);
         Counter -> increase();
         return;
     }  else if (colliding_item == 4){
-        ///Spiel beenden
+        ///end game
         timer->stop();
         finalscore = Counter->getscore();
         finaltime = uhr -> gettime();
         levelscene->clear();
         Gewonnen();
         return;
-        /// Text "du hast gewonnen" + Highscore
     } else if (colliding_item == 5){       
 //        qDebug("Nichts wird berührt");
         return;
@@ -532,16 +528,18 @@ void Level::showHighscore(int level){
     connect(back, SIGNAL(clicked()),this,SLOT(Hauptmenu()));
     levelscene->addItem(back);
 
+    /// title
     QGraphicsTextItem* enternametitle = new QGraphicsTextItem(QString("Highscore Level" + QString::number(level)));
     QFont titleFont("comic sans",30);
     enternametitle->setFont(titleFont);
     enternametitle->setPos(WINDOW_W/16,WINDOW_H/8);
     levelscene->addItem(enternametitle);
 
+    ///output of highscore of played level is shown
     QString outputText = newHighscore -> read(level);
     QGraphicsTextItem* highscoreOutput = new QGraphicsTextItem(outputText);
-    QFont titleFontText("comic sans",20);
-    highscoreOutput->setPos(WINDOW_W*1/8,WINDOW_H*3/8);
+    QFont titleFontText("comic sans",18);
+    highscoreOutput->setPos(WINDOW_W*1/8,WINDOW_H*2/8);
     highscoreOutput->setFont(titleFontText);
     levelscene->addItem(highscoreOutput);
 }

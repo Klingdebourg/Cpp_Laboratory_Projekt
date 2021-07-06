@@ -5,4 +5,9 @@
         <file>media/pause.png</file>
         <file>media/virus.png</file>
     </qresource>
+    <qresource prefix="/highscores">
+        <file>highscores/highscore1.txt</file>
+        <file>highscores/highscore2.txt</file>
+        <file>highscores/highscore3.txt</file>
+    </qresource>
 </RCC>

@@ -21,6 +21,9 @@ public:
      * Game inherits from QGraphicsView to manage what should be seen
      */
     Game(QWidget* parent = NULL);
+    /**
+     * @brief highscore element to use the read funtion of the highscore
+     */
     Highscore* newHighscore;
 
 
@@ -46,9 +49,12 @@ public slots:
      */
     void scores();
     /**
-     * @brief best is being called when the player selected a level from which they want to kno the scores
+     * @brief best is being called after clicking a button for the level, level number is given in level_clicked() function
      */
     void best(int level);
+    /**
+     * @brief level_clicked is being called when the level_ button is being clicked
+     */
     void level1clicked();
     void level2clicked();
     void level3clicked();
