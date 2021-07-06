@@ -3,6 +3,8 @@
 
 Level2::Level2(Game* game):Level(game, 2) {
 
+    ///Create the objects specific for level 2 and set the positions
+
     ballStep = b2Vec2(0,0);
 
     //wofür ist dies? (@johanna)

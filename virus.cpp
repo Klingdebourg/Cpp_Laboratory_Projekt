@@ -2,9 +2,8 @@
 #include <QRectF>
 #include "definitions.h"
 
-Virus::Virus(int x, int y, QRectF *a)
+Virus::Virus(int x, int y)
 {
-    QPixmap pic("media/virus.png");
     setRect(x, y, VIRUS_DIAM, VIRUS_DIAM);
 }
 

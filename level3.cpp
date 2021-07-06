@@ -3,6 +3,8 @@
 
 Level3::Level3(Game* game):Level(game,3) {
 
+    ///Create the objects specific for level 3 and set the positions
+
     x_last=ball->item->x();
     y_last=ball->item->y();
 
