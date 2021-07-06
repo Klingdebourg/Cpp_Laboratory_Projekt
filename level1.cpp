@@ -4,7 +4,7 @@
 
 Level1::Level1(Game* game):Level(game,1) {
 
-    //Create the objects specific for the level
+    ///Create the objects specific for level 1 and set the positions
     balken.append(new Element(BALKEN_S));
     dynamic_cast<Balken*>(balken.at(0)->item)->setPosition(QPointF(WINDOW_W/2.0f, WINDOW_H*3.0f/4));
     balken.at(0)->body = world->CreateBody(balken.at(0)->bodyDef);

@@ -8,10 +8,10 @@
 #include <QDebug>
 #include <QGraphicsRectItem>
 #include <QLineEdit>
-#include <fstream>
+#include <QIcon>
 
 Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
-    //create scene for the level and adapt parameters
+    ///create the basic scene for the level
     levelscene = new QGraphicsScene(this);
     levelgame = game;
     level = type;
@@ -21,6 +21,9 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     setFixedSize(WINDOW_W,WINDOW_H);
     levelscene->setSceneRect(0,0,WINDOW_W,WINDOW_H);
     levelscene->addLine(0,100,WINDOW_W,100);
+    setWindowIcon(QIcon(":/pictures/media/virus.png"));
+    QPixmap background(":/pictures/media/background2.jpg");
+    levelscene->setBackgroundBrush(background.scaled(WINDOW_W,WINDOW_H,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
 
     //create box2d world with negative gravity of
     world = new b2World(b2Vec2(0.0f, GRAVITY));
@@ -32,11 +35,14 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     groundBoxTop.SetAsBox(900.0f, 5.0f);
     groundBodyTop->CreateFixture(&groundBoxTop, 0.0f);
 
-    groundBodyDefBotton.position.Set(800,1030);
-    b2Body* groundBodyBotton = world->CreateBody(&groundBodyDefBotton);
-    b2PolygonShape groundBoxBotton;
-    groundBoxBotton.SetAsBox(900.0f, 5.0f);
-    groundBodyBotton->CreateFixture(&groundBoxBotton, 0.0f);
+    groundBodyDefBottom.position.Set(800,1030);
+    b2Body* groundBodyBottom = world->CreateBody(&groundBodyDefBottom);
+    b2PolygonShape groundBoxBottom;
+    groundBoxBottom.SetAsBox(900.0f, 5.0f);
+    b2FixtureDef groundFixtureBottom;
+    groundFixtureBottom.friction = 2000.5f;
+    groundFixtureBottom.shape = &groundBoxBottom;
+    groundBodyBottom->CreateFixture(&groundFixtureBottom);
 
     groundBodyDefLeft.position.Set(-30,600);
     b2Body* groundBodyLeft = world->CreateBody(&groundBodyDefLeft);
@@ -50,14 +56,14 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     groundBoxRight.SetAsBox(5.0f, 600.0f);
     groundBodyRight->CreateFixture(&groundBoxRight, 0.0f);
 
-
+    ///create a button to close the info for each level
     Button* closeinfo = new Button(QString("OK & schließen"));
     connect(closeinfo, SIGNAL(clicked()),this,SLOT(InfoToBeClosed()));
     closeinfo->setRect(0,0,150,50);
 
     bounds=new QGraphicsRectItem;
 
-
+    ///depending on the level, set the title text of the level and create the info
     if (level == 1 ){
         text= "Level 1";
         Info = new info(1,closeinfo, bounds);
@@ -77,7 +83,7 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     }
     levelscene->addItem(bounds);
 
-
+    ///draw the title
     QGraphicsTextItem* titleText = new QGraphicsTextItem(text);
     QFont titleFont("comic sans",30);
     titleText->setDefaultTextColor(Qt::cyan);
@@ -87,6 +93,7 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     titleText->setPos(txPos,tyPos);
     levelscene->addItem(titleText);
 
+    ///create the basic elements of every level
     ball = new Element(BALL);
     ball->body = world->CreateBody(ball->bodyDef);
     ball->body->CreateFixture(ball->fixture);
@@ -120,20 +127,22 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     levelscene -> addItem(virus->item);
     
 
-    //Pause-Button
+    ///create a pause button
     Button* pause = new Button(QString("||"));
     pause->setRect(0,0,100,100);
     connect(pause, SIGNAL(clicked()),this,SLOT(pause()));
     levelscene->addItem(pause);
     isPaused = false;
 
-    pausepic = new QGraphicsView;
+    pausepic = new QGraphicsView();
     pausemenu = new QGraphicsScene();
 
+    ///create a timer
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(Interaktion()));
     timer -> start(TIME_STEP*1000);
 
+    ///create a counter for the collected masks
     Counter = new counter;
     Counter->setPos(WINDOW_W-Counter->boundingRect().width(),y());
     levelscene -> addItem(Counter);
@@ -154,35 +163,41 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
  * @brief Level::pause to pause the game
  */
 void Level::pause(){
-    //Szene einfrieren -> box2d??
     isPaused = true;
-    //new scene
+
+    ///create a new scene and view for the pause menu
 
     pausepic->setScene(pausemenu);
     pausepic->show();
+    pausepic->setWindowIcon(QIcon(":/pictures/media/pause.png"));
+    pausepic->setBackgroundBrush(Qt::lightGray);
     pausepic->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     pausepic->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     pausepic->setFixedSize(WINDOW_W/2,WINDOW_H/2);
     pausemenu->setSceneRect(0,0,WINDOW_W/2,WINDOW_H/2);
 
+    ///draw the title
     QGraphicsTextItem* pausetext = new QGraphicsTextItem;
     pausetext->setPlainText(QString("Du hast auf Pause gedrückt, was möchtest du machen:"));
     pausetext->setDefaultTextColor(Qt::blue);
-    pausetext->setPos(pausemenu->width()/5,100);
+    pausetext->setPos(pausemenu->width()/6,100);
     pausemenu->addItem(pausetext);
 
+    ///create a return button to get back to the level menu
     Button* zurueck = new Button(QString("Zurück zur Levelübersicht"));
     connect(zurueck, SIGNAL(clicked()),this,SLOT(Zurueck()));
     zurueck->setRect(0,0,300,50);
     zurueck->setPos(pausetext->x()+pausetext->boundingRect().width()/4, pausetext->y()+100);
     pausemenu->addItem(zurueck);
 
+    ///create a button to restart the level
     Button* redo = new Button(QString("Den Level erneut starten"));
     connect(redo, SIGNAL(clicked()),this,SLOT(Redo()));
     redo->setRect(0,0,300,50);
     redo->setPos(pausetext->x()+pausetext->boundingRect().width()/4, pausetext->y()+200);
     pausemenu->addItem(redo);
 
+    ///create a button to return to the main menu
     Button* haupt = new Button(QString("Zum Hauptmenü"));
     connect(haupt, SIGNAL(clicked()),this,SLOT(Hauptmenu()));
     haupt->setRect(0,0,300,50);
@@ -195,6 +210,7 @@ void Level::pause(){
  */
 void Level::Zurueck()
 {
+    ///call the levelmenu of the game scene and delete everything else
     levelgame->show();
     levelgame->levelmenu();
     pausemenu->deleteLater();
@@ -207,6 +223,7 @@ void Level::Zurueck()
  */
 void Level::Redo()
 {
+    ///delete the existing level and depending on the level create a new level object
     pausemenu->deleteLater();
     pausepic->deleteLater();
     this->deleteLater();
@@ -231,6 +248,7 @@ void Level::Redo()
  */
 void Level::Hauptmenu()
 {
+    ///call the main menu and delete everything else
     levelgame->show();
     levelgame->displayMainMenu();
     pausemenu->deleteLater();
@@ -271,52 +289,10 @@ void Level::Interaktion(){
     }
 
 
-    //Abfrage nach Position des Balls->Ende des Spiels / Abbruchbedingung
-    if (! dynamic_cast<Feder*>(feder->item)->getBallAttached()) {
-        int x_current = ball->item->x();
-        int y_current = ball->item->y();
-        if(x_current == x_last && y_current == y_last && isPaused == false) {
-            if (failbedingung <= ABBRUCHZEIT) {
-                failbedingung++;
-            } else {
-                levelscene->clear();
-                QGraphicsTextItem* losttext = new QGraphicsTextItem(QString("Sie haben leider verloren"));
-                QFont titleFont("comic sans",50);
-                losttext->setFont(titleFont);
-                int txPos = this->width()/2 - losttext->boundingRect().width()/2;
-                int tyPos = 150;
-                losttext->setPos(txPos,tyPos);
-                levelscene->addItem(losttext);
+    ///Check for position of the ball, if it hasn't changed in 1500 times of calling the method then the game is lost
+    if (StopCheck()==true){
+        return;}
 
-                Button* zurueck = new Button(QString("Zurück zur Levelübersicht"));
-                connect(zurueck, SIGNAL(clicked()),this,SLOT(Zurueck()));
-                zurueck->setRect(0,0,300,50);
-                zurueck->setPos(losttext->x()+losttext->boundingRect().width()/3,losttext ->y()+400);
-                levelscene->addItem(zurueck);
-
-                Button* redo = new Button(QString("Den Level erneut starten"));
-                connect(redo, SIGNAL(clicked()),this,SLOT(Redo()));
-                redo->setRect(0,0,300,50);
-                redo->setPos(losttext->x()+losttext->boundingRect().width()/3, losttext->y()+600);
-                levelscene->addItem(redo);
-
-                Button* haupt = new Button(QString("Zum Hauptmenü"));
-                connect(haupt, SIGNAL(clicked()),this,SLOT(Hauptmenu()));
-                haupt->setRect(0,0,300,50);
-                haupt->setPos(losttext->x()+losttext->boundingRect().width()/3, losttext->y()+800);
-                levelscene->addItem(haupt);
-                timer->stop();
-                return;
-
-            }
-        } else {
-            failbedingung = 0;
-        }
-        x_last = x_current;
-        y_last = y_current;
-    } else {
-        failbedingung = 0;
-    }
 
 
 
@@ -359,7 +335,7 @@ void Level::Interaktion(){
 }
 
 void Level::InfoToBeClosed()
-{
+{   ///to delete the Info
     Info->OKpressed();
     delete(bounds);
 }
@@ -370,7 +346,8 @@ void Level::Gewonnen()
 
     QGraphicsTextItem* winText = new QGraphicsTextItem(QString("Wow. Du hast es geschafft den Virus zu besiegen. Glückwunsch! Du hast es geschafft dabei "+QString::number(finalscore)+ " Maske/n zu sammeln und das in einer Zeit von " + finaltime + "! Was möchtest du jetzt tun?"));
 
-    QFont titleFont("comic sans",10);
+    QFont titleFont("comic sans",15);
+    titleFont.setStyleHint(QFont::Courier);
     winText->setTextWidth(1000);
     winText->setDefaultTextColor(Qt::darkGreen);
     winText->setFont(titleFont);
@@ -379,12 +356,14 @@ void Level::Gewonnen()
     winText->setPos(txPos,tyPos);
     levelscene->addItem(winText);
 
+    ///create a button to get back to the level menu
     Button* zurueck = new Button(QString("Zurück zur Levelübersicht"));
     connect(zurueck, SIGNAL(clicked()),this,SLOT(Zurueck()));
     zurueck->setRect(0,0,300,50);
     zurueck->setPos(WINDOW_W/8,WINDOW_H/2);
     levelscene->addItem(zurueck);
 
+    ///depending on the level played, create a button to directly play the next one
     if (level == 1 || level == 2){
     Button* next = new Button(QString("Nächster Level"));
     connect(next, SIGNAL(clicked()),this,SLOT(Next()));
@@ -392,18 +371,21 @@ void Level::Gewonnen()
     next->setPos(WINDOW_W*5/8,WINDOW_H/2);
     levelscene->addItem(next);}
 
+    ///create a restart button
     Button* redo = new Button(QString("Den Level erneut starten"));
     connect(redo, SIGNAL(clicked()),this,SLOT(Redo()));
     redo->setRect(0,0,300,50);
     redo->setPos(WINDOW_W/8, WINDOW_H*3/4);
     levelscene->addItem(redo);
 
+    ///create a button to return to the main menu
     Button* haupt = new Button(QString("Zum Hauptmenü"));
     connect(haupt, SIGNAL(clicked()),this,SLOT(Hauptmenu()));
     haupt->setRect(0,0,300,50);
     haupt->setPos(WINDOW_W*5/8, WINDOW_H*3/4);
     levelscene->addItem(haupt);
 
+    ///create a button to save the score
     Button* highscore = new Button(QString("Meinen Score speichern"));
     connect(highscore, SIGNAL(clicked()),this,SLOT(AddScore()));
     highscore->setRect(0,0,300,50);
@@ -418,6 +400,7 @@ void Level::Gewonnen()
 
 void Level::Next()
 {
+    ///depending on the level that was played, delete this level and start the next one
     if(level==1){
         this->deleteLater();
         Level2* level2 = new Level2(levelgame);
@@ -434,6 +417,7 @@ void Level::Next()
 
 void Level::AddScore()
 {
+    ///draw the text for the highscore
     levelscene->clear();
     QGraphicsTextItem* enternametitle = new QGraphicsTextItem(QString("Bitte gebe deinen Namen ein und bestätige mit dem Button"));
        QFont titleFont("comic sans",20);
@@ -561,10 +545,6 @@ void Level::showHighscore(int level){
     levelscene->addItem(highscoreOutput);
 }
 
-/**
- * @brief Level::applyFoehnForces iterates over all foehne, checks whether the ball is in reach of them
- * and applies a force in direction of the foehn if necessary depending on the positions wrt each others
- */
 void Level::applyFoehnForces() {
     //iterate over all foehne
     for (int i = 0; i < foehne.size(); i++) {
@@ -599,12 +579,7 @@ void Level::applyFoehnForces() {
     }
 }
 
-/**
- * @brief Level::updateB2Balken as the balken class only handles their Qt appearance/position,
- * their box2d position needs to be updated as well. Therefore this method iterates over all balken
- * stored in the QVector of the level and updates their position if the internal modified flag
- * has been set in the respective Qt-item.
- */
+
 void Level::updateB2Balken() {
     //iterate over all balken
     for (int i = 0; i < balken.size(); i++) {

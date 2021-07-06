@@ -10,6 +10,9 @@
 #include "virus.h"
 #include <box2d.h>
 
+/**
+ * @brief The elementType enum helps to identify which object needs to be genereated when calling the constructor
+ */
 enum elementType {
     BALKEN_S,
     BALKEN_R,
@@ -23,11 +26,29 @@ enum elementType {
 
 
 struct Element {
+    /**
+     * @brief item the Qt item visible in the scene
+     */
     QGraphicsItem *item = nullptr;
+    /**
+     * @brief body the body necessary for the box2d animation
+     */
     b2Body *body = nullptr;
+    /**
+     * @brief bodyDef necessary to build a body
+     */
     b2BodyDef *bodyDef = nullptr;
+    /**
+     * @brief shape the shape for the respective box2d body
+     */
     b2Shape *shape = nullptr;
+    /**
+     * @brief fixture a box2d construct necessary to link shape and body parameters to the final box2d body
+     */
     b2FixtureDef *fixture = nullptr;
+    /**
+     * @brief typ the type of element stored
+     */
     elementType typ;
 
     /**
@@ -128,6 +149,9 @@ struct Element {
     }
 
 
+    /**
+     * @brief ~Element a regular destructor
+     */
     ~Element() {
         if (bodyDef != nullptr) {
             delete bodyDef;

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Get the Virus: Balken Class Reference</title>
+<title>Get The Virus: Balken Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="virus.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Get the Virus
+   <div id="projectname">Get The Virus
    </div>
   </td>
  </tr>
@@ -79,60 +79,62 @@ Inheritance diagram for Balken:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a283e4919a348c1443aced7316b4b7497"><td class="memItemLeft" align="right" valign="top"><a id="a283e4919a348c1443aced7316b4b7497"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>balkenType</b> { <b>statisch</b>
+<tr class="memitem:a283e4919a348c1443aced7316b4b7497"><td class="memItemLeft" align="right" valign="top"><a id="a283e4919a348c1443aced7316b4b7497"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_balken.html#a283e4919a348c1443aced7316b4b7497">balkenType</a> { <b>statisch</b>
 , <b>translatorisch</b>
 , <b>rotatorisch</b>
  }</td></tr>
+<tr class="memdesc:a283e4919a348c1443aced7316b4b7497"><td class="mdescLeft">&#160;</td><td class="mdescRight">The balkenType enum defines whether and if yes how the balken can be modified by the player. <br /></td></tr>
 <tr class="separator:a283e4919a348c1443aced7316b4b7497"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3bdcf562fdbab10bb573ec414b3351c7"><td class="memItemLeft" align="right" valign="top"><a id="a3bdcf562fdbab10bb573ec414b3351c7"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>modification</b> { <b>LEFT</b>
+<tr class="memitem:a3bdcf562fdbab10bb573ec414b3351c7"><td class="memItemLeft" align="right" valign="top"><a id="a3bdcf562fdbab10bb573ec414b3351c7"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_balken.html#a3bdcf562fdbab10bb573ec414b3351c7">modification</a> { <b>LEFT</b>
 , <b>RIGHT</b>
 , <b>NONE</b>
  }</td></tr>
+<tr class="memdesc:a3bdcf562fdbab10bb573ec414b3351c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The modification enum this parameter is necessary to tell the level class if a balken has been modifiedand if yes how. Then the level class will also modify the position of the box2d instance of the balken. <br /></td></tr>
 <tr class="separator:a3bdcf562fdbab10bb573ec414b3351c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a77eb8baebcb02d26c636242e020199e2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_balken.html#a77eb8baebcb02d26c636242e020199e2">Balken</a> (int x, int y, int rotation, int length, balkenType typ)</td></tr>
-<tr class="memdesc:a77eb8baebcb02d26c636242e020199e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates a <a class="el" href="class_balken.html">Balken</a> at a certain position  <a href="class_balken.html#a77eb8baebcb02d26c636242e020199e2">More...</a><br /></td></tr>
-<tr class="separator:a77eb8baebcb02d26c636242e020199e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6553f170b25cbb2012f0bd003d5679d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_balken.html#ad6553f170b25cbb2012f0bd003d5679d">Balken</a> (int x, int y, int rotation, int length=BALKEN_LENGTH_DEFAULT, <a class="el" href="class_balken.html#a283e4919a348c1443aced7316b4b7497">balkenType</a> typ=statisch)</td></tr>
+<tr class="memdesc:ad6553f170b25cbb2012f0bd003d5679d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_balken.html">Balken</a> simple constructor.  <a href="class_balken.html#ad6553f170b25cbb2012f0bd003d5679d">More...</a><br /></td></tr>
+<tr class="separator:ad6553f170b25cbb2012f0bd003d5679d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afff44b1aebfde017794688c8450a5df3"><td class="memItemLeft" align="right" valign="top">QRectF&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_balken.html#afff44b1aebfde017794688c8450a5df3">boundingRect</a> () const</td></tr>
-<tr class="memdesc:afff44b1aebfde017794688c8450a5df3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_balken.html#afff44b1aebfde017794688c8450a5df3" title="Balken::boundingRect.">Balken::boundingRect</a>.  <a href="class_balken.html#afff44b1aebfde017794688c8450a5df3">More...</a><br /></td></tr>
+<tr class="memdesc:afff44b1aebfde017794688c8450a5df3"><td class="mdescLeft">&#160;</td><td class="mdescRight">boundingRect implements virtual function  <a href="class_balken.html#afff44b1aebfde017794688c8450a5df3">More...</a><br /></td></tr>
 <tr class="separator:afff44b1aebfde017794688c8450a5df3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae767d213c3c80b00085afd5ceec78e51"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_balken.html#ae767d213c3c80b00085afd5ceec78e51">keyPressEvent</a> (QKeyEvent *event)</td></tr>
-<tr class="memdesc:ae767d213c3c80b00085afd5ceec78e51"><td class="mdescLeft">&#160;</td><td class="mdescRight">to move the <a class="el" href="class_balken.html">Balken</a> if it is in focus  <a href="class_balken.html#ae767d213c3c80b00085afd5ceec78e51">More...</a><br /></td></tr>
+<tr class="memdesc:ae767d213c3c80b00085afd5ceec78e51"><td class="mdescLeft">&#160;</td><td class="mdescRight">keyPressEvent moves or rotates the <a class="el" href="class_balken.html">Balken</a> if it is in focus  <a href="class_balken.html#ae767d213c3c80b00085afd5ceec78e51">More...</a><br /></td></tr>
 <tr class="separator:ae767d213c3c80b00085afd5ceec78e51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a491ce7fe3748fe956a7a49ebb248bd29"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_balken.html#a491ce7fe3748fe956a7a49ebb248bd29">mousePressEvent</a> (QGraphicsSceneMouseEvent *event)</td></tr>
-<tr class="memdesc:a491ce7fe3748fe956a7a49ebb248bd29"><td class="mdescLeft">&#160;</td><td class="mdescRight">enables the object to be modified with keyboard input  <a href="class_balken.html#a491ce7fe3748fe956a7a49ebb248bd29">More...</a><br /></td></tr>
+<tr class="memdesc:a491ce7fe3748fe956a7a49ebb248bd29"><td class="mdescLeft">&#160;</td><td class="mdescRight">mousePressEvent enables the object to be modified with keyboard input  <a href="class_balken.html#a491ce7fe3748fe956a7a49ebb248bd29">More...</a><br /></td></tr>
 <tr class="separator:a491ce7fe3748fe956a7a49ebb248bd29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03df6aa98e8a89adb527dc51b62da081"><td class="memItemLeft" align="right" valign="top"><a id="a03df6aa98e8a89adb527dc51b62da081"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>paint</b> (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)</td></tr>
+<tr class="memitem:a03df6aa98e8a89adb527dc51b62da081"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_balken.html#a03df6aa98e8a89adb527dc51b62da081">paint</a> (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)</td></tr>
+<tr class="memdesc:a03df6aa98e8a89adb527dc51b62da081"><td class="mdescLeft">&#160;</td><td class="mdescRight">paint implements virtual function to draw the balken according to certain requirements  <a href="class_balken.html#a03df6aa98e8a89adb527dc51b62da081">More...</a><br /></td></tr>
 <tr class="separator:a03df6aa98e8a89adb527dc51b62da081"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aadcefe258bea6caa7aef9070f82f80b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_balken.html#aadcefe258bea6caa7aef9070f82f80b4">setPosition</a> (QPointF point)</td></tr>
-<tr class="memdesc:aadcefe258bea6caa7aef9070f82f80b4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_balken.html#aadcefe258bea6caa7aef9070f82f80b4" title="Balken::setPosition sets the position of the Balken and changes the internally stored position.">Balken::setPosition</a> sets the position of the <a class="el" href="class_balken.html">Balken</a> and changes the internally stored position.  <a href="class_balken.html#aadcefe258bea6caa7aef9070f82f80b4">More...</a><br /></td></tr>
+<tr class="memdesc:aadcefe258bea6caa7aef9070f82f80b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">setPosition sets the position of the <a class="el" href="class_balken.html">Balken</a> and changes the internally stored position  <a href="class_balken.html#aadcefe258bea6caa7aef9070f82f80b4">More...</a><br /></td></tr>
 <tr class="separator:aadcefe258bea6caa7aef9070f82f80b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d96a2f947a42da69760f86f6bc9e7d9"><td class="memItemLeft" align="right" valign="top"><a id="a6d96a2f947a42da69760f86f6bc9e7d9"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_balken.html#a6d96a2f947a42da69760f86f6bc9e7d9">unmodified</a> ()</td></tr>
-<tr class="memdesc:a6d96a2f947a42da69760f86f6bc9e7d9"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_balken.html#a6d96a2f947a42da69760f86f6bc9e7d9" title="Balken::unmodified setd the modified status to NONE.">Balken::unmodified</a> setd the modified status to NONE. <br /></td></tr>
+<tr class="memdesc:a6d96a2f947a42da69760f86f6bc9e7d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">unmodified sets the modified status to NONE <br /></td></tr>
 <tr class="separator:a6d96a2f947a42da69760f86f6bc9e7d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5bc18a1bd42d4b1bdd1645459c5bca6"><td class="memItemLeft" align="right" valign="top"><a id="ab5bc18a1bd42d4b1bdd1645459c5bca6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setRotation</b> (qreal angle)</td></tr>
+<tr class="memitem:ab5bc18a1bd42d4b1bdd1645459c5bca6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_balken.html#ab5bc18a1bd42d4b1bdd1645459c5bca6">setRotation</a> (qreal angle)</td></tr>
+<tr class="memdesc:ab5bc18a1bd42d4b1bdd1645459c5bca6"><td class="mdescLeft">&#160;</td><td class="mdescRight">setRotation alters the rotation of the Qt internal object while also altering the member variable storing the current rotation  <a href="class_balken.html#ab5bc18a1bd42d4b1bdd1645459c5bca6">More...</a><br /></td></tr>
 <tr class="separator:ab5bc18a1bd42d4b1bdd1645459c5bca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad93916a81cbb478449dcd23ea524a94e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_balken.html#ad93916a81cbb478449dcd23ea524a94e">getRotation</a> () const</td></tr>
-<tr class="memdesc:ad93916a81cbb478449dcd23ea524a94e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Balken::rot.  <a href="class_balken.html#ad93916a81cbb478449dcd23ea524a94e">More...</a><br /></td></tr>
+<tr class="memdesc:ad93916a81cbb478449dcd23ea524a94e"><td class="mdescLeft">&#160;</td><td class="mdescRight">getRotation simple getter method  <a href="class_balken.html#ad93916a81cbb478449dcd23ea524a94e">More...</a><br /></td></tr>
 <tr class="separator:ad93916a81cbb478449dcd23ea524a94e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af230966183bdcd79137d28b4990b6c6f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_balken.html#af230966183bdcd79137d28b4990b6c6f">getLength</a> () const</td></tr>
-<tr class="memdesc:af230966183bdcd79137d28b4990b6c6f"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_balken.html#af230966183bdcd79137d28b4990b6c6f" title="Balken::getLength.">Balken::getLength</a>.  <a href="class_balken.html#af230966183bdcd79137d28b4990b6c6f">More...</a><br /></td></tr>
+<tr class="memdesc:af230966183bdcd79137d28b4990b6c6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">getLength simple getter method  <a href="class_balken.html#af230966183bdcd79137d28b4990b6c6f">More...</a><br /></td></tr>
 <tr class="separator:af230966183bdcd79137d28b4990b6c6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a502015d3b0fc5062cfbe44dde1d26bd6"><td class="memItemLeft" align="right" valign="top"><a id="a502015d3b0fc5062cfbe44dde1d26bd6"></a>
-balkenType&#160;</td><td class="memItemRight" valign="bottom"><b>getType</b> () const</td></tr>
+<tr class="memitem:a502015d3b0fc5062cfbe44dde1d26bd6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_balken.html#a283e4919a348c1443aced7316b4b7497">balkenType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_balken.html#a502015d3b0fc5062cfbe44dde1d26bd6">getType</a> () const</td></tr>
+<tr class="memdesc:a502015d3b0fc5062cfbe44dde1d26bd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">getType simple getter method  <a href="class_balken.html#a502015d3b0fc5062cfbe44dde1d26bd6">More...</a><br /></td></tr>
 <tr class="separator:a502015d3b0fc5062cfbe44dde1d26bd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0d3798e065861d46a38272b698c14b8"><td class="memItemLeft" align="right" valign="top"><a id="af0d3798e065861d46a38272b698c14b8"></a>
-modification&#160;</td><td class="memItemRight" valign="bottom"><b>wasModified</b> () const</td></tr>
+<tr class="memitem:af0d3798e065861d46a38272b698c14b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_balken.html#a3bdcf562fdbab10bb573ec414b3351c7">modification</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_balken.html#af0d3798e065861d46a38272b698c14b8">wasModified</a> () const</td></tr>
+<tr class="memdesc:af0d3798e065861d46a38272b698c14b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">wasModified simple getter method  <a href="class_balken.html#af0d3798e065861d46a38272b698c14b8">More...</a><br /></td></tr>
 <tr class="separator:af0d3798e065861d46a38272b698c14b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a77eb8baebcb02d26c636242e020199e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77eb8baebcb02d26c636242e020199e2">&#9670;&nbsp;</a></span>Balken()</h2>
+<a id="ad6553f170b25cbb2012f0bd003d5679d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6553f170b25cbb2012f0bd003d5679d">&#9670;&nbsp;</a></span>Balken()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -159,13 +161,13 @@ modification&#160;</td><td class="memItemRight" valign="bottom"><b>wasModified</
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>length</em>, </td>
+          <td class="paramname"><em>length</em> = <code>BALKEN_LENGTH_DEFAULT</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">balkenType&#160;</td>
-          <td class="paramname"><em>typ</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_balken.html#a283e4919a348c1443aced7316b4b7497">balkenType</a>&#160;</td>
+          <td class="paramname"><em>typ</em> = <code>statisch</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -175,14 +177,14 @@ modification&#160;</td><td class="memItemRight" valign="bottom"><b>wasModified</
       </table>
 </div><div class="memdoc">
 
-<p>creates a <a class="el" href="class_balken.html">Balken</a> at a certain position </p>
+<p><a class="el" href="class_balken.html">Balken</a> simple constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">x</td><td>horizontal location of <a class="el" href="class_balken.html">Balken</a> </td></tr>
-    <tr><td class="paramname">y</td><td>vertical location of <a class="el" href="class_balken.html">Balken</a> </td></tr>
-    <tr><td class="paramname">rotation</td><td>initial rotation of <a class="el" href="class_balken.html">Balken</a> </td></tr>
-    <tr><td class="paramname">length</td><td>length of the balken </td></tr>
-    <tr><td class="paramname">typ</td><td>indicates whether the balken cannot be moved at all, can be translated or rotated with arrow keys </td></tr>
+    <tr><td class="paramname">x</td><td>position of the balken </td></tr>
+    <tr><td class="paramname">y</td><td>position of the balken </td></tr>
+    <tr><td class="paramname">rotation</td><td>initial rotation of the balken </td></tr>
+    <tr><td class="paramname">length</td><td>the length of the balken </td></tr>
+    <tr><td class="paramname">typ</td><td>how the balken can be modified by the player </td></tr>
   </table>
   </dd>
 </dl>
@@ -205,8 +207,8 @@ modification&#160;</td><td class="memItemRight" valign="bottom"><b>wasModified</
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_balken.html#afff44b1aebfde017794688c8450a5df3" title="Balken::boundingRect.">Balken::boundingRect</a>. </p>
-<dl class="section return"><dt>Returns</dt><dd>the are to be redrawn when the item is updated </dd></dl>
+<p>boundingRect implements virtual function </p>
+<dl class="section return"><dt>Returns</dt><dd>the area which contains the balken if it needs to be (re-)drawn </dd></dl>
 
 </div>
 </div>
@@ -225,8 +227,8 @@ modification&#160;</td><td class="memItemRight" valign="bottom"><b>wasModified</
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_balken.html#af230966183bdcd79137d28b4990b6c6f" title="Balken::getLength.">Balken::getLength</a>. </p>
-<dl class="section return"><dt>Returns</dt><dd>length of the <a class="el" href="class_balken.html">Balken</a> </dd></dl>
+<p>getLength simple getter method </p>
+<dl class="section return"><dt>Returns</dt><dd>the current length of the balken </dd></dl>
 
 </div>
 </div>
@@ -245,8 +247,28 @@ modification&#160;</td><td class="memItemRight" valign="bottom"><b>wasModified</
       </table>
 </div><div class="memdoc">
 
-<p>Balken::rot. </p>
+<p>getRotation simple getter method </p>
 <dl class="section return"><dt>Returns</dt><dd>current rotation of the <a class="el" href="class_balken.html">Balken</a> </dd></dl>
+
+</div>
+</div>
+<a id="a502015d3b0fc5062cfbe44dde1d26bd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a502015d3b0fc5062cfbe44dde1d26bd6">&#9670;&nbsp;</a></span>getType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_balken.html#a283e4919a348c1443aced7316b4b7497">Balken::balkenType</a> Balken::getType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getType simple getter method </p>
+<dl class="section return"><dt>Returns</dt><dd>the type of the balken </dd></dl>
 
 </div>
 </div>
@@ -266,7 +288,7 @@ modification&#160;</td><td class="memItemRight" valign="bottom"><b>wasModified</
       </table>
 </div><div class="memdoc">
 
-<p>to move the <a class="el" href="class_balken.html">Balken</a> if it is in focus </p>
+<p>keyPressEvent moves or rotates the <a class="el" href="class_balken.html">Balken</a> if it is in focus </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">event</td><td>contains the pressed key </td></tr>
@@ -292,10 +314,54 @@ modification&#160;</td><td class="memItemRight" valign="bottom"><b>wasModified</
       </table>
 </div><div class="memdoc">
 
-<p>enables the object to be modified with keyboard input </p>
+<p>mousePressEvent enables the object to be modified with keyboard input </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">event</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a03df6aa98e8a89adb527dc51b62da081"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03df6aa98e8a89adb527dc51b62da081">&#9670;&nbsp;</a></span>paint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Balken::paint </td>
+          <td>(</td>
+          <td class="paramtype">QPainter *&#160;</td>
+          <td class="paramname"><em>painter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QStyleOptionGraphicsItem *&#160;</td>
+          <td class="paramname"><em>option</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QWidget *&#160;</td>
+          <td class="paramname"><em>widget</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>paint implements virtual function to draw the balken according to certain requirements </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">painter</td><td></td></tr>
+    <tr><td class="paramname">option</td><td></td></tr>
+    <tr><td class="paramname">widget</td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -318,7 +384,7 @@ modification&#160;</td><td class="memItemRight" valign="bottom"><b>wasModified</
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_balken.html#aadcefe258bea6caa7aef9070f82f80b4" title="Balken::setPosition sets the position of the Balken and changes the internally stored position.">Balken::setPosition</a> sets the position of the <a class="el" href="class_balken.html">Balken</a> and changes the internally stored position. </p>
+<p>setPosition sets the position of the <a class="el" href="class_balken.html">Balken</a> and changes the internally stored position </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">point</td><td></td></tr>
@@ -328,9 +394,55 @@ modification&#160;</td><td class="memItemRight" valign="bottom"><b>wasModified</
 
 </div>
 </div>
+<a id="ab5bc18a1bd42d4b1bdd1645459c5bca6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5bc18a1bd42d4b1bdd1645459c5bca6">&#9670;&nbsp;</a></span>setRotation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Balken::setRotation </td>
+          <td>(</td>
+          <td class="paramtype">qreal&#160;</td>
+          <td class="paramname"><em>angle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>setRotation alters the rotation of the Qt internal object while also altering the member variable storing the current rotation </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">angle</td><td>the new desired angle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af0d3798e065861d46a38272b698c14b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0d3798e065861d46a38272b698c14b8">&#9670;&nbsp;</a></span>wasModified()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_balken.html#a3bdcf562fdbab10bb573ec414b3351c7">Balken::modification</a> Balken::wasModified </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>wasModified simple getter method </p>
+<dl class="section return"><dt>Returns</dt><dd>how the balken was modified by the user during the last step of the box2d world </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="balken_8h_source.html">balken.h</a></li>
-<li>balken.cpp</li>
+<li>C:/Users/Eric/Documents/Studium MSE/6. Semester/Grundkurs C++/Get the Virus/gruppe-3-hauptprojekt/<a class="el" href="balken_8h_source.html">balken.h</a></li>
+<li>C:/Users/Eric/Documents/Studium MSE/6. Semester/Grundkurs C++/Get the Virus/gruppe-3-hauptprojekt/balken.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

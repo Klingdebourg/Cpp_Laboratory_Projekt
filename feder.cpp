@@ -40,7 +40,7 @@ Feder::Feder(int x, int y) {
 
     //set initial tension to 0 (i.e. relaxed)
     spannung = 0;
-    spannungBall=spannungBallInit;
+    spannungBall=SPANNUNG_BALL_INIT;
 
     //indicate that there is no ball attached
     ball = nullptr;
@@ -83,7 +83,7 @@ Feder::Feder(int x, int y, Element *ball) {
 
     //set initial tension to 0 (i.e. relaxed)
     spannung = 0;
-    spannungBall=spannungBallInit;
+    spannungBall=SPANNUNG_BALL_INIT;
 
     //attach the ball
     this->ball = ball;
@@ -92,18 +92,11 @@ Feder::Feder(int x, int y, Element *ball) {
     this->ball->body->SetTransform(b2Vec2(this->ball->item->x(), (WINDOW_H - this->ball->item->y())), this->ball->item->rotation());
 }
 
-/**
- * @brief Feder::boundingRect
- * @return the are to be redrawn when the item is updated
- */
+
 QRectF Feder::boundingRect() const {
     return QRectF(0, 0, FEDER_WIDTH, FEDER_HEIGHT);
 }
 
-/**
- * @brief rotates, tensions or releaves the spring if it is in focus
- * @param event contains the pressed key
- */
 
 void Feder::keyPressEvent(QKeyEvent *event)
 {
@@ -139,7 +132,7 @@ void Feder::keyPressEvent(QKeyEvent *event)
             b2Vec2 VelocityBall= ball->body->GetLinearVelocity();
             qDebug() << VelocityBall.x << " " << VelocityBall.y;
             spannung = 0;
-            spannungBall=spannungBallInit;
+            spannungBall = SPANNUNG_BALL_INIT;
             isBallAttached = false;
             this->ball = nullptr;
         }
@@ -153,10 +146,6 @@ void Feder::keyPressEvent(QKeyEvent *event)
 
 }
 
-/**
- * @brief enables the object to be modified with keyboard input
- * @param event
- */
 void Feder::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     switch(event->button()) {
     case Qt::LeftButton:
@@ -174,10 +163,6 @@ void Feder::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     painter->drawRect(QRectF(0, 0.1*spannung*FEDER_HEIGHT, FEDER_WIDTH, FEDER_HEIGHT*(1-0.1*spannung)));
 }
 
-/**
- * @brief if a ball is connected to the feder, its position is updated (is used after the feder changes its position/tesnion)
- * @param ball to be changed
- */
 void Feder::updateBall(Element &ball) {
     int x_ = x() + FEDER_WIDTH/2 - BALL_DIAM/2 + (FEDER_HEIGHT*(1-0.1*spannung) + BALL_DIAM/2) * sin(rotation() * M_PI/180);
     int y_ = y() + FEDER_HEIGHT  - BALL_DIAM/2 - (FEDER_HEIGHT*(1-0.1*spannung) + BALL_DIAM/2) * cos(rotation() * M_PI/180);
