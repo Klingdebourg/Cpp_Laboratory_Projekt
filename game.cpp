@@ -179,6 +179,7 @@ void Game::scores()
 
     ///draw the text to get to the highscores
     QGraphicsTextItem* scoreText = new QGraphicsTextItem(QString("Die Bestenliste der Level:"));
+    scoreText->setDefaultTextColor(Qt::red);
     QFont levelFont("times",50);
     scoreText->setFont(levelFont);
     int lvposx = this->width()/2-scoreText->boundingRect().width()/2;
