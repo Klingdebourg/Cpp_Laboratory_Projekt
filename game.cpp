@@ -1,6 +1,7 @@
 #include "game.h"
 
 #include <QDebug>
+#include <QIcon>
 #include "button.h"
 #include "level1.h"
 #include "level2.h"
@@ -24,13 +25,19 @@ Game::Game(QWidget* parent): QGraphicsView(parent){
     setFixedSize(WINDOW_W,WINDOW_H);
     scene->setSceneRect(0,0,WINDOW_W,WINDOW_H);
 
+    setWindowIcon(QIcon(":/pictures/virus.png"));
+
 }
 
 void Game::displayMainMenu(){
     /// create the title text
     scene->clear();
+    QPixmap background(":/pictures/background1.jpg");
+    scene->setBackgroundBrush(background.scaled(WINDOW_W,WINDOW_H,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     QGraphicsTextItem* titleText = new QGraphicsTextItem(QString("Get the virus"));
-    QFont titleFont("comic sans",50);
+    QFont titleFont("Fantasy",50);
+    titleFont.setStyleHint(QFont::Fantasy);
+    titleText->setDefaultTextColor(Qt::red);
     titleText->setFont(titleFont);
     int txPos = this->width()/2 - titleText->boundingRect().width()/2;
     int tyPos = 150;
@@ -73,7 +80,9 @@ void Game::levelmenu(){
     scene->clear();
     ///draw the title
     QGraphicsTextItem* levelText = new QGraphicsTextItem(QString("Levels"));
-    QFont levelFont("times",50);
+    QFont levelFont("Fantasy",50);
+    levelFont.setStyleHint(QFont::Fantasy);
+    levelText->setDefaultTextColor(Qt::red);
     levelText->setFont(levelFont);
     int lvposx = this->width()/2-levelText->boundingRect().width()/2;
     int lvposy = 200;
@@ -137,7 +146,9 @@ void Game::Info()
     QGraphicsTextItem* informationtitle = new QGraphicsTextItem;
     informationtitle->setPlainText(QString("Spielinformationen"));
     QFont titleFont("comic sans",50);
+    titleFont.setStyleHint(QFont::Fantasy);
     informationtitle->setFont(titleFont);
+    informationtitle->setDefaultTextColor(Qt::red);
     int txPos = this->width()/2 - informationtitle->boundingRect().width()/2;
     int tyPos = 150;
     informationtitle->setPos(txPos,tyPos);
@@ -145,9 +156,11 @@ void Game::Info()
 
     ///draw the text
     QGraphicsTextItem* information = new QGraphicsTextItem;
+    information->setDefaultTextColor(Qt::white);
     information->setPlainText(QString("Das Ziel des Spieles ist es den Virus (roter Ball) mit dem Antikörper-Ball (grüner Ball) zu treffen. Der Ball ist nur bewegbar indem man ihn mit einer Feder abschießt. Die Feder ist schwarz und man kann sie spannen indem man zuerst mit der Maus auf sie drückt und dann mit den Pfeiltasten \"Auf\" und \"Ab\" die Spannhöhe angibt. Mit den Pfeiltasten \"Rechts\" und \"Links\" lässt sich die Feder ausrichten. Zum Abschießen drückt man die Leertaste. Während des Spieles kann man Masken einsammeln (Gelbe Quadrate), hierbei erhöht sich der Score. Es gibt drei verschiedene Arten von Balken an dem der Antikörper-Ball abprallt. Die schwarzen Balken sind starr, die hellblauen Balken sind rotatorisch. Mit den Pfeiltasten \"Rechts\" und \"Links\" lässt sich die Rotation einstellen. Die hellgrünen Balken sind translatorisch, sie lassen sich ebenfalls mit den Pfeiltasten nach links und rechts bewegen."));
-    information->setPos(informationtitle->x()+informationtitle->boundingRect().width()*3/16,informationtitle->y()+200);
+    information->setPos(informationtitle->x()+informationtitle->boundingRect().width()*1/16,informationtitle->y()+200);
     QFont textFont("times",10);
+    textFont.setStyleHint(QFont::Courier);
     information->setFont(textFont);
     information->adjustSize();
     scene->addItem(information);

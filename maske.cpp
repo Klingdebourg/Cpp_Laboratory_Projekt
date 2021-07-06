@@ -17,7 +17,7 @@ QRectF Maske::boundingRect() const {
 void Maske::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     QPen pen = QPen();
     pen.setWidth(3);
-    pen.setColor(Qt::yellow);
+    pen.setColor(Qt::darkYellow);
     painter->setPen(pen);
     QPainterPath path;
     path.addRoundedRect(QRectF(0, 0, MASKE_WIDTH, MASKE_WIDTH), 0, 0);

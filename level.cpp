@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QGraphicsRectItem>
 #include <QLineEdit>
+#include <QIcon>
 
 Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     ///create the basic scene for the level
@@ -20,6 +21,9 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     setFixedSize(WINDOW_W,WINDOW_H);
     levelscene->setSceneRect(0,0,WINDOW_W,WINDOW_H);
     levelscene->addLine(0,100,WINDOW_W,100);
+    setWindowIcon(QIcon(":/pictures/virus.png"));
+    QPixmap background(":/pictures/background2.jpg");
+    levelscene->setBackgroundBrush(background.scaled(WINDOW_W,WINDOW_H,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
 
     //create box2d world with negative gravity of
     world = new b2World(b2Vec2(0.0f, GRAVITY));
@@ -163,6 +167,8 @@ void Level::pause(){
 
     pausepic->setScene(pausemenu);
     pausepic->show();
+    pausepic->setWindowIcon(QIcon(":/pictures/pause.png"));
+    pausepic->setBackgroundBrush(Qt::lightGray);
     pausepic->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     pausepic->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     pausepic->setFixedSize(WINDOW_W/2,WINDOW_H/2);
@@ -172,7 +178,7 @@ void Level::pause(){
     QGraphicsTextItem* pausetext = new QGraphicsTextItem;
     pausetext->setPlainText(QString("Du hast auf Pause gedrückt, was möchtest du machen:"));
     pausetext->setDefaultTextColor(Qt::blue);
-    pausetext->setPos(pausemenu->width()/5,100);
+    pausetext->setPos(pausemenu->width()/6,100);
     pausemenu->addItem(pausetext);
 
     ///create a return button to get back to the level menu
@@ -353,7 +359,8 @@ void Level::Gewonnen()
     ///draw the winning text
     QGraphicsTextItem* winText = new QGraphicsTextItem(QString("Wow. Du hast es geschafft den Virus zu besiegen. Glückwunsch! Du hast es geschafft dabei "+QString::number(finalscore)+ " Maske/n zu sammeln und das in einer Zeit von(Hier einfügen Uhr!)! Was möchtest du jetzt tun?"));
 
-    QFont titleFont("comic sans",10);
+    QFont titleFont("comic sans",15);
+    titleFont.setStyleHint(QFont::Courier);
     winText->setTextWidth(1000);
     winText->setDefaultTextColor(Qt::darkGreen);
     winText->setFont(titleFont);
@@ -481,6 +488,7 @@ bool Level::StopCheck()
                 ///draw the losing text
                 QGraphicsTextItem* losttext = new QGraphicsTextItem(QString("Sie haben leider verloren"));
                 QFont titleFont("comic sans",50);
+                titleFont.setStyleHint(QFont::Fantasy);
                 losttext->setFont(titleFont);
                 int txPos = this->width()/2 - losttext->boundingRect().width()/2;
                 int tyPos = WINDOW_H/8;
@@ -491,21 +499,21 @@ bool Level::StopCheck()
                 Button* zurueck = new Button(QString("Zurück zur Levelübersicht"));
                 connect(zurueck, SIGNAL(clicked()),this,SLOT(Zurueck()));
                 zurueck->setRect(0,0,300,50);
-                zurueck->setPos(losttext->x()+losttext->boundingRect().width()/3,WINDOW_H*3/8);
+                zurueck->setPos(WINDOW_W*6/16,WINDOW_H*3/8);
                 levelscene->addItem(zurueck);
 
                 ///create a button to restart the level
                 Button* redo = new Button(QString("Den Level erneut starten"));
                 connect(redo, SIGNAL(clicked()),this,SLOT(Redo()));
                 redo->setRect(0,0,300,50);
-                redo->setPos(losttext->x()+losttext->boundingRect().width()/3, WINDOW_H*4/8);
+                redo->setPos(WINDOW_W*6/16, WINDOW_H*4/8);
                 levelscene->addItem(redo);
 
                 ///create a button to get back to the main menu
                 Button* haupt = new Button(QString("Zum Hauptmenü"));
                 connect(haupt, SIGNAL(clicked()),this,SLOT(Hauptmenu()));
                 haupt->setRect(0,0,300,50);
-                haupt->setPos(losttext->x()+losttext->boundingRect().width()/3, WINDOW_H*5/8);
+                haupt->setPos(WINDOW_W*6/16, WINDOW_H*5/8);
                 levelscene->addItem(haupt);
                 timer->stop();
                 return true;
