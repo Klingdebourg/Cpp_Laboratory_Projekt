@@ -2,6 +2,7 @@
 #define LEVEL_H
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QInputDialog>
 #include "game.h"
 #include "counter.h"
 #include "maske.h"
@@ -14,6 +15,8 @@
 #include "definitions.h"
 #include "element.h"
 #include "info.h"
+#include "uhr.h"
+#include "highscore.h"
 
 
 class Level : public QGraphicsView
@@ -33,12 +36,16 @@ public:
     QGraphicsView* pausepic;
     counter* Counter;
     QTimer* timer;
+    Uhr* uhr;
+    Highscore* newHighscore;
     int failbedingung;
     int x_last;
     int y_last;
     info* Info;
     QGraphicsRectItem* bounds;
     int finalscore;
+    QString finaltime;
+    QLineEdit* input;
 public slots:
     void pause();
     void Zurueck();
@@ -49,9 +56,9 @@ public slots:
     void Gewonnen();
     void Next();
     void AddScore();
+    void insertScore();
+    void showHighscore(int level);
     bool StopCheck();
-    //Maske* maske1, Maske* maske2, Maske* maske3, Virus* virus
-
 protected:
     /**
      * @brief world the world for the box2d engine managing all physics
@@ -93,8 +100,7 @@ protected:
      * @brief foehne additional items exerting forces on the ball, stored as a vector to enable iterating over them
      */
     QVector<Element*> foehne;
-
-
+    QString Spielername;
 private:
     /**
      * @brief currentBalken to accelerate the iteration over the vector

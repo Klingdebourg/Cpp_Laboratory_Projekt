@@ -1,4 +1,3 @@
-
 #include "counter.h"
 #include "game.h"
 

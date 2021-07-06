@@ -74,14 +74,12 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
         closeinfo->setPos(0,0);
         Info = new info(2,closeinfo, bounds);
         levelscene->addItem(Info);
-
     }
     if(level == 3){
         text = "Level 3";
         closeinfo->setPos(0,0);
         Info = new info(3,closeinfo, bounds);
         levelscene->addItem(Info);
-
     }
     levelscene->addItem(bounds);
 
@@ -127,6 +125,7 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     virus->body = world->CreateBody(virus->bodyDef);
     virus->body->CreateFixture(virus->fixture);
     levelscene -> addItem(virus->item);
+    
 
     ///create a pause button
     Button* pause = new Button(QString("||"));
@@ -148,13 +147,16 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     Counter->setPos(WINDOW_W-Counter->boundingRect().width(),y());
     levelscene -> addItem(Counter);
 
-    ///set the counter needed for the fail condition
+    uhr = new Uhr;
+    uhr->setPos(WINDOW_W-uhr->boundingRect().width(),40);
+    levelscene -> addItem(uhr);
+
+    newHighscore = new Highscore;
+
     failbedingung=0;
 
     levelscene->addItem(closeinfo);
-
-
-
+    
 }
 
 /**
@@ -269,6 +271,11 @@ void Level::Interaktion(){
     ///account for influence of the foehne
     applyFoehnForces();
 
+    ///update the passed time as soon as ball is moving
+    if (!dynamic_cast<Feder*>(feder->item)->getBallAttached()){
+        uhr -> time_elapsed();
+    }
+
     ///update world in box2d (ask new position of ball and apply)
     ///only update if the ball is not attached to the spring
     ///as the ball is the only dynamic item in the world
@@ -315,6 +322,7 @@ void Level::Interaktion(){
         ///Spiel beenden
         timer->stop();
         finalscore = Counter->getscore();
+        finaltime = uhr -> gettime();
         levelscene->clear();
         Gewonnen();
         return;
@@ -324,27 +332,6 @@ void Level::Interaktion(){
         return;
     }
 
-    //    ///Liste durchgehen und checken, ob Item eine Maske oder Virus ist
-    //    int n = colliding_items_level.size();
-    //    for (int i = 0; i< n; i++){
-    //        for (int j = 0; j< n; j++){
-    //            ///falls Maske: Maske entfernen, Maskecounter hochsetzen
-    //            if ((typeid(*(colliding_items_level[i])) == typeid(Maske)) && (typeid(*(colliding_items_level[j])) == typeid(Ball))){
-    //                levelscene -> removeItem(colliding_items_level[i]);
-    //                delete colliding_items_level[i];
-    //                Counter -> increase();
-    //                return;
-    //            }
-    //            else if ((typeid(*(colliding_items_level[i])) == typeid(Virus)) && (typeid(*(colliding_items_level[j])) == typeid(Ball))){
-    //            ///Spiel beenden
-    //                levelscene -> clear();
-    //                return;
-    //            /// Text "du hast gewonnen" + Highscore
-
-    //            }
-    //            else return;
-    //        }
-    //    }
 }
 
 void Level::InfoToBeClosed()
@@ -356,8 +343,8 @@ void Level::InfoToBeClosed()
 void Level::Gewonnen()
 {
 
-    ///draw the winning text
-    QGraphicsTextItem* winText = new QGraphicsTextItem(QString("Wow. Du hast es geschafft den Virus zu besiegen. Glückwunsch! Du hast es geschafft dabei "+QString::number(finalscore)+ " Maske/n zu sammeln und das in einer Zeit von(Hier einfügen Uhr!)! Was möchtest du jetzt tun?"));
+
+    QGraphicsTextItem* winText = new QGraphicsTextItem(QString("Wow. Du hast es geschafft den Virus zu besiegen. Glückwunsch! Du hast es geschafft dabei "+QString::number(finalscore)+ " Maske/n zu sammeln und das in einer Zeit von " + finaltime + "! Was möchtest du jetzt tun?"));
 
     QFont titleFont("comic sans",15);
     titleFont.setStyleHint(QFont::Courier);
@@ -433,39 +420,38 @@ void Level::AddScore()
     ///draw the text for the highscore
     levelscene->clear();
     QGraphicsTextItem* enternametitle = new QGraphicsTextItem(QString("Bitte gebe deinen Namen ein und bestätige mit dem Button"));
-    QFont titleFont("comic sans",20);
-    enternametitle->setFont(titleFont);
-    enternametitle->setPos(WINDOW_W/16,WINDOW_H/8);
-    levelscene->addItem(enternametitle);
+       QFont titleFont("comic sans",20);
+       enternametitle->setFont(titleFont);
+       enternametitle->setPos(WINDOW_W/16,WINDOW_H/8);
+       levelscene->addItem(enternametitle);
 
-    ///draw the QLineEdit to enter the name of the player
-    QLineEdit* input = new QLineEdit();
-    QFont textFont("time",15);
-    input->setReadOnly(false);
-    input->setFixedHeight(100);
-    input->setFixedWidth(500);
-    input->setFont(textFont);
-    input->move(WINDOW_W/3,WINDOW_H/2);
-    levelscene->addWidget(input);
+       ///draw the QLineEdit to enter the name of the player
+       input = new QLineEdit();
+       QFont textFont("time",15);
+       input->setReadOnly(false);
+       input->setFixedHeight(100);
+       input->setFixedWidth(500);
+       input->setFont(textFont);
+       input->move(WINDOW_W/3,WINDOW_H/2);
+       levelscene->addWidget(input);
 
-    ///draw the score
-    QGraphicsTextItem*sc = new QGraphicsTextItem(QString("Dein Score: " + QString::number(finalscore)));
-    sc->setPos(WINDOW_W/8,WINDOW_H*3/8);
-    sc->setFont(titleFont);
-    levelscene->addItem(sc);
+       ///draw the score
+       QGraphicsTextItem*sc = new QGraphicsTextItem(QString("Dein Score: " + QString::number(finalscore)));
+       sc->setPos(WINDOW_W/8,WINDOW_H*3/8);
+       sc->setFont(titleFont);
+       levelscene->addItem(sc);
 
-    ///draw the time it took
-    QGraphicsTextItem* time = new QGraphicsTextItem(QString("Deine Zeit: "));
-    time->setPos(WINDOW_W*4/8,WINDOW_H*3/8);
-    time->setFont(titleFont);
-    levelscene->addItem(time);
+       ///draw the time it took
+       QGraphicsTextItem* time = new QGraphicsTextItem(QString("Deine Zeit: ") + finaltime);
+       time->setPos(WINDOW_W*4/8,WINDOW_H*3/8);
+       time->setFont(titleFont);
+       levelscene->addItem(time);
 
-    ///create an add button
-    Button* add = new Button(QString("Hinzufügen"));
-    connect(add,SIGNAL(clicked()),this,SLOT(CopyInDatei()));
-    add->setPos(input->x()+input->width(),input->y());
-    levelscene->addItem(add);
-
+       ///create an add button
+       Button* add = new Button(QString("Hinzufügen"));
+       connect(add,SIGNAL(clicked()),this,SLOT(insertScore()));
+       add->setPos(input->x()+input->width(),input->y());
+       levelscene->addItem(add);
 }
 
 bool Level::StopCheck()
@@ -530,6 +516,34 @@ bool Level::StopCheck()
     return false;
 }
 
+
+void Level::insertScore(){
+    Spielername = input -> text();
+    newHighscore -> insertScore(Spielername, finaltime, finalscore, level);
+
+    showHighscore(level);
+}
+
+void Level::showHighscore(int level){
+    levelscene -> clear();
+
+    Button* back = new Button(QString("Zurück zum Hauptmenü"));
+    connect(back, SIGNAL(clicked()),this,SLOT(Hauptmenu()));
+    levelscene->addItem(back);
+
+    QGraphicsTextItem* enternametitle = new QGraphicsTextItem(QString("Highscore Level" + QString::number(level)));
+    QFont titleFont("comic sans",30);
+    enternametitle->setFont(titleFont);
+    enternametitle->setPos(WINDOW_W/16,WINDOW_H/8);
+    levelscene->addItem(enternametitle);
+
+    QString outputText = newHighscore -> read(level);
+    QGraphicsTextItem* highscoreOutput = new QGraphicsTextItem(outputText);
+    QFont titleFontText("comic sans",20);
+    highscoreOutput->setPos(WINDOW_W*1/8,WINDOW_H*3/8);
+    highscoreOutput->setFont(titleFontText);
+    levelscene->addItem(highscoreOutput);
+}
 
 void Level::applyFoehnForces() {
     //iterate over all foehne

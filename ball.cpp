@@ -15,8 +15,6 @@ Ball::Ball() {
 
 }
 
-//für move Funktion
-
 int Ball::collidingItem(Maske* maske1, Maske* maske2, Maske* maske3, Virus* virus){
     if (collidesWithItem(maske1)==true){
         return 1;
@@ -43,9 +41,3 @@ void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->drawEllipse(QRectF(0, 0, BALL_DIAM, BALL_DIAM));
 
 }
-
-//QList <QGraphicsItem *> Ball::collidingList(){
-//    ///Liste mit kollidierenden Elementen erzeugen
-//    QList <QGraphicsItem *> colliding_items = collidingItems();
-//    return colliding_items;
-//}

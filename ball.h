@@ -15,7 +15,6 @@ public:
      * @brief Ball simple constructor
      */
     Ball();
-    //QList <QGraphicsItem *> collidingList();
     int collidingItem(Maske* maske1, Maske* maske2, Maske* maske3, Virus* virus);
     /**
      * @brief boundingRect implements virtual function

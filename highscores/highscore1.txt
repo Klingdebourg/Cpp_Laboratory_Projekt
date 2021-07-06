@@ -1,0 +1,9 @@
+Paula 1: Zeit: 0:5,716, gesammelte Masken: 1
+Paula 2: Zeit: 0:6,266, gesammelte Masken: 2
+Paula 3: Zeit: 0:8,829, gesammelte Masken: 2
+Paula 4: Zeit: 0:7,549, gesammelte Masken: 2
+Paula 5: Zeit: 0:6,689, gesammelte Masken: 2
+Paula 6: Zeit: 0:5,488, gesammelte Masken: 2
+Paula --: Zeit: 0:5,713, gesammelte Masken: 2
+Paula 3: Zeit: 0:8,317, gesammelte Masken: 2
+Paula: Zeit: 0:6,683, gesammelte Masken: 2
