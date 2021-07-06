@@ -21,8 +21,8 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     setFixedSize(WINDOW_W,WINDOW_H);
     levelscene->setSceneRect(0,0,WINDOW_W,WINDOW_H);
     levelscene->addLine(0,100,WINDOW_W,100);
-    setWindowIcon(QIcon(":/pictures/virus.png"));
-    QPixmap background(":/pictures/background2.jpg");
+    setWindowIcon(QIcon(":/pictures/media/virus.png"));
+    QPixmap background(":/pictures/media/background2.jpg");
     levelscene->setBackgroundBrush(background.scaled(WINDOW_W,WINDOW_H,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
 
     //create box2d world with negative gravity of
@@ -167,7 +167,7 @@ void Level::pause(){
 
     pausepic->setScene(pausemenu);
     pausepic->show();
-    pausepic->setWindowIcon(QIcon(":/pictures/pause.png"));
+    pausepic->setWindowIcon(QIcon(":/pictures/media/pause.png"));
     pausepic->setBackgroundBrush(Qt::lightGray);
     pausepic->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     pausepic->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

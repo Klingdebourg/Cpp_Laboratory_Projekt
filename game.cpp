@@ -25,14 +25,14 @@ Game::Game(QWidget* parent): QGraphicsView(parent){
     setFixedSize(WINDOW_W,WINDOW_H);
     scene->setSceneRect(0,0,WINDOW_W,WINDOW_H);
 
-    setWindowIcon(QIcon(":/pictures/virus.png"));
+    setWindowIcon(QIcon(":/pictures/media/virus.png"));
 
 }
 
 void Game::displayMainMenu(){
     /// create the title text
     scene->clear();
-    QPixmap background(":/pictures/background1.jpg");
+    QPixmap background(":/pictures/media/background1.jpg");
     scene->setBackgroundBrush(background.scaled(WINDOW_W,WINDOW_H,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     QGraphicsTextItem* titleText = new QGraphicsTextItem(QString("Get the virus"));
     QFont titleFont("Fantasy",50);
