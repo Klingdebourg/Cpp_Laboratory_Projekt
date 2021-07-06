@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['feder_49',['Feder',['../class_feder.html#a8e3c6699a2720fee907e3211b6f9e162',1,'Feder::Feder(int x, int y)'],['../class_feder.html#a6b04a11142b59572fddd7143f16156f9',1,'Feder::Feder(int x, int y, Element *ball)']]]
+  ['element_77',['Element',['../struct_element.html#ab0d0e20be9a36ae676202db753faeec9',1,'Element::Element()'],['../struct_element.html#a955bd5a48b2f3ca51fe247358a124e91',1,'Element::Element(elementType typ)']]]
 ];

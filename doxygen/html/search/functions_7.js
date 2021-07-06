@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mousepressevent_55',['mousePressEvent',['../class_balken.html#a491ce7fe3748fe956a7a49ebb248bd29',1,'Balken::mousePressEvent()'],['../class_feder.html#af1c96b67dbc3a5e7a0b84d6e95ae73f1',1,'Feder::mousePressEvent()']]]
+  ['keypressevent_86',['keyPressEvent',['../class_balken.html#ae767d213c3c80b00085afd5ceec78e51',1,'Balken::keyPressEvent()'],['../class_feder.html#a4814b9e59c6509f030e72477c02220cf',1,'Feder::keyPressEvent()']]]
 ];

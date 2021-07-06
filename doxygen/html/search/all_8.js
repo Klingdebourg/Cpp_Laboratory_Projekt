@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['level_16',['Level',['../class_level.html',1,'']]],
-  ['level1_17',['Level1',['../class_level1.html',1,'']]],
-  ['level2_18',['Level2',['../class_level2.html',1,'']]],
-  ['level3_19',['Level3',['../class_level3.html',1,'']]]
+  ['keypressevent_29',['keyPressEvent',['../class_balken.html#ae767d213c3c80b00085afd5ceec78e51',1,'Balken::keyPressEvent()'],['../class_feder.html#a4814b9e59c6509f030e72477c02220cf',1,'Feder::keyPressEvent()']]]
 ];

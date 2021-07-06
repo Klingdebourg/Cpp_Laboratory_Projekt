@@ -31,11 +31,14 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     groundBoxTop.SetAsBox(900.0f, 5.0f);
     groundBodyTop->CreateFixture(&groundBoxTop, 0.0f);
 
-    groundBodyDefBotton.position.Set(800,1030);
-    b2Body* groundBodyBotton = world->CreateBody(&groundBodyDefBotton);
-    b2PolygonShape groundBoxBotton;
-    groundBoxBotton.SetAsBox(900.0f, 5.0f);
-    groundBodyBotton->CreateFixture(&groundBoxBotton, 0.0f);
+    groundBodyDefBottom.position.Set(800,1030);
+    b2Body* groundBodyBottom = world->CreateBody(&groundBodyDefBottom);
+    b2PolygonShape groundBoxBottom;
+    groundBoxBottom.SetAsBox(900.0f, 5.0f);
+    b2FixtureDef groundFixtureBottom;
+    groundFixtureBottom.friction = 2000.5f;
+    groundFixtureBottom.shape = &groundBoxBottom;
+    groundBodyBottom->CreateFixture(&groundFixtureBottom);
 
     groundBodyDefLeft.position.Set(-30,600);
     b2Body* groundBodyLeft = world->CreateBody(&groundBodyDefLeft);
@@ -520,10 +523,6 @@ bool Level::StopCheck()
 }
 
 
-/**
- * @brief Level::applyFoehnForces iterates over all foehne, checks whether the ball is in reach of them
- * and applies a force in direction of the foehn if necessary depending on the positions wrt each others
- */
 void Level::applyFoehnForces() {
     //iterate over all foehne
     for (int i = 0; i < foehne.size(); i++) {
@@ -558,12 +557,7 @@ void Level::applyFoehnForces() {
     }
 }
 
-/**
- * @brief Level::updateB2Balken as the balken class only handles their Qt appearance/position,
- * their box2d position needs to be updated as well. Therefore this method iterates over all balken
- * stored in the QVector of the level and updates their position if the internal modified flag
- * has been set in the respective Qt-item.
- */
+
 void Level::updateB2Balken() {
     //iterate over all balken
     for (int i = 0; i < balken.size(); i++) {
