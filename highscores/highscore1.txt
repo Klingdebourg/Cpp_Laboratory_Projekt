@@ -7,3 +7,4 @@ Paula 6: Zeit: 0:5,488, gesammelte Masken: 2
 Paula --: Zeit: 0:5,713, gesammelte Masken: 2
 Paula 3: Zeit: 0:8,317, gesammelte Masken: 2
 Paula: Zeit: 0:6,683, gesammelte Masken: 2
+Paula: Zeit: 0:8,940, gesammelte Masken: 2

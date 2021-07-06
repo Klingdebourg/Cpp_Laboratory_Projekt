@@ -153,6 +153,7 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
 
     newHighscore = new Highscore;
 
+    ///set the counter needed for the fail condition
     failbedingung=0;
 
     levelscene->addItem(closeinfo);
