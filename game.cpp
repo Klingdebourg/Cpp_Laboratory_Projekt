@@ -25,6 +25,7 @@ Game::Game(QWidget* parent): QGraphicsView(parent){
 
     informationtitle = new QGraphicsTextItem;
     information = new QGraphicsTextItem;
+    newHighscore = new Highscore();
 }
 
 void Game::displayMainMenu(){
@@ -169,7 +170,7 @@ void Game::scores()
 
     // create the button for Level 1
     Button* level1 = new Button(QString("1"));
-    connect(level1,SIGNAL(clicked()),this,SLOT(best()));
+    connect(level1,SIGNAL(clicked()),this,SLOT(level1clicked()));
     int l1x = this->width()/2-scoreText->boundingRect().width();
     int l1y = 500;
     level1->setPos(l1x,l1y);
@@ -177,7 +178,7 @@ void Game::scores()
 
     // create the button for Level 2
     Button* level2 = new Button(QString("2"));
-    connect(level2,SIGNAL(clicked()),this,SLOT(best()));
+    connect(level2,SIGNAL(clicked()),this,SLOT(level2clicked()));
     int l2x = this->width()/2 - level2->boundingRect().width()/2;
     int l2y = 500;
     level2->setPos(l2x,l2y);
@@ -185,7 +186,7 @@ void Game::scores()
 
     // create the button for Level 3
     Button* level3 = new Button(QString("3"));
-    connect(level3,SIGNAL(clicked()),this,SLOT(best()));
+    connect(level3,SIGNAL(clicked()),this,SLOT(level3clicked()));
     int l3x = this->width()/2+scoreText->boundingRect().width()/2;
     int l3y = 500;
     level3->setPos(l3x,l3y);
@@ -197,8 +198,36 @@ void Game::scores()
 
 }
 
-void Game::best()
-{
+void Game::level1clicked(){
+    best(1);
+}
+
+void Game::level2clicked(){
+    best(2);
+}
+
+void Game::level3clicked(){
+    best(3);
+}
+
+void Game::best(int level){
     scene->clear();
+
+    Button* back = new Button(QString("<-"));
+    connect(back, SIGNAL(clicked()),this,SLOT(scores()));
+    scene->addItem(back);
+
+    QGraphicsTextItem* enternametitle = new QGraphicsTextItem(QString("Highscore Level" + QString::number(level)));
+    QFont titleFont("comic sans",30);
+    enternametitle->setFont(titleFont);
+    enternametitle->setPos(WINDOW_W/16,WINDOW_H/8);
+    scene->addItem(enternametitle);
+
+    QString outputText = newHighscore -> read(level);
+    QGraphicsTextItem* highscoreOutput = new QGraphicsTextItem(outputText);
+    QFont titleFontText("comic sans",20);
+    highscoreOutput->setPos(WINDOW_W*1/8,WINDOW_H*2/8);
+    highscoreOutput->setFont(titleFontText);
+    scene->addItem(highscoreOutput);
 
 }

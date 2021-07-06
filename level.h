@@ -2,6 +2,7 @@
 #define LEVEL_H
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QInputDialog>
 #include "game.h"
 #include "counter.h"
 #include "maske.h"
@@ -15,6 +16,8 @@
 #include "definitions.h"
 #include "element.h"
 #include "info.h"
+#include "uhr.h"
+#include "highscore.h"
 
 
 class Level : public QGraphicsView
@@ -34,6 +37,8 @@ public:
     QGraphicsView* pausepic;
     counter* Counter;
     QTimer* timer;
+    Uhr* uhr;
+    Highscore* newHighscore;
     int failbedingung;
     int x_last;
     int y_last;
@@ -42,6 +47,8 @@ public:
     info* Info;
     QGraphicsRectItem* bounds;
     int finalscore;
+    QString finaltime;
+    QLineEdit* input;
 public slots:
     void pause();
     void Zurueck();
@@ -52,8 +59,8 @@ public slots:
     void Gewonnen();
     void Next();
     void AddScore();
-    //Maske* maske1, Maske* maske2, Maske* maske3, Virus* virus
-
+    void insertScore();
+    void showHighscore(int level);
 protected:
     b2World *world;
     Element* ball;
@@ -65,7 +72,7 @@ protected:
     Element* virus;
     QVector<Element*> balken;
     QVector<Element*> foehne;
-
+    QString Spielername;
 private:
     Element* currentBalken;
     Balken* currentBalkenItem;

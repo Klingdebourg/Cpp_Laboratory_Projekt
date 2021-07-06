@@ -6,9 +6,7 @@
 #include <QGraphicsTextItem>
 #include <QFont>
 #include <QBrush>
-
-
-
+#include "highscore.h"
 
 class Game: public QGraphicsView{
     Q_OBJECT
@@ -19,6 +17,7 @@ public:
 
     QGraphicsTextItem* informationtitle;
     QGraphicsTextItem* information;
+    Highscore* newHighscore;
 
 public slots:
     void levelmenu();
@@ -26,8 +25,10 @@ public slots:
     void start();
     void Info();
     void scores();
-    void best();
-
+    void best(int level);
+    void level1clicked();
+    void level2clicked();
+    void level3clicked();
 };
 
 #endif // GAME_H

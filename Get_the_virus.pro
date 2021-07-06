@@ -23,6 +23,7 @@ SOURCES += \
     feder.cpp \
     foehn.cpp \
     game.cpp \
+    highscore.cpp \
     info.cpp \
     level.cpp \
     level1.cpp \
@@ -88,6 +89,7 @@ HEADERS += \
     feder.h \
     foehn.h \
     game.h \
+    highscore.h \
     include/box2d/b2_api.h \
     include/box2d/b2_block_allocator.h \
     include/box2d/b2_body.h \
@@ -152,3 +154,8 @@ FORMS +=
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    highscore1.txt \
+    highscore2.txt \
+    highscore3.txt
