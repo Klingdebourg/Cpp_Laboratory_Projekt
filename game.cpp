@@ -232,27 +232,27 @@ void Game::level3clicked(){
     best(3);
 }
 
-void Game::best(int level)
-{
+void Game::best(int level){
     scene->clear();
 
-
+    ///butten to go back to choose the highscore
     Button* back = new Button(QString("Zurück"));
     connect(back, SIGNAL(clicked()),this,SLOT(scores()));
     scene->addItem(back);
 
-    QGraphicsTextItem* Highscore = new QGraphicsTextItem("Highscore für Level" + QString::number(level));
+    ///Header
+    QGraphicsTextItem* Highscore = new QGraphicsTextItem("Highscore für Level " + QString::number(level));
     QFont titleFont("comic sans",30);
-    Highscore->setPos(WINDOW_W/8,WINDOW_H*3/8);
+    Highscore->setPos(WINDOW_W/8,WINDOW_H*1/8);
     Highscore->setFont(titleFont);
+    Highscore->setDefaultTextColor(Qt::red);
     scene->addItem(Highscore);
 
-    ///draw the time it took
+    ///draw the highscore for the chosen level
     QGraphicsTextItem* output = new QGraphicsTextItem(newHighscore -> read(level));
     QFont titleFontText("comic sans",18);
-    output -> setPos(WINDOW_W*4/8,WINDOW_H*3/8);
+    output -> setPos(WINDOW_W*1/8,WINDOW_H*2/8);
     output -> setFont(titleFontText);
+    output->setDefaultTextColor(Qt::white);
     scene->addItem(output);
-
-
 }

@@ -14,13 +14,14 @@
 class Highscore: public QGraphicsTextItem{
 public:
     Highscore();
-    int rowsHS1 = 0;
-    int rowsHS2 = 0;
-    int rowsHS3 = 0;
 public slots:
-    void write();
+    /**
+     * @brief when read is being called, the highscore file of the given level is read and returned
+     */
     QString read(int level);
-    int countRows(QString filename);
+    /**
+     * @brief adds the new score to the highscore file of the given level
+     */
     void insertScore(QString Name, QString Zeit, int Masken, int level);
 };
 

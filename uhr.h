@@ -1,7 +1,6 @@
 #ifndef UHR_H
 #define UHR_H
 
-#include <QTimer>
 #include <QTime>
 #include <QDebug>
 #include <QGraphicsTextItem>
@@ -22,8 +21,17 @@ public:
     QString elapsed_str;
 
 public slots:
+    /**
+     * @brief starts the timer (e.g. when the ball starts moving)
+     */
     void start();
+    /**
+     * @brief gives back the passed time after the clock was started
+     */
     void time_elapsed();
+    /**
+     * @brief gettime gives back the passed time in a clock format (not in integer time format)
+     */
     QString gettime();
 };
 

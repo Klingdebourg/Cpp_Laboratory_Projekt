@@ -56,7 +56,13 @@ public slots:
     void Gewonnen();
     void Next();
     void AddScore();
+    /**
+     * @brief insertScore shows the achieved score and lets the player insert it's name
+     */
     void insertScore();
+    /**
+     * @brief showHighscore shows the highscore-file of the wanted level
+     */
     void showHighscore(int level);
     bool StopCheck();
 protected:
