@@ -61,6 +61,7 @@ public slots:
     void AddScore();
     void insertScore();
     void showHighscore(int level);
+    bool StopCheck();
 protected:
     b2World *world;
     Element* ball;

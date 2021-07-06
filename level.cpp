@@ -441,6 +441,7 @@ void Level::AddScore()
        enternametitle->setPos(WINDOW_W/16,WINDOW_H/8);
        levelscene->addItem(enternametitle);
 
+       ///draw the QLineEdit to enter the name of the player
        input = new QLineEdit();
        QFont textFont("time",15);
        input->setReadOnly(false);
@@ -450,22 +451,87 @@ void Level::AddScore()
        input->move(WINDOW_W/3,WINDOW_H/2);
        levelscene->addWidget(input);
 
+       ///draw the score
        QGraphicsTextItem*sc = new QGraphicsTextItem(QString("Dein Score: " + QString::number(finalscore)));
        sc->setPos(WINDOW_W/8,WINDOW_H*3/8);
        sc->setFont(titleFont);
        levelscene->addItem(sc);
 
+       ///draw the time it took
        QGraphicsTextItem* time = new QGraphicsTextItem(QString("Deine Zeit: ") + finaltime);
        time->setPos(WINDOW_W*4/8,WINDOW_H*3/8);
        time->setFont(titleFont);
        levelscene->addItem(time);
 
-
+       ///create an add button
        Button* add = new Button(QString("Hinzufügen"));
        connect(add,SIGNAL(clicked()),this,SLOT(insertScore()));
        add->setPos(input->x()+input->width(),input->y());
        levelscene->addItem(add);
 }
+
+bool Level::StopCheck()
+{
+    /**
+      * if the ball isn't attached to the spring get the current y-Position of the ball
+      * if the level hasn't been paused and the current y-Position is the same as the last time the method was called
+      * increase the failing condition variable
+      * if the variable exceeds 1500
+      * the game is lost
+      */
+    if (! dynamic_cast<Feder*>(feder->item)->getBallAttached()) {
+        int y_current = dynamic_cast<Ball*>(ball->item)->y();
+        if( y_current == y_last && isPaused == false) {
+            if (failbedingung <= ABBRUCHZEIT) {
+                failbedingung++;
+            } else {
+                levelscene->clear();
+
+                ///draw the losing text
+                QGraphicsTextItem* losttext = new QGraphicsTextItem(QString("Sie haben leider verloren"));
+                QFont titleFont("comic sans",50);
+                titleFont.setStyleHint(QFont::Fantasy);
+                losttext->setFont(titleFont);
+                int txPos = this->width()/2 - losttext->boundingRect().width()/2;
+                int tyPos = WINDOW_H/8;
+                losttext->setPos(txPos,tyPos);
+                levelscene->addItem(losttext);
+
+                ///create a button to get back to the level menu
+                Button* zurueck = new Button(QString("Zurück zur Levelübersicht"));
+                connect(zurueck, SIGNAL(clicked()),this,SLOT(Zurueck()));
+                zurueck->setRect(0,0,300,50);
+                zurueck->setPos(WINDOW_W*6/16,WINDOW_H*3/8);
+                levelscene->addItem(zurueck);
+
+                ///create a button to restart the level
+                Button* redo = new Button(QString("Den Level erneut starten"));
+                connect(redo, SIGNAL(clicked()),this,SLOT(Redo()));
+                redo->setRect(0,0,300,50);
+                redo->setPos(WINDOW_W*6/16, WINDOW_H*4/8);
+                levelscene->addItem(redo);
+
+                ///create a button to get back to the main menu
+                Button* haupt = new Button(QString("Zum Hauptmenü"));
+                connect(haupt, SIGNAL(clicked()),this,SLOT(Hauptmenu()));
+                haupt->setRect(0,0,300,50);
+                haupt->setPos(WINDOW_W*6/16, WINDOW_H*5/8);
+                levelscene->addItem(haupt);
+                timer->stop();
+                return true;
+
+            }
+        } else {
+            failbedingung = 0;
+        }
+        y_last = y_current;
+    } else {
+        failbedingung = 0;
+        return false;
+    }
+    return false;
+}
+
 
 void Level::insertScore(){
     Spielername = input -> text();
