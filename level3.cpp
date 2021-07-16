@@ -34,7 +34,6 @@ Level3::Level3(Game* game):Level(game,3) {
 
     foehne.append(new Element(FOEHN));
     foehne.at(0)->item->setPos(balken.at(0)->item->x() + BALKEN_LENGTH_DEFAULT + 100, balken.at(0)->item->y() - FOEHN_WIDTH);
-    //foehne.at(0)->item->setPos(WINDOW_W/2, WINDOW_H/2);
     foehne.at(0)->body = world->CreateBody(foehne.at(0)->bodyDef);
     foehne.at(0)->body->CreateFixture(foehne.at(0)->fixture);
     foehne.at(0)->body->SetTransform(b2Vec2(foehne.at(0)->item->x()+10-FOEHN_WIDTH/4, WINDOW_H - foehne.at(0)->item->y()+5-FOEHN_WIDTH/2), -foehne.at(0)->item->rotation());

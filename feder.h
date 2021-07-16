@@ -16,6 +16,12 @@
 class Feder : public QGraphicsRectItem {
 public:
     Feder(int x, int y);
+    /**
+     * @brief Constructor creating a spring at a requested position with a fixed size with a ball already attached to it
+     * @param x requested x position
+     * @param y requested y position
+     * @param ball ball connected to the spring
+     */
     Feder(int x, int y, Element *ball);
     /**
      * @brief boundingRect implements virtual function

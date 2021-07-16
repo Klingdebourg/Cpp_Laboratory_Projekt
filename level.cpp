@@ -25,17 +25,17 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     QPixmap background(":/pictures/media/background2.jpg");
     levelscene->setBackgroundBrush(background.scaled(WINDOW_W,WINDOW_H,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
 
-    //create box2d world with negative gravity of
+    ///create box2d world with gravity
     world = new b2World(b2Vec2(0.0f, GRAVITY));
 
-    //create a wall for each side of the window
-    groundBodyDefTop.position.Set(800,20);
+    ///create a wall for each side of the window
+    groundBodyDefTop.position.Set(WINDOW_W /2, 20);
     b2Body* groundBodyTop = world->CreateBody(&groundBodyDefTop);
     b2PolygonShape groundBoxTop;
     groundBoxTop.SetAsBox(900.0f, 5.0f);
     groundBodyTop->CreateFixture(&groundBoxTop, 0.0f);
 
-    groundBodyDefBottom.position.Set(800,1030);
+    groundBodyDefBottom.position.Set(WINDOW_W /2, WINDOW_H +30);
     b2Body* groundBodyBottom = world->CreateBody(&groundBodyDefBottom);
     b2PolygonShape groundBoxBottom;
     groundBoxBottom.SetAsBox(900.0f, 5.0f);
@@ -44,13 +44,13 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     groundFixtureBottom.shape = &groundBoxBottom;
     groundBodyBottom->CreateFixture(&groundFixtureBottom);
 
-    groundBodyDefLeft.position.Set(-30,600);
+    groundBodyDefLeft.position.Set(-30, WINDOW_H / 2);
     b2Body* groundBodyLeft = world->CreateBody(&groundBodyDefLeft);
     b2PolygonShape groundBoxLeft;
     groundBoxLeft.SetAsBox(5.0f, 600.0f);
     groundBodyLeft->CreateFixture(&groundBoxLeft, 0.0f);
 
-    groundBodyDefRight.position.Set(1580,600);
+    groundBodyDefRight.position.Set( WINDOW_W -20, WINDOW_H / 2);
     b2Body* groundBodyRight = world->CreateBody(&groundBodyDefRight);
     b2PolygonShape groundBoxRight;
     groundBoxRight.SetAsBox(5.0f, 600.0f);
@@ -102,8 +102,6 @@ Level::Level(Game* game,int type, QWidget* parent):QGraphicsView(parent){
     feder = new Element(FEDER);
     //the feder item cannot be genereated in the element-constructor due to the circular include
     feder->item = new Feder(0, 0);
-    //feder->body = world->CreateBody(feder->bodyDef);
-    //feder->body->CreateFixture(feder->fixture);
     levelscene->addItem(feder->item);
 
     maske1 = new Element(MASKE);

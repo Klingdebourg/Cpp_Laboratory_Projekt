@@ -47,12 +47,6 @@ Feder::Feder(int x, int y) {
     isBallAttached = false;
 }
 
-/**
- * @brief Constructor creating a spring at a requested position with a fixed size with a ball already attached to it
- * @param x requested x position
- * @param y requested y position
- * @param ball ball connected to the spring
- */
 Feder::Feder(int x, int y, Element *ball) {
     //creates rectangle with given size at origin in scene coordinates
     setRect(0, 0, FEDER_WIDTH, FEDER_HEIGHT);

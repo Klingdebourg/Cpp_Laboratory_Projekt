@@ -23,13 +23,30 @@ class Level : public QGraphicsView
 {
     Q_OBJECT
 public:
+    /**
+     * @brief Level constructor
+     *
+     * It is a Überklasse for every Level
+     */
     Level(Game* game, int type, QWidget* parent = NULL);
     QGraphicsScene* levelscene;
     Game* levelgame;
     int level;
+    /**
+     * @brief groundBodyDefTop is the Box2D Definition for a wall for the Top-ending of the game world
+     */
     b2BodyDef groundBodyDefTop;
+    /**
+     * @brief groundBodyDefBottom is the Box2D Definition for a wall for the button-ending of the game world
+     */
     b2BodyDef groundBodyDefBottom;
+    /**
+     * @brief groundBodyDefLeft is the Box2D Definition for a wall for the Leftside-ending of the game world
+     */
     b2BodyDef groundBodyDefLeft;
+    /**
+     * @brief groundBodyDefRight is the Box2D Definition for a wall for the right-side-endinge of the game world
+     */
     b2BodyDef groundBodyDefRight;
     QString text;
     QGraphicsScene* pausemenu;

@@ -7,7 +7,6 @@ Level2::Level2(Game* game):Level(game, 2) {
 
     ballStep = b2Vec2(0,0);
 
-    //wofür ist dies? (@johanna)
     x_last=ball->item->x();
     y_last=ball->item->y();
 
