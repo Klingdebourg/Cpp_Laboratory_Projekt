@@ -37,8 +37,8 @@ void Game::displayMainMenu(){
     QPixmap background(":/pictures/media/background1.jpg");
     scene->setBackgroundBrush(background.scaled(WINDOW_W,WINDOW_H,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     QGraphicsTextItem* titleText = new QGraphicsTextItem(QString("Get the virus"));
-    QFont titleFont("Fantasy",50);
-    titleFont.setStyleHint(QFont::Fantasy);
+    QFont titleFont("times",50);
+    titleFont.setStyleHint(QFont::Courier);
     titleText->setDefaultTextColor(Qt::red);
     titleText->setFont(titleFont);
     int txPos = this->width()/2 - titleText->boundingRect().width()/2;
@@ -82,8 +82,8 @@ void Game::levelmenu(){
     scene->clear();
     ///draw the title
     QGraphicsTextItem* levelText = new QGraphicsTextItem(QString("Levels"));
-    QFont levelFont("Fantasy",50);
-    levelFont.setStyleHint(QFont::Fantasy);
+    QFont levelFont("times",50);
+    levelFont.setStyleHint(QFont::Courier);
     levelText->setDefaultTextColor(Qt::red);
     levelText->setFont(levelFont);
     int lvposx = this->width()/2-levelText->boundingRect().width()/2;
@@ -147,8 +147,8 @@ void Game::Info()
     ///draw the title
     QGraphicsTextItem* informationtitle = new QGraphicsTextItem;
     informationtitle->setPlainText(QString("Spielinformationen"));
-    QFont titleFont("comic sans",50);
-    titleFont.setStyleHint(QFont::Fantasy);
+    QFont titleFont("times",50);
+    titleFont.setStyleHint(QFont::Courier);
     informationtitle->setFont(titleFont);
     informationtitle->setDefaultTextColor(Qt::red);
     int txPos = this->width()/2 - informationtitle->boundingRect().width()/2;

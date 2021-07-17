@@ -186,21 +186,21 @@ void Level::pause(){
     ///create a return button to get back to the level menu
     Button* zurueck = new Button(QString("Zurück zur Levelübersicht"));
     connect(zurueck, SIGNAL(clicked()),this,SLOT(Zurueck()));
-    zurueck->setRect(0,0,300,50);
+    zurueck->setRect(0,0,350,50);
     zurueck->setPos(pausetext->x()+pausetext->boundingRect().width()/4, pausetext->y()+100);
     pausemenu->addItem(zurueck);
 
     ///create a button to restart the level
     Button* redo = new Button(QString("Den Level erneut starten"));
     connect(redo, SIGNAL(clicked()),this,SLOT(Redo()));
-    redo->setRect(0,0,300,50);
+    redo->setRect(0,0,350,50);
     redo->setPos(pausetext->x()+pausetext->boundingRect().width()/4, pausetext->y()+200);
     pausemenu->addItem(redo);
 
     ///create a button to return to the main menu
     Button* haupt = new Button(QString("Zum Hauptmenü"));
     connect(haupt, SIGNAL(clicked()),this,SLOT(Hauptmenu()));
-    haupt->setRect(0,0,300,50);
+    haupt->setRect(0,0,350,50);
     haupt->setPos(pausetext->x()+pausetext->boundingRect().width()/4, pausetext->y()+300);
     pausemenu->addItem(haupt);
 }
@@ -354,7 +354,7 @@ void Level::Gewonnen()
     ///create a button to get back to the level menu
     Button* zurueck = new Button(QString("Zurück zur Levelübersicht"));
     connect(zurueck, SIGNAL(clicked()),this,SLOT(Zurueck()));
-    zurueck->setRect(0,0,300,50);
+    zurueck->setRect(0,0,350,50);
     zurueck->setPos(WINDOW_W/8,WINDOW_H/2);
     levelscene->addItem(zurueck);
 
@@ -362,28 +362,28 @@ void Level::Gewonnen()
     if (level == 1 || level == 2){
     Button* next = new Button(QString("Nächster Level"));
     connect(next, SIGNAL(clicked()),this,SLOT(Next()));
-    next->setRect(0,0,300,50);
+    next->setRect(0,0,350,50);
     next->setPos(WINDOW_W*5/8,WINDOW_H/2);
     levelscene->addItem(next);}
 
     ///create a restart button
     Button* redo = new Button(QString("Den Level erneut starten"));
     connect(redo, SIGNAL(clicked()),this,SLOT(Redo()));
-    redo->setRect(0,0,300,50);
+    redo->setRect(0,0,350,50);
     redo->setPos(WINDOW_W/8, WINDOW_H*3/4);
     levelscene->addItem(redo);
 
     ///create a button to return to the main menu
     Button* haupt = new Button(QString("Zum Hauptmenü"));
     connect(haupt, SIGNAL(clicked()),this,SLOT(Hauptmenu()));
-    haupt->setRect(0,0,300,50);
+    haupt->setRect(0,0,350,50);
     haupt->setPos(WINDOW_W*5/8, WINDOW_H*3/4);
     levelscene->addItem(haupt);
 
     ///create a button to save the score
     Button* highscore = new Button(QString("Meinen Score speichern"));
     connect(highscore, SIGNAL(clicked()),this,SLOT(AddScore()));
-    highscore->setRect(0,0,300,50);
+    highscore->setRect(0,0,350,50);
     highscore->setPos(WINDOW_W*3/8, WINDOW_H*5/8);
     levelscene->addItem(highscore);
 
@@ -469,7 +469,7 @@ bool Level::StopCheck()
                 ///draw the losing text
                 QGraphicsTextItem* losttext = new QGraphicsTextItem(QString("Sie haben leider verloren"));
                 QFont titleFont("comic sans",50);
-                titleFont.setStyleHint(QFont::Fantasy);
+                titleFont.setStyleHint(QFont::Times);
                 losttext->setFont(titleFont);
                 int txPos = this->width()/2 - losttext->boundingRect().width()/2;
                 int tyPos = WINDOW_H/8;
